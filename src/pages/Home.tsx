@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import { listPeople } from '../api/people'
+import { peopleQuery } from '../api/queries'
 import PersonCard from '../components/PersonCard'
 import SearchBar from '../components/SearchBar'
 import { useTaxonomy } from '../hooks/useTaxonomy'
@@ -9,10 +9,9 @@ function Home() {
   const { data: industries } = useTaxonomy('industries')
 
   // Sab se zyada followers wale 6 log
-  const { data: featured, isLoading } = useQuery({
-    queryKey: ['people', 'featured'],
-    queryFn: () => listPeople(new URLSearchParams({ limit: '6', sort: 'followers' })),
-  })
+  const { data: featured, isLoading } = useQuery(
+    peopleQuery(new URLSearchParams({ limit: '6', sort: 'followers' })),
+  )
 
   return (
     <div className="space-y-14">

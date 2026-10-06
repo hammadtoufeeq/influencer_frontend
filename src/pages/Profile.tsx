@@ -1,7 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
-import { getPerson } from '../api/people'
+import { personQuery } from '../api/queries'
 import Avatar from '../components/Avatar'
 import VerifiedBadge from '../components/VerifiedBadge'
 import { PLATFORM_LABELS, STATUS_LABELS } from '../constants/people'
@@ -31,11 +31,7 @@ function TagList({ title, items, param }: { title: string; items: TaxonomyItem[]
 function Profile() {
   const { slug = '' } = useParams()
 
-  const { data: person, isLoading, error } = useQuery({
-    queryKey: ['person', slug],
-    queryFn: () => getPerson(slug),
-    retry: false,
-  })
+  const { data: person, isLoading, error } = useQuery({ ...personQuery(slug), retry: false })
 
   if (isLoading) return <p className="text-center text-gray-500">Loading...</p>
 

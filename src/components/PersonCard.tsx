@@ -1,15 +1,28 @@
 import { Link } from 'react-router-dom'
+import { useQueryClient } from '@tanstack/react-query'
+import { personQuery } from '../api/queries'
 import type { PersonSummary } from '../types/person'
 import { countryName, formatCount } from '../utils/format'
 import Avatar from './Avatar'
 import VerifiedBadge from './VerifiedBadge'
 
 function PersonCard({ person }: { person: PersonSummary }) {
+  const queryClient = useQueryClient()
+
+  // Card pe mouse/ungli aate hi profile pehle se mangwa lo.
+  // Click tak data cache mein hota hai, is liye profile foran khulti hai
+  function prefetchProfile() {
+    queryClient.prefetchQuery(personQuery(person.slug))
+  }
+
   const location = [person.city, countryName(person.country)].filter(Boolean).join(', ')
 
   return (
     <Link
       to={`/people/${person.slug}`}
+      onMouseEnter={prefetchProfile}
+      onFocus={prefetchProfile}
+      onTouchStart={prefetchProfile}
       className="flex gap-4 rounded-2xl border border-gray-200 bg-white p-4 transition hover:border-gray-400 hover:shadow-sm"
     >
       <Avatar name={person.name} photoUrl={person.photoUrl} />

@@ -1,7 +1,7 @@
-import { useState, type ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { keepPreviousData, useQuery } from '@tanstack/react-query'
-import { listPeople } from '../api/people'
+import { keepPreviousData, useQuery, useQueryClient } from '@tanstack/react-query'
+import { peopleQuery } from '../api/queries'
 import Pagination from '../components/Pagination'
 import PersonCard from '../components/PersonCard'
 import SearchBar from '../components/SearchBar'
@@ -98,11 +98,22 @@ function Search() {
   params.set('limit', String(PAGE_SIZE))
   if (!params.get('sort')) params.set('sort', 'followers')
 
+  const queryClient = useQueryClient()
   const { data, isLoading, isError, isFetching } = useQuery({
-    queryKey: ['people', params.toString()],
-    queryFn: () => listPeople(params),
+    ...peopleQuery(params),
+    // Naya page load hote waqt purane results dikhate raho (khali screen nahi)
     placeholderData: keepPreviousData,
   })
+
+  // Agla page pehle se cache mein la kar rakho, taake "Next" foran khule
+  const paramsKey = params.toString()
+  const hasNextPage = data ? page * PAGE_SIZE < data.meta.total : false
+  useEffect(() => {
+    if (!hasNextPage) return
+    const nextParams = new URLSearchParams(paramsKey)
+    nextParams.set('page', String(page + 1))
+    queryClient.prefetchQuery(peopleQuery(nextParams))
+  }, [hasNextPage, paramsKey, page, queryClient])
 
   function setFilter(name: string, value: string) {
     const next = new URLSearchParams(searchParams)
