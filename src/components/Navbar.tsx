@@ -28,16 +28,22 @@ function Navbar() {
           <NavLink to="/search" className={linkClass}>
             Explore
           </NavLink>
-          <NavLink to="/dashboard" className={linkClass}>
-            Dashboard
-          </NavLink>
-          {user && (
-            <button
-              onClick={handleLogout}
-              className="whitespace-nowrap rounded-lg border border-gray-300 px-2.5 py-1.5 text-sm text-gray-700 hover:bg-gray-100 sm:px-3"
-            >
-              Log out
-            </button>
+          {user ? (
+            <>
+              <NavLink to="/dashboard" className={linkClass}>
+                Dashboard
+              </NavLink>
+              <button
+                onClick={handleLogout}
+                className="whitespace-nowrap rounded-lg border border-gray-300 px-2.5 py-1.5 text-sm text-gray-700 hover:bg-gray-100 sm:px-3"
+              >
+                Log out
+              </button>
+            </>
+          ) : (
+            <NavLink to="/login" className={linkClass}>
+              Log in
+            </NavLink>
           )}
         </div>
       </nav>

@@ -9,7 +9,7 @@ function Home() {
   const { data: industries } = useTaxonomy('industries')
 
   // Sab se zyada followers wale 6 log
-  const { data: featured, isLoading } = useQuery(
+  const { data: featured, isLoading, isError } = useQuery(
     peopleQuery(new URLSearchParams({ limit: '6', sort: 'followers' })),
   )
 
@@ -51,6 +51,14 @@ function Home() {
           </Link>
         </div>
         {isLoading && <p className="mt-4 text-gray-500">Loading...</p>}
+        {isError && (
+          <p className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">
+            Could not load people right now. Please refresh the page or try again later.
+          </p>
+        )}
+        {featured && featured.people.length === 0 && (
+          <p className="mt-4 text-gray-500">No profiles yet.</p>
+        )}
         <div className="mt-4 grid gap-4 md:grid-cols-2">
           {featured?.people.map((person) => (
             <PersonCard key={person._id} person={person} />
