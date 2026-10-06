@@ -3,6 +3,8 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import { adminListPeople, deletePerson, updatePerson } from '../../api/admin'
+import { adminListClaims } from '../../api/claims'
+import ClaimRequests from '../../components/admin/ClaimRequests'
 import AdminPersonCard from '../../components/admin/AdminPersonCard'
 import DashboardHeader from '../../components/DashboardHeader'
 import Pagination from '../../components/Pagination'
@@ -65,7 +67,20 @@ function AdminDashboard() {
     setParam('q', search.trim())
   }
 
+  // Tab bar pe pending claims ki ginti
+  const { data: pendingClaims } = useQuery({
+    queryKey: ['admin', 'claims', 'pending', 1],
+    queryFn: () => adminListClaims('pending', 1),
+    staleTime: 0,
+  })
+  const pendingCount = pendingClaims?.meta.total ?? 0
+
+  const tab = searchParams.get('tab') === 'claims' ? 'claims' : 'people'
   const total = data?.meta.total ?? 0
+  const tabClass = (active: boolean) =>
+    `flex-1 rounded-lg px-4 py-2 text-sm font-medium transition sm:flex-none ${
+      active ? 'bg-white shadow-sm' : 'text-gray-600 hover:text-gray-900'
+    }`
 
   return (
     <div className="space-y-6">
@@ -78,74 +93,102 @@ function AdminDashboard() {
         </Link>
       </DashboardHeader>
 
-      <section className="space-y-4">
-        <div className="flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <h2 className="text-lg font-semibold">People profiles</h2>
-            <p className="text-sm text-gray-500">{data ? `${total} profiles` : ' '}</p>
+      <div role="tablist" className="flex gap-1 rounded-xl bg-gray-100 p-1 sm:inline-flex">
+        <button
+          role="tab"
+          aria-selected={tab === 'people'}
+          className={tabClass(tab === 'people')}
+          onClick={() => setSearchParams({})}
+        >
+          People
+        </button>
+        <button
+          role="tab"
+          aria-selected={tab === 'claims'}
+          className={tabClass(tab === 'claims')}
+          onClick={() => setSearchParams({ tab: 'claims' })}
+        >
+          Claim requests
+          {pendingCount > 0 && (
+            <span className="ml-2 rounded-full bg-red-600 px-2 py-0.5 text-xs text-white">
+              {pendingCount}
+            </span>
+          )}
+        </button>
+      </div>
+
+      {tab === 'claims' ? (
+        <ClaimRequests />
+      ) : (
+        <section className="space-y-4">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <h2 className="text-lg font-semibold">People profiles</h2>
+              <p className="text-sm text-gray-500">{data ? `${total} profiles` : ' '}</p>
+            </div>
           </div>
-        </div>
 
-        <div className="flex flex-wrap gap-2">
-          <form onSubmit={handleSearch} className="flex min-w-0 flex-1 gap-2">
-            <input
-              type="search"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search by name or slug"
-              aria-label="Search profiles"
-              className="min-w-0 flex-1 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm"
-            />
-            <button type="submit" className="rounded-lg bg-gray-900 px-4 py-2 text-sm text-white">
-              Search
-            </button>
-          </form>
-          <select
-            aria-label="Visibility"
-            value={searchParams.get('visibility') ?? ''}
-            onChange={(e) => setParam('visibility', e.target.value)}
-            className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm"
-          >
-            <option value="">All profiles</option>
-            <option value="visible">Visible</option>
-            <option value="hidden">Hidden</option>
-          </select>
-        </div>
+          <div className="flex flex-wrap gap-2">
+            <form onSubmit={handleSearch} className="flex min-w-0 flex-1 gap-2">
+              <input
+                type="search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search by name or slug"
+                aria-label="Search profiles"
+                className="min-w-0 flex-1 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm"
+              />
+              <button type="submit" className="rounded-lg bg-gray-900 px-4 py-2 text-sm text-white">
+                Search
+              </button>
+            </form>
+            <select
+              aria-label="Visibility"
+              value={searchParams.get('visibility') ?? ''}
+              onChange={(e) => setParam('visibility', e.target.value)}
+              className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm"
+            >
+              <option value="">All profiles</option>
+              <option value="visible">Visible</option>
+              <option value="hidden">Hidden</option>
+            </select>
+          </div>
 
-        {isLoading && <p className="text-gray-500">Loading...</p>}
+          {isLoading && <p className="text-gray-500">Loading...</p>}
 
-        {data && data.people.length === 0 && (
-          <p className="rounded-2xl border border-dashed border-gray-300 p-8 text-center text-gray-500">
-            No profiles found.
-          </p>
-        )}
+          {data && data.people.length === 0 && (
+            <p className="rounded-2xl border border-dashed border-gray-300 p-8 text-center text-gray-500">
+              No profiles found.
+            </p>
+          )}
 
-        <div className={`grid gap-4 lg:grid-cols-2 ${isFetching ? 'opacity-70' : ''}`}>
-          {data?.people.map((person) => (
-            <AdminPersonCard
-              key={person._id}
-              person={person}
-              isBusy={quickUpdate.isPending || remove.isPending}
-              onToggleVerified={() =>
-                quickUpdate.mutate({ id: person._id, input: { verified: !person.verified } })
-              }
-              onToggleHidden={() =>
-                quickUpdate.mutate({
-                  id: person._id,
-                  input: { visibility: person.visibility === 'hidden' ? 'visible' : 'hidden' },
-                })
-              }
-              onDelete={() => remove.mutate(person)}
-            />
-          ))}
-        </div>
+          <div className={`grid gap-4 lg:grid-cols-2 ${isFetching ? 'opacity-70' : ''}`}>
+            {data?.people.map((person) => (
+              <AdminPersonCard
+                key={person._id}
+                person={person}
+                isBusy={quickUpdate.isPending || remove.isPending}
+                onToggleVerified={() =>
+                  quickUpdate.mutate({ id: person._id, input: { verified: !person.verified } })
+                }
+                onToggleHidden={() =>
+                  quickUpdate.mutate({
+                    id: person._id,
+                    input: { visibility: person.visibility === 'hidden' ? 'visible' : 'hidden' },
+                  })
+                }
+                onDelete={() => remove.mutate(person)}
+              />
+            ))}
+          </div>
 
-        <Pagination
-          page={page}
-          totalPages={Math.ceil(total / PAGE_SIZE)}
-          onChange={(p) => setParam('page', String(p))}
-        />
-      </section>
+          <Pagination
+            page={page}
+            totalPages={Math.ceil(total / PAGE_SIZE)}
+            onChange={(p) => setParam('page', String(p))}
+          />
+        </section>
+      )}
     </div>
   )
 }

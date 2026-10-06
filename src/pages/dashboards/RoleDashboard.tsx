@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import DashboardHeader from '../../components/DashboardHeader'
+import MyProfileSection from '../../components/MyProfileSection'
 import type { SignupRole } from '../../types/user'
 
 interface DashboardCard {
@@ -30,11 +31,6 @@ const ROLE_DASHBOARDS: Record<SignupRole, RoleConfig> = {
     title: 'Talent dashboard',
     subtitle: 'Manage your public profile, what you offer and who wants to work with you.',
     cards: [
-      {
-        icon: '🪪',
-        title: 'Your public profile',
-        description: 'Find your profile and claim it, or ask us to create one.',
-      },
       {
         icon: '🧾',
         title: 'Services & rates',
@@ -124,6 +120,8 @@ function RoleDashboard({ role }: { role: SignupRole }) {
   return (
     <div className="space-y-6">
       <DashboardHeader />
+
+      {role === 'talent' && <MyProfileSection />}
 
       <div>
         <h2 className="text-lg font-semibold">{config.title}</h2>

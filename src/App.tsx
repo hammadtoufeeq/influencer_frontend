@@ -4,6 +4,8 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Home from './pages/Home'
 import Search from './pages/Search'
 import Profile from './pages/Profile'
+import ClaimProfile from './pages/ClaimProfile'
+import EditMyProfile from './pages/dashboards/EditMyProfile'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
@@ -17,6 +19,22 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />
         <Route path="/people/:slug" element={<Profile />} />
+        <Route
+          path="/people/:slug/claim"
+          element={
+            <ProtectedRoute roles={['talent']}>
+              <ClaimProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/profile/edit"
+          element={
+            <ProtectedRoute roles={['talent']}>
+              <EditMyProfile />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route

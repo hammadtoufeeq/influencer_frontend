@@ -1,5 +1,6 @@
 import { queryOptions } from '@tanstack/react-query'
 import { getPerson, listPeople, listTaxonomy } from './people'
+import { getMyProfile, listMyClaims } from './claims'
 import type { TaxonomyType } from '../types/person'
 
 // Har query ki key aur function ek jagah. Pages aur prefetch dono yahi use karte hain,
@@ -27,3 +28,16 @@ export function taxonomyQuery(type: TaxonomyType) {
     staleTime: Infinity,
   })
 }
+
+// Logged-in user ka data: staleTime 0 taake hamesha taaza ho
+export const myClaimsQuery = queryOptions({
+  queryKey: ['claims', 'mine'],
+  queryFn: listMyClaims,
+  staleTime: 0,
+})
+
+export const myProfileQuery = queryOptions({
+  queryKey: ['claims', 'my-profile'],
+  queryFn: getMyProfile,
+  staleTime: 0,
+})

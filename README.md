@@ -48,6 +48,8 @@ src/
 |---|---|
 | `/` | Home: search bar, browse by industry, most followed |
 | `/search?q=&profession=&industry=&topic=&country=&city=&language=&minFollowers=&status=&sort=&page=` | Search with filters. All filters live in the URL, so results can be shared and the back button works |
-| `/people/:slug` | Public profile |
-| `/dashboard` | Logged-in home. Admins get the admin dashboard (all profiles, Verify / Hide, search) |
+| `/people/:slug` | Public profile (Claim button for talents) |
+| `/people/:slug/claim` | Talent only: send a claim with proof |
+| `/dashboard/profile/edit` | Talent only: edit the profile you own |
+| `/dashboard` | Logged-in home per account type. Talent sees their profile / claim status. Admins get People and Claim requests tabs |
 | `/dashboard/people/new`, `/dashboard/people/:id/edit` | Admin only: create or edit a profile |
