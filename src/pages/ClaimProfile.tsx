@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import { createClaim } from '../api/claims'
 import { myClaimsQuery, myProfileQuery, personQuery } from '../api/queries'
+import { isOpenClaim } from '../types/claim'
 import Avatar from '../components/Avatar'
 import FormField from '../components/FormField'
 import { getApiError } from '../utils/apiError'
@@ -44,7 +45,7 @@ function ClaimProfile() {
   if (!person) return <p className="text-center">Profile not found.</p>
 
   // Talent ki pehle se profile hai, ya claim pending hai: form mat dikhao
-  const pending = myClaims.data?.find((claim) => claim.status === 'pending')
+  const pending = myClaims.data?.find((claim) => isOpenClaim(claim.status))
   const blockMessage = myProfile.data
     ? 'You already own a profile. One talent account can have only one profile.'
     : pending
@@ -100,13 +101,18 @@ function ClaimProfile() {
         </div>
       </section>
 
-      <form onSubmit={handleSubmit} noValidate className="space-y-4 rounded-2xl bg-white p-6 shadow-sm">
+      <form
+        onSubmit={handleSubmit}
+        noValidate
+        className="space-y-4 rounded-2xl bg-white p-6 shadow-sm"
+      >
         <div>
           <h2 className="text-lg font-semibold">Help us verify it&apos;s you</h2>
-          <p className="mt-1 text-sm text-gray-500">
-            An admin will check your details. Once approved, you can edit this profile and start
-            receiving inquiries.
-          </p>
+          <ol className="mt-3 space-y-1 text-sm text-gray-600">
+            <li>1. Add your official account links (Instagram, X, YouTube, website...).</li>
+            <li>2. Our team sends a 6-digit code as a message to one of these accounts.</li>
+            <li>3. Enter the code on your dashboard. Then we approve your claim.</li>
+          </ol>
         </div>
 
         <FormField
@@ -120,14 +126,18 @@ function ClaimProfile() {
         />
 
         <div className="space-y-2">
-          <span className="block text-sm font-medium">Links that prove it&apos;s you (optional)</span>
-          <p className="text-xs text-gray-500">Your verified social accounts, website or press page.</p>
+          <span className="block text-sm font-medium">Your official account links *</span>
+          <p className="text-xs text-gray-500">
+            We will send the code as a message to one of these. Use accounts you can log in to.
+          </p>
           {links.map((link, index) => (
             <input
               key={index}
               type="url"
               aria-label={`Proof link ${index + 1}`}
-              placeholder="https://..."
+              placeholder={
+                index === 0 ? 'https://instagram.com/yourname' : 'https://... (optional)'
+              }
               value={link}
               onChange={(e) => setLinks(links.map((l, i) => (i === index ? e.target.value : l)))}
               className="w-full rounded-lg border border-gray-300 px-3 py-2"
@@ -138,12 +148,12 @@ function ClaimProfile() {
 
         <div>
           <label htmlFor="note" className="mb-1 block text-sm font-medium">
-            How can we verify you? *
+            Anything else we should know? (optional)
           </label>
           <textarea
             id="note"
             rows={4}
-            placeholder="e.g. You can message me on my verified Instagram, or call my manager."
+            placeholder="e.g. My manager can also confirm. Their email is ..."
             value={note}
             onChange={(e) => setNote(e.target.value)}
             className={`w-full rounded-lg border px-3 py-2 ${errors.note ? 'border-red-500' : 'border-gray-300'}`}

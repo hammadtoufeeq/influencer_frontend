@@ -67,10 +67,10 @@ function AdminDashboard() {
     setParam('q', search.trim())
   }
 
-  // Tab bar pe pending claims ki ginti
+  // Tab bar pe un claims ki ginti jin pe admin ko kuch karna hai
   const { data: pendingClaims } = useQuery({
-    queryKey: ['admin', 'claims', 'pending', 1],
-    queryFn: () => adminListClaims('pending', 1),
+    queryKey: ['admin', 'claims', 'needs_action', 1],
+    queryFn: () => adminListClaims('needs_action', 1),
     staleTime: 0,
   })
   const pendingCount = pendingClaims?.meta.total ?? 0

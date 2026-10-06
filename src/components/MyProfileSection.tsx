@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { myClaimsQuery, myProfileQuery } from '../api/queries'
 import Avatar from './Avatar'
+import ClaimProgress from './ClaimProgress'
+import { isOpenClaim } from '../types/claim'
 
 // Talent dashboard ka sab se upar wala hissa: meri profile ki halat
 function MyProfileSection() {
@@ -50,25 +52,8 @@ function MyProfileSection() {
 
   const latest = claims?.[0]
 
-  // 2. Claim review ho raha hai
-  if (latest?.status === 'pending') {
-    return (
-      <section className={`${box} border-amber-200 bg-amber-50/40`}>
-        <p className="text-xs font-medium uppercase tracking-wide text-amber-700">Claim pending</p>
-        <p className="mt-2">
-          We are reviewing your claim for{' '}
-          <Link to={`/people/${latest.person.slug}`} className="font-semibold underline">
-            {latest.person.name}
-          </Link>
-          .
-        </p>
-        <p className="mt-1 text-sm text-gray-500">
-          Sent on {new Date(latest.createdAt).toLocaleDateString()}. You will be able to edit the
-          profile once it is approved.
-        </p>
-      </section>
-    )
-  }
+  // 2. Claim chal raha hai (code bhejna / daalna / approval)
+  if (latest && isOpenClaim(latest.status)) return <ClaimProgress claim={latest} />
 
   // 3. Koi profile nahi (ya pichla claim reject hua)
   return (

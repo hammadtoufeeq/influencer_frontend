@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import { myClaimsQuery, myProfileQuery } from '../api/queries'
+import { isOpenClaim } from '../types/claim'
 import { useAuth } from '../hooks/useAuth'
 import type { Person } from '../types/person'
 
@@ -67,7 +68,7 @@ function ClaimAction({ person }: { person: Person }) {
   if (myProfile.data) return null
 
   // 6. Claim pending: sirf usi profile pe status, baqi sab pe kuch nahi
-  const pending = myClaims.data?.find((claim) => claim.status === 'pending')
+  const pending = myClaims.data?.find((claim) => isOpenClaim(claim.status))
   if (pending) {
     return pending.person._id === person._id ? (
       <span className="rounded-lg bg-amber-50 px-4 py-2 text-center text-sm text-amber-800">
