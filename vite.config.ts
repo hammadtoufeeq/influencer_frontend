@@ -7,5 +7,9 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     port: 3000,
+    // Local development: /api wali requests backend (port 5000) pe bhejo
+    proxy: {
+      '/api': 'http://localhost:5000',
+    },
   },
 })

@@ -6,11 +6,17 @@ React + TypeScript + Vite + Tailwind CSS.
 
 ```bash
 npm install
-cp .env.example .env
 npm run dev
 ```
 
-The app opens at http://localhost:3000. The backend (`influencer_backend`) must also be running.
+The app opens at http://localhost:3000. The backend (`influencer_backend`) must also be running on port 5000.
+
+## How the frontend reaches the backend
+
+The app always calls `/api/...` on its own domain, so no environment variable is needed:
+
+- Locally, the Vite dev server proxies `/api` to `http://localhost:5000` (see `vite.config.ts`).
+- On Vercel, `vercel.json` rewrites `/api/*` to `https://influencer-backend.vercel.app/api/*`.
 
 ## Folder structure
 
