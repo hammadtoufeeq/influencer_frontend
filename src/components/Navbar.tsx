@@ -22,6 +22,9 @@ function Navbar() {
 
         {!isLoading && (
           <div className="flex items-center gap-2 text-sm sm:gap-4">
+            <Link to="/search" className="hover:underline">
+              Explore
+            </Link>
             {user ? (
               <>
                 <Link to="/dashboard" className="hover:underline">

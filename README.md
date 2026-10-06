@@ -24,13 +24,14 @@ The app always calls `/api/...` on its own domain, so no environment variable is
 src/
 ├─ api/          axios instance (backend se baat karne ke liye)
 ├─ api/auth.ts   register / login / logout / me calls
+├─ api/people.ts people search, profile, taxonomy calls
 ├─ components/   reusable UI pieces (Navbar, Footer, Layout, FormField, ProtectedRoute)
-├─ pages/        full pages, one per route (Home, Login, Register, Dashboard, NotFound)
+├─ pages/        full pages, one per route (Home, Search, Profile, Login, Register, Dashboard, NotFound)
 ├─ context/      AuthProvider (who is logged in)
-├─ hooks/        custom hooks (useAuth)
+├─ hooks/        custom hooks (useAuth, useTaxonomy)
 ├─ types/        TypeScript types (API response, User)
 ├─ constants/    app-wide constants (PLATFORM_NAME, signup roles)
-├─ utils/        helpers (read backend error messages)
+├─ utils/        helpers (backend error messages, number / country / language formatting)
 ├─ App.tsx       routes
 └─ main.tsx      entry point (providers)
 ```
@@ -40,3 +41,11 @@ src/
 - `useAuth()` gives `user`, `isLoading`, `login`, `register`, `logout`.
 - Wrap a page in `<ProtectedRoute>` (optionally `roles={['business']}`) to require login.
 - Tokens are httpOnly cookies set by the backend. When the access token expires, `api/axios.ts` calls `/auth/refresh` once and retries the request.
+
+## Pages
+
+| URL | Page |
+|---|---|
+| `/` | Home: search bar, browse by industry, most followed |
+| `/search?q=&profession=&industry=&topic=&country=&city=&language=&minFollowers=&status=&sort=&page=` | Search with filters. All filters live in the URL, so results can be shared and the back button works |
+| `/people/:slug` | Public profile |
