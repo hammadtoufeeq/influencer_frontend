@@ -8,6 +8,8 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
 import NotFound from './pages/NotFound'
+import AdminPeople from './pages/admin/AdminPeople'
+import AdminPersonEditor from './pages/admin/AdminPersonEditor'
 
 function App() {
   return (
@@ -23,6 +25,30 @@ function App() {
           element={
             <ProtectedRoute>
               <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute roles={['admin']}>
+              <AdminPeople />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/people/new"
+          element={
+            <ProtectedRoute roles={['admin']}>
+              <AdminPersonEditor />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/people/:id/edit"
+          element={
+            <ProtectedRoute roles={['admin']}>
+              <AdminPersonEditor />
             </ProtectedRoute>
           }
         />

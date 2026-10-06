@@ -1,4 +1,4 @@
-import type { SignupRole } from '../types/user'
+import type { Role, SignupRole } from '../types/user'
 
 // Signup page pe dikhne wale account types
 export const SIGNUP_ROLE_OPTIONS: {
@@ -32,3 +32,12 @@ export const SIGNUP_ROLE_OPTIONS: {
     description: 'NGO, university, event organizer or government body',
   },
 ]
+
+export const ROLE_LABELS: Record<Role, string> = {
+  talent: 'Talent',
+  representative: 'Manager / Agent',
+  business: 'Business',
+  agency: 'Agency',
+  organization: 'Organization',
+  admin: 'Admin',
+}

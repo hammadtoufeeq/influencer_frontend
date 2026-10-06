@@ -52,6 +52,7 @@ export interface Person extends PersonSummary {
   websiteUrl?: string
   socialAccounts: SocialAccount[]
   claimedBy: string | null
+  visibility: 'visible' | 'hidden'
   sourceRecords: { sourceType: string; url?: string; note?: string; retrievedAt: string }[]
   createdAt: string
   updatedAt: string

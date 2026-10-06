@@ -1,4 +1,5 @@
-import { SIGNUP_ROLE_OPTIONS } from '../constants/roles'
+import { Link } from 'react-router-dom'
+import { ROLE_LABELS } from '../constants/roles'
 import { useAuth } from '../hooks/useAuth'
 
 // Abhi sirf placeholder. Talent aur business dashboards baad mein banenge
@@ -6,8 +7,6 @@ function Dashboard() {
   const { user } = useAuth()
   if (!user) return null
 
-  const roleLabel =
-    SIGNUP_ROLE_OPTIONS.find((option) => option.value === user.role)?.label ?? user.role
 
   return (
     <section className="rounded-2xl bg-white p-6 shadow-sm md:p-8">
@@ -19,9 +18,17 @@ function Dashboard() {
         </div>
         <div>
           <dt className="text-sm text-gray-500">Account type</dt>
-          <dd className="font-medium">{roleLabel}</dd>
+          <dd className="font-medium">{ROLE_LABELS[user.role]}</dd>
         </div>
       </dl>
+      {user.role === 'admin' && (
+        <Link
+          to="/admin"
+          className="mt-6 inline-block rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
+        >
+          Open admin panel →
+        </Link>
+      )}
     </section>
   )
 }

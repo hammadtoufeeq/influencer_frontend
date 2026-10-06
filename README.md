@@ -49,3 +49,5 @@ src/
 | `/` | Home: search bar, browse by industry, most followed |
 | `/search?q=&profession=&industry=&topic=&country=&city=&language=&minFollowers=&status=&sort=&page=` | Search with filters. All filters live in the URL, so results can be shared and the back button works |
 | `/people/:slug` | Public profile |
+| `/admin` | Admin only: all profiles, quick Verify / Hide, search |
+| `/admin/people/new`, `/admin/people/:id/edit` | Admin only: create or edit a profile |

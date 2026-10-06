@@ -15,18 +15,23 @@ function Navbar() {
 
   return (
     <header className="border-b bg-white">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4">
+      <nav className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-4">
         <Link to="/" className="text-lg font-bold sm:text-xl">
           {PLATFORM_NAME}
         </Link>
 
         {!isLoading && (
-          <div className="flex items-center gap-2 text-sm sm:gap-4">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm sm:gap-x-4">
             <Link to="/search" className="hover:underline">
               Explore
             </Link>
             {user ? (
               <>
+                {user.role === 'admin' && (
+                  <Link to="/admin" className="font-medium hover:underline">
+                    Admin
+                  </Link>
+                )}
                 <Link to="/dashboard" className="hover:underline">
                   Dashboard
                 </Link>
