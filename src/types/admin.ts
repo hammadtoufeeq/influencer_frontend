@@ -5,6 +5,7 @@ export interface AdminPersonRow {
   name: string
   slug: string
   headline?: string
+  photoUrl?: string
   status: ProfileStatus
   verified: boolean
   visibility: 'visible' | 'hidden'

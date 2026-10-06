@@ -30,7 +30,7 @@ function AdminPersonEditor() {
       queryClient.invalidateQueries({ queryKey: ['admin'] })
       queryClient.invalidateQueries({ queryKey: ['people'] })
       queryClient.invalidateQueries({ queryKey: ['person', saved.slug] })
-      navigate('/admin')
+      navigate('/dashboard')
     },
     onError: (error) => {
       const { message, fields } = getApiError(error)
@@ -46,7 +46,7 @@ function AdminPersonEditor() {
   return (
     <div className="mx-auto max-w-3xl space-y-6">
       <div>
-        <Link to="/admin" className="text-sm underline">← Back to admin</Link>
+        <Link to="/dashboard" className="text-sm underline">← Back to dashboard</Link>
         <h1 className="mt-2 text-2xl font-bold">{isNew ? 'New profile' : `Edit ${person!.name}`}</h1>
       </div>
       {/* key: dusri profile kholne pe form naye data se shuru ho */}

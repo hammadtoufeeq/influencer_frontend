@@ -1,35 +1,32 @@
 import { Link } from 'react-router-dom'
-import { ROLE_LABELS } from '../constants/roles'
+import DashboardHeader from '../components/DashboardHeader'
 import { useAuth } from '../hooks/useAuth'
+import AdminDashboard from './admin/AdminDashboard'
 
-// Abhi sirf placeholder. Talent aur business dashboards baad mein banenge
+// /dashboard: har role ko apna dashboard. Admin ko seedha admin dashboard
 function Dashboard() {
   const { user } = useAuth()
   if (!user) return null
 
+  if (user.role === 'admin') return <AdminDashboard />
 
+  // Talent aur business dashboards agle phases mein banenge
   return (
-    <section className="rounded-2xl bg-white p-6 shadow-sm md:p-8">
-      <h1 className="text-2xl font-bold">Hi, {user.name} 👋</h1>
-      <dl className="mt-6 grid gap-4 sm:grid-cols-2">
-        <div>
-          <dt className="text-sm text-gray-500">Email</dt>
-          <dd className="font-medium break-all">{user.email}</dd>
-        </div>
-        <div>
-          <dt className="text-sm text-gray-500">Account type</dt>
-          <dd className="font-medium">{ROLE_LABELS[user.role]}</dd>
-        </div>
-      </dl>
-      {user.role === 'admin' && (
+    <div className="space-y-6">
+      <DashboardHeader />
+      <section className="rounded-2xl border border-dashed border-gray-300 p-8 text-center">
+        <p className="font-medium">Your dashboard is coming soon.</p>
+        <p className="mt-1 text-sm text-gray-500">
+          Meanwhile, discover people on the platform.
+        </p>
         <Link
-          to="/admin"
-          className="mt-6 inline-block rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
+          to="/search"
+          className="mt-4 inline-block rounded-lg bg-gray-900 px-4 py-2 text-sm text-white hover:bg-gray-800"
         >
-          Open admin panel →
+          Explore people
         </Link>
-      )}
-    </section>
+      </section>
+    </div>
   )
 }
 
