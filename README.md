@@ -23,12 +23,20 @@ The app always calls `/api/...` on its own domain, so no environment variable is
 ```
 src/
 ├─ api/          axios instance (backend se baat karne ke liye)
-├─ components/   reusable UI pieces (Navbar, Footer, Layout)
-├─ pages/        full pages, one per route (Home, NotFound)
-├─ context/      React context (AuthContext later)
-├─ hooks/        custom hooks
-├─ types/        TypeScript types (API response shape)
-├─ constants/    app-wide constants (PLATFORM_NAME)
+├─ api/auth.ts   register / login / logout / me calls
+├─ components/   reusable UI pieces (Navbar, Footer, Layout, FormField, ProtectedRoute)
+├─ pages/        full pages, one per route (Home, Login, Register, Dashboard, NotFound)
+├─ context/      AuthProvider (who is logged in)
+├─ hooks/        custom hooks (useAuth)
+├─ types/        TypeScript types (API response, User)
+├─ constants/    app-wide constants (PLATFORM_NAME, signup roles)
+├─ utils/        helpers (read backend error messages)
 ├─ App.tsx       routes
 └─ main.tsx      entry point (providers)
 ```
+
+## Auth
+
+- `useAuth()` gives `user`, `isLoading`, `login`, `register`, `logout`.
+- Wrap a page in `<ProtectedRoute>` (optionally `roles={['business']}`) to require login.
+- Tokens are httpOnly cookies set by the backend. When the access token expires, `api/axios.ts` calls `/auth/refresh` once and retries the request.
