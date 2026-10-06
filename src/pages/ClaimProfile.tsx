@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import { createClaim } from '../api/claims'
-import { personQuery } from '../api/queries'
+import { myClaimsQuery, myProfileQuery, personQuery } from '../api/queries'
 import Avatar from '../components/Avatar'
 import FormField from '../components/FormField'
 import { getApiError } from '../utils/apiError'
@@ -13,7 +13,10 @@ function ClaimProfile() {
   const { slug = '' } = useParams()
   const navigate = useNavigate()
   const queryClient = useQueryClient()
-  const { data: person, isLoading } = useQuery({ ...personQuery(slug), retry: false })
+  // Claim se pehle hamesha taaza data (cache wala purana ho sakta hai)
+  const { data: person, isLoading } = useQuery({ ...personQuery(slug), retry: false, staleTime: 0 })
+  const myProfile = useQuery(myProfileQuery)
+  const myClaims = useQuery(myClaimsQuery)
 
   const [contactEmail, setContactEmail] = useState('')
   const [links, setLinks] = useState(['', '', ''])
@@ -35,8 +38,28 @@ function ClaimProfile() {
     },
   })
 
-  if (isLoading) return <p className="text-center text-gray-500">Loading...</p>
+  if (isLoading || myProfile.isLoading || myClaims.isLoading) {
+    return <p className="text-center text-gray-500">Loading...</p>
+  }
   if (!person) return <p className="text-center">Profile not found.</p>
+
+  // Talent ki pehle se profile hai, ya claim pending hai: form mat dikhao
+  const pending = myClaims.data?.find((claim) => claim.status === 'pending')
+  const blockMessage = myProfile.data
+    ? 'You already own a profile. One talent account can have only one profile.'
+    : pending
+      ? `You already have a claim under review for ${pending.person.name}.`
+      : null
+  if (blockMessage) {
+    return (
+      <section className="mx-auto max-w-xl rounded-2xl bg-white p-6 text-center shadow-sm">
+        <p className="font-medium">{blockMessage}</p>
+        <Link to="/dashboard" className="mt-3 inline-block text-sm underline">
+          Go to dashboard
+        </Link>
+      </section>
+    )
+  }
 
   if (person.claimedBy) {
     return (

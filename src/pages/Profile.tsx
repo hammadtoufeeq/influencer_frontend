@@ -1,10 +1,9 @@
 import { Link, useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
-import toast from 'react-hot-toast'
-import { useAuth } from '../hooks/useAuth'
 import { personQuery } from '../api/queries'
 import Avatar from '../components/Avatar'
+import ClaimAction from '../components/ClaimAction'
 import VerifiedBadge from '../components/VerifiedBadge'
 import { PLATFORM_LABELS, STATUS_LABELS } from '../constants/people'
 import type { TaxonomyItem } from '../types/person'
@@ -32,7 +31,6 @@ function TagList({ title, items, param }: { title: string; items: TaxonomyItem[]
 
 function Profile() {
   const { slug = '' } = useParams()
-  const { user } = useAuth()
 
   const { data: person, isLoading, error } = useQuery({ ...personQuery(slug), retry: false })
 
@@ -81,7 +79,7 @@ function Profile() {
             </div>
           </div>
 
-          {/* Contact agle phase mein. Claim ab chalta hai */}
+          {/* Contact agle phase mein */}
           <div className="flex flex-col gap-2 sm:w-44">
             <button
               disabled
@@ -90,33 +88,7 @@ function Profile() {
             >
               Contact / Hire
             </button>
-            {person.claimedBy ? (
-              <span className="rounded-lg bg-green-50 px-4 py-2 text-center text-sm text-green-700">
-                ✓ Claimed profile
-              </span>
-            ) : !user ? (
-              <Link
-                to="/login"
-                state={{ from: `/people/${person.slug}/claim` }}
-                className="rounded-lg border border-gray-300 px-4 py-2 text-center text-sm hover:bg-gray-100"
-              >
-                Is this you? Claim
-              </Link>
-            ) : user.role === 'talent' ? (
-              <Link
-                to={`/people/${person.slug}/claim`}
-                className="rounded-lg border border-gray-300 px-4 py-2 text-center text-sm hover:bg-gray-100"
-              >
-                Is this you? Claim
-              </Link>
-            ) : (
-              <button
-                onClick={() => toast('Only talent accounts can claim a profile')}
-                className="rounded-lg border border-gray-300 px-4 py-2 text-sm text-gray-500"
-              >
-                Is this you? Claim
-              </button>
-            )}
+            <ClaimAction person={person} />
           </div>
         </div>
       </section>
