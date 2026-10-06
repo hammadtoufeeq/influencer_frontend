@@ -2,7 +2,7 @@ import { useState, type FormEvent } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
-import { adminListPeople, updatePerson } from '../../api/admin'
+import { adminListPeople, deletePerson, updatePerson } from '../../api/admin'
 import AdminPersonCard from '../../components/admin/AdminPersonCard'
 import DashboardHeader from '../../components/DashboardHeader'
 import Pagination from '../../components/Pagination'
@@ -37,6 +37,17 @@ function AdminDashboard() {
       queryClient.invalidateQueries({ queryKey: ['admin'] })
       queryClient.invalidateQueries({ queryKey: ['people'] })
       queryClient.invalidateQueries({ queryKey: ['person', person.slug] })
+    },
+    onError: (error) => toast.error(getApiError(error).message),
+  })
+
+  const remove = useMutation({
+    mutationFn: (person: { _id: string; slug: string; name: string }) => deletePerson(person._id),
+    onSuccess: (_data, person) => {
+      toast.success(`${person.name} deleted`)
+      queryClient.invalidateQueries({ queryKey: ['admin'] })
+      queryClient.invalidateQueries({ queryKey: ['people'] })
+      queryClient.removeQueries({ queryKey: ['person', person.slug] })
     },
     onError: (error) => toast.error(getApiError(error).message),
   })
@@ -114,7 +125,7 @@ function AdminDashboard() {
             <AdminPersonCard
               key={person._id}
               person={person}
-              isBusy={quickUpdate.isPending}
+              isBusy={quickUpdate.isPending || remove.isPending}
               onToggleVerified={() =>
                 quickUpdate.mutate({ id: person._id, input: { verified: !person.verified } })
               }
@@ -124,6 +135,7 @@ function AdminDashboard() {
                   input: { visibility: person.visibility === 'hidden' ? 'visible' : 'hidden' },
                 })
               }
+              onDelete={() => remove.mutate(person)}
             />
           ))}
         </div>

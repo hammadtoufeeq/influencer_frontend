@@ -22,3 +22,7 @@ export async function updatePerson(id: string, input: PersonInput) {
   const res = await api.patch<ApiSuccess<{ person: Person }>>(`/people/${id}`, input)
   return res.data.data.person
 }
+
+export async function deletePerson(id: string) {
+  await api.delete(`/people/${id}`)
+}

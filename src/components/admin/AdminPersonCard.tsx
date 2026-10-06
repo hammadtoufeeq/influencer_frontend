@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Avatar from '../Avatar'
 import { STATUS_LABELS } from '../../constants/people'
@@ -9,15 +10,27 @@ interface AdminPersonCardProps {
   isBusy: boolean
   onToggleVerified: () => void
   onToggleHidden: () => void
+  onDelete: () => void
 }
 
 function Badge({ className, children }: { className: string; children: string }) {
-  return <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${className}`}>{children}</span>
+  return (
+    <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${className}`}>{children}</span>
+  )
 }
 
-function AdminPersonCard({ person, isBusy, onToggleVerified, onToggleHidden }: AdminPersonCardProps) {
+function AdminPersonCard({
+  person,
+  isBusy,
+  onToggleVerified,
+  onToggleHidden,
+  onDelete,
+}: AdminPersonCardProps) {
   const isHidden = person.visibility === 'hidden'
-  const button = 'inline-flex items-center justify-center gap-1 rounded-lg px-3 py-2 text-xs font-medium transition disabled:opacity-50'
+  // Delete se pehle card ke andar hi "Are you sure?" poochte hain
+  const [confirmDelete, setConfirmDelete] = useState(false)
+  const button =
+    'inline-flex items-center justify-center gap-1 rounded-lg px-3 py-2 text-xs font-medium transition disabled:opacity-50'
 
   return (
     <article
@@ -53,42 +66,82 @@ function AdminPersonCard({ person, isBusy, onToggleVerified, onToggleHidden }: A
         </div>
       </dl>
 
-      <div className="mt-auto grid grid-cols-2 gap-2 p-5 sm:grid-cols-4">
-        <Link to={`/dashboard/people/${person._id}/edit`} className={`${button} bg-gray-900 text-white hover:bg-gray-800`}>
-          ✎ Edit
-        </Link>
-        <button
-          onClick={onToggleVerified}
-          disabled={isBusy}
-          className={`${button} ${
-            person.verified
-              ? 'border border-blue-200 text-blue-700 hover:bg-blue-50'
-              : 'bg-blue-600 text-white hover:bg-blue-700'
-          }`}
-        >
-          {person.verified ? 'Unverify' : '✓ Verify'}
-        </button>
-        <button
-          onClick={onToggleHidden}
-          disabled={isBusy}
-          className={`${button} ${
-            isHidden
-              ? 'bg-green-600 text-white hover:bg-green-700'
-              : 'border border-red-200 text-red-600 hover:bg-red-50'
-          }`}
-        >
-          {isHidden ? 'Show' : 'Hide'}
-        </button>
-        {isHidden ? (
-          <span className={`${button} cursor-not-allowed border border-gray-200 text-gray-400`} title="Hidden profiles are not public">
-            View
-          </span>
-        ) : (
-          <Link to={`/people/${person.slug}`} className={`${button} border border-gray-300 text-gray-700 hover:bg-gray-100`}>
-            View ↗
+      {confirmDelete ? (
+        <div className="mx-5 mt-auto mb-5 rounded-xl border border-red-200 bg-red-50 p-4">
+          <p className="text-sm font-medium text-red-800">Delete {person.name} permanently?</p>
+          <p className="mt-1 text-xs text-red-700">
+            This cannot be undone. To take a profile down temporarily, use Hide instead.
+          </p>
+          <div className="mt-3 flex gap-2">
+            <button
+              onClick={() => setConfirmDelete(false)}
+              className={`${button} flex-1 border border-gray-300 bg-white text-gray-700 hover:bg-gray-100`}
+            >
+              Cancel
+            </button>
+            <button
+              onClick={onDelete}
+              disabled={isBusy}
+              className={`${button} flex-1 bg-red-600 text-white hover:bg-red-700`}
+            >
+              Yes, delete
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className="mt-auto grid grid-cols-2 gap-2 p-5 sm:grid-cols-5">
+          <Link
+            to={`/dashboard/people/${person._id}/edit`}
+            className={`${button} bg-gray-900 text-white hover:bg-gray-800`}
+          >
+            ✎ Edit
           </Link>
-        )}
-      </div>
+          <button
+            onClick={onToggleVerified}
+            disabled={isBusy}
+            className={`${button} ${
+              person.verified
+                ? 'border border-blue-200 text-blue-700 hover:bg-blue-50'
+                : 'bg-blue-600 text-white hover:bg-blue-700'
+            }`}
+          >
+            {person.verified ? 'Unverify' : '✓ Verify'}
+          </button>
+          <button
+            onClick={onToggleHidden}
+            disabled={isBusy}
+            className={`${button} ${
+              isHidden
+                ? 'bg-green-600 text-white hover:bg-green-700'
+                : 'border border-red-200 text-red-600 hover:bg-red-50'
+            }`}
+          >
+            {isHidden ? 'Show' : 'Hide'}
+          </button>
+          {isHidden ? (
+            <span
+              className={`${button} cursor-not-allowed border border-gray-200 text-gray-400`}
+              title="Hidden profiles are not public"
+            >
+              View
+            </span>
+          ) : (
+            <Link
+              to={`/people/${person.slug}`}
+              className={`${button} border border-gray-300 text-gray-700 hover:bg-gray-100`}
+            >
+              View ↗
+            </Link>
+          )}
+          <button
+            onClick={() => setConfirmDelete(true)}
+            disabled={isBusy}
+            className={`${button} col-span-2 border border-red-200 text-red-600 hover:bg-red-600 hover:text-white sm:col-span-1`}
+          >
+            🗑 Delete
+          </button>
+        </div>
+      )}
     </article>
   )
 }

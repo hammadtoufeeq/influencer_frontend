@@ -1,21 +1,12 @@
 import type { ReactNode } from 'react'
-import { useNavigate } from 'react-router-dom'
-import toast from 'react-hot-toast'
 import { ROLE_LABELS } from '../constants/roles'
 import { useAuth } from '../hooks/useAuth'
 import Avatar from './Avatar'
 
-// Har dashboard ke upar: naam, role, aur Log out
+// Har dashboard ke upar: naam aur role. children mein page ke apne buttons
 function DashboardHeader({ children }: { children?: ReactNode }) {
-  const { user, logout } = useAuth()
-  const navigate = useNavigate()
+  const { user } = useAuth()
   if (!user) return null
-
-  async function handleLogout() {
-    await logout()
-    toast.success('Logged out')
-    navigate('/')
-  }
 
   return (
     <section className="flex flex-col gap-4 rounded-2xl bg-white p-5 shadow-sm sm:flex-row sm:items-center md:p-6">
@@ -26,15 +17,7 @@ function DashboardHeader({ children }: { children?: ReactNode }) {
           {ROLE_LABELS[user.role]} · {user.email}
         </p>
       </div>
-      <div className="flex flex-wrap items-center gap-2">
-        {children}
-        <button
-          onClick={handleLogout}
-          className="rounded-lg border border-gray-300 px-4 py-2 text-sm hover:bg-gray-100"
-        >
-          Log out
-        </button>
-      </div>
+      {children && <div className="flex flex-wrap items-center gap-2">{children}</div>}
     </section>
   )
 }
