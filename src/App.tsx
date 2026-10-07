@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import ProtectedRoute from './components/ProtectedRoute'
 import Home from './pages/Home'
@@ -22,6 +22,15 @@ import {
   faUsers,
 } from '@fortawesome/free-solid-svg-icons'
 import AdminPersonEditor from './pages/admin/AdminPersonEditor'
+import AdminLayout from './components/admin-panel/AdminLayout'
+import AdminOverviewPage from './pages/admin-panel/AdminOverviewPage'
+import AdminClaimsPage from './pages/admin-panel/AdminClaimsPage'
+import AdminClaimDetailPage from './pages/admin-panel/AdminClaimDetailPage'
+import AdminUsersPage from './pages/admin-panel/AdminUsersPage'
+import AdminReportsPage from './pages/admin-panel/AdminReportsPage'
+import AdminReportDetailPage from './pages/admin-panel/AdminReportDetailPage'
+import AdminAuditLogPage from './pages/admin-panel/AdminAuditLogPage'
+import ReportProfile from './pages/ReportProfile'
 
 function App() {
   return (
@@ -184,8 +193,24 @@ function App() {
             </ProtectedRoute>
           }
         />
-        {/* Purana /admin link ab dashboard pe jata hai */}
-        <Route path="/admin" element={<Navigate to="/dashboard" replace />} />
+        {/* Admin panel: sidebar ke saath, sirf admin */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute roles={['admin']}>
+              <AdminLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<AdminOverviewPage />} />
+          <Route path="claims" element={<AdminClaimsPage />} />
+          <Route path="claims/:id" element={<AdminClaimDetailPage />} />
+          <Route path="users" element={<AdminUsersPage />} />
+          <Route path="reports" element={<AdminReportsPage />} />
+          <Route path="reports/:id" element={<AdminReportDetailPage />} />
+          <Route path="audit-logs" element={<AdminAuditLogPage />} />
+        </Route>
+        <Route path="/people/:slug/report" element={<ReportProfile />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

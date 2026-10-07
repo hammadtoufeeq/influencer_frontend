@@ -6,6 +6,7 @@ import axios from 'axios'
 import { personQuery } from '../api/queries'
 import Avatar from '../components/Avatar'
 import ClaimAction from '../components/ClaimAction'
+import ReportProfileLink from '../components/ReportProfileLink'
 import VerifiedBadge from '../components/VerifiedBadge'
 import { PLATFORM_ICONS, PLATFORM_LABELS, STATUS_LABELS } from '../constants/people'
 import type { TaxonomyItem } from '../types/person'
@@ -181,6 +182,7 @@ function Profile() {
               Information on unclaimed profiles comes from public sources. Last updated{' '}
               {new Date(person.updatedAt).toLocaleDateString()}.
             </p>
+            <ReportProfileLink slug={person.slug} />
           </section>
         </aside>
       </div>

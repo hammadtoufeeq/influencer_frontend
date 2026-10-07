@@ -7,6 +7,7 @@ import {
   faGear,
   faIdCard,
   faLayerGroup,
+  faShieldHalved,
   faPlus,
   faStar,
   faTableColumns,
@@ -38,6 +39,7 @@ export const MAIN_NAV: NavItem[] = [
   },
   { to: '/dashboard?tab=claims', label: 'Claims', icon: faUserCheck, roles: ['admin'] },
   { to: '/dashboard/people/new', label: 'Add profile', icon: faPlus, roles: ['admin'] },
+  { to: '/admin', label: 'Admin panel', icon: faShieldHalved, roles: ['admin'] },
 ]
 
 // Right side ke chhote icon buttons (logged-in)
