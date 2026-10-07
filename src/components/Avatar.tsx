@@ -3,11 +3,12 @@ import { initials } from '../utils/format'
 interface AvatarProps {
   name: string
   photoUrl?: string
-  size?: 'md' | 'lg'
+  size?: 'sm' | 'md' | 'lg'
 }
 
 function Avatar({ name, photoUrl, size = 'md' }: AvatarProps) {
-  const sizeClass = size === 'lg' ? 'h-24 w-24 text-3xl' : 'h-14 w-14 text-lg'
+  const sizeClass =
+    size === 'lg' ? 'h-24 w-24 text-3xl' : size === 'sm' ? 'h-8 w-8 text-xs' : 'h-14 w-14 text-lg'
 
   if (photoUrl) {
     return (

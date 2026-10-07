@@ -48,8 +48,13 @@ src/
 |---|---|
 | `/` | Home: search bar, browse by industry, most followed |
 | `/search?q=&profession=&industry=&topic=&country=&city=&language=&minFollowers=&status=&sort=&page=` | Search with filters. All filters live in the URL, so results can be shared and the back button works |
+| `/browse` | Browse by industry, profession, topic and country |
 | `/people/:slug` | Public profile (Claim button for talents) |
 | `/people/:slug/claim` | Talent only: send a claim with proof |
 | `/dashboard/profile/edit` | Talent only: edit the profile you own |
 | `/dashboard` | Logged-in home per account type. Talent sees their profile / claim status. Admins get People and Claim requests tabs |
 | `/dashboard/people/new`, `/dashboard/people/:id/edit` | Admin only: create or edit a profile |
+
+## Navigation
+
+All navbar links live in `src/constants/navigation.ts` (`MAIN_NAV`, `UTILITY_NAV`, `ACCOUNT_NAV`), each with the roles that can see it. Pages that are planned but not built yet (`/inbox`, `/notifications`, `/shortlists`, `/talents`, `/settings`, `/dashboard/services`) show a "Coming soon" page.
