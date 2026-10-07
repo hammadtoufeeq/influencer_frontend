@@ -5,7 +5,6 @@ import {
   faCircleCheck,
   faEye,
   faEyeSlash,
-  faLock,
   faPen,
   faTrash,
   faTriangleExclamation,
@@ -39,6 +38,7 @@ function AdminPersonCard({
   onDelete,
 }: AdminPersonCardProps) {
   const isHidden = person.visibility === 'hidden'
+  const isClaimed = Boolean(person.claimedBy)
   // Delete se pehle card ke andar hi "Are you sure?" poochte hain
   const [confirmDelete, setConfirmDelete] = useState(false)
   const button =
@@ -109,16 +109,11 @@ function AdminPersonCard({
           </div>
         </div>
       ) : (
-        <div className="mt-auto grid grid-cols-2 gap-2 p-5 sm:grid-cols-5">
-          {/* Claimed profile sirf uska maalik edit kar sakta hai */}
-          {person.claimedBy ? (
-            <span
-              title="This profile is claimed. Only its owner can edit it."
-              className={`${button} cursor-not-allowed bg-gray-100 text-gray-500`}
-            >
-              <FontAwesomeIcon icon={faLock} /> Locked
-            </span>
-          ) : (
+        <div
+          className={`mt-auto grid grid-cols-2 gap-2 p-5 ${isClaimed ? 'sm:grid-cols-4' : 'sm:grid-cols-5'}`}
+        >
+          {/* Claimed profile sirf uska maalik edit kar sakta hai: Edit button hi nahi */}
+          {!isClaimed && (
             <Link
               to={`/dashboard/people/${person._id}/edit`}
               className={`${button} bg-gray-900 text-white hover:bg-gray-800`}
@@ -168,7 +163,7 @@ function AdminPersonCard({
           <button
             onClick={() => setConfirmDelete(true)}
             disabled={isBusy}
-            className={`${button} col-span-2 border border-red-200 text-red-600 hover:bg-red-600 hover:text-white sm:col-span-1`}
+            className={`${button} ${isClaimed ? '' : 'col-span-2 sm:col-span-1'} border border-red-200 text-red-600 hover:bg-red-600 hover:text-white`}
           >
             <FontAwesomeIcon icon={faTrash} /> Delete
           </button>
