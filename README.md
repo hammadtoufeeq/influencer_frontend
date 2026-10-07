@@ -58,3 +58,22 @@ src/
 ## Navigation
 
 All navbar links live in `src/constants/navigation.ts` (`MAIN_NAV`, `UTILITY_NAV`, `ACCOUNT_NAV`), each with the roles that can see it. Pages that are planned but not built yet (`/inbox`, `/notifications`, `/shortlists`, `/talents`, `/settings`, `/dashboard/services`) show a "Coming soon" page.
+
+## Admin panel (`/admin`)
+
+Admins only (`ProtectedRoute roles={['admin']}`). Sidebar: Dashboard, Claims, Users, Reports, Audit log.
+
+| URL | Page |
+|---|---|
+| `/admin` | Overview: claims needing action, open reports, users, profiles |
+| `/admin/claims`, `/admin/claims/:id` | Claims table (status filter) and detail: evidence, code, approve/reject |
+| `/admin/users` | Search, role/status filter, change role, suspend/unsuspend |
+| `/admin/reports`, `/admin/reports/:id` | Reports queue and detail: status, admin note, takedown |
+| `/admin/audit-logs` | Read-only audit log with filters and before/after view |
+| `/people/:slug/report` | Public "Report an error or request removal" form |
+
+The older admin dashboard at `/dashboard` (profile cards, create/edit) is unchanged.
+
+## i18n
+
+`react-i18next` with English, Urdu and Arabic in `src/i18n/locales/*.json`. The admin panel has a language switch; Urdu and Arabic set `dir="rtl"` on the admin area. Use `t('key')` for new strings and add the key to all three files.
