@@ -5,6 +5,7 @@ import {
   faCircleCheck,
   faEye,
   faEyeSlash,
+  faLock,
   faPen,
   faTrash,
   faTriangleExclamation,
@@ -109,12 +110,22 @@ function AdminPersonCard({
         </div>
       ) : (
         <div className="mt-auto grid grid-cols-2 gap-2 p-5 sm:grid-cols-5">
-          <Link
-            to={`/dashboard/people/${person._id}/edit`}
-            className={`${button} bg-gray-900 text-white hover:bg-gray-800`}
-          >
-            <FontAwesomeIcon icon={faPen} /> Edit
-          </Link>
+          {/* Claimed profile sirf uska maalik edit kar sakta hai */}
+          {person.claimedBy ? (
+            <span
+              title="This profile is claimed. Only its owner can edit it."
+              className={`${button} cursor-not-allowed bg-gray-100 text-gray-500`}
+            >
+              <FontAwesomeIcon icon={faLock} /> Locked
+            </span>
+          ) : (
+            <Link
+              to={`/dashboard/people/${person._id}/edit`}
+              className={`${button} bg-gray-900 text-white hover:bg-gray-800`}
+            >
+              <FontAwesomeIcon icon={faPen} /> Edit
+            </Link>
+          )}
           <button
             onClick={onToggleVerified}
             disabled={isBusy}

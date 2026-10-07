@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faLock } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
@@ -48,6 +48,25 @@ function AdminPersonEditor() {
 
   if (!isNew && isLoading) return <p className="text-gray-500">Loading...</p>
   if (!isNew && (isError || !person)) return <p className="text-red-600">Profile not found.</p>
+
+  // Claimed profile: admin edit nahi kar sakta (backend bhi rokta hai)
+  if (person?.claimedBy) {
+    return (
+      <section className="mx-auto max-w-xl rounded-2xl bg-white p-8 text-center shadow-sm">
+        <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-gray-100 text-gray-600">
+          <FontAwesomeIcon icon={faLock} />
+        </span>
+        <h1 className="mt-4 text-xl font-bold">{person.name} is a claimed profile</h1>
+        <p className="mt-2 text-sm text-gray-600">
+          Only the owner can edit it. As an admin you can still verify, hide or delete it from the
+          dashboard.
+        </p>
+        <Link to="/dashboard" className="mt-6 inline-block text-sm underline">
+          Back to dashboard
+        </Link>
+      </section>
+    )
+  }
 
   return (
     <div className="mx-auto max-w-3xl space-y-6">
