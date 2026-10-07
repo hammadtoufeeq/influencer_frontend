@@ -6,6 +6,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Toaster } from 'react-hot-toast'
 import { AuthProvider } from './context/AuthProvider.tsx'
 import './index.css'
+import './i18n'
 import App from './App.tsx'
 
 const queryClient = new QueryClient({
