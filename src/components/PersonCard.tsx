@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLocationDot, faUsers } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
 import { personQuery } from '../api/queries'
@@ -38,9 +40,17 @@ function PersonCard({ person }: { person: PersonSummary }) {
           {person.professions.map((p) => p.name).join(' · ')}
         </p>
         <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-gray-500">
-          {location && <span>📍 {location}</span>}
+          {location && (
+            <span>
+              <FontAwesomeIcon icon={faLocationDot} className="mr-1 text-gray-400" />
+              {location}
+            </span>
+          )}
           {person.totalFollowers > 0 && (
-            <span>👥 {formatCount(person.totalFollowers)} followers</span>
+            <span>
+              <FontAwesomeIcon icon={faUsers} className="mr-1 text-gray-400" />
+              {formatCount(person.totalFollowers)} followers
+            </span>
           )}
         </div>
       </div>

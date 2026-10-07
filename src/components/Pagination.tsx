@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 interface PaginationProps {
   page: number
   totalPages: number
@@ -13,7 +15,8 @@ function Pagination({ page, totalPages, onChange }: PaginationProps) {
   return (
     <nav aria-label="Pagination" className="mt-8 flex items-center justify-center gap-3">
       <button className={buttonClass} disabled={page <= 1} onClick={() => onChange(page - 1)}>
-        ← Previous
+        <FontAwesomeIcon icon={faChevronLeft} className="mr-1.5 text-xs" />
+        Previous
       </button>
       <span className="text-sm text-gray-600">
         Page {page} of {totalPages}
@@ -23,7 +26,8 @@ function Pagination({ page, totalPages, onChange }: PaginationProps) {
         disabled={page >= totalPages}
         onClick={() => onChange(page + 1)}
       >
-        Next →
+        Next
+        <FontAwesomeIcon icon={faChevronRight} className="ml-1.5 text-xs" />
       </button>
     </nav>
   )

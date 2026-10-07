@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -31,9 +33,11 @@ function SearchBar({ initialValue = '', size = 'md' }: SearchBarProps) {
       />
       <button
         type="submit"
+        aria-label="Search"
         className={`rounded-xl bg-gray-900 px-5 font-medium text-white hover:bg-gray-800 ${padding}`}
       >
-        Search
+        <FontAwesomeIcon icon={faMagnifyingGlass} className="sm:mr-2" />
+        <span className="hidden sm:inline">Search</span>
       </button>
     </form>
   )

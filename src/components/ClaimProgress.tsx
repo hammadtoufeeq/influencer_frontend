@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
 import { useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -126,7 +128,8 @@ function ClaimProgress({ claim }: { claim: Claim }) {
 
       {claim.status === 'code_verified' && (
         <p className="mt-4 rounded-xl bg-green-50 p-4 text-sm text-green-800">
-          ✓ Code verified. An admin will give final approval soon, then you can edit your profile.
+          <FontAwesomeIcon icon={faCircleCheck} className="mr-1.5" />
+          Code verified. An admin will give final approval soon, then you can edit your profile.
         </p>
       )}
     </section>

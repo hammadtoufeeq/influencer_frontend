@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import type { TaxonomyItem } from '../../types/person'
 
 interface TaxonomyPickerProps {
@@ -18,7 +20,10 @@ function TaxonomyPicker({ label, items, selected, onChange, error }: TaxonomyPic
       <span className="mb-1 block text-sm font-medium">{label}</span>
       <div className="mb-2 flex flex-wrap gap-2">
         {selected.map((slug) => (
-          <span key={slug} className="inline-flex items-center gap-1 rounded-full bg-gray-100 py-1 pl-3 pr-1 text-sm">
+          <span
+            key={slug}
+            className="inline-flex items-center gap-1 rounded-full bg-gray-100 py-1 pl-3 pr-1 text-sm"
+          >
             {nameOf(slug)}
             <button
               type="button"
@@ -26,7 +31,7 @@ function TaxonomyPicker({ label, items, selected, onChange, error }: TaxonomyPic
               onClick={() => onChange(selected.filter((s) => s !== slug))}
               className="rounded-full px-1.5 text-gray-500 hover:bg-gray-200 hover:text-gray-900"
             >
-              ×
+              <FontAwesomeIcon icon={faXmark} className="text-xs" />
             </button>
           </span>
         ))}

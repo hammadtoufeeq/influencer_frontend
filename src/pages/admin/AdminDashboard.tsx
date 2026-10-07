@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useState, type FormEvent } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
@@ -89,7 +91,8 @@ function AdminDashboard() {
           to="/dashboard/people/new"
           className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
         >
-          + New profile
+          <FontAwesomeIcon icon={faPlus} className="mr-1.5" />
+          New profile
         </Link>
       </DashboardHeader>
 

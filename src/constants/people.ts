@@ -1,3 +1,15 @@
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
+import {
+  faFacebook,
+  faInstagram,
+  faLinkedin,
+  faSnapchat,
+  faTiktok,
+  faTwitch,
+  faXTwitter,
+  faYoutube,
+} from '@fortawesome/free-brands-svg-icons'
+import { faGlobe, faLink, faPodcast } from '@fortawesome/free-solid-svg-icons'
 import type { ProfileStatus, SocialPlatform } from '../types/person'
 
 export const STATUS_LABELS: Record<ProfileStatus, string> = {
@@ -38,3 +50,18 @@ export const SORT_OPTIONS = [
   { value: 'newest', label: 'Newest' },
   { value: 'name', label: 'Name (A-Z)' },
 ]
+
+// Har platform ka Font Awesome icon (brands wale asli logo hain)
+export const PLATFORM_ICONS: Record<SocialPlatform, IconDefinition> = {
+  instagram: faInstagram,
+  youtube: faYoutube,
+  tiktok: faTiktok,
+  x: faXTwitter,
+  facebook: faFacebook,
+  linkedin: faLinkedin,
+  snapchat: faSnapchat,
+  twitch: faTwitch,
+  podcast: faPodcast,
+  website: faGlobe,
+  other: faLink,
+}

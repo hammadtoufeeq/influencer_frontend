@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleCheck, faHourglassHalf, faPen } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
@@ -25,10 +27,12 @@ function ClaimAction({ person }: { person: Person }) {
     return (
       <>
         <span className="rounded-lg bg-green-50 px-4 py-2 text-center text-sm text-green-700">
-          ✓ This is your profile
+          <FontAwesomeIcon icon={faCircleCheck} className="mr-1.5" />
+          This is your profile
         </span>
         <Link to="/dashboard/profile/edit" className={outline}>
-          ✎ Edit profile
+          <FontAwesomeIcon icon={faPen} className="mr-1.5" />
+          Edit profile
         </Link>
       </>
     )
@@ -38,7 +42,8 @@ function ClaimAction({ person }: { person: Person }) {
   if (person.claimedBy) {
     return (
       <span className="rounded-lg bg-green-50 px-4 py-2 text-center text-sm text-green-700">
-        ✓ Claimed profile
+        <FontAwesomeIcon icon={faCircleCheck} className="mr-1.5" />
+        Claimed profile
       </span>
     )
   }
@@ -72,6 +77,7 @@ function ClaimAction({ person }: { person: Person }) {
   if (pending) {
     return pending.person._id === person._id ? (
       <span className="rounded-lg bg-amber-50 px-4 py-2 text-center text-sm text-amber-800">
+        <FontAwesomeIcon icon={faHourglassHalf} className="mr-1.5" />
         Claim under review
       </span>
     ) : null

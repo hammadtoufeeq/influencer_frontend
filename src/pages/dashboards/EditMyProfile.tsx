@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
@@ -41,7 +43,8 @@ function EditMyProfile() {
     <div className="mx-auto max-w-3xl space-y-6">
       <div>
         <Link to="/dashboard" className="text-sm underline">
-          ← Back to dashboard
+          <FontAwesomeIcon icon={faArrowLeft} className="mr-1.5" />
+          Back to dashboard
         </Link>
         <h1 className="mt-2 text-2xl font-bold">Edit your profile</h1>
         <p className="text-sm text-gray-500">These details are shown on your public profile.</p>

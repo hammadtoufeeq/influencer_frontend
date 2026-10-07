@@ -1,4 +1,15 @@
-import { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faArrowUpRightFromSquare,
+  faBan,
+  faCircleCheck,
+  faEye,
+  faEyeSlash,
+  faPen,
+  faTrash,
+  faTriangleExclamation,
+} from '@fortawesome/free-solid-svg-icons'
+import { useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import Avatar from '../Avatar'
 import { STATUS_LABELS } from '../../constants/people'
@@ -13,7 +24,7 @@ interface AdminPersonCardProps {
   onDelete: () => void
 }
 
-function Badge({ className, children }: { className: string; children: string }) {
+function Badge({ className, children }: { className: string; children: ReactNode }) {
   return (
     <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${className}`}>{children}</span>
   )
@@ -47,7 +58,12 @@ function AdminPersonCard({
             <p className="mt-1 line-clamp-2 text-sm text-gray-600">{person.headline}</p>
           )}
           <div className="mt-3 flex flex-wrap gap-1.5">
-            {person.verified && <Badge className="bg-blue-50 text-blue-700">✓ Verified</Badge>}
+            {person.verified && (
+              <Badge className="bg-blue-50 text-blue-700">
+                <FontAwesomeIcon icon={faCircleCheck} className="mr-1" />
+                Verified
+              </Badge>
+            )}
             {isHidden && <Badge className="bg-red-100 text-red-700">Hidden</Badge>}
             {person.claimedBy && <Badge className="bg-green-50 text-green-700">Claimed</Badge>}
             {person.isDemo && <Badge className="bg-amber-50 text-amber-800">Demo</Badge>}
@@ -68,7 +84,10 @@ function AdminPersonCard({
 
       {confirmDelete ? (
         <div className="mx-5 mt-auto mb-5 rounded-xl border border-red-200 bg-red-50 p-4">
-          <p className="text-sm font-medium text-red-800">Delete {person.name} permanently?</p>
+          <p className="text-sm font-medium text-red-800">
+            <FontAwesomeIcon icon={faTriangleExclamation} className="mr-1.5" />
+            Delete {person.name} permanently?
+          </p>
           <p className="mt-1 text-xs text-red-700">
             This cannot be undone. To take a profile down temporarily, use Hide instead.
           </p>
@@ -94,7 +113,7 @@ function AdminPersonCard({
             to={`/dashboard/people/${person._id}/edit`}
             className={`${button} bg-gray-900 text-white hover:bg-gray-800`}
           >
-            ✎ Edit
+            <FontAwesomeIcon icon={faPen} /> Edit
           </Link>
           <button
             onClick={onToggleVerified}
@@ -105,7 +124,8 @@ function AdminPersonCard({
                 : 'bg-blue-600 text-white hover:bg-blue-700'
             }`}
           >
-            {person.verified ? 'Unverify' : '✓ Verify'}
+            <FontAwesomeIcon icon={person.verified ? faBan : faCircleCheck} />
+            {person.verified ? 'Unverify' : 'Verify'}
           </button>
           <button
             onClick={onToggleHidden}
@@ -116,6 +136,7 @@ function AdminPersonCard({
                 : 'border border-red-200 text-red-600 hover:bg-red-50'
             }`}
           >
+            <FontAwesomeIcon icon={isHidden ? faEye : faEyeSlash} />
             {isHidden ? 'Show' : 'Hide'}
           </button>
           {isHidden ? (
@@ -130,7 +151,7 @@ function AdminPersonCard({
               to={`/people/${person.slug}`}
               className={`${button} border border-gray-300 text-gray-700 hover:bg-gray-100`}
             >
-              View ↗
+              View <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-[10px]" />
             </Link>
           )}
           <button
@@ -138,7 +159,7 @@ function AdminPersonCard({
             disabled={isBusy}
             className={`${button} col-span-2 border border-red-200 text-red-600 hover:bg-red-600 hover:text-white sm:col-span-1`}
           >
-            🗑 Delete
+            <FontAwesomeIcon icon={faTrash} /> Delete
           </button>
         </div>
       )}

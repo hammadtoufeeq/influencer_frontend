@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
@@ -15,7 +17,11 @@ function AdminPersonEditor() {
   const queryClient = useQueryClient()
   const [errors, setErrors] = useState<Record<string, string>>({})
 
-  const { data: person, isLoading, isError } = useQuery({
+  const {
+    data: person,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ['admin', 'person', id],
     queryFn: () => adminGetPerson(id!),
     enabled: !isNew,
@@ -46,8 +52,13 @@ function AdminPersonEditor() {
   return (
     <div className="mx-auto max-w-3xl space-y-6">
       <div>
-        <Link to="/dashboard" className="text-sm underline">← Back to dashboard</Link>
-        <h1 className="mt-2 text-2xl font-bold">{isNew ? 'New profile' : `Edit ${person!.name}`}</h1>
+        <Link to="/dashboard" className="text-sm underline">
+          <FontAwesomeIcon icon={faArrowLeft} className="mr-1.5" />
+          Back to dashboard
+        </Link>
+        <h1 className="mt-2 text-2xl font-bold">
+          {isNew ? 'New profile' : `Edit ${person!.name}`}
+        </h1>
       </div>
       {/* key: dusri profile kholne pe form naye data se shuru ho */}
       <PersonForm

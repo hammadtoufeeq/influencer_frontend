@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRight, faArrowUpRightFromSquare, faPen } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { myClaimsQuery, myProfileQuery } from '../api/queries'
@@ -36,13 +38,14 @@ function MyProfileSection() {
               to={`/people/${profile.slug}`}
               className="rounded-lg border border-gray-300 px-4 py-2 text-sm hover:bg-gray-100"
             >
-              View ↗
+              View <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="ml-1 text-xs" />
             </Link>
             <Link
               to="/dashboard/profile/edit"
               className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
             >
-              ✎ Edit profile
+              <FontAwesomeIcon icon={faPen} className="mr-1.5" />
+              Edit profile
             </Link>
           </div>
         </div>
@@ -57,7 +60,7 @@ function MyProfileSection() {
 
   // 3. Koi profile nahi (ya pichla claim reject hua)
   return (
-    <section className={box}>
+    <section className={`${box} border-gray-200`}>
       {latest?.status === 'rejected' && (
         <p className="mb-4 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">
           Your claim for <strong>{latest.person.name}</strong> was not approved:{' '}
@@ -76,7 +79,7 @@ function MyProfileSection() {
         to="/search"
         className="mt-4 inline-block rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
       >
-        Find my profile →
+        Find my profile <FontAwesomeIcon icon={faArrowRight} className="ml-1" />
       </Link>
     </section>
   )

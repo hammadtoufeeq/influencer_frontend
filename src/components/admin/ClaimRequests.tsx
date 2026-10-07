@@ -1,3 +1,14 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faArrowUpRightFromSquare,
+  faBan,
+  faCheck,
+  faCircleCheck,
+  faCopy,
+  faKey,
+  faPaperPlane,
+  faTriangleExclamation,
+} from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
@@ -66,7 +77,7 @@ function GeneratedCode({
         rel="noopener noreferrer nofollow"
         className="block break-all text-sm text-blue-700 underline"
       >
-        {channelUrl} ↗
+        {channelUrl} <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="ml-1 text-xs" />
       </a>
       <p className="text-center font-mono text-4xl font-bold tracking-[0.3em]">{code}</p>
       <p className="rounded-lg bg-gray-50 p-3 text-xs text-gray-600">{message}</p>
@@ -75,23 +86,27 @@ function GeneratedCode({
           onClick={() => copy(code, 'Code')}
           className={`${button} border border-gray-300 hover:bg-gray-100`}
         >
+          <FontAwesomeIcon icon={faCopy} className="mr-1.5" />
           Copy code
         </button>
         <button
           onClick={() => copy(message, 'Message')}
           className={`${button} border border-gray-300 hover:bg-gray-100`}
         >
+          <FontAwesomeIcon icon={faCopy} className="mr-1.5" />
           Copy message
         </button>
         <button
           onClick={onDone}
           className={`${button} ml-auto bg-gray-900 text-white hover:bg-gray-800`}
         >
+          <FontAwesomeIcon icon={faPaperPlane} className="mr-1.5" />
           Done, I sent it
         </button>
       </div>
       <p className="text-xs text-amber-700">
-        ⚠ This code is shown only once. If you lose it, send a new code.
+        <FontAwesomeIcon icon={faTriangleExclamation} className="mr-1.5" />
+        This code is shown only once. If you lose it, send a new code.
       </p>
     </div>
   )
@@ -230,7 +245,8 @@ function ClaimCard({ claim }: { claim: Claim }) {
                 disabled={busy || !channelUrl}
                 className={`${button} w-full bg-gray-900 text-white hover:bg-gray-800`}
               >
-                {claim.status === 'pending' ? '🔑 Generate code' : '🔑 Generate new code'}
+                <FontAwesomeIcon icon={faKey} className="mr-1.5" />
+                {claim.status === 'pending' ? 'Generate code' : 'Generate new code'}
               </button>
             </div>
           )}
@@ -238,7 +254,8 @@ function ClaimCard({ claim }: { claim: Claim }) {
           {claim.status === 'code_verified' && (
             <div className="mt-4 space-y-2">
               <p className="rounded-lg bg-green-50 p-3 text-sm text-green-800">
-                ✓ The talent entered the correct code sent to{' '}
+                <FontAwesomeIcon icon={faCircleCheck} className="mr-1.5" />
+                The talent entered the correct code sent to{' '}
                 <span className="break-all font-medium">{v?.channelUrl}</span>
                 {v?.verifiedAt && ` on ${new Date(v.verifiedAt).toLocaleString()}`}.
               </p>
@@ -247,7 +264,8 @@ function ClaimCard({ claim }: { claim: Claim }) {
                 disabled={busy}
                 className={`${button} w-full bg-green-600 text-white hover:bg-green-700`}
               >
-                ✓ Approve claim
+                <FontAwesomeIcon icon={faCheck} className="mr-1.5" />
+                Approve claim
               </button>
             </div>
           )}
@@ -294,6 +312,7 @@ function ClaimCard({ claim }: { claim: Claim }) {
                 disabled={busy}
                 className={`${button} mt-2 w-full border border-red-200 text-red-600 hover:bg-red-50`}
               >
+                <FontAwesomeIcon icon={faBan} className="mr-1.5" />
                 Reject
               </button>
             ))}

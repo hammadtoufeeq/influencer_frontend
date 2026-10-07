@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { useState, type FormEvent } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
@@ -90,7 +92,8 @@ function ClaimProfile() {
   return (
     <div className="mx-auto max-w-xl space-y-6">
       <Link to={`/people/${person.slug}`} className="text-sm underline">
-        ← Back to profile
+        <FontAwesomeIcon icon={faArrowLeft} className="mr-1.5" />
+        Back to profile
       </Link>
 
       <section className="flex items-center gap-4 rounded-2xl bg-white p-5 shadow-sm">

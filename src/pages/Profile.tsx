@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircle, faGlobe, faLanguage, faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import { Link, useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
@@ -5,7 +7,7 @@ import { personQuery } from '../api/queries'
 import Avatar from '../components/Avatar'
 import ClaimAction from '../components/ClaimAction'
 import VerifiedBadge from '../components/VerifiedBadge'
-import { PLATFORM_LABELS, STATUS_LABELS } from '../constants/people'
+import { PLATFORM_ICONS, PLATFORM_LABELS, STATUS_LABELS } from '../constants/people'
 import type { TaxonomyItem } from '../types/person'
 import { countryName, formatCount, languageName } from '../utils/format'
 
@@ -71,11 +73,25 @@ function Profile() {
             </div>
             {person.headline && <p className="mt-1 text-gray-600">{person.headline}</p>}
             <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-500">
-              {location && <span>📍 {location}</span>}
-              {person.languages.length > 0 && (
-                <span>🗣 {person.languages.map(languageName).join(', ')}</span>
+              {location && (
+                <span>
+                  <FontAwesomeIcon icon={faLocationDot} className="mr-1.5 text-gray-400" />
+                  {location}
+                </span>
               )}
-              <span>● {STATUS_LABELS[person.status]}</span>
+              {person.languages.length > 0 && (
+                <span>
+                  <FontAwesomeIcon icon={faLanguage} className="mr-1.5 text-gray-400" />
+                  {person.languages.map(languageName).join(', ')}
+                </span>
+              )}
+              <span>
+                <FontAwesomeIcon
+                  icon={faCircle}
+                  className={`mr-1.5 text-[8px] align-middle ${person.status === 'hireable' ? 'text-green-500' : 'text-gray-400'}`}
+                />
+                {STATUS_LABELS[person.status]}
+              </span>
             </div>
           </div>
 
@@ -123,7 +139,16 @@ function Profile() {
                     key={`${account.platform}-${account.url}`}
                     className="flex items-center justify-between py-2 text-sm"
                   >
-                    <a href={account.url} target="_blank" rel="noopener noreferrer nofollow" className="hover:underline">
+                    <a
+                      href={account.url}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="inline-flex items-center gap-2 hover:underline"
+                    >
+                      <FontAwesomeIcon
+                        icon={PLATFORM_ICONS[account.platform]}
+                        className="w-4 text-base text-gray-700"
+                      />
                       {PLATFORM_LABELS[account.platform]}
                     </a>
                     <span className="text-right text-gray-600">
@@ -139,7 +164,13 @@ function Profile() {
               </ul>
             )}
             {person.websiteUrl && (
-              <a href={person.websiteUrl} target="_blank" rel="noopener noreferrer nofollow" className="mt-4 block text-sm underline">
+              <a
+                href={person.websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                className="mt-4 inline-flex items-center gap-2 text-sm underline"
+              >
+                <FontAwesomeIcon icon={faGlobe} />
                 Website
               </a>
             )}
