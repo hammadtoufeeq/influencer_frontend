@@ -13,7 +13,6 @@ import {
 import { faArrowUp, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { CONTACT_EMAIL, PLATFORM_NAME, SOCIAL_LINKS } from '../constants/config'
 import { useAuth } from '../hooks/useAuth'
-import NewsletterForm from './NewsletterForm'
 
 const currentYear = new Date().getFullYear()
 
