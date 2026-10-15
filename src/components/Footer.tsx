@@ -101,7 +101,9 @@ function Footer() {
             <p className="mt-3 max-w-md text-sm leading-relaxed text-gray-400">
               {t('footer.tagline')}
             </p>
-            
+            <p className="text-sm text-gray-400">
+              {t('footer.description')}
+            </p>
 
             <ul className="mt-6 flex flex-wrap gap-2" aria-label={t('footer.followUs')}>
               {SOCIALS.map((social) => (

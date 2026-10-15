@@ -355,13 +355,13 @@ function Home() {
                 </p>
               </div>
             )}
-            <div className="absolute end-2 top-0 z-20 flex animate-float items-center gap-2 rounded-full bg-white px-3.5 py-2 text-xs font-semibold text-gray-900 shadow-xl">
+            {/* <div className="absolute end-2 top-0 z-20 flex animate-float items-center gap-2 rounded-full bg-white px-3.5 py-2 text-xs font-semibold text-gray-900 shadow-xl">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400" />
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
               </span>
               {d('home.openToWork', 'Open to work')}
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
