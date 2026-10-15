@@ -17,13 +17,18 @@ import NewsletterForm from './NewsletterForm'
 
 const currentYear = new Date().getFullYear()
 
-const SOCIALS: { key: keyof typeof SOCIAL_LINKS; label: string; icon: IconDefinition }[] = [
-  { key: 'instagram', label: 'Instagram', icon: faInstagram },
-  { key: 'x', label: 'X', icon: faXTwitter },
-  { key: 'linkedin', label: 'LinkedIn', icon: faLinkedinIn },
-  { key: 'youtube', label: 'YouTube', icon: faYoutube },
-  { key: 'facebook', label: 'Facebook', icon: faFacebookF },
-  { key: 'tiktok', label: 'TikTok', icon: faTiktok },
+const SOCIALS: {
+  key: keyof typeof SOCIAL_LINKS
+  label: string
+  icon: IconDefinition
+  bg: string
+}[] = [
+  { key: 'instagram', label: 'Instagram', icon: faInstagram, bg: 'bg-pink-600' },
+  { key: 'x', label: 'X', icon: faXTwitter, bg: 'bg-black' },
+  { key: 'linkedin', label: 'LinkedIn', icon: faLinkedinIn, bg: 'bg-blue-700' },
+  { key: 'youtube', label: 'YouTube', icon: faYoutube, bg: 'bg-red-600' },
+  { key: 'facebook', label: 'Facebook', icon: faFacebookF, bg: 'bg-blue-600' },
+  { key: 'tiktok', label: 'TikTok', icon: faTiktok, bg: 'bg-black' },
 ]
 
 interface FooterLink {
