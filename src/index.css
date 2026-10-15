@@ -1,3 +1,140 @@
+@import "tailwindcss";
+
+/* Naya page aane pe halka fade + thoda sa upar sarakna ("kam animation" wale users ke liye band) */
+@theme {
+  --animate-page-in: page-in 280ms ease-out both;
+  @keyframes page-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+/* ---------- Dark mode ----------
+   <html class="dark"> pe Tailwind ke rang ke variables badal dete hain, is liye
+   har page (bg-white, text-gray-900 ...) khud dark ho jata hai.
+   Jo hisse hamesha gehre hain (hero, footer) un pe .keep-dark: wahan asal rang wapas */
+@custom-variant dark (&:where(.dark, .dark *));
+
+.dark {
+  color-scheme: dark;
+  --color-white: oklch(21% 0.02 264);
+  --color-gray-50: oklch(15.5% 0.018 264);
+  --color-gray-100: oklch(25.5% 0.022 264);
+  --color-gray-200: oklch(30% 0.024 264);
+  --color-gray-300: oklch(37% 0.025 264);
+  --color-gray-400: oklch(55% 0.022 264);
+  --color-gray-500: oklch(66% 0.018 264);
+  --color-gray-600: oklch(75% 0.014 264);
+  --color-gray-700: oklch(83% 0.01 264);
+  --color-gray-800: oklch(90% 0.008 264);
+  --color-gray-900: oklch(95% 0.005 264);
+  --color-gray-950: oklch(98% 0.003 264);
+  --color-red-50: color-mix(in oklab, var(--color-red-500) 14%, oklch(20% 0.02 264));
+  --color-red-100: color-mix(in oklab, var(--color-red-500) 22%, oklch(20% 0.02 264));
+  --color-red-200: color-mix(in oklab, var(--color-red-500) 34%, oklch(20% 0.02 264));
+  --color-red-700: color-mix(in oklab, var(--color-red-400) 80%, white);
+  --color-red-800: color-mix(in oklab, var(--color-red-400) 65%, white);
+  --color-red-900: color-mix(in oklab, var(--color-red-400) 50%, white);
+  --color-green-50: color-mix(in oklab, var(--color-green-500) 14%, oklch(20% 0.02 264));
+  --color-green-100: color-mix(in oklab, var(--color-green-500) 22%, oklch(20% 0.02 264));
+  --color-green-200: color-mix(in oklab, var(--color-green-500) 34%, oklch(20% 0.02 264));
+  --color-green-700: color-mix(in oklab, var(--color-green-400) 80%, white);
+  --color-green-800: color-mix(in oklab, var(--color-green-400) 65%, white);
+  --color-green-900: color-mix(in oklab, var(--color-green-400) 50%, white);
+  --color-blue-50: color-mix(in oklab, var(--color-blue-500) 14%, oklch(20% 0.02 264));
+  --color-blue-100: color-mix(in oklab, var(--color-blue-500) 22%, oklch(20% 0.02 264));
+  --color-blue-200: color-mix(in oklab, var(--color-blue-500) 34%, oklch(20% 0.02 264));
+  --color-blue-700: color-mix(in oklab, var(--color-blue-400) 80%, white);
+  --color-blue-800: color-mix(in oklab, var(--color-blue-400) 65%, white);
+  --color-blue-900: color-mix(in oklab, var(--color-blue-400) 50%, white);
+  --color-amber-50: color-mix(in oklab, var(--color-amber-500) 14%, oklch(20% 0.02 264));
+  --color-amber-100: color-mix(in oklab, var(--color-amber-500) 22%, oklch(20% 0.02 264));
+  --color-amber-200: color-mix(in oklab, var(--color-amber-500) 34%, oklch(20% 0.02 264));
+  --color-amber-700: color-mix(in oklab, var(--color-amber-400) 80%, white);
+  --color-amber-800: color-mix(in oklab, var(--color-amber-400) 65%, white);
+  --color-amber-900: color-mix(in oklab, var(--color-amber-400) 50%, white);
+  --color-yellow-50: color-mix(in oklab, var(--color-yellow-500) 14%, oklch(20% 0.02 264));
+  --color-yellow-100: color-mix(in oklab, var(--color-yellow-500) 22%, oklch(20% 0.02 264));
+  --color-yellow-200: color-mix(in oklab, var(--color-yellow-500) 34%, oklch(20% 0.02 264));
+  --color-yellow-700: color-mix(in oklab, var(--color-yellow-400) 80%, white);
+  --color-yellow-800: color-mix(in oklab, var(--color-yellow-400) 65%, white);
+  --color-yellow-900: color-mix(in oklab, var(--color-yellow-400) 50%, white);
+  --color-violet-50: color-mix(in oklab, var(--color-violet-500) 14%, oklch(20% 0.02 264));
+  --color-violet-100: color-mix(in oklab, var(--color-violet-500) 22%, oklch(20% 0.02 264));
+  --color-violet-200: color-mix(in oklab, var(--color-violet-500) 34%, oklch(20% 0.02 264));
+  --color-violet-700: color-mix(in oklab, var(--color-violet-400) 80%, white);
+  --color-violet-800: color-mix(in oklab, var(--color-violet-400) 65%, white);
+  --color-violet-900: color-mix(in oklab, var(--color-violet-400) 50%, white);
+  --color-emerald-50: color-mix(in oklab, var(--color-emerald-500) 14%, oklch(20% 0.02 264));
+  --color-emerald-100: color-mix(in oklab, var(--color-emerald-500) 22%, oklch(20% 0.02 264));
+  --color-emerald-200: color-mix(in oklab, var(--color-emerald-500) 34%, oklch(20% 0.02 264));
+  --color-emerald-700: color-mix(in oklab, var(--color-emerald-400) 80%, white);
+  --color-emerald-800: color-mix(in oklab, var(--color-emerald-400) 65%, white);
+  --color-emerald-900: color-mix(in oklab, var(--color-emerald-400) 50%, white);
+  --color-sky-50: color-mix(in oklab, var(--color-sky-500) 14%, oklch(20% 0.02 264));
+  --color-sky-100: color-mix(in oklab, var(--color-sky-500) 22%, oklch(20% 0.02 264));
+  --color-sky-200: color-mix(in oklab, var(--color-sky-500) 34%, oklch(20% 0.02 264));
+  --color-sky-700: color-mix(in oklab, var(--color-sky-400) 80%, white);
+  --color-sky-800: color-mix(in oklab, var(--color-sky-400) 65%, white);
+  --color-sky-900: color-mix(in oklab, var(--color-sky-400) 50%, white);
+  --color-indigo-50: color-mix(in oklab, var(--color-indigo-500) 14%, oklch(20% 0.02 264));
+  --color-indigo-100: color-mix(in oklab, var(--color-indigo-500) 22%, oklch(20% 0.02 264));
+  --color-indigo-200: color-mix(in oklab, var(--color-indigo-500) 34%, oklch(20% 0.02 264));
+  --color-indigo-700: color-mix(in oklab, var(--color-indigo-400) 80%, white);
+  --color-indigo-800: color-mix(in oklab, var(--color-indigo-400) 65%, white);
+  --color-indigo-900: color-mix(in oklab, var(--color-indigo-400) 50%, white);
+  --color-rose-50: color-mix(in oklab, var(--color-rose-500) 14%, oklch(20% 0.02 264));
+  --color-rose-100: color-mix(in oklab, var(--color-rose-500) 22%, oklch(20% 0.02 264));
+  --color-rose-200: color-mix(in oklab, var(--color-rose-500) 34%, oklch(20% 0.02 264));
+  --color-rose-700: color-mix(in oklab, var(--color-rose-400) 80%, white);
+  --color-rose-800: color-mix(in oklab, var(--color-rose-400) 65%, white);
+  --color-rose-900: color-mix(in oklab, var(--color-rose-400) 50%, white);
+  --color-orange-50: color-mix(in oklab, var(--color-orange-500) 14%, oklch(20% 0.02 264));
+  --color-orange-100: color-mix(in oklab, var(--color-orange-500) 22%, oklch(20% 0.02 264));
+  --color-orange-200: color-mix(in oklab, var(--color-orange-500) 34%, oklch(20% 0.02 264));
+  --color-orange-700: color-mix(in oklab, var(--color-orange-400) 80%, white);
+  --color-orange-800: color-mix(in oklab, var(--color-orange-400) 65%, white);
+  --color-orange-900: color-mix(in oklab, var(--color-orange-400) 50%, white);
+}
+
+.dark .keep-dark,
+.dark .print-document {
+  color-scheme: dark;
+  --color-white: #fff;
+  --color-gray-50: oklch(98.5% 0.002 247.839);
+  --color-gray-100: oklch(96.7% 0.003 264.542);
+  --color-gray-200: oklch(92.8% 0.006 264.531);
+  --color-gray-300: oklch(87.2% 0.01 258.338);
+  --color-gray-400: oklch(70.7% 0.022 261.325);
+  --color-gray-500: oklch(55.1% 0.027 264.364);
+  --color-gray-600: oklch(44.6% 0.03 256.802);
+  --color-gray-700: oklch(37.3% 0.034 259.733);
+  --color-gray-800: oklch(27.8% 0.033 256.848);
+  --color-gray-900: oklch(21% 0.034 264.665);
+  --color-gray-950: oklch(13% 0.028 261.692);
+}
+
+/* Theme badalte lamhe har transition band: rang ek saath, foran (purane browsers) */
+html.theme-switching,
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition: none !important;
+}
+
+/* Naye browsers: poori screen ka halka fade (sirf do tasveerein, GPU pe) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 220ms;
+  animation-timing-function: ease-out;
+}
+
 /* ---------- Home page: brand colours, fonts and animations ----------
    Paste this at the END of src/index.css */
 @theme {
