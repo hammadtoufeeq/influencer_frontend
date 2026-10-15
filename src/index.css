@@ -1,136 +1,69 @@
-@import "tailwindcss";
-
-/* Naya page aane pe halka fade + thoda sa upar sarakna ("kam animation" wale users ke liye band) */
+/* ---------- Home page: brand colours, fonts and animations ----------
+   Paste this at the END of src/index.css */
 @theme {
-  --animate-page-in: page-in 280ms ease-out both;
-  @keyframes page-in {
-    from {
-      opacity: 0;
-      transform: translateY(6px);
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --color-brand-coral: #ff5a6e;
+  --color-brand-violet: #7c4dff;
+  --color-brand-sun: #ffb547;
+  --color-brand-plum: #1c0f36;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 10s ease-in-out -3s infinite reverse;
+  --animate-marquee: marquee 45s linear infinite;
+  --animate-drift: drift 16s ease-in-out infinite;
+  --animate-sheen: sheen 5s ease-in-out infinite;
+  --animate-word: word 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-slide-in: slide-in 0.5s ease-out both;
+  --animate-fade: fade 0.25s ease-out both;
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-16px); }
+  }
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
+  }
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(40px, -30px) scale(1.15); }
+  }
+  @keyframes sheen {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  @keyframes word {
+    from { opacity: 0; transform: translateY(60%); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes slide-in {
+    from { opacity: 0; transform: translateX(-14px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 }
 
-/* ---------- Dark mode ----------
-   <html class="dark"> pe Tailwind ke rang ke variables badal dete hain, is liye
-   har page (bg-white, text-gray-900 ...) khud dark ho jata hai.
-   Jo hisse hamesha gehre hain (hero, footer) un pe .keep-dark: wahan asal rang wapas */
-@custom-variant dark (&:where(.dark, .dark *));
-
-.dark {
-  color-scheme: dark;
-  --color-white: oklch(21% 0.02 264);
-  --color-gray-50: oklch(15.5% 0.018 264);
-  --color-gray-100: oklch(25.5% 0.022 264);
-  --color-gray-200: oklch(30% 0.024 264);
-  --color-gray-300: oklch(37% 0.025 264);
-  --color-gray-400: oklch(55% 0.022 264);
-  --color-gray-500: oklch(66% 0.018 264);
-  --color-gray-600: oklch(75% 0.014 264);
-  --color-gray-700: oklch(83% 0.01 264);
-  --color-gray-800: oklch(90% 0.008 264);
-  --color-gray-900: oklch(95% 0.005 264);
-  --color-gray-950: oklch(98% 0.003 264);
-  --color-red-50: color-mix(in oklab, var(--color-red-500) 14%, oklch(20% 0.02 264));
-  --color-red-100: color-mix(in oklab, var(--color-red-500) 22%, oklch(20% 0.02 264));
-  --color-red-200: color-mix(in oklab, var(--color-red-500) 34%, oklch(20% 0.02 264));
-  --color-red-700: color-mix(in oklab, var(--color-red-400) 80%, white);
-  --color-red-800: color-mix(in oklab, var(--color-red-400) 65%, white);
-  --color-red-900: color-mix(in oklab, var(--color-red-400) 50%, white);
-  --color-green-50: color-mix(in oklab, var(--color-green-500) 14%, oklch(20% 0.02 264));
-  --color-green-100: color-mix(in oklab, var(--color-green-500) 22%, oklch(20% 0.02 264));
-  --color-green-200: color-mix(in oklab, var(--color-green-500) 34%, oklch(20% 0.02 264));
-  --color-green-700: color-mix(in oklab, var(--color-green-400) 80%, white);
-  --color-green-800: color-mix(in oklab, var(--color-green-400) 65%, white);
-  --color-green-900: color-mix(in oklab, var(--color-green-400) 50%, white);
-  --color-blue-50: color-mix(in oklab, var(--color-blue-500) 14%, oklch(20% 0.02 264));
-  --color-blue-100: color-mix(in oklab, var(--color-blue-500) 22%, oklch(20% 0.02 264));
-  --color-blue-200: color-mix(in oklab, var(--color-blue-500) 34%, oklch(20% 0.02 264));
-  --color-blue-700: color-mix(in oklab, var(--color-blue-400) 80%, white);
-  --color-blue-800: color-mix(in oklab, var(--color-blue-400) 65%, white);
-  --color-blue-900: color-mix(in oklab, var(--color-blue-400) 50%, white);
-  --color-amber-50: color-mix(in oklab, var(--color-amber-500) 14%, oklch(20% 0.02 264));
-  --color-amber-100: color-mix(in oklab, var(--color-amber-500) 22%, oklch(20% 0.02 264));
-  --color-amber-200: color-mix(in oklab, var(--color-amber-500) 34%, oklch(20% 0.02 264));
-  --color-amber-700: color-mix(in oklab, var(--color-amber-400) 80%, white);
-  --color-amber-800: color-mix(in oklab, var(--color-amber-400) 65%, white);
-  --color-amber-900: color-mix(in oklab, var(--color-amber-400) 50%, white);
-  --color-yellow-50: color-mix(in oklab, var(--color-yellow-500) 14%, oklch(20% 0.02 264));
-  --color-yellow-100: color-mix(in oklab, var(--color-yellow-500) 22%, oklch(20% 0.02 264));
-  --color-yellow-200: color-mix(in oklab, var(--color-yellow-500) 34%, oklch(20% 0.02 264));
-  --color-yellow-700: color-mix(in oklab, var(--color-yellow-400) 80%, white);
-  --color-yellow-800: color-mix(in oklab, var(--color-yellow-400) 65%, white);
-  --color-yellow-900: color-mix(in oklab, var(--color-yellow-400) 50%, white);
-  --color-violet-50: color-mix(in oklab, var(--color-violet-500) 14%, oklch(20% 0.02 264));
-  --color-violet-100: color-mix(in oklab, var(--color-violet-500) 22%, oklch(20% 0.02 264));
-  --color-violet-200: color-mix(in oklab, var(--color-violet-500) 34%, oklch(20% 0.02 264));
-  --color-violet-700: color-mix(in oklab, var(--color-violet-400) 80%, white);
-  --color-violet-800: color-mix(in oklab, var(--color-violet-400) 65%, white);
-  --color-violet-900: color-mix(in oklab, var(--color-violet-400) 50%, white);
-  --color-emerald-50: color-mix(in oklab, var(--color-emerald-500) 14%, oklch(20% 0.02 264));
-  --color-emerald-100: color-mix(in oklab, var(--color-emerald-500) 22%, oklch(20% 0.02 264));
-  --color-emerald-200: color-mix(in oklab, var(--color-emerald-500) 34%, oklch(20% 0.02 264));
-  --color-emerald-700: color-mix(in oklab, var(--color-emerald-400) 80%, white);
-  --color-emerald-800: color-mix(in oklab, var(--color-emerald-400) 65%, white);
-  --color-emerald-900: color-mix(in oklab, var(--color-emerald-400) 50%, white);
-  --color-sky-50: color-mix(in oklab, var(--color-sky-500) 14%, oklch(20% 0.02 264));
-  --color-sky-100: color-mix(in oklab, var(--color-sky-500) 22%, oklch(20% 0.02 264));
-  --color-sky-200: color-mix(in oklab, var(--color-sky-500) 34%, oklch(20% 0.02 264));
-  --color-sky-700: color-mix(in oklab, var(--color-sky-400) 80%, white);
-  --color-sky-800: color-mix(in oklab, var(--color-sky-400) 65%, white);
-  --color-sky-900: color-mix(in oklab, var(--color-sky-400) 50%, white);
-  --color-indigo-50: color-mix(in oklab, var(--color-indigo-500) 14%, oklch(20% 0.02 264));
-  --color-indigo-100: color-mix(in oklab, var(--color-indigo-500) 22%, oklch(20% 0.02 264));
-  --color-indigo-200: color-mix(in oklab, var(--color-indigo-500) 34%, oklch(20% 0.02 264));
-  --color-indigo-700: color-mix(in oklab, var(--color-indigo-400) 80%, white);
-  --color-indigo-800: color-mix(in oklab, var(--color-indigo-400) 65%, white);
-  --color-indigo-900: color-mix(in oklab, var(--color-indigo-400) 50%, white);
-  --color-rose-50: color-mix(in oklab, var(--color-rose-500) 14%, oklch(20% 0.02 264));
-  --color-rose-100: color-mix(in oklab, var(--color-rose-500) 22%, oklch(20% 0.02 264));
-  --color-rose-200: color-mix(in oklab, var(--color-rose-500) 34%, oklch(20% 0.02 264));
-  --color-rose-700: color-mix(in oklab, var(--color-rose-400) 80%, white);
-  --color-rose-800: color-mix(in oklab, var(--color-rose-400) 65%, white);
-  --color-rose-900: color-mix(in oklab, var(--color-rose-400) 50%, white);
-  --color-orange-50: color-mix(in oklab, var(--color-orange-500) 14%, oklch(20% 0.02 264));
-  --color-orange-100: color-mix(in oklab, var(--color-orange-500) 22%, oklch(20% 0.02 264));
-  --color-orange-200: color-mix(in oklab, var(--color-orange-500) 34%, oklch(20% 0.02 264));
-  --color-orange-700: color-mix(in oklab, var(--color-orange-400) 80%, white);
-  --color-orange-800: color-mix(in oklab, var(--color-orange-400) 65%, white);
-  --color-orange-900: color-mix(in oklab, var(--color-orange-400) 50%, white);
+.reveal {
+  opacity: 0;
+  transform: translateY(28px) scale(0.98);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-
-.dark .keep-dark,
-.dark .print-document {
-  color-scheme: dark;
-  --color-white: #fff;
-  --color-gray-50: oklch(98.5% 0.002 247.839);
-  --color-gray-100: oklch(96.7% 0.003 264.542);
-  --color-gray-200: oklch(92.8% 0.006 264.531);
-  --color-gray-300: oklch(87.2% 0.01 258.338);
-  --color-gray-400: oklch(70.7% 0.022 261.325);
-  --color-gray-500: oklch(55.1% 0.027 264.364);
-  --color-gray-600: oklch(44.6% 0.03 256.802);
-  --color-gray-700: oklch(37.3% 0.034 259.733);
-  --color-gray-800: oklch(27.8% 0.033 256.848);
-  --color-gray-900: oklch(21% 0.034 264.665);
-  --color-gray-950: oklch(13% 0.028 261.692);
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
 }
-
-/* Theme badalte lamhe har transition band: rang ek saath, foran (purane browsers) */
-html.theme-switching,
-html.theme-switching *,
-html.theme-switching *::before,
-html.theme-switching *::after {
-  transition: none !important;
+[dir="rtl"] .animate-marquee {
+  animation-direction: reverse;
 }
-
-/* Naye browsers: poori screen ka halka fade (sirf do tasveerein, GPU pe) */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: 220ms;
-  animation-timing-function: ease-out;
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  [class*="animate-"] {
+    animation: none !important;
+  }
 }
