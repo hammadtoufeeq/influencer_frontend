@@ -17,49 +17,13 @@ import NewsletterForm from './NewsletterForm'
 
 const currentYear = new Date().getFullYear()
 
-// ✅ Har social ka original brand color — DEFAULT state mein
-const SOCIALS: {
-  key: keyof typeof SOCIAL_LINKS
-  label: string
-  icon: IconDefinition
-  bg: string
-}[] = [
-  {
-    key: 'instagram',
-    label: 'Instagram',
-    icon: faInstagram,
-    bg: 'bg-gradient-to-br from-amber-400 via-pink-500 to-purple-600',
-  },
-  {
-    key: 'x',
-    label: 'X',
-    icon: faXTwitter,
-    bg: 'bg-black',
-  },
-  {
-    key: 'linkedin',
-    label: 'LinkedIn',
-    icon: faLinkedinIn,
-    bg: 'bg-[#0A66C2]',
-  },
-  {
-    key: 'youtube',
-    label: 'YouTube',
-    icon: faYoutube,
-    bg: 'bg-[#FF0000]',
-  },
-  {
-    key: 'facebook',
-    label: 'Facebook',
-    icon: faFacebookF,
-    bg: 'bg-[#1877F2]',
-  },
-  {
-    key: 'tiktok',
-    label: 'TikTok',
-    icon: faTiktok,
-    bg: 'bg-black',
-  },
+const SOCIALS: { key: keyof typeof SOCIAL_LINKS; label: string; icon: IconDefinition }[] = [
+  { key: 'instagram', label: 'Instagram', icon: faInstagram },
+  { key: 'x', label: 'X', icon: faXTwitter },
+  { key: 'linkedin', label: 'LinkedIn', icon: faLinkedinIn },
+  { key: 'youtube', label: 'YouTube', icon: faYoutube },
+  { key: 'facebook', label: 'Facebook', icon: faFacebookF },
+  { key: 'tiktok', label: 'TikTok', icon: faTiktok },
 ]
 
 interface FooterLink {
@@ -132,8 +96,8 @@ function Footer() {
             <p className="mt-3 max-w-md text-sm leading-relaxed text-gray-400">
               {t('footer.tagline')}
             </p>
+            
 
-            {/* ✅ Social icons — brand color DEFAULT, hover pe icon bara */}
             <ul className="mt-6 flex flex-wrap gap-2" aria-label={t('footer.followUs')}>
               {SOCIALS.map((social) => (
                 <li key={social.key}>
@@ -153,10 +117,6 @@ function Footer() {
                 </li>
               ))}
             </ul>
-
-            <div className="mt-8 max-w-md">
-              <NewsletterForm />
-            </div>
           </div>
 
           {/* Link columns */}

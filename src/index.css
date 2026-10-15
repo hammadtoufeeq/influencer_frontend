@@ -134,3 +134,73 @@ html.theme-switching *::after {
   animation-duration: 220ms;
   animation-timing-function: ease-out;
 }
+
+/* ---------- Home page: brand colours, fonts and animations ----------
+   Paste this at the END of src/index.css */
+@theme {
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --color-brand-coral: #111111;
+  --color-brand-violet: #3f3f46;
+  --color-brand-sun: #a1a1aa;
+  --color-brand-plum: #0a0a0a;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 10s ease-in-out -3s infinite reverse;
+  --animate-marquee: marquee 45s linear infinite;
+  --animate-drift: drift 16s ease-in-out infinite;
+  --animate-sheen: sheen 5s ease-in-out infinite;
+  --animate-word: word 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-slide-in: slide-in 0.5s ease-out both;
+  --animate-fade: fade 0.25s ease-out both;
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-16px); }
+  }
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
+  }
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(40px, -30px) scale(1.15); }
+  }
+  @keyframes sheen {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  @keyframes word {
+    from { opacity: 0; transform: translateY(60%); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes slide-in {
+    from { opacity: 0; transform: translateX(-14px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px) scale(0.98);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+[dir="rtl"] .animate-marquee {
+  animation-direction: reverse;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  [class*="animate-"] {
+    animation: none !important;
+  }
+}
