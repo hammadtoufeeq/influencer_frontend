@@ -265,7 +265,7 @@ function Home() {
           <div className="absolute inset-0 bg-gradient-to-t from-brand-plum/95 via-brand-plum/50 to-transparent" />
         </div>
 
-        <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 pb-20 pt-24 sm:gap-10 sm:pb-28 sm:pt-28 md:pt-36 lg:grid-cols-2">
+        <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 pb-20 pt-16 sm:gap-10 sm:pb-28 sm:pt-20 md:pt-24 lg:grid-cols-2">
           <div className="text-center lg:text-start">
             <h1 className="font-display text-3xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl">
               {t('home.title')}
