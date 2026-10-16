@@ -1216,7 +1216,8 @@
     "newsletterPlaceholder": "you@example.com",
     "newsletterButton": "اشترك",
     "newsletterSending": "جارٍ الاشتراك...",
-    "newsletterDone": "شكرًا! أنت الآن في القائمة."
+    "newsletterDone": "شكرًا! أنت الآن في القائمة.",
+    "description": "مصمم للعلامات التجارية والمواهب والمديرين: ملفات موثقة وحملات مفتوحة واتفاقيات موقعة في مكان واحد."
   },
   "newProfile": {
     "cta": "لم تجده؟ أنشئ ملفك",
