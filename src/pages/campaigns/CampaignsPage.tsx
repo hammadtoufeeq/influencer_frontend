@@ -231,7 +231,7 @@ function CampaignsPage() {
       </section>
 
       {/* Category chips */}
-      <div className="-mx-4 flex snap-x gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:px-0">
+      <div className="-mx-4 flex snap-x gap-2 overflow-x-auto px-4 py-1 sm:mx-0 sm:flex-wrap sm:px-0">
         {[{ value: "", icon: faBullhorn }, ...SERVICE_CATEGORIES].map((c) => {
           const on = category === c.value;
           return (
@@ -242,8 +242,8 @@ function CampaignsPage() {
               aria-pressed={on}
               className={`inline-flex shrink-0 snap-start items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition duration-300 ${
                 on
-                  ? "scale-105 bg-gray-900 text-white shadow-md"
-                  : "bg-white text-gray-700 ring-1 ring-gray-200 hover:-translate-y-0.5 hover:ring-gray-400"
+                  ? "relative z-10 bg-gray-900 text-white shadow-md ring-1 ring-gray-900"
+                  : "bg-white text-gray-700 ring-1 ring-gray-200 hover:relative hover:z-10 hover:shadow-md hover:ring-gray-400"
               }`}
             >
               <FontAwesomeIcon icon={c.icon} className="text-xs" />
