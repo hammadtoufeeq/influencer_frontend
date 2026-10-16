@@ -140,8 +140,10 @@ function useD() {
 function Title({ children, sub }: { children: ReactNode; sub?: string }) {
   return (
     <Reveal className="mx-auto max-w-2xl text-center">
-      <h2 className="font-display text-2xl font-bold leading-tight md:text-4xl">{children}</h2>
-      {sub && <p className="mt-3 text-gray-600">{sub}</p>}
+      <h2 className="font-display text-xl font-bold leading-tight sm:text-2xl md:text-4xl">
+        {children}
+      </h2>
+      {sub && <p className="mt-3 text-sm text-gray-600 sm:text-base">{sub}</p>}
     </Reveal>
   )
 }
@@ -162,17 +164,17 @@ export function PlatformStrip() {
   return (
     <section className="text-center">
       <Reveal>
-        <p className="font-display text-lg font-semibold text-gray-600">
+        <p className="font-display text-base font-semibold text-gray-600 sm:text-lg">
           {d('home.platformsTitle', 'See reach across every platform they use')}
         </p>
       </Reveal>
-      <div className="mt-6 flex flex-wrap items-center justify-center gap-5 md:gap-10">
+      <div className="mt-6 flex flex-wrap items-center justify-center gap-3 sm:gap-5 md:gap-10">
         {PLATFORMS.map((p, i) => (
           <Reveal key={p.name} delay={i * 80}>
             <span
               title={p.name}
               style={{ animationDelay: `${i * -1.2}s` }}
-              className={`flex h-16 w-16 animate-float items-center justify-center rounded-2xl bg-white text-3xl shadow-md ring-1 ring-gray-100 transition hover:scale-110 ${p.color}`}
+              className={`flex h-12 w-12 animate-float items-center justify-center rounded-xl bg-white text-2xl shadow-md ring-1 ring-gray-100 transition hover:scale-110 sm:h-14 sm:w-14 sm:text-3xl md:h-16 md:w-16 ${p.color}`}
             >
               <FontAwesomeIcon icon={p.icon} />
               <span className="sr-only">{p.name}</span>
@@ -201,26 +203,28 @@ function Showcase({
 }) {
   return (
     <div
-      className={`grid items-center gap-8 md:grid-cols-2 md:gap-14 ${
+      className={`grid min-w-0 grid-cols-1 items-center gap-6 sm:gap-8 md:grid-cols-2 md:gap-14 ${
         flip ? 'md:[&>*:first-child]:order-2' : ''
       }`}
     >
-      <Reveal>
-        <h3 className="font-display text-2xl font-bold md:text-3xl">{title}</h3>
-        <p className="mt-3 text-gray-600">{body}</p>
+      <Reveal className="min-w-0">
+        <h3 className="font-display text-xl font-bold sm:text-2xl md:text-3xl">{title}</h3>
+        <p className="mt-3 text-sm text-gray-600 sm:text-base">{body}</p>
         <ul className="mt-5 space-y-2.5">
           {points.map((p) => (
             <li key={p} className="flex min-w-0 items-start gap-2.5 text-sm text-gray-700">
-              <FontAwesomeIcon icon={faCheck} className="text-xs text-gray-900" />
+              <FontAwesomeIcon icon={faCheck} className="mt-0.5 shrink-0 text-xs text-gray-900" />
               <span className="min-w-0">{p}</span>
             </li>
           ))}
         </ul>
       </Reveal>
-      <Reveal delay={150}>
-        <div className="relative rounded-3xl bg-gradient-to-br from-gray-100 to-gray-50 p-5 ring-1 ring-gray-100">
-          <span className="absolute end-4 top-3 text-[11px] text-gray-400">Example</span>
-          <div className="space-y-3 pt-4">{children}</div>
+      <Reveal delay={150} className="min-w-0 w-full">
+        <div className="relative w-full min-w-0 rounded-2xl bg-gradient-to-br from-gray-100 to-gray-50 p-3 ring-1 ring-gray-100 sm:rounded-3xl sm:p-5">
+          <span className="absolute end-3 top-2 text-[10px] text-gray-400 sm:end-4 sm:top-3 sm:text-[11px]">
+            Example
+          </span>
+          <div className="space-y-2.5 pt-4 sm:space-y-3">{children}</div>
         </div>
       </Reveal>
     </div>
@@ -242,28 +246,30 @@ function MockRow({
 }) {
   return (
     <Reveal delay={delay}>
-      <div className="flex items-center gap-3 rounded-2xl bg-white p-3 shadow-sm ring-1 ring-gray-100">
+      <div className="flex min-w-0 items-center gap-2.5 rounded-2xl bg-white p-2.5 shadow-sm ring-1 ring-gray-100 sm:gap-3 sm:p-3">
         {person ? (
-          <Photo person={person} className="h-10 w-10 shrink-0 rounded-full" />
+          <Photo person={person} className="h-9 w-9 shrink-0 rounded-full sm:h-10 sm:w-10" />
         ) : (
-          <span className="h-10 w-10 shrink-0 rounded-full bg-gradient-to-br from-gray-500 to-gray-800" />
+          <span className="h-9 w-9 shrink-0 rounded-full bg-gradient-to-br from-gray-500 to-gray-800 sm:h-10 sm:w-10" />
         )}
         <span className="min-w-0 flex-1 leading-tight">
-          <span className="block truncate text-sm font-semibold">{person?.name ?? title}</span>
-          <span className="block truncate text-xs text-gray-500">{note}</span>
+          <span className="block truncate text-xs font-semibold sm:text-sm">
+            {person?.name ?? title}
+          </span>
+          <span className="block truncate text-[11px] text-gray-500 sm:text-xs">{note}</span>
         </span>
-        {tag}
+        <span className="shrink-0">{tag}</span>
       </div>
     </Reveal>
   )
 }
 
-const pill = 'rounded-full px-2.5 py-1 text-[11px] font-semibold'
+const pill = 'rounded-full px-2 py-0.5 text-[10px] font-semibold whitespace-nowrap sm:px-2.5 sm:py-1 sm:text-[11px]'
 
 function Progress({ percent }: { percent: number }) {
   const [ref, seen] = useInView<HTMLDivElement>()
   return (
-    <div ref={ref} className="h-2.5 overflow-hidden rounded-full bg-gray-100">
+    <div ref={ref} className="h-2 overflow-hidden rounded-full bg-gray-100 sm:h-2.5">
       <div
         style={{ width: seen ? `${percent}%` : '0%' }}
         className="h-full rounded-full bg-gray-900 transition-[width] duration-[1600ms] ease-out"
@@ -276,7 +282,7 @@ export function FeatureShowcase({ people }: { people: PersonSummary[] }) {
   const d = useD()
   const [a, b, c] = people
   return (
-    <section className="space-y-20 md:space-y-28">
+    <section className="space-y-14 sm:space-y-20 md:space-y-28">
       <Title sub={d('home.toolkitSub', 'Search, shortlist, hire and get it in writing, all in one place.')}>
         {d('home.toolkitTitle', 'Everything you need to work with creators')}
       </Title>
@@ -338,18 +344,26 @@ export function FeatureShowcase({ people }: { people: PersonSummary[] }) {
         ]}
       >
         <Reveal>
-          <div className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-gray-100">
-            <div className="flex items-center justify-between gap-3">
-              <p className="font-semibold">Product launch reel</p>
+          <div className="rounded-2xl bg-white p-3 shadow-sm ring-1 ring-gray-100 sm:p-4">
+            <div className="flex items-center justify-between gap-2">
+              <p className="text-sm font-semibold sm:text-base">Product launch reel</p>
               <span className={`${pill} bg-green-100 text-green-700`}>Open</span>
             </div>
-            <p className="mt-1 text-xs text-gray-500">18 applications · 3 of 5 slots filled</p>
+            <p className="mt-1 text-[11px] text-gray-500 sm:text-xs">
+              18 applications · 3 of 5 slots filled
+            </p>
             <div className="mt-3">
               <Progress percent={60} />
             </div>
           </div>
         </Reveal>
-        <MockRow person={a} title="Creator" note="“I'd love to cover this…”" delay={150} tag={<span className={`${pill} bg-green-100 text-green-700`}>Accepted</span>} />
+        <MockRow
+          person={a}
+          title="Creator"
+          note="“I'd love to cover this…”"
+          delay={150}
+          tag={<span className={`${pill} bg-green-100 text-green-700`}>Accepted</span>}
+        />
       </Showcase>
 
       <Showcase
@@ -363,7 +377,17 @@ export function FeatureShowcase({ people }: { people: PersonSummary[] }) {
         ]}
       >
         <MockRow title="1. Script approved" note="Delivered and approved" delay={0} tag={<FontAwesomeIcon icon={faCheck} className="text-green-500" />} />
-        <MockRow title="2. Video delivered" note="Waiting for approval" delay={120} tag={<span className="relative flex h-2.5 w-2.5"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400" /><span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-amber-500" /></span>} />
+        <MockRow
+          title="2. Video delivered"
+          note="Waiting for approval"
+          delay={120}
+          tag={
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-amber-500" />
+            </span>
+          }
+        />
         <MockRow title="Signed by both sides" note="Terms locked" delay={240} tag={<FontAwesomeIcon icon={faFileSignature} className="text-gray-900" />} />
       </Showcase>
     </section>
@@ -383,7 +407,7 @@ export function HowItWorks() {
   return (
     <section>
       <Title sub={t('home.howSubtitle')}>{t('home.howTitle')}</Title>
-      <ol ref={ref} className="relative mt-12 grid gap-10 md:grid-cols-3">
+      <ol ref={ref} className="relative mt-10 grid gap-8 sm:mt-12 sm:gap-10 md:grid-cols-3">
         <span
           aria-hidden="true"
           style={{ transform: seen ? 'scaleX(1)' : 'scaleX(0)' }}
@@ -392,11 +416,13 @@ export function HowItWorks() {
         {steps.map((s, i) => (
           <Reveal key={s.title} delay={i * 200}>
             <li className="relative text-center">
-              <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gray-900 text-xl text-white shadow-lg">
+              <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gray-900 text-lg text-white shadow-lg sm:h-16 sm:w-16 sm:text-xl">
                 <FontAwesomeIcon icon={s.icon} />
               </span>
-              <h3 className="mt-5 font-display text-xl font-bold">{s.title}</h3>
-              <p className="mx-auto mt-2 max-w-xs text-sm text-gray-600">{s.body}</p>
+              <h3 className="mt-4 font-display text-lg font-bold sm:mt-5 sm:text-xl">
+                {s.title}
+              </h3>
+              <p className="mx-auto mt-2 max-w-xs text-xs text-gray-600 sm:text-sm">{s.body}</p>
             </li>
           </Reveal>
         ))}
@@ -416,34 +442,44 @@ export function OpenCampaigns() {
   return (
     <section>
       <Reveal className="flex items-end justify-between gap-3">
-        <h2 className="font-display text-2xl font-bold md:text-3xl">
+        <h2 className="font-display text-xl font-bold sm:text-2xl md:text-3xl">
           {d('home.openCampaigns', 'Open campaigns right now')}
         </h2>
-        <Link to="/campaigns" className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 hover:text-gray-900">
+        <Link
+          to="/campaigns"
+          className="inline-flex shrink-0 items-center gap-1.5 text-xs font-medium text-gray-500 hover:text-gray-900 sm:text-sm"
+        >
           {t('home.seeAll')}
           <FontAwesomeIcon icon={faArrowRight} className="text-[10px] rtl:rotate-180" />
         </Link>
       </Reveal>
-      <div className="-mx-4 mt-6 flex snap-x gap-4 overflow-x-auto px-4 pb-4">
+      <div className="-mx-4 mt-6 flex snap-x gap-3 overflow-x-auto px-4 pb-4 sm:gap-4">
         {items.map((c, i) => (
           <Reveal key={c._id} delay={i * 80} className="snap-start">
             <Link
               to={`/campaigns/${c._id}`}
-              className="group flex h-full w-72 flex-col rounded-3xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition duration-300 hover:-translate-y-1.5 hover:shadow-xl"
+              className="group flex h-full w-64 flex-col rounded-2xl bg-white p-4 shadow-sm ring-1 ring-gray-100 transition duration-300 hover:-translate-y-1.5 hover:shadow-xl sm:w-72 sm:rounded-3xl sm:p-5"
             >
               <p className="flex items-center gap-1.5 text-xs text-gray-500">
                 <span className="truncate">{c.business?.name}</span>
-                {c.business?.verified && <FontAwesomeIcon icon={faCircleCheck} className="text-sky-500" />}
+                {c.business?.verified && (
+                  <FontAwesomeIcon icon={faCircleCheck} className="shrink-0 text-sky-500" />
+                )}
               </p>
-              <h3 className="mt-2 font-display text-lg font-bold leading-snug">{c.title}</h3>
-              <p className="mt-2 line-clamp-2 text-sm text-gray-600">{c.brief}</p>
-              <div className="mt-auto flex items-center justify-between gap-2 pt-4 text-xs">
-                <span className="rounded-full bg-gray-100 px-3 py-1 font-semibold text-gray-900">
+              <h3 className="mt-2 font-display text-base font-bold leading-snug sm:text-lg">
+                {c.title}
+              </h3>
+              <p className="mt-2 line-clamp-2 text-xs text-gray-600 sm:text-sm">{c.brief}</p>
+              <div className="mt-auto flex items-center justify-between gap-2 pt-3 text-[11px] sm:pt-4 sm:text-xs">
+                <span className="rounded-full bg-gray-100 px-2.5 py-1 font-semibold text-gray-900 sm:px-3">
                   {c.budget ? money(c.budget.amount, c.budget.currency) : d('home.budgetOpen', 'Budget open')}
                 </span>
                 {c.deadline && (
-                  <span className="text-gray-500">
-                    {new Date(c.deadline).toLocaleDateString(i18n.language, { day: 'numeric', month: 'short' })}
+                  <span className="shrink-0 text-gray-500">
+                    {new Date(c.deadline).toLocaleDateString(i18n.language, {
+                      day: 'numeric',
+                      month: 'short',
+                    })}
                   </span>
                 )}
               </div>
@@ -470,15 +506,15 @@ export function Benefits() {
   return (
     <section>
       <Title>{d('home.whyTitle', 'Why teams choose us')}</Title>
-      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
         {items.map((it, i) => (
           <Reveal key={it.t} delay={(i % 3) * 100}>
-            <div className="group h-full rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-100 transition duration-300 hover:-translate-y-1.5 hover:shadow-xl">
-              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gray-900 text-white transition duration-300 group-hover:rotate-6 group-hover:scale-110">
+            <div className="group h-full rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition duration-300 hover:-translate-y-1.5 hover:shadow-xl sm:rounded-3xl sm:p-6">
+              <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gray-900 text-white transition duration-300 group-hover:rotate-6 group-hover:scale-110 sm:h-12 sm:w-12">
                 <FontAwesomeIcon icon={it.icon} />
               </span>
-              <h3 className="mt-4 font-display text-lg font-bold">{it.t}</h3>
-              <p className="mt-1.5 text-sm text-gray-600">{it.b}</p>
+              <h3 className="mt-4 font-display text-base font-bold sm:text-lg">{it.t}</h3>
+              <p className="mt-1.5 text-xs text-gray-600 sm:text-sm">{it.b}</p>
             </div>
           </Reveal>
         ))}
@@ -502,7 +538,7 @@ export function Faq() {
   return (
     <section className="mx-auto max-w-3xl">
       <Title>{d('home.faqTitle', 'Questions, answered')}</Title>
-      <div className="mt-8 space-y-3">
+      <div className="mt-6 space-y-2.5 sm:mt-8 sm:space-y-3">
         {rows.map(([q, a], i) => (
           <Reveal key={q} delay={i * 60}>
             <div className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-gray-100">
@@ -510,17 +546,21 @@ export function Faq() {
                 type="button"
                 aria-expanded={open === i}
                 onClick={() => setOpen(open === i ? -1 : i)}
-                className="flex w-full items-center justify-between gap-4 p-5 text-start font-semibold"
+                className="flex w-full items-center justify-between gap-3 p-4 text-start text-sm font-semibold sm:gap-4 sm:p-5 sm:text-base"
               >
-                {q}
+                <span className="min-w-0">{q}</span>
                 <FontAwesomeIcon
                   icon={faPlus}
                   className={`shrink-0 text-gray-900 transition-transform duration-300 ${open === i ? 'rotate-45' : ''}`}
                 />
               </button>
-              <div className={`grid transition-[grid-template-rows] duration-300 ${open === i ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
-                <p className="overflow-hidden px-5 text-sm text-gray-600">
-                  <span className="block pb-5">{a}</span>
+              <div
+                className={`grid transition-[grid-template-rows] duration-300 ${
+                  open === i ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+                }`}
+              >
+                <p className="overflow-hidden px-4 text-xs text-gray-600 sm:px-5 sm:text-sm">
+                  <span className="block pb-4 sm:pb-5">{a}</span>
                 </p>
               </div>
             </div>
