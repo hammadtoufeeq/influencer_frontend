@@ -2,7 +2,6 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { QueryClientProvider } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { AuthProvider } from './context/AuthProvider.tsx'
 import { ThemeProvider } from './context/ThemeContext.tsx'
 import { queryClient } from './context/reactQueryContext'
@@ -26,7 +25,7 @@ createRoot(document.getElementById('root')!).render(
       </BrowserRouter>
       <AppToaster />
       {/* Sirf development mein dikhta hai: cache ke andar kya hai */}
-      <ReactQueryDevtools initialIsOpen={false} />
+      
     </QueryClientProvider>
   </StrictMode>,
 )
