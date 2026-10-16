@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLocationDot, faUsers, faArrowRight, faStar } from '@fortawesome/free-solid-svg-icons'
+import { faLocationDot, faUsers, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
 import { personQuery } from '../api/queries'
