@@ -12,7 +12,10 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import Pagination from "../../components/Pagination";
-import { CampaignTile } from "./CampaignTile";
+import {
+ 
+  CampaignTile,
+} from "./CampaignTile";
 import { CountUp, Reveal } from "../../components/home/HomeSections";
 import { campaignsQuery } from "../../api/queries";
 import { COUNTRY_OPTIONS } from "../../constants/people";
@@ -96,25 +99,29 @@ function CampaignsPage() {
       </Link>
     ) : null;
 
-  // ✅ Spotlight logic removed — saari campaigns grid mein
-  const gridItems = data?.items ?? [];
+  // First campaign gets the big dark card (only on the plain first page)
+  const spotlight =
+    data && page === 1 && !filtered && data.items.length >= 3
+      ? data.items[0]
+      : null;
+  const gridItems = data ? (spotlight ? data.items.slice(1) : data.items) : [];
 
   let results: ReactNode;
   if (isLoading) {
     results = (
-      <div className="grid gap-4 sm:gap-5 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-        {Array.from({ length: 8 }, (_, i) => (
+      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        {Array.from({ length: 6 }, (_, i) => (
           <div
             key={i}
-            className="h-72 animate-pulse rounded-2xl bg-gray-200/70 sm:h-80 sm:rounded-3xl"
+            className="h-80 animate-pulse rounded-3xl bg-gray-200/70"
           />
         ))}
       </div>
     );
   } else if (isError) {
     results = (
-      <div className="rounded-2xl bg-white px-4 py-10 text-center shadow-sm ring-1 ring-gray-200/70 sm:px-6 sm:py-12">
-        <p className="text-sm font-semibold sm:text-base">{t("common.error")}</p>
+      <div className="rounded-2xl bg-white px-6 py-12 text-center shadow-sm ring-1 ring-gray-200/70">
+        <p className="font-semibold">{t("common.error")}</p>
         <button
           type="button"
           onClick={() => refetch()}
@@ -126,14 +133,14 @@ function CampaignsPage() {
     );
   } else if (!data || data.items.length === 0) {
     results = (
-      <div className="rounded-2xl border border-dashed border-gray-300 bg-white px-4 py-10 text-center sm:rounded-3xl sm:px-6 sm:py-14">
+      <div className="rounded-3xl border border-dashed border-gray-300 bg-white px-6 py-14 text-center">
         <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 text-gray-500">
           <FontAwesomeIcon icon={filtered ? faMagnifyingGlass : faBullhorn} />
         </span>
-        <p className="mt-4 text-sm font-semibold sm:text-base">
+        <p className="mt-4 font-semibold">
           {filtered ? t("campaigns.noMatch") : t("campaigns.emptyTitle")}
         </p>
-        <p className="mx-auto mt-1 max-w-md text-xs text-gray-500 sm:text-sm">
+        <p className="mx-auto mt-1 max-w-md text-sm text-gray-500">
           {filtered ? t("directory.noMatchHint") : t("campaigns.emptyText")}
         </p>
         {!filtered && postButton && <div className="mt-5">{postButton}</div>}
@@ -142,10 +149,10 @@ function CampaignsPage() {
   } else {
     results = (
       <>
-        {/* ✅ Sirf grid — koi spotlight nahi */}
-        <div className="grid gap-4 sm:gap-5 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+       
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {gridItems.map((campaign, i) => (
-            <Reveal key={campaign._id} delay={(i % 4) * 90} className="h-full">
+            <Reveal key={campaign._id} delay={(i % 3) * 90} className="h-full">
               <CampaignTile campaign={campaign} />
             </Reveal>
           ))}
@@ -156,9 +163,8 @@ function CampaignsPage() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-7xl space-y-4 px-4 sm:space-y-6 sm:px-6 2xl:max-w-screen-2xl 2xl:px-8">
-      {/* Header */}
-      <section className="keep-dark relative isolate overflow-hidden rounded-2xl bg-gray-900 px-4 py-8 text-white sm:rounded-3xl sm:px-8 sm:py-10 md:py-14 2xl:px-12 2xl:py-20">
+    <div className="space-y-6">
+      <section className="keep-dark relative isolate overflow-hidden rounded-3xl bg-gray-900 px-5 py-10 text-white sm:px-8 md:py-14">
         <img
           src={HEADER_IMAGE}
           alt=""
@@ -167,21 +173,21 @@ function CampaignsPage() {
           className="absolute inset-0 -z-10 h-full w-full object-cover object-center"
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-gray-950/95 via-gray-950/75 to-gray-950/25 rtl:bg-gradient-to-l" />
-        <div className="max-w-2xl 2xl:max-w-3xl">
-          <p className="inline-flex items-center gap-2 text-[10px] font-medium tracking-wider text-white/60 uppercase sm:text-xs">
+        <div className="max-w-2xl">
+          <p className="inline-flex items-center gap-2 text-xs font-medium tracking-wider text-white/60 uppercase">
             <FontAwesomeIcon icon={faBullhorn} />
             {t("campaigns.eyebrow")}
           </p>
-          <h1 className="mt-2 text-xl font-bold tracking-tight sm:text-2xl md:text-3xl 2xl:text-4xl">
+          <h1 className="mt-2 text-2xl font-bold tracking-tight md:text-3xl">
             {t("campaigns.title")}
           </h1>
-          <p className="mt-1 text-xs text-white/70 sm:text-sm 2xl:text-base">
+          <p className="mt-1 text-sm text-white/70">
             {t("campaigns.subtitle")}
           </p>
 
           <form
             onSubmit={search}
-            className="mt-5 flex max-w-lg flex-col gap-2 sm:flex-row 2xl:max-w-xl"
+            className="mt-5 flex max-w-lg gap-2"
             role="search"
           >
             <label className="relative flex-1">
@@ -194,7 +200,7 @@ function CampaignsPage() {
                 value={draft}
                 onChange={(e) => setDraft(e.target.value)}
                 placeholder={t("campaigns.searchPlaceholder")}
-                className="w-full rounded-xl bg-white py-2.5 ps-11 pe-10 text-sm text-gray-900 outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-white/60 sm:py-3 sm:text-base"
+                className="w-full rounded-xl bg-white py-3 ps-11 pe-10 text-gray-900 outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-white/60"
               />
               {draft && (
                 <button
@@ -212,7 +218,7 @@ function CampaignsPage() {
             </label>
             <button
               type="submit"
-              className="rounded-xl bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 sm:py-3"
+              className="rounded-xl bg-white px-5 text-sm font-medium text-gray-900 hover:bg-gray-100"
             >
               {t("common.search")}
             </button>
@@ -221,7 +227,7 @@ function CampaignsPage() {
       </section>
 
       {/* Category chips */}
-      <div className="-mx-4 flex snap-x snap-mandatory gap-2 overflow-x-auto scroll-px-4 px-4 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-1 2xl:gap-2.5">
+      <div className="-mx-4 flex snap-x gap-2 overflow-x-auto px-4 py-1 sm:mx-0 sm:flex-wrap sm:px-0">
         {[{ value: "", icon: faBullhorn }, ...SERVICE_CATEGORIES].map((c) => {
           const on = category === c.value;
           return (
@@ -230,34 +236,28 @@ function CampaignsPage() {
               type="button"
               onClick={() => setFilter("category", c.value)}
               aria-pressed={on}
-              className={`inline-flex shrink-0 snap-start items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition duration-300 sm:gap-2 sm:px-4 sm:py-2 sm:text-sm 2xl:px-5 2xl:py-2.5 2xl:text-base ${
+              className={`inline-flex shrink-0 snap-start items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition duration-300 ${
                 on
-                  ? "scale-105 bg-gray-900 text-white shadow-md"
-                  : "bg-white text-gray-700 ring-1 ring-gray-200 hover:-translate-y-0.5 hover:ring-gray-400"
+                  ? "relative z-10 bg-gray-900 text-white shadow-md ring-1 ring-gray-900"
+                  : "bg-white text-gray-700 ring-1 ring-gray-200 hover:relative hover:z-10 hover:shadow-md hover:ring-gray-400"
               }`}
             >
-              <FontAwesomeIcon
-                icon={c.icon}
-                className="text-[10px] sm:text-xs 2xl:text-sm"
-              />
-              <span className="whitespace-nowrap">
-                {c.value
-                  ? t(`services.category.${c.value}`)
-                  : t("campaigns.allCategories")}
-              </span>
+              <FontAwesomeIcon icon={c.icon} className="text-xs" />
+              {c.value
+                ? t(`services.category.${c.value}`)
+                : t("campaigns.allCategories")}
             </button>
           );
         })}
       </div>
 
-      {/* Filters row */}
-      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
-        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <select
             aria-label={t("campaigns.fields.country")}
             value={country}
             onChange={(e) => setFilter("country", e.target.value)}
-            className={`${selectClass} w-full sm:w-auto 2xl:px-4 2xl:py-2.5 2xl:text-base`}
+            className={selectClass}
           >
             <option value="">{t("campaigns.allCountries")}</option>
             {COUNTRY_OPTIONS.map((code) => (
@@ -267,31 +267,29 @@ function CampaignsPage() {
             ))}
           </select>
           {data && (
-            <p className="text-xs text-gray-600 sm:text-sm 2xl:text-base">
-              <span className="font-display text-base font-bold text-gray-900 sm:text-lg 2xl:text-xl">
+            <p className="text-sm text-gray-600">
+              <span className="font-display text-lg font-bold text-gray-900">
                 <CountUp value={total} />
               </span>{" "}
               {t("campaigns.count", { count: total })}
             </p>
           )}
         </div>
-        {data && data.items.length > 0 && (
-          <div className="self-start sm:self-auto">{postButton}</div>
-        )}
+        {data && data.items.length > 0 && postButton}
       </div>
 
       {results}
 
       {/* How applying works */}
-      <section className="pt-8 sm:pt-10 2xl:pt-14">
-        <Reveal className="mx-auto max-w-2xl text-center 2xl:max-w-3xl">
-          <h2 className="font-display text-xl font-bold sm:text-2xl md:text-3xl 2xl:text-4xl">
+      <section className="pt-10">
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <h2 className="font-display text-2xl font-bold md:text-3xl">
             {t("campaigns.howTitle", {
               defaultValue: "From open call to signed deal",
             })}
           </h2>
         </Reveal>
-        <ol className="mt-6 grid gap-4 sm:mt-8 sm:gap-6 md:grid-cols-3 2xl:gap-8">
+        <ol className="mt-8 grid gap-6 md:grid-cols-3">
           {[
             [
               faMagnifyingGlass,
@@ -322,16 +320,14 @@ function CampaignsPage() {
           ].map(([icon, title, body], i) => (
             <li key={String(title)}>
               <Reveal delay={i * 150} className="h-full">
-                <div className="h-full rounded-2xl bg-white p-5 text-center shadow-sm ring-1 ring-gray-100 transition duration-300 hover:-translate-y-1.5 hover:shadow-xl sm:rounded-3xl sm:p-6 2xl:p-8">
-                  <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-gray-900 text-base text-white sm:h-14 sm:w-14 sm:rounded-2xl sm:text-lg 2xl:h-16 2xl:w-16 2xl:text-xl">
+                <div className="h-full rounded-3xl bg-white p-6 text-center shadow-sm ring-1 ring-gray-100 transition duration-300 hover:-translate-y-1.5 hover:shadow-xl">
+                  <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gray-900 text-lg text-white">
                     <FontAwesomeIcon icon={icon as typeof faBullhorn} />
                   </span>
-                  <h3 className="mt-4 font-display text-base font-bold sm:text-lg 2xl:text-xl">
+                  <h3 className="mt-4 font-display text-lg font-bold">
                     {String(title)}
                   </h3>
-                  <p className="mt-1.5 text-xs text-gray-600 sm:text-sm 2xl:mt-2 2xl:text-base">
-                    {String(body)}
-                  </p>
+                  <p className="mt-1.5 text-sm text-gray-600">{String(body)}</p>
                 </div>
               </Reveal>
             </li>
@@ -342,24 +338,24 @@ function CampaignsPage() {
       {/* Call to action for businesses */}
       {postButton && (
         <Reveal>
-          <section className="keep-dark relative isolate overflow-hidden rounded-2xl bg-brand-plum px-4 py-8 text-center text-white sm:rounded-3xl sm:px-6 sm:py-10 md:px-12 md:py-14 2xl:px-16 2xl:py-20">
-            <div className="absolute -start-16 -top-20 -z-10 h-72 w-72 animate-drift rounded-full bg-white/10 blur-3xl 2xl:h-96 2xl:w-96" />
+          <section className="keep-dark relative isolate overflow-hidden rounded-3xl bg-brand-plum px-6 py-10 text-center text-white md:px-12 md:py-14">
+            <div className="absolute -start-16 -top-20 -z-10 h-72 w-72 animate-drift rounded-full bg-white/10 blur-3xl" />
             <div
-              className="absolute -bottom-24 end-0 -z-10 h-72 w-72 animate-drift rounded-full bg-gray-400/20 blur-3xl 2xl:h-96 2xl:w-96"
+              className="absolute -bottom-24 end-0 -z-10 h-72 w-72 animate-drift rounded-full bg-gray-400/20 blur-3xl"
               style={{ animationDelay: "-8s" }}
             />
-            <h2 className="font-display text-xl font-bold sm:text-2xl md:text-4xl 2xl:text-5xl">
+            <h2 className="font-display text-2xl font-bold md:text-4xl">
               {t("campaigns.ctaTitle", {
                 defaultValue: "Have a project? Let talent come to you.",
               })}
             </h2>
-            <p className="mx-auto mt-3 max-w-xl text-xs text-white/75 sm:text-sm md:text-base 2xl:mt-4 2xl:max-w-2xl 2xl:text-lg">
+            <p className="mx-auto mt-3 max-w-xl text-white/75">
               {t("campaigns.ctaBody", {
                 defaultValue:
                   "Post an open call once and review applications from verified creators.",
               })}
             </p>
-            <div className="mt-6 flex flex-col items-stretch justify-center gap-2 [&_a]:justify-center [&_a]:bg-white [&_a]:text-gray-900 [&_a:hover]:scale-105 [&_a:hover]:bg-gray-100 sm:flex-row sm:items-center 2xl:mt-8">
+            <div className="mt-6 flex justify-center [&_a]:bg-white [&_a]:text-gray-900 [&_a:hover]:scale-105 [&_a:hover]:bg-gray-100">
               {postButton}
             </div>
           </section>
