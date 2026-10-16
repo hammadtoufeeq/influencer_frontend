@@ -37,7 +37,7 @@ import {
 } from "../components/home/HomeSections";
 import { useAuth } from "../hooks/useAuth";
 import { useTaxonomy } from "../hooks/useTaxonomy";
-import type { PersonSummary } from "../types/person";
+// import type { PersonSummary } from "../types/person";
 
 // Upar wale card ki tasveer (Unsplash, Home hero wali mein se ek)
 const ABOUT_IMAGE =
@@ -63,44 +63,44 @@ function Heading({ title, sub }: { title: string; sub?: string }) {
 }
 
 // Slowly scrolling row of portrait tiles
-function FaceRow({
-  people,
-  reverse,
-}: {
-  people: PersonSummary[];
-  reverse?: boolean;
-}) {
-  const base =
-    people.length >= 8 ? people : [...people, ...people, ...people].slice(0, 8);
-  return (
-    <div className="group overflow-hidden">
-      <div
-        className={`flex w-max animate-marquee gap-4 ${
-          reverse ? "[animation-direction:reverse]" : ""
-        }`}
-      >
-        {[...base, ...base].map((p, i) => (
-          <Link
-            key={`${p._id}-${i}`}
-            to={`/people/${p.slug}`}
-            aria-hidden={i >= base.length}
-            tabIndex={i >= base.length ? -1 : 0}
-            className="keep-dark group/tile relative block aspect-[3/4] w-40 shrink-0 overflow-hidden rounded-2xl bg-brand-plum text-white shadow-md md:w-48"
-          >
-            <Photo
-              person={p}
-              className="h-full w-full transition duration-700 group-hover/tile:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-            <p className="absolute inset-x-0 bottom-0 truncate p-3 text-sm font-semibold">
-              {p.name}
-            </p>
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
-}
+// function FaceRow({
+//   people,
+//   reverse,
+// }: {
+//   people: PersonSummary[];
+//   reverse?: boolean;
+// }) {
+//   const base =
+//     people.length >= 8 ? people : [...people, ...people, ...people].slice(0, 8);
+//   return (
+//     <div className="group overflow-hidden">
+//       <div
+//         className={`flex w-max animate-marquee gap-4 ${
+//           reverse ? "[animation-direction:reverse]" : ""
+//         }`}
+//       >
+//         {[...base, ...base].map((p, i) => (
+//           <Link
+//             key={`${p._id}-${i}`}
+//             to={`/people/${p.slug}`}
+//             aria-hidden={i >= base.length}
+//             tabIndex={i >= base.length ? -1 : 0}
+//             className="keep-dark group/tile relative block aspect-[3/4] w-40 shrink-0 overflow-hidden rounded-2xl bg-brand-plum text-white shadow-md md:w-48"
+//           >
+//             <Photo
+//               person={p}
+//               className="h-full w-full transition duration-700 group-hover/tile:scale-110"
+//             />
+//             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+//             <p className="absolute inset-x-0 bottom-0 truncate p-3 text-sm font-semibold">
+//               {p.name}
+//             </p>
+//           </Link>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
 
 // About: platform kya hai, kaise chalta hai, kis ke liye hai aur is mein kya kya hai
 function About() {
@@ -398,7 +398,7 @@ function About() {
         </div>
       </section>
 
-      {/* People already here */}
+      {/* People already here
       {faces.length > 0 && (
         <section className="space-y-4">
           <Heading title={d("about.peopleTitle", "Already on the platform")} />
@@ -407,7 +407,7 @@ function About() {
           </div>
           <FaceRow people={[...faces].reverse()} reverse />
         </section>
-      )}
+      )} */}
 
       {/* Kis ke liye: teen account types */}
       <section>
