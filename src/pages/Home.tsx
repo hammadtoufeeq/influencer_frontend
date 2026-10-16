@@ -220,7 +220,7 @@ function Home() {
     'rounded-full border border-white/25 bg-white/10 px-3 py-1.5 backdrop-blur transition hover:bg-white/20 hover:text-white'
 
   return (
-    <div className="overflow-x-hidden pb-16">
+    <div className="home-page overflow-x-hidden pb-16">
       {/* Hero */}
       <section
         aria-label={t('home.heroLabel')}
@@ -245,7 +245,7 @@ function Home() {
               preload="metadata"
               onCanPlay={() => setVideoOk(true)}
               onError={() => setVideoOk(false)}
-              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+              className={`absolute inset-0 hidden h-full w-full object-cover transition-opacity duration-1000 sm:block ${
                 videoOk ? 'opacity-20' : 'opacity-0'
               }`}
             />

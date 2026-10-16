@@ -204,3 +204,15 @@ html.theme-switching *::after {
     animation: none !important;
   }
 }
+
+/* Keep mobile resizing stable: decorative effects are not part of the content. */
+@media (max-width: 639px) {
+  .home-page .animate-drift,
+  .home-page .animate-float,
+  .home-page .animate-float-slow,
+  .home-page .animate-ping,
+  .home-page .animate-pulse,
+  .home-page .animate-sheen {
+    animation: none !important;
+  }
+}
