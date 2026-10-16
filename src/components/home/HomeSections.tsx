@@ -494,8 +494,7 @@ export function OpenCampaigns() {
 // ✅ Card ko alag component banaya — reuse ke liye
 function CampaignCard({
   campaign: c,
-  index,
-  t,
+  
   d,
   i18n,
 }: {
