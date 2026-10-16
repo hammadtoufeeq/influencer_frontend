@@ -1216,7 +1216,8 @@
     "newsletterPlaceholder": "you@example.com",
     "newsletterButton": "Subscribe",
     "newsletterSending": "Subscribing...",
-    "newsletterDone": "Thanks! You're on the list."
+    "newsletterDone": "Thanks! You're on the list.",
+    "description": "Built for brands, talent and managers: verified profiles, open campaigns and signed agreements in one place."
   },
   "newProfile": {
     "cta": "Can't find it? Create your profile",

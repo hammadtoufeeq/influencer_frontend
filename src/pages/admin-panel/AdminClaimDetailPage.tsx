@@ -132,7 +132,7 @@ function AdminClaimDetailPage() {
               )}
             </div>
 
-            <div className="grid gap-5 lg:grid-cols-2">
+            <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
               <section className={card}>
                 <h2 className="text-sm font-medium text-gray-500">{t('claims.colPerson')}</h2>
                 <div className="mt-3 flex items-center gap-3">

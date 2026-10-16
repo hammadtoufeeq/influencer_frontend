@@ -74,12 +74,10 @@ function Navbar() {
 
   return (
     // The transparent header holds the floating navbar above the page content.
-    <header className="sticky top-0 z-40 px-4 pt-3 print:hidden sm:px-6 sm:pt-4 lg:px-8">
+    <header className="relative z-40 px-3 pt-3 print:hidden sm:px-6 sm:pt-4 lg:px-8">
       
-      {/* CHANGED: This inner nav is now the floating "pill". 
-          Added 'rounded-full', 'bg-white/90', 'shadow-md', 'border', 'border-gray-200', and 'backdrop-blur'.
-          Removed the 'grid' logic here to keep the pill shape simple, as grid can break the pill layout on smaller screens. */}
-      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-3 rounded-full border border-gray-200 bg-white/90 px-6 py-2 shadow-md backdrop-blur supports-[backdrop-filter]:bg-white/80">
+      {/* Tairti hui "pill" navbar */}
+      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-3 rounded-full border border-gray-200 bg-white/90 py-2 ps-5 pe-2 sm:px-6 shadow-md backdrop-blur supports-[backdrop-filter]:bg-white/80">
         
         <TopLink
           to="/"
@@ -172,10 +170,9 @@ function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile menu - Note: Ensure this dropdown still works with the new floating layout. 
-          You might need to adjust 'top-full' if the pill shape shifts things. */}
+      {/* Mobile menu: pill ke theek neeche */}
       {mobileOpen && (
-        <div className="absolute inset-x-0 top-full z-30 mx-auto mt-2 max-h-[calc(100vh-80px)] w-[calc(100%-2rem)] max-w-7xl overflow-y-auto rounded-2xl border border-gray-200 bg-white shadow-lg xl:hidden">
+        <div className="absolute inset-x-0 top-full z-30 mx-auto mt-2 max-h-[calc(100vh-80px)] w-[calc(100%-1.5rem)] max-w-7xl overflow-y-auto overscroll-contain sm:w-[calc(100%-3rem)] rounded-2xl border border-gray-200 bg-white shadow-lg xl:hidden">
           <div className="space-y-4 px-4 py-4">
             {user && (
               <div className="flex items-center gap-3 rounded-xl bg-gray-50 p-3">
