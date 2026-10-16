@@ -33,9 +33,7 @@ import type { PersonSummary } from '../types/person'
 import { formatCount } from '../utils/format'
 
 // Optional hero video: put a short muted loop at public/videos/hero.mp4.
-// If the file is missing the page simply shows the animated background.
 const HERO_VIDEO = '/videos/hero.mp4'
-// Hero background image (shown behind the video / as fallback)
 const HERO_IMAGE =
   'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=75'
 
@@ -43,7 +41,6 @@ const FEATURED_COUNT = 8
 const STRIP_COUNT = 12
 const INDUSTRY_LIMIT = 8
 
-// Tile pictures; if one fails to load the gradient behind it still looks good
 const INDUSTRY_IMAGES = [
   'photo-1522071820081-009f0129c71c',
   'photo-1600880292203-757bb62b4baf',
@@ -62,14 +59,12 @@ const TILE_GRADIENTS = [
   'from-gray-900 to-gray-600',
 ]
 
-// Background images for the role cards (per tab)
 const ROLE_IMAGES = {
   brands: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=75',
   talent: 'https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=1200&q=75',
   managers: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=75',
 }
 
-// Background image for the final call to action section
 const CTA_BACKGROUND =
   'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=75'
 
@@ -134,10 +129,42 @@ function IndustryTile({
   )
 }
 
+// ✅ Reusable CTA card — 2 baar use hoga (original + duplicate loop)
+function CtaCard({
+  title,
+  body,
+  cta,
+  to,
+  variant = 'solid',
+}: {
+  title: string
+  body: string
+  cta: string
+  to: string
+  variant?: 'solid' | 'outline'
+}) {
+  return (
+    <div className="w-[85%] shrink-0 rounded-xl bg-white/10 p-5 ring-1 ring-white/20 backdrop-blur sm:rounded-2xl sm:p-6 md:w-auto">
+      <h2 className="font-display text-xl font-bold leading-snug sm:text-2xl">{title}</h2>
+      <p className="mt-2 text-xs leading-relaxed text-white/80 sm:text-sm">{body}</p>
+      <Link
+        to={to}
+        className={
+          variant === 'solid'
+            ? 'mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 transition hover:scale-105 sm:w-auto sm:justify-start'
+            : 'mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/40 px-5 py-2.5 text-sm font-semibold text-white transition hover:scale-105 hover:bg-white/10 sm:w-auto sm:justify-start'
+        }
+      >
+        {cta}
+        <FontAwesomeIcon icon={faArrowRight} className="text-xs rtl:rotate-180" />
+      </Link>
+    </div>
+  )
+}
+
 function Home() {
   const { t } = useTranslation()
   const d = (key: string, defaultValue: string) => t(key, { defaultValue })
-  // "0 followers" looks empty, so fall back to the person's profession
   const sub = (p: PersonSummary) =>
     p.totalFollowers > 0
       ? t('site.followers', { value: formatCount(p.totalFollowers) })
@@ -219,6 +246,22 @@ function Home() {
   const chip =
     'rounded-full border border-white/25 bg-white/10 px-3 py-1.5 backdrop-blur transition hover:bg-white/20 hover:text-white'
 
+  // CTA cards data — reusable
+  const ctaTalent = {
+    title: t('home.ctaTalentTitle'),
+    body: t('home.ctaTalentBody'),
+    cta: user ? t('home.ctaDashboard') : t('home.ctaTalentButton'),
+    to: user ? '/dashboard' : '/register',
+    variant: 'solid' as const,
+  }
+  const ctaBusiness = {
+    title: t('home.ctaBusinessTitle'),
+    body: t('home.ctaBusinessBody'),
+    cta: t('home.ctaBusinessButton'),
+    to: '/search',
+    variant: 'outline' as const,
+  }
+
   return (
     <div className="home-page overflow-x-hidden pb-16">
       {/* Hero */}
@@ -227,7 +270,6 @@ function Home() {
         className="keep-dark relative isolate overflow-hidden bg-brand-plum"
       >
         <div className="absolute inset-0 -z-10">
-          {/* Background image (base layer) — low opacity */}
           <img
             src={HERO_IMAGE}
             alt=""
@@ -235,7 +277,6 @@ function Home() {
             className="absolute inset-0 h-full w-full object-cover opacity-25"
           />
 
-          {/* Video on top of image (if available) — low opacity */}
           {!reduced && (
             <video
               src={HERO_VIDEO}
@@ -252,7 +293,6 @@ function Home() {
             />
           )}
 
-          {/* Brand tint + glows */}
           <div className="absolute -start-24 -top-24 h-96 w-96 animate-drift rounded-full bg-white/10 blur-3xl" />
           <div
             className="absolute -bottom-32 end-0 h-[30rem] w-[30rem] animate-drift rounded-full bg-gray-400/20 blur-3xl"
@@ -262,7 +302,6 @@ function Home() {
             className="absolute start-1/3 top-1/2 h-64 w-64 animate-drift rounded-full bg-white/10 blur-3xl"
             style={{ animationDelay: '-11s' }}
           />
-          {/* Gradient overlay for text readability */}
           <div className="absolute inset-0 bg-gradient-to-t from-brand-plum/95 via-brand-plum/50 to-transparent" />
         </div>
 
@@ -323,7 +362,6 @@ function Home() {
             </div>
           </div>
 
-          {/* Floating influencer cards */}
           <div className="relative mx-auto hidden h-[26rem] w-full max-w-xl lg:block">
             {stage.map((p, i) => (
               <Link
@@ -354,13 +392,6 @@ function Home() {
                 </p>
               </div>
             )}
-            {/* <div className="absolute end-2 top-0 z-20 flex animate-float items-center gap-2 rounded-full bg-white px-3.5 py-2 text-xs font-semibold text-gray-900 shadow-xl">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400" />
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
-              </span>
-              {d('home.openToWork', 'Open to work')}
-            </div> */}
           </div>
         </div>
       </section>
@@ -407,7 +438,6 @@ function Home() {
       <div className="mx-auto mt-20 max-w-6xl space-y-24 px-4">
         <PlatformStrip />
 
-        {/* Industries */}
         <section>
           <Reveal>
             <SectionHeader title={t('home.browseByIndustry')} to="/browse" />
@@ -429,7 +459,6 @@ function Home() {
           </div>
         </section>
 
-        {/* Featured people */}
         <section>
           <Reveal>
             <SectionHeader title={t('home.mostFollowed')} to="/search?sort=followers" />
@@ -535,16 +564,13 @@ function Home() {
                 ))}
               </ul>
 
-              {/* Card with background image */}
               <div className="keep-dark relative isolate overflow-hidden rounded-3xl p-8 text-white shadow-xl">
-                {/* Background image */}
                 <img
                   src={ROLE_IMAGES[tab]}
                   alt=""
                   loading="lazy"
                   className="absolute inset-0 -z-20 h-full w-full object-cover"
                 />
-                {/* Dark overlay for readability */}
                 <div className="absolute inset-0 -z-10 bg-gradient-to-br from-black/85 via-black/70 to-black/50" />
 
                 <FontAwesomeIcon icon={current.icon} className="text-4xl text-white/90" />
@@ -571,59 +597,39 @@ function Home() {
 
         <Faq />
 
-        {/* ✅ Final call to action — fully responsive */}
+        {/* ✅ Final CTA — mobile pe continuous auto-scroll (no user scroll), desktop pe grid */}
         <Reveal>
           <section className="keep-dark relative isolate overflow-hidden rounded-2xl p-5 text-white sm:rounded-[2rem] sm:p-6 md:p-12">
-            {/* Background image */}
             <img
               src={CTA_BACKGROUND}
               alt=""
               loading="lazy"
               className="absolute inset-0 -z-20 h-full w-full object-cover"
             />
-            {/* Dark brand overlay for readability */}
             <div className="absolute inset-0 -z-10 bg-gradient-to-br from-brand-plum/95 via-brand-plum/85 to-black/70" />
-            {/* Soft glow accents */}
             <div className="absolute -start-20 -top-20 -z-10 h-80 w-80 animate-drift rounded-full bg-white/10 blur-3xl" />
             <div
               className="absolute -bottom-24 end-0 -z-10 h-80 w-80 animate-drift rounded-full bg-gray-400/20 blur-3xl"
               style={{ animationDelay: '-8s' }}
             />
 
-            {/* Cards — mobile pe stack, md+ pe side-by-side */}
-            <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
-              {/* Talent card */}
-              <div className="rounded-xl bg-white/10 p-5 ring-1 ring-white/20 backdrop-blur sm:rounded-2xl sm:p-6">
-                <h2 className="font-display text-xl font-bold leading-snug sm:text-2xl">
-                  {t('home.ctaTalentTitle')}
-                </h2>
-                <p className="mt-2 text-xs leading-relaxed text-white/80 sm:text-sm">
-                  {t('home.ctaTalentBody')}
-                </p>
-                <Link
-                  to={user ? '/dashboard' : '/register'}
-                  className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 transition hover:scale-105 sm:w-auto sm:justify-start"
-                >
-                  {user ? t('home.ctaDashboard') : t('home.ctaTalentButton')}
-                  <FontAwesomeIcon icon={faArrowRight} className="text-xs rtl:rotate-180" />
-                </Link>
-              </div>
+            {/* ✅ overflow-hidden — koi user scroll nahi. Animation khud chalti hai. */}
+            <div className="relative overflow-hidden">
+              <div
+                className="flex gap-4 md:grid md:grid-cols-2 md:gap-4"
+                style={{
+                  animation: reduced ? undefined : 'cta-marquee 24s linear infinite',
+                }}
+              >
+                {/* Original cards */}
+                <CtaCard {...ctaTalent} />
+                <CtaCard {...ctaBusiness} />
 
-              {/* Business card */}
-              <div className="rounded-xl bg-white/10 p-5 ring-1 ring-white/20 backdrop-blur sm:rounded-2xl sm:p-6">
-                <h2 className="font-display text-xl font-bold leading-snug sm:text-2xl">
-                  {t('home.ctaBusinessTitle')}
-                </h2>
-                <p className="mt-2 text-xs leading-relaxed text-white/80 sm:text-sm">
-                  {t('home.ctaBusinessBody')}
-                </p>
-                <Link
-                  to="/search"
-                  className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/40 px-5 py-2.5 text-sm font-semibold text-white transition hover:scale-105 hover:bg-white/10 sm:w-auto sm:justify-start"
-                >
-                  {t('home.ctaBusinessButton')}
-                  <FontAwesomeIcon icon={faArrowRight} className="text-xs rtl:rotate-180" />
-                </Link>
+                {/* ✅ Duplicate cards — sirf mobile, seamless loop ke liye (aria-hidden) */}
+                <div aria-hidden="true" className="contents md:hidden">
+                  <CtaCard {...ctaTalent} />
+                  <CtaCard {...ctaBusiness} />
+                </div>
               </div>
             </div>
           </section>

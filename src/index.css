@@ -234,3 +234,22 @@ html.theme-switching *::after {
     animation: none !important;
   }
 }
+
+@keyframes campaigns-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes campaigns-scroll-step {
+  /* 0s — 4s: apni jagah ruko */
+  0%, 16% {
+    transform: translateX(0);
+  }
+  /* 4s — 12s: left jaao */
+  48%, 60% {
+    transform: translateX(-50%);
+  }
+  /* 12s — 20s: wapas right */
+  92%, 100% {
+    transform: translateX(0);
+  }
+}

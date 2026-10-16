@@ -438,56 +438,102 @@ export function OpenCampaigns() {
   const d = useD()
   const { data } = useQuery(campaignsQuery(new URLSearchParams({ limit: '6' })))
   const items = data?.items ?? []
+  const reduced = prefersReducedMotion()
   if (items.length === 0) return null
+
   return (
     <section>
-      <Reveal className="flex items-end justify-between gap-3">
-        <h2 className="font-display text-xl font-bold sm:text-2xl md:text-3xl">
-          {d('home.openCampaigns', 'Open campaigns right now')}
-        </h2>
-        <Link
-          to="/campaigns"
-          className="inline-flex shrink-0 items-center gap-1.5 text-xs font-medium text-gray-500 hover:text-gray-900 sm:text-sm"
+     {/* ✅ Centered title */}
+<div className="text-center">
+  <h2 className="font-display text-xl font-bold sm:text-2xl md:text-3xl">
+    {d('home.openCampaigns', 'Open campaigns right now')}
+  </h2>
+
+</div>
+  <Link
+    to="/campaigns"
+    className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-gray-500 hover:text-gray-900 sm:text-sm"
+  >
+    {t('home.seeAll')}
+    <FontAwesomeIcon icon={faArrowRight} className="text-[10px] rtl:rotate-180" />
+  </Link>
+
+      {/* ✅ overflow-hidden — koi user scroll nahi. Cards khud right se left chalte hain. */}
+      <div className="relative mt-6 overflow-hidden">
+        <div
+          className="flex gap-3 sm:gap-4"
+          style={{
+            animation: reduced ? undefined : 'campaigns-marquee 40s linear infinite',
+            width: 'max-content',
+          }}
         >
-          {t('home.seeAll')}
-          <FontAwesomeIcon icon={faArrowRight} className="text-[10px] rtl:rotate-180" />
-        </Link>
-      </Reveal>
-      <div className="-mx-4 mt-6 flex snap-x gap-3 overflow-x-auto px-4 pb-4 sm:gap-4">
-        {items.map((c, i) => (
-          <Reveal key={c._id} delay={i * 80} className="snap-start">
-            <Link
-              to={`/campaigns/${c._id}`}
-              className="group flex h-full w-64 flex-col rounded-2xl bg-white p-4 shadow-sm ring-1 ring-gray-100 transition duration-300 hover:-translate-y-1.5 hover:shadow-xl sm:w-72 sm:rounded-3xl sm:p-5"
-            >
-              <p className="flex items-center gap-1.5 text-xs text-gray-500">
-                <span className="truncate">{c.business?.name}</span>
-                {c.business?.verified && (
-                  <FontAwesomeIcon icon={faCircleCheck} className="shrink-0 text-sky-500" />
-                )}
-              </p>
-              <h3 className="mt-2 font-display text-base font-bold leading-snug sm:text-lg">
-                {c.title}
-              </h3>
-              <p className="mt-2 line-clamp-2 text-xs text-gray-600 sm:text-sm">{c.brief}</p>
-              <div className="mt-auto flex items-center justify-between gap-2 pt-3 text-[11px] sm:pt-4 sm:text-xs">
-                <span className="rounded-full bg-gray-100 px-2.5 py-1 font-semibold text-gray-900 sm:px-3">
-                  {c.budget ? money(c.budget.amount, c.budget.currency) : d('home.budgetOpen', 'Budget open')}
-                </span>
-                {c.deadline && (
-                  <span className="shrink-0 text-gray-500">
-                    {new Date(c.deadline).toLocaleDateString(i18n.language, {
-                      day: 'numeric',
-                      month: 'short',
-                    })}
-                  </span>
-                )}
-              </div>
-            </Link>
-          </Reveal>
-        ))}
+          {/* Original cards */}
+          {items.map((c, i) => (
+            <CampaignCard key={c._id} campaign={c} index={i} t={t} d={d} i18n={i18n} />
+          ))}
+
+          {/* ✅ Duplicate cards — aria-hidden, seamless loop ke liye */}
+          <div aria-hidden="true" className="contents">
+            {items.map((c, i) => (
+              <CampaignCard
+                key={`dup-${c._id}`}
+                campaign={c}
+                index={i}
+                t={t}
+                d={d}
+                i18n={i18n}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </section>
+  )
+}
+
+// ✅ Card ko alag component banaya — reuse ke liye
+function CampaignCard({
+  campaign: c,
+  index,
+  t,
+  d,
+  i18n,
+}: {
+  campaign: any
+  index: number
+  t: any
+  d: (key: string, defaultValue: string) => string
+  i18n: any
+}) {
+  return (
+    <Link
+      to={`/campaigns/${c._id}`}
+      className="group flex h-full w-64 shrink-0 flex-col rounded-2xl bg-white p-4 shadow-sm ring-1 ring-gray-100 transition duration-300 hover:-translate-y-1.5 hover:shadow-xl sm:w-72 sm:rounded-3xl sm:p-5"
+    >
+      <p className="flex items-center gap-1.5 text-xs text-gray-500">
+        <span className="truncate">{c.business?.name}</span>
+        {c.business?.verified && (
+          <FontAwesomeIcon icon={faCircleCheck} className="shrink-0 text-sky-500" />
+        )}
+      </p>
+      <h3 className="mt-2 font-display text-base font-bold leading-snug sm:text-lg">
+        {c.title}
+      </h3>
+      <p className="mt-2 line-clamp-2 text-xs text-gray-600 sm:text-sm">{c.brief}</p>
+      <div className="mt-auto flex items-center justify-between gap-2 pt-3 text-[11px] sm:pt-4 sm:text-xs">
+        <span className="rounded-full bg-gray-100 px-2.5 py-1 font-semibold text-gray-900 sm:px-3">
+          {c.budget ? money(c.budget.amount, c.budget.currency) : d('home.budgetOpen', 'Budget open')}
+        </span>
+        {c.deadline && (
+          <span className="shrink-0 text-gray-500">
+            {new Date(c.deadline).toLocaleDateString(i18n.language, {
+              day: 'numeric',
+              month: 'short',
+            })}
+          </span>
+        )}
+      </div>
+    </Link>
   )
 }
 
