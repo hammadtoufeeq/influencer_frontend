@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState, type ReactNode } from 'react'
+import { createPortal } from 'react-dom'
 import { Link, useSearchParams } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import { CountUp, Photo, Reveal } from '../components/home/HomeSections'
@@ -535,15 +536,16 @@ function Search() {
       </div>
 
       {/* Mobile filters: bottom sheet */}
-      {showFilters && (
-        <div role="dialog" aria-modal="true" className="fixed inset-0 z-[90] lg:hidden">
+      {showFilters &&
+        createPortal(
+          <div role="dialog" aria-modal="true" className="fixed inset-0 z-[100] lg:hidden">
           <button
             type="button"
             aria-label="Close"
             onClick={() => setShowFilters(false)}
             className="absolute inset-0 animate-fade bg-black/60"
           />
-          <div className="absolute inset-x-0 bottom-0 max-h-[85vh] animate-word overflow-y-auto rounded-t-3xl bg-white p-5">
+          <div className="absolute inset-x-0 bottom-0 max-h-[85dvh] animate-word overflow-y-auto overscroll-contain rounded-t-3xl bg-white p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] shadow-2xl">
             <div className="mb-4 flex items-start justify-between gap-3">
               <div className="flex-1">{filtersHeader}</div>
               <button
@@ -563,8 +565,9 @@ function Search() {
               {total} {t('search.peopleFound', { count: total })}
             </button>
           </div>
-        </div>
-      )}
+          </div>,
+          document.body,
+        )}
     </div>
   )
 }
