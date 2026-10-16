@@ -2,13 +2,15 @@ import { useTranslation } from 'react-i18next'
 import { useEffect, useState, type ReactNode } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
+import { CountUp, Photo, Reveal } from '../components/home/HomeSections'
+import TalentCard from '../components/search/TalentCard'
 import { keepPreviousData, useQuery, useQueryClient } from '@tanstack/react-query'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faChevronDown,
-  faMagnifyingGlass,
+  faList,
   faPlus,
   faSliders,
+  faTableCellsLarge,
   faUserGroup,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons'
@@ -28,9 +30,13 @@ import { countryName, languageName } from '../utils/format'
 import { OPEN_TO_OPTIONS } from '../constants/services'
 
 const PAGE_SIZE = 12
-// Explore ke upar wale card ki tasveer (Unsplash)
-const HEADER_IMAGE =
-  'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1600&q=80'
+// Concert / crowd-with-lights pictures for the banner (faint, like the home hero).
+// If the first one fails to load, the next is tried; change or reorder freely.
+const HERO_IMAGES = [
+  'photo-1470229722913-7c0e2dbbafd3',
+  'photo-1429962714451-bb934ecdc4ec',
+  'photo-1492684223066-81342ee5ff30',
+].map((id) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1920&q=75`)
 const FILTER_KEYS = [
   'profession',
   'industry',
@@ -118,6 +124,8 @@ function Search() {
   // Is se link share ho sakta hai aur back button kaam karta hai
   const [searchParams, setSearchParams] = useSearchParams()
   const [showFilters, setShowFilters] = useState(false)
+  const [view, setView] = useState<'grid' | 'list'>('grid')
+  const [heroIndex, setHeroIndex] = useState(0)
 
   const { data: professions } = useTaxonomy('professions')
   const { data: industries } = useTaxonomy('industries')
@@ -240,9 +248,9 @@ function Search() {
   let results: ReactNode
   if (isLoading) {
     results = (
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {Array.from({ length: 6 }, (_, i) => (
-          <div key={i} className="h-36 animate-pulse rounded-2xl bg-gray-200/70" />
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {Array.from({ length: 8 }, (_, i) => (
+          <div key={i} className="aspect-[4/5] animate-pulse rounded-3xl bg-gray-200/70" />
         ))}
       </div>
     )
@@ -281,11 +289,21 @@ function Search() {
   } else {
     results = (
       <>
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {data?.people.map((person) => (
-            <PersonCard key={person._id} person={person} />
-          ))}
-        </div>
+        {view === 'grid' ? (
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {data?.people.map((person, i) => (
+              <Reveal key={person._id} delay={(i % 4) * 90}>
+                <TalentCard person={person} />
+              </Reveal>
+            ))}
+          </div>
+        ) : (
+          <div className="grid gap-3 xl:grid-cols-2">
+            {data?.people.map((person) => (
+              <PersonCard key={person._id} person={person} />
+            ))}
+          </div>
+        )}
         <Pagination page={page} totalPages={totalPages} onChange={setPage} />
         {/* Talent ko apni profile na mile to khud bheje */}
         {canCreateProfile && (
@@ -307,181 +325,246 @@ function Search() {
     )
   }
 
-  return (
-    <div className="space-y-6">
-      {/* Upar: heading + search */}
-      <section className="keep-dark relative isolate overflow-hidden rounded-3xl bg-gray-900 px-5 py-10 text-white sm:px-8 md:py-14">
-        {/* Peeche tasveer; likhai wali taraf gehra parda taake text saaf parha jaye */}
-        <img
-          src={HEADER_IMAGE}
-          alt=""
-          decoding="async"
-          className="absolute inset-0 -z-10 h-full w-full object-cover object-center"
-        />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-gray-950/95 via-gray-950/75 to-gray-950/20 rtl:bg-gradient-to-l" />
-        <div className="relative max-w-2xl">
-          <p className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-white/60">
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-            {t('search.eyebrow')}
-          </p>
-          <h1 className="mt-2 text-2xl font-bold tracking-tight md:text-3xl">
-            {t('search.title')}
-          </h1>
-          <p className="mt-1 text-sm text-white/70">{t('search.subtitle')}</p>
-          <div className="mt-5">
-            <SearchBar key={get('q')} initialValue={get('q')} tone="onDark" />
-          </div>
-        </div>
-      </section>
-
-      {/* Filters: ek horizontal patti. Phone pe button se khulti hai */}
-      <section className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-gray-100">
-        <div className="flex items-center justify-between gap-3">
-          <button
-            type="button"
-            onClick={() => setShowFilters((open) => !open)}
-            aria-expanded={showFilters}
-            className="inline-flex items-center gap-2 text-sm font-semibold md:pointer-events-none"
-          >
-            <FontAwesomeIcon icon={faSliders} className="text-gray-500" />
-            {t('search.filters')}
-            {activeFilters > 0 && (
-              <span className="rounded-full bg-gray-900 px-2 py-0.5 text-[11px] font-semibold text-white">
-                {activeFilters}
-              </span>
-            )}
-            <span className="md:hidden">
-              <FontAwesomeIcon
-                icon={faChevronDown}
-                className={`text-[10px] text-gray-400 transition ${showFilters ? 'rotate-180' : ''}`}
-              />
-            </span>
-          </button>
-          {activeFilters > 0 && (
-            <button
-              type="button"
-              onClick={clearFilters}
-              className="text-xs font-medium text-gray-500 underline-offset-2 hover:text-gray-900 hover:underline"
-            >
-              {t('search.clearAllFilters')}
-            </button>
-          )}
-        </div>
-
-        <div
-          className={`${showFilters ? 'grid' : 'hidden'} mt-4 grid-cols-2 gap-3 sm:grid-cols-3 md:grid lg:grid-cols-5`}
-        >
-          <FilterSelect
-            label={t('search.profession')}
-            name="profession"
-            value={get('profession')}
-            options={toOptions(professions)}
-            onChange={setFilter}
-          />
-          <FilterSelect
-            label={t('search.industry')}
-            name="industry"
-            value={get('industry')}
-            options={toOptions(industries)}
-            onChange={setFilter}
-          />
-          <FilterSelect
-            label={t('search.topic')}
-            name="topic"
-            value={get('topic')}
-            options={toOptions(topics)}
-            onChange={setFilter}
-          />
-          <FilterSelect
-            label={t('search.country')}
-            name="country"
-            value={get('country')}
-            options={countryOptions}
-            onChange={setFilter}
-          />
+  const faces = (data?.people ?? []).slice(0, 5)
+  const filterFields = (
+    <div className="space-y-4">
+      {filterDefs.map((f) =>
+        f.key === 'city' ? (
           <CityFilter
-            key={get('city')}
+            key={`city-${get('city')}`}
             value={get('city')}
             onChange={(value) => setFilter('city', value)}
           />
+        ) : (
           <FilterSelect
-            label={t('search.language')}
-            name="language"
-            value={get('language')}
-            options={languageOptions}
+            key={f.key}
+            label={f.label}
+            name={f.key}
+            value={get(f.key)}
+            options={f.options ?? []}
             onChange={setFilter}
           />
-          <FilterSelect
-            label={t('search.followers')}
-            name="minFollowers"
-            value={get('minFollowers')}
-            options={FOLLOWER_OPTIONS}
-            onChange={setFilter}
-          />
-          <FilterSelect
-            label={t('search.availability')}
-            name="status"
-            value={get('status')}
-            options={statusOptions}
-            onChange={setFilter}
-          />
-          <FilterSelect
-            label={t('search.openTo')}
-            name="openTo"
-            value={get('openTo')}
-            options={openToOptions}
-            onChange={setFilter}
-          />
-        </div>
-
-        {chips.length > 0 && (
-          <ul className="mt-4 flex flex-wrap gap-2 border-t border-gray-100 pt-4">
-            {chips.map((chip) => (
-              <li key={chip.key}>
-                <button
-                  type="button"
-                  onClick={chip.remove}
-                  aria-label={t('search.removeFilter', { name: chip.text })}
-                  className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-800 transition hover:bg-gray-900 hover:text-white"
-                >
-                  {chip.text}
-                  <FontAwesomeIcon icon={faXmark} className="text-[10px]" />
-                </button>
-              </li>
-            ))}
-          </ul>
+        ),
+      )}
+    </div>
+  )
+  const filtersHeader = (
+    <div className="flex items-center justify-between gap-3">
+      <p className="inline-flex items-center gap-2 font-semibold">
+        <FontAwesomeIcon icon={faSliders} className="text-gray-500" />
+        {t('search.filters')}
+        {activeFilters > 0 && (
+          <span className="rounded-full bg-gray-900 px-2 py-0.5 text-[11px] font-semibold text-white">
+            {activeFilters}
+          </span>
         )}
+      </p>
+      {activeFilters > 0 && (
+        <button
+          type="button"
+          onClick={clearFilters}
+          className="text-xs font-medium text-gray-500 underline-offset-2 hover:text-gray-900 hover:underline"
+        >
+          {t('search.clearAllFilters')}
+        </button>
+      )}
+    </div>
+  )
+  const viewButton = (mode: 'grid' | 'list', icon: typeof faList) => (
+    <button
+      type="button"
+      onClick={() => setView(mode)}
+      aria-pressed={view === mode}
+      aria-label={mode}
+      className={`flex h-9 w-9 items-center justify-center rounded-lg text-sm transition ${
+        view === mode ? 'bg-gray-900 text-white' : 'text-gray-500 hover:text-gray-900'
+      }`}
+    >
+      <FontAwesomeIcon icon={icon} />
+    </button>
+  )
+
+  return (
+    <div className="space-y-6">
+      {/* Hero */}
+      <section className="keep-dark relative isolate overflow-hidden rounded-3xl bg-brand-plum px-5 py-10 text-white sm:px-8 md:py-14">
+        {/* Background picture, same low opacity as the home hero */}
+        {heroIndex < HERO_IMAGES.length && (
+          <img
+            key={heroIndex}
+            src={HERO_IMAGES[heroIndex]}
+            alt=""
+            decoding="async"
+            onError={() => setHeroIndex((i) => i + 1)}
+            className="absolute inset-0 -z-10 h-full w-full object-cover opacity-25"
+          />
+        )}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-brand-plum/80 via-brand-plum/30 to-transparent rtl:bg-gradient-to-l" />
+        <div className="absolute -start-20 -top-24 -z-10 h-80 w-80 animate-drift rounded-full bg-white/10 blur-3xl" />
+        <div
+          className="absolute -bottom-24 end-10 -z-10 h-72 w-72 animate-drift rounded-full bg-gray-400/20 blur-3xl"
+          style={{ animationDelay: '-7s' }}
+        />
+        <div className="grid items-center gap-8 lg:grid-cols-[1.3fr_0.7fr]">
+          <div>
+            <h1 className="font-display text-3xl font-extrabold tracking-tight md:text-5xl">
+              {t('search.title')}
+            </h1>
+            <p className="mt-3 max-w-xl text-white/75">{t('search.subtitle')}</p>
+            <div className="mt-6 max-w-xl">
+              <SearchBar key={get('q')} initialValue={get('q')} tone="onDark" />
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2 text-xs">
+              {professions?.slice(0, 6).map((p) => {
+                const on = get('profession') === p.slug
+                return (
+                  <button
+                    key={p.slug}
+                    type="button"
+                    onClick={() => setFilter('profession', on ? '' : p.slug)}
+                    className={`rounded-full border px-3 py-1.5 transition ${
+                      on
+                        ? 'border-white bg-white text-gray-900'
+                        : 'border-white/25 bg-white/10 text-white/90 hover:bg-white/20'
+                    }`}
+                  >
+                    {p.name}
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+          {faces.length > 0 && (
+            <div className="hidden flex-col items-center gap-4 lg:flex">
+              <div className="flex -space-x-4 rtl:space-x-reverse">
+                {faces.map((p, i) => (
+                  <Link
+                    key={p._id}
+                    to={`/people/${p.slug}`}
+                    style={{ animationDelay: `${i * -1.4}s` }}
+                    className="animate-float"
+                  >
+                    <Photo person={p} className="h-20 w-20 rounded-full ring-4 ring-brand-plum" />
+                  </Link>
+                ))}
+              </div>
+              <p className="font-display text-5xl font-extrabold">
+                <CountUp value={total} />
+              </p>
+              <p className="text-sm text-white/70">{t('search.peopleFound', { count: total })}</p>
+            </div>
+          )}
+        </div>
       </section>
 
-      {/* Natije: ginti + tarteeb */}
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="text-sm text-gray-600">
-          {data ? (
-            <>
-              <span className="font-semibold text-gray-900">{total}</span>{' '}
-              {t('search.peopleFound', { count: total })}
-            </>
-          ) : (
-            ' '
+      <div className="grid gap-6 lg:grid-cols-[15rem_1fr]">
+        {/* Filters: sticky side panel on desktop */}
+        <aside className="hidden lg:block">
+          <div className="sticky top-24 space-y-4 rounded-3xl bg-white p-5 shadow-sm ring-1 ring-gray-100">
+            {filtersHeader}
+            {filterFields}
+          </div>
+        </aside>
+
+        <div className="min-w-0 space-y-5">
+          {/* Toolbar: count, view toggle, sort, mobile filters button */}
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <p className="text-sm text-gray-600">
+              {data ? (
+                <>
+                  <span className="font-semibold text-gray-900">{total}</span>{' '}
+                  {t('search.peopleFound', { count: total })}
+                </>
+              ) : (
+                ' '
+              )}
+            </p>
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setShowFilters(true)}
+                className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm font-medium lg:hidden"
+              >
+                <FontAwesomeIcon icon={faSliders} />
+                {t('search.filters')}
+                {activeFilters > 0 && (
+                  <span className="rounded-full bg-gray-900 px-2 py-0.5 text-[11px] text-white">{activeFilters}</span>
+                )}
+              </button>
+              <div className="flex rounded-xl border border-gray-200 bg-white p-0.5">
+                {viewButton('grid', faTableCellsLarge)}
+                {viewButton('list', faList)}
+              </div>
+              <label className="flex items-center gap-2 text-sm text-gray-500">
+                <span className="hidden sm:inline">{t('search.sortBy')}</span>
+                <select
+                  value={get('sort') || 'followers'}
+                  onChange={(e) => setFilter('sort', e.target.value)}
+                  className="rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 hover:border-gray-400"
+                >
+                  {SORT_OPTIONS.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+          </div>
+
+          {chips.length > 0 && (
+            <ul className="flex flex-wrap gap-2">
+              {chips.map((chip) => (
+                <li key={chip.key} className="animate-fade">
+                  <button
+                    type="button"
+                    onClick={chip.remove}
+                    aria-label={t('search.removeFilter', { name: chip.text })}
+                    className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-800 transition hover:bg-gray-900 hover:text-white"
+                  >
+                    {chip.text}
+                    <FontAwesomeIcon icon={faXmark} className="text-[10px]" />
+                  </button>
+                </li>
+              ))}
+            </ul>
           )}
-        </p>
-        <label className="flex items-center gap-2 text-sm text-gray-500">
-          {t('search.sortBy')}
-          <select
-            value={get('sort') || 'followers'}
-            onChange={(e) => setFilter('sort', e.target.value)}
-            className="rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 hover:border-gray-400"
-          >
-            {SORT_OPTIONS.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </label>
+
+          <section>{results}</section>
+        </div>
       </div>
 
-      <section>{results}</section>
+      {/* Mobile filters: bottom sheet */}
+      {showFilters && (
+        <div role="dialog" aria-modal="true" className="fixed inset-0 z-[90] lg:hidden">
+          <button
+            type="button"
+            aria-label="Close"
+            onClick={() => setShowFilters(false)}
+            className="absolute inset-0 animate-fade bg-black/60"
+          />
+          <div className="absolute inset-x-0 bottom-0 max-h-[85vh] animate-word overflow-y-auto rounded-t-3xl bg-white p-5">
+            <div className="mb-4 flex items-start justify-between gap-3">
+              <div className="flex-1">{filtersHeader}</div>
+              <button
+                type="button"
+                onClick={() => setShowFilters(false)}
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100"
+              >
+                <FontAwesomeIcon icon={faXmark} />
+              </button>
+            </div>
+            {filterFields}
+            <button
+              type="button"
+              onClick={() => setShowFilters(false)}
+              className="mt-5 w-full rounded-xl bg-gray-900 py-3 text-sm font-semibold text-white"
+            >
+              {total} {t('search.peopleFound', { count: total })}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

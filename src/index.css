@@ -151,6 +151,12 @@ html.theme-switching *::after {
   --animate-word: word 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   --animate-slide-in: slide-in 0.5s ease-out both;
   --animate-fade: fade 0.25s ease-out both;
+
+  /* Naye — Talent page ke liye */
+  --animate-fade-up: fadeUp 0.5s ease-out both;
+  --animate-shimmer: shimmer 1.8s linear infinite;
+  --animate-hero-zoom: heroZoom 18s ease-in-out infinite alternate;
+
   @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-16px); }
@@ -177,6 +183,18 @@ html.theme-switching *::after {
   @keyframes fade {
     from { opacity: 0; }
     to { opacity: 1; }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  @keyframes heroZoom {
+    0% { transform: scale(1.05); }
+    100% { transform: scale(1.12); }
   }
 }
 
