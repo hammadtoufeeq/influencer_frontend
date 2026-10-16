@@ -140,7 +140,7 @@ function useD() {
 function Title({ children, sub }: { children: ReactNode; sub?: string }) {
   return (
     <Reveal className="mx-auto max-w-2xl text-center">
-      <h2 className="font-display text-2xl font-bold md:text-4xl">{children}</h2>
+      <h2 className="font-display text-2xl font-bold leading-tight md:text-4xl">{children}</h2>
       {sub && <p className="mt-3 text-gray-600">{sub}</p>}
     </Reveal>
   )
@@ -210,9 +210,9 @@ function Showcase({
         <p className="mt-3 text-gray-600">{body}</p>
         <ul className="mt-5 space-y-2.5">
           {points.map((p) => (
-            <li key={p} className="flex items-center gap-2.5 text-sm text-gray-700">
+            <li key={p} className="flex min-w-0 items-start gap-2.5 text-sm text-gray-700">
               <FontAwesomeIcon icon={faCheck} className="text-xs text-gray-900" />
-              {p}
+              <span className="min-w-0">{p}</span>
             </li>
           ))}
         </ul>

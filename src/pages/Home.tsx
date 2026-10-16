@@ -220,7 +220,7 @@ function Home() {
     'rounded-full border border-white/25 bg-white/10 px-3 py-1.5 backdrop-blur transition hover:bg-white/20 hover:text-white'
 
   return (
-    <div className="pb-16">
+    <div className="overflow-x-hidden pb-16">
       {/* Hero */}
       <section
         aria-label={t('home.heroLabel')}
@@ -265,15 +265,16 @@ function Home() {
           <div className="absolute inset-0 bg-gradient-to-t from-brand-plum/95 via-brand-plum/50 to-transparent" />
         </div>
 
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 pb-28 pt-12 md:pt-20 lg:grid-cols-2">
+        {/* ✅ pt-28 md:pt-36 — navbar ke neeche se start hone ke liye space */}
+        <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 pb-20 pt-24 sm:gap-10 sm:pb-28 sm:pt-28 md:pt-36 lg:grid-cols-2">
           <div className="text-center lg:text-start">
-            <h1 className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl">
+            <h1 className="font-display text-3xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl">
               {t('home.title')}
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/80 md:text-lg lg:mx-0">
               {t('home.subtitle')}
             </p>
-            <p className="mt-5 font-display text-2xl font-bold text-white md:text-3xl">
+            <p className="mt-5 font-display text-xl font-bold text-white sm:text-2xl md:text-3xl">
               {d('home.findTop', 'Find top')} <RotatingWord words={words} />
             </p>
 
@@ -293,16 +294,16 @@ function Home() {
               ))}
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
+            <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center lg:justify-start">
               <Link
                 to="/search"
-                className="keep-dark rounded-xl bg-white px-6 py-3 font-semibold text-gray-900 shadow-lg transition hover:scale-105 hover:bg-gray-100"
+                className="keep-dark inline-flex justify-center rounded-xl bg-white px-6 py-3 font-semibold text-gray-900 shadow-lg transition hover:scale-105 hover:bg-gray-100"
               >
                 {d('home.findInfluencers', 'Find influencers')}
               </Link>
               <Link
                 to={user ? '/dashboard' : '/register'}
-                className="rounded-xl border border-white/30 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
+                className="inline-flex justify-center rounded-xl border border-white/30 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
               >
                 {user ? t('home.ctaDashboard') : d('home.joinAsTalent', 'Join as talent')}
               </Link>
@@ -339,9 +340,7 @@ function Home() {
                       <FontAwesomeIcon icon={faCircleCheck} className="text-xs text-sky-300" />
                     )}
                   </p>
-                  <p className="text-xs text-white/80">
-                    {sub(p)}
-                  </p>
+                  <p className="text-xs text-white/80">{sub(p)}</p>
                 </div>
               </Link>
             ))}
@@ -355,13 +354,13 @@ function Home() {
                 </p>
               </div>
             )}
-            {/* <div className="absolute end-2 top-0 z-20 flex animate-float items-center gap-2 rounded-full bg-white px-3.5 py-2 text-xs font-semibold text-gray-900 shadow-xl">
+            <div className="absolute end-2 top-0 z-20 flex animate-float items-center gap-2 rounded-full bg-white px-3.5 py-2 text-xs font-semibold text-gray-900 shadow-xl">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400" />
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
               </span>
               {d('home.openToWork', 'Open to work')}
-            </div> */}
+            </div>
           </div>
         </div>
       </section>
@@ -397,9 +396,7 @@ function Home() {
                 <Photo person={p} className="h-11 w-11 rounded-full" />
                 <span className="leading-tight">
                   <span className="block text-sm font-semibold">{p.name}</span>
-                  <span className="block text-xs text-gray-500">
-                    {sub(p)}
-                  </span>
+                  <span className="block text-xs text-gray-500">{sub(p)}</span>
                 </span>
               </Link>
             ))}
@@ -415,7 +412,7 @@ function Home() {
           <Reveal>
             <SectionHeader title={t('home.browseByIndustry')} to="/browse" />
           </Reveal>
-          <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
+          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {industries
               ? industries.slice(0, INDUSTRY_LIMIT).map((industry, i) => (
                   <Reveal key={industry._id} delay={(i % 4) * 80}>
@@ -510,7 +507,7 @@ function Home() {
                   type="button"
                   aria-selected={tab === id}
                   onClick={() => setTab(id)}
-                  className={`inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-semibold transition ${
+                  className={`inline-flex min-w-0 items-center justify-center gap-2 rounded-full px-3 py-2 text-xs font-semibold transition sm:px-5 sm:text-sm ${
                     tab === id
                       ? 'bg-gray-900 text-white shadow'
                       : 'text-gray-600 hover:text-gray-900'
@@ -551,7 +548,7 @@ function Home() {
                 <div className="absolute inset-0 -z-10 bg-gradient-to-br from-black/85 via-black/70 to-black/50" />
 
                 <FontAwesomeIcon icon={current.icon} className="text-4xl text-white/90" />
-                <h3 className="mt-4 font-display text-2xl font-bold leading-snug">
+                <h3 className="mt-4 font-display text-xl font-bold leading-snug sm:text-2xl">
                   {current.title}
                 </h3>
                 <Link

@@ -42,7 +42,6 @@ function BellCount({ count }: { count: number }) {
 
 function Navbar() {
   const { t } = useTranslation()
-  // Shakal ke liye: pakka login, ya tasdeeq ke dauran pichla login (bell ki API pakke pe hi)
   const { user: confirmedUser, cachedUser, logout } = useAuth()
   const user = confirmedUser ?? cachedUser
   const navigate = useNavigate()
@@ -71,15 +70,18 @@ function Navbar() {
       isActive ? 'bg-gray-900 text-white' : 'text-gray-600 hover:bg-gray-100'
     }`
 
-  // Right side ka bara button: admin ke liye Admin panel, baqi sab ke liye Dashboard
   const homeItem = [ACCOUNT_NAV[0], ADMIN_PANEL_NAV].find((item) => canSee(item, role))
 
-  // Sticky: scroll karne pe bhi navbar upar chipka rahe
   return (
-    <header className="sticky top-0 z-40 print:hidden border-b border-gray-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/80">
-      {/* Desktop (xl, 1280px+): brand bilkul start pe, links beech mein, baqi sab bilkul end pe.
-          Chhoti screen pe ☰ menu, kyun ke talent ke zyada links 1024px pe brand se takrate hain */}
-      <nav className="flex items-center gap-3 px-4 py-3 sm:px-6 xl:grid xl:grid-cols-[1fr_auto_1fr] lg:px-8">
+    // CHANGED: Added 'pt-4' for top spacing and removed 'border-b' and 'bg-white/90' from the header wrapper.
+    // The header acts as a transparent container to hold the floating navbar.
+    <header className="sticky top-0 z-40 print:hidden pt-4 px-4 sm:px-6 lg:px-8">
+      
+      {/* CHANGED: This inner nav is now the floating "pill". 
+          Added 'rounded-full', 'bg-white/90', 'shadow-md', 'border', 'border-gray-200', and 'backdrop-blur'.
+          Removed the 'grid' logic here to keep the pill shape simple, as grid can break the pill layout on smaller screens. */}
+      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-3 rounded-full border border-gray-200 bg-white/90 px-6 py-2 shadow-md backdrop-blur supports-[backdrop-filter]:bg-white/80">
+        
         <TopLink
           to="/"
           className="me-2 truncate text-base font-bold sm:text-xl xl:justify-self-start"
@@ -91,7 +93,6 @@ function Navbar() {
         <div className="hidden items-center justify-center gap-1 xl:flex">
           {mainItems.map((item) => (
             <TopLink key={item.to} to={item.to} className={linkClass(active(item))}>
-              {/* 1280-1535px pe jagah kam: sirf naam (span: FA ka svg "hidden" nahi maanta) */}
               <span className="hidden 2xl:inline-flex">
                 <FontAwesomeIcon icon={item.icon} />
               </span>
@@ -104,7 +105,6 @@ function Navbar() {
         <div className="ms-auto hidden items-center gap-1 xl:flex xl:justify-self-end">
           <ThemeToggle />
           <LanguageMenu />
-          {/* Reload pe bhi foran: pichla login yaad hai (AuthProvider), server baad mein pakka karta hai */}
           {user ? (
             <>
               {utilityItems.map((item) => (
@@ -146,8 +146,7 @@ function Navbar() {
           )}
         </div>
 
-        {/* ✅ Mobile: SAARE utility icons (inbox + notifications) + menu button.
-            Pehle sirf UTILITY_NAV[1] (notifications) tha jo index change hone par crash karta tha. */}
+        {/* Mobile: SAARE utility icons + menu button */}
         <div className="ms-auto flex items-center gap-1 xl:hidden">
           <ThemeToggle />
           {user &&
@@ -174,10 +173,11 @@ function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile menu - Note: Ensure this dropdown still works with the new floating layout. 
+          You might need to adjust 'top-full' if the pill shape shifts things. */}
       {mobileOpen && (
-        <div className="absolute inset-x-0 top-full z-30 max-h-[calc(100vh-60px)] overflow-y-auto border-b border-gray-200 bg-white shadow-lg xl:hidden">
-          <div className="mx-auto max-w-6xl space-y-4 px-4 py-4">
+        <div className="absolute inset-x-0 top-full z-30 mx-auto mt-2 max-h-[calc(100vh-80px)] w-[calc(100%-2rem)] max-w-7xl overflow-y-auto rounded-2xl border border-gray-200 bg-white shadow-lg xl:hidden">
+          <div className="space-y-4 px-4 py-4">
             {user && (
               <div className="flex items-center gap-3 rounded-xl bg-gray-50 p-3">
                 <Avatar name={user.name} photoUrl={user.avatarUrl} size="sm" />
@@ -209,7 +209,6 @@ function Navbar() {
               ))}
             </ul>
 
-            {/* flex-wrap: zaban ki list khule to is row ke neeche poori chaurai mein aati hai */}
             <div className="flex flex-wrap items-center justify-between gap-y-3 border-t border-gray-100 pt-4">
               <LanguageMenu variant="inline" />
               {user ? (
