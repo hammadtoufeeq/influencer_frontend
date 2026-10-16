@@ -265,8 +265,7 @@ function Home() {
           <div className="absolute inset-0 bg-gradient-to-t from-brand-plum/95 via-brand-plum/50 to-transparent" />
         </div>
 
-        {/* ✅ pt-28 md:pt-36 — navbar ke neeche se start hone ke liye space */}
-        <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 pb-20 pt-24 sm:gap-10 sm:pb-28 sm:pt-28 md:pt-36 lg:grid-cols-2">
+        <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 pb-20 pt-16 sm:gap-10 sm:pb-28 sm:pt-20 md:pt-24 lg:grid-cols-2">
           <div className="text-center lg:text-start">
             <h1 className="font-display text-3xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl">
               {t('home.title')}
@@ -571,9 +570,9 @@ function Home() {
 
         <Faq />
 
-        {/* Final call to action */}
+        {/* ✅ Final call to action — fully responsive */}
         <Reveal>
-          <section className="keep-dark relative isolate overflow-hidden rounded-[2rem] p-6 text-white md:p-12">
+          <section className="keep-dark relative isolate overflow-hidden rounded-2xl p-5 text-white sm:rounded-[2rem] sm:p-6 md:p-12">
             {/* Background image */}
             <img
               src={CTA_BACKGROUND}
@@ -590,24 +589,36 @@ function Home() {
               style={{ animationDelay: '-8s' }}
             />
 
-            <div className="grid gap-5 md:grid-cols-2">
-              <div className="rounded-2xl bg-white/10 p-6 ring-1 ring-white/20 backdrop-blur">
-                <h2 className="font-display text-2xl font-bold">{t('home.ctaTalentTitle')}</h2>
-                <p className="mt-2 text-sm text-white/80">{t('home.ctaTalentBody')}</p>
+            {/* Cards — mobile pe stack, md+ pe side-by-side */}
+            <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
+              {/* Talent card */}
+              <div className="rounded-xl bg-white/10 p-5 ring-1 ring-white/20 backdrop-blur sm:rounded-2xl sm:p-6">
+                <h2 className="font-display text-xl font-bold leading-snug sm:text-2xl">
+                  {t('home.ctaTalentTitle')}
+                </h2>
+                <p className="mt-2 text-xs leading-relaxed text-white/80 sm:text-sm">
+                  {t('home.ctaTalentBody')}
+                </p>
                 <Link
                   to={user ? '/dashboard' : '/register'}
-                  className="mt-5 inline-flex items-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 transition hover:scale-105"
+                  className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 transition hover:scale-105 sm:w-auto sm:justify-start"
                 >
                   {user ? t('home.ctaDashboard') : t('home.ctaTalentButton')}
                   <FontAwesomeIcon icon={faArrowRight} className="text-xs rtl:rotate-180" />
                 </Link>
               </div>
-              <div className="rounded-2xl bg-white/10 p-6 ring-1 ring-white/20 backdrop-blur">
-                <h2 className="font-display text-2xl font-bold">{t('home.ctaBusinessTitle')}</h2>
-                <p className="mt-2 text-sm text-white/80">{t('home.ctaBusinessBody')}</p>
+
+              {/* Business card */}
+              <div className="rounded-xl bg-white/10 p-5 ring-1 ring-white/20 backdrop-blur sm:rounded-2xl sm:p-6">
+                <h2 className="font-display text-xl font-bold leading-snug sm:text-2xl">
+                  {t('home.ctaBusinessTitle')}
+                </h2>
+                <p className="mt-2 text-xs leading-relaxed text-white/80 sm:text-sm">
+                  {t('home.ctaBusinessBody')}
+                </p>
                 <Link
                   to="/search"
-                  className="mt-5 inline-flex items-center gap-2 rounded-xl border border-white/40 px-5 py-2.5 text-sm font-semibold text-white transition hover:scale-105 hover:bg-white/10"
+                  className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/40 px-5 py-2.5 text-sm font-semibold text-white transition hover:scale-105 hover:bg-white/10 sm:w-auto sm:justify-start"
                 >
                   {t('home.ctaBusinessButton')}
                   <FontAwesomeIcon icon={faArrowRight} className="text-xs rtl:rotate-180" />

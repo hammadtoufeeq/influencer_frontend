@@ -73,9 +73,8 @@ function Navbar() {
   const homeItem = [ACCOUNT_NAV[0], ADMIN_PANEL_NAV].find((item) => canSee(item, role))
 
   return (
-    // CHANGED: Added 'pt-4' for top spacing and removed 'border-b' and 'bg-white/90' from the header wrapper.
-    // The header acts as a transparent container to hold the floating navbar.
-    <header className="sticky top-0 z-40 print:hidden pt-4 px-4 sm:px-6 lg:px-8">
+    // The transparent header holds the floating navbar above the page content.
+    <header className="sticky top-0 z-40 px-4 pt-3 print:hidden sm:px-6 sm:pt-4 lg:px-8">
       
       {/* CHANGED: This inner nav is now the floating "pill". 
           Added 'rounded-full', 'bg-white/90', 'shadow-md', 'border', 'border-gray-200', and 'backdrop-blur'.
