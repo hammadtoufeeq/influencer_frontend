@@ -5,6 +5,7 @@ import toast from 'react-hot-toast'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import { faArrowLeft, faBuilding, faStar, faUserTie } from '@fortawesome/free-solid-svg-icons'
+import GoogleButton from '../components/GoogleButton'
 import PasswordField from '../components/PasswordField'
 import { COUNTRY_OPTIONS } from '../constants/people'
 import { SIGNUP_ROLE_OPTIONS } from '../constants/roles'
@@ -14,7 +15,7 @@ import {
   type CompanySize,
   type OrganizationType,
 } from '../types/business'
-import type { RegisterInput } from '../api/auth'
+import { googleRegisterRequest, type RegisterInput } from '../api/auth'
 import { useAuth } from '../hooks/useAuth'
 import type { SignupRole } from '../types/user'
 import { getApiError } from '../utils/apiError'
@@ -62,7 +63,7 @@ function FieldError({ message }: { message?: string }) {
 
 function Register() {
   const { t } = useTranslation()
-  const { user, register } = useAuth()
+  const { user, register, updateUser } = useAuth()
   const navigate = useNavigate()
   // /register?type=business -> account type pehle se chuna hua
   const [searchParams, setSearchParams] = useSearchParams()
@@ -123,13 +124,14 @@ function Register() {
     return found
   }
 
-  function payload(current: SignupRole): RegisterInput {
-    const base = { email: email.trim(), password, role: current }
-    if (current === 'talent') return { ...base, name: name.trim() }
+  // Account type ki details (email / password ke baghair: Google signup mein woh Google se)
+  function details(current: SignupRole): Omit<RegisterInput, 'email' | 'password'> {
+    const base = { role: current }
+    if (current === 'talent') return { ...base, name: name.trim() || undefined }
     if (current === 'representative') {
       return {
         ...base,
-        name: name.trim(),
+        name: name.trim() || undefined,
         country,
         agencyName: agencyName.trim() || undefined,
         websiteUrl: websiteUrl.trim() || undefined,
@@ -144,6 +146,47 @@ function Register() {
       industry: industry.trim() || undefined,
       companySize,
       description: description.trim() || undefined,
+    }
+  }
+
+  const payload = (current: SignupRole): RegisterInput => ({
+    ...details(current),
+    email: email.trim(),
+    password,
+  })
+
+  // Google se signup: email, naam aur password Google se/zaroorat nahi,
+  // magar account type ki baqi details (business ka naam, mulk...) form se
+  async function handleGoogle(credential: string) {
+    if (!role) return
+    const found = validate(role)
+    delete found.email
+    delete found.password
+    // Talent / manager ka naam khali ho to Google wala naam
+    delete found.name
+    setErrors(found)
+    if (Object.keys(found).length) {
+      toast.error(t('register.googleFillFirst'))
+      document.getElementById(Object.keys(found)[0])?.focus()
+      return
+    }
+
+    setIsSubmitting(true)
+    try {
+      const { user: created, existing } = await googleRegisterRequest(credential, details(role))
+      updateUser(created)
+      toast.success(
+        existing
+          ? t('login.welcomeBack', { name: created.name })
+          : t('register.welcome', { name: created.name }),
+      )
+      navigate(created.role === 'admin' ? '/admin' : '/dashboard', { replace: true })
+    } catch (error) {
+      const { message, fields } = getApiError(error)
+      setErrors(fields)
+      toast.error(message)
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -478,6 +521,15 @@ function Register() {
           <p className="border-t border-gray-200 pt-5 text-sm font-semibold text-gray-900">
             {t('register.loginDetails')}
           </p>
+          {role !== 'talent' && (
+            <p className="-mt-3 text-xs text-gray-500">{t('register.googleHint')}</p>
+          )}
+          <GoogleButton
+            mode="signup"
+            onCredential={handleGoogle}
+            divider={t('register.orEmail')}
+            dividerAt="after"
+          />
           <div>
             <FieldLabel htmlFor="email">
               {isBusiness ? t('register.workEmail') : t('login.email')}

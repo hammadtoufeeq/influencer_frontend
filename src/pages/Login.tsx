@@ -5,12 +5,14 @@ import toast from 'react-hot-toast'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faRightToBracket } from '@fortawesome/free-solid-svg-icons'
 import FormField from '../components/FormField'
+import GoogleButton from '../components/GoogleButton'
+import { googleLoginRequest } from '../api/auth'
 import { useAuth } from '../hooks/useAuth'
 import { getApiError } from '../utils/apiError'
 
 function Login() {
   const { t } = useTranslation()
-  const { user, login } = useAuth()
+  const { user, login, updateUser } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
   const from = (location.state as { from?: string } | null)?.from
@@ -23,6 +25,27 @@ function Login() {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   if (user) return <Navigate to={from ?? homeFor(user.role)} replace />
+
+  // Google button: isi Google email ka account ho to login, warna signup pe bhejo
+  async function handleGoogle(credential: string) {
+    setIsSubmitting(true)
+    try {
+      const loggedIn = await googleLoginRequest(credential)
+      updateUser(loggedIn)
+      toast.success(t('login.welcomeBack', { name: loggedIn.name }))
+      navigate(from ?? homeFor(loggedIn.role), { replace: true })
+    } catch (error) {
+      const { code, message } = getApiError(error)
+      if (code === 'GOOGLE_NO_ACCOUNT') {
+        toast.error(t('login.googleNoAccount'))
+        navigate('/register')
+      } else {
+        toast.error(message)
+      }
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
@@ -108,6 +131,10 @@ function Login() {
             {!isSubmitting && <FontAwesomeIcon icon={faArrowRight} className="text-xs rtl:rotate-180" />}
           </button>
         </form>
+
+        <div className="mt-5">
+          <GoogleButton mode="signin" onCredential={handleGoogle} divider={t('login.or')} />
+        </div>
 
         <p className="mt-7 text-center text-sm text-gray-600">
           {t('login.noAccount')}{' '}

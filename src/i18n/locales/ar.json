@@ -667,7 +667,9 @@
     "submitting": "جارٍ تسجيل الدخول...",
     "noAccount": "ليس لديك حساب؟",
     "signup": "أنشئ حساباً",
-    "welcomeBack": "مرحباً بعودتك، {{name}}!"
+    "welcomeBack": "مرحباً بعودتك، {{name}}!",
+    "or": "أو",
+    "googleNoAccount": "لا يوجد حساب بهذا البريد من Google بعد. اختر نوع الحساب للتسجيل."
   },
   "notFound": {
     "title": "404 - الصفحة غير موجودة",
@@ -769,7 +771,10 @@
     "ACTIVE_AGREEMENT": "أكمل أو احلّ اتفاقياتك النشطة قبل حذف حسابك",
     "SHORTLIST_EXISTS": "لديك قائمة بهذا الاسم بالفعل",
     "TOO_MANY_SHORTLISTS": "وصلت إلى الحد الأقصى لعدد القوائم",
-    "SHORTLIST_FULL": "هذه القائمة ممتلئة"
+    "SHORTLIST_FULL": "هذه القائمة ممتلئة",
+    "GOOGLE_INVALID": "فشل تسجيل الدخول عبر Google. حاول مرة أخرى.",
+    "GOOGLE_NOT_CONFIGURED": "تسجيل الدخول عبر Google غير متاح حالياً.",
+    "GOOGLE_MISMATCH": "هذا البريد مرتبط بحساب Google آخر."
   },
   "search": {
     "any": "الكل",
@@ -862,7 +867,10 @@
       "url": "أدخل رابطاً كاملاً يبدأ بـ https://",
       "email": "أدخل بريداً إلكترونياً صحيحاً",
       "password": "يجب أن تتكون كلمة المرور من {{count}} أحرف على الأقل"
-    }
+    },
+    "orEmail": "أو سجّل بالبريد الإلكتروني",
+    "googleHint": "تسجّل عبر Google؟ املأ التفاصيل أعلاه أولاً. لا حاجة لكلمة مرور.",
+    "googleFillFirst": "املأ التفاصيل المطلوبة أعلاه، ثم تابع باستخدام Google."
   },
   "claimForm": {
     "sent": "تم إرسال المطالبة! سنراجعها قريباً.",
@@ -2226,7 +2234,9 @@
     "noOpenCampaigns": "لا توجد حملات مفتوحة حالياً.",
     "representedTalents": "المواهب التي يمثلها",
     "noRepresentedTalents": "لا يمثل أي موهبة على المنصة بعد.",
-    "viewBusiness": "عرض النشاط التجاري"
+    "viewBusiness": "عرض النشاط التجاري",
+    "viewManager": "عرض المدير",
+    "talentsLabel": "مواهب يمثلها"
   },
   "orgType": {
     "company": "شركة",

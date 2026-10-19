@@ -73,18 +73,9 @@ function DirectoryPage({ kind, icon }: { kind: Kind; icon: IconDefinition }) {
   let results: ReactNode
   if (isLoading) {
     results = (
-      <div
-        className={
-          kind === 'businesses'
-            ? 'grid gap-5 md:grid-cols-2 xl:grid-cols-3'
-            : 'grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4'
-        }
-      >
-        {Array.from({ length: kind === 'businesses' ? 6 : 8 }, (_, i) => (
-          <div
-            key={i}
-            className={`animate-pulse rounded-3xl bg-gray-200/70 ${kind === 'businesses' ? 'h-72' : 'aspect-[4/5]'}`}
-          />
+      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        {Array.from({ length: 6 }, (_, i) => (
+          <div key={i} className="h-72 animate-pulse rounded-3xl bg-gray-200/70" />
         ))}
       </div>
     )
@@ -119,19 +110,15 @@ function DirectoryPage({ kind, icon }: { kind: Kind; icon: IconDefinition }) {
   } else {
     results = (
       <>
-        {kind === 'businesses' ? (
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {(data.items as DirectoryBusiness[]).map((b) => (
-              <BusinessCard key={b._id} business={b} />
-            ))}
-          </div>
-        ) : (
-          <div className="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
-            {(data.items as DirectoryManager[]).map((m) => (
-              <ManagerCard key={m._id} manager={m} />
-            ))}
-          </div>
-        )}
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {kind === 'businesses'
+            ? (data.items as DirectoryBusiness[]).map((b) => (
+                <BusinessCard key={b._id} business={b} />
+              ))
+            : (data.items as DirectoryManager[]).map((m) => (
+                <ManagerCard key={m._id} manager={m} />
+              ))}
+        </div>
         <Pagination page={page} totalPages={totalPages} onChange={setPage} />
       </>
     )

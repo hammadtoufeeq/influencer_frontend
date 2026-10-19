@@ -37,6 +37,31 @@ export async function loginUser(input: LoginInput) {
   return res.data.data.user
 }
 
+// Google se login / signup. Server batata hai button dikhana hai ya nahi (aur client ID)
+export async function getGoogleConfig() {
+  const res = await api.get<ApiSuccess<{ enabled: boolean; clientId: string | null }>>(
+    '/auth/google/config',
+  )
+  return res.data.data
+}
+
+export async function googleLoginRequest(credential: string) {
+  const res = await api.post<ApiSuccess<{ user: User }>>('/auth/google/login', { credential })
+  return res.data.data.user
+}
+
+// Signup form ki details (email / password ke baghair: woh Google se)
+export async function googleRegisterRequest(
+  credential: string,
+  details: Omit<RegisterInput, 'email' | 'password'>,
+) {
+  const res = await api.post<ApiSuccess<{ user: User; existing: boolean }>>(
+    '/auth/google/register',
+    { ...details, credential },
+  )
+  return res.data.data
+}
+
 export async function logoutUser() {
   await api.post('/auth/logout')
 }
