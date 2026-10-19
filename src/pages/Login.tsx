@@ -133,7 +133,12 @@ function Login() {
         </form>
 
         <div className="mt-5">
-          <GoogleButton mode="signin" onCredential={handleGoogle} divider={t('login.or')} />
+          <GoogleButton
+            mode="signin"
+            onCredential={handleGoogle}
+            divider={t('login.or')}
+            busy={isSubmitting}
+          />
         </div>
 
         <p className="mt-7 text-center text-sm text-gray-600">

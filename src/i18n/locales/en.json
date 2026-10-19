@@ -669,7 +669,8 @@
     "signup": "Sign up",
     "welcomeBack": "Welcome back, {{name}}!",
     "or": "or",
-    "googleNoAccount": "No account uses this Google email yet. Choose an account type to sign up."
+    "googleNoAccount": "No account uses this Google email yet. Choose an account type to sign up.",
+    "googleButton": "Continue with Google"
   },
   "notFound": {
     "title": "404 - Page not found",
@@ -868,9 +869,9 @@
       "email": "Enter a valid email",
       "password": "Password must be at least {{count}} characters"
     },
-    "orEmail": "or sign up with email",
-    "googleHint": "Signing up with Google? Fill in the details above first. No password needed.",
-    "googleFillFirst": "Fill in the required details above, then continue with Google."
+    "googleHint": "Using Google? Fill in the details above first. No password needed.",
+    "googleFillFirst": "Fill in the required details above, then continue with Google.",
+    "googleButton": "Sign up with Google"
   },
   "claimForm": {
     "sent": "Claim sent! We will review it soon.",

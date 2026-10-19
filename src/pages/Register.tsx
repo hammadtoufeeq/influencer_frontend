@@ -521,15 +521,6 @@ function Register() {
           <p className="border-t border-gray-200 pt-5 text-sm font-semibold text-gray-900">
             {t('register.loginDetails')}
           </p>
-          {role !== 'talent' && (
-            <p className="-mt-3 text-xs text-gray-500">{t('register.googleHint')}</p>
-          )}
-          <GoogleButton
-            mode="signup"
-            onCredential={handleGoogle}
-            divider={t('register.orEmail')}
-            dividerAt="after"
-          />
           <div>
             <FieldLabel htmlFor="email">
               {isBusiness ? t('register.workEmail') : t('login.email')}
@@ -569,6 +560,13 @@ function Register() {
           >
             {isSubmitting ? t('register.submitting') : t('register.submit')}
           </button>
+          <GoogleButton
+            mode="signup"
+            onCredential={handleGoogle}
+            divider={t('login.or')}
+            hint={role !== 'talent' ? t('register.googleHint') : undefined}
+            busy={isSubmitting}
+          />
         </form>
 
         <p className="mt-7 text-center text-sm text-gray-600">
