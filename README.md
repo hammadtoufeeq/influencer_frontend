@@ -57,7 +57,11 @@ src/
 | `/agreements`, `/agreements/:id` | Business and talent: their agreements; terms, signing, milestones, disputes, reviews and "Download PDF" (browser print) |
 | `/agreements/new?hire=` | Business only: draft an agreement from an accepted hire request |
 | `/shortlists`, `/shortlists/:id` | Business, agency, organization: named lists of people with private notes, hiring status, Hire button and a compare view (2–4 people) |
-| `/dashboard/people/new`, `/dashboard/people/:id/edit` | Admin only: create or edit a profile |
+| `/dashboard/people/new`, `/dashboard/people/:id/edit` 
+
+
+
+| Admin only: create or edit a profile |
 
 ## Business verification and hiring
 

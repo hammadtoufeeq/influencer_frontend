@@ -280,87 +280,9 @@ function CampaignsPage() {
 
       {results}
 
-      {/* How applying works */}
-      <section className="pt-10">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <h2 className="font-display text-2xl font-bold md:text-3xl">
-            {t("campaigns.howTitle", {
-              defaultValue: "From open call to signed deal",
-            })}
-          </h2>
-        </Reveal>
-        <ol className="mt-8 grid gap-6 md:grid-cols-3">
-          {[
-            [
-              faMagnifyingGlass,
-              t("campaigns.how1", {
-                defaultValue: "Find a campaign that fits",
-              }),
-              t("campaigns.how1Body", {
-                defaultValue:
-                  "Filter by category and country, then read the brief and budget.",
-              }),
-            ],
-            [
-              faPaperPlane,
-              t("campaigns.how2", { defaultValue: "Send your application" }),
-              t("campaigns.how2Body", {
-                defaultValue:
-                  "Pitch with your profile. The business sees your reach and reviews.",
-              }),
-            ],
-            [
-              faHandshake,
-              t("campaigns.how3", { defaultValue: "Get selected and sign" }),
-              t("campaigns.how3Body", {
-                defaultValue:
-                  "A hire request opens, then an agreement with milestones.",
-              }),
-            ],
-          ].map(([icon, title, body], i) => (
-            <li key={String(title)}>
-              <Reveal delay={i * 150} className="h-full">
-                <div className="h-full rounded-3xl bg-white p-6 text-center shadow-sm ring-1 ring-gray-100 transition duration-300 hover:-translate-y-1.5 hover:shadow-xl">
-                  <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gray-900 text-lg text-white">
-                    <FontAwesomeIcon icon={icon as typeof faBullhorn} />
-                  </span>
-                  <h3 className="mt-4 font-display text-lg font-bold">
-                    {String(title)}
-                  </h3>
-                  <p className="mt-1.5 text-sm text-gray-600">{String(body)}</p>
-                </div>
-              </Reveal>
-            </li>
-          ))}
-        </ol>
-      </section>
+   
 
-      {/* Call to action for businesses */}
-      {postButton && (
-        <Reveal>
-          <section className="keep-dark relative isolate overflow-hidden rounded-3xl bg-brand-plum px-6 py-10 text-center text-white md:px-12 md:py-14">
-            <div className="absolute -start-16 -top-20 -z-10 h-72 w-72 animate-drift rounded-full bg-white/10 blur-3xl" />
-            <div
-              className="absolute -bottom-24 end-0 -z-10 h-72 w-72 animate-drift rounded-full bg-gray-400/20 blur-3xl"
-              style={{ animationDelay: "-8s" }}
-            />
-            <h2 className="font-display text-2xl font-bold md:text-4xl">
-              {t("campaigns.ctaTitle", {
-                defaultValue: "Have a project? Let talent come to you.",
-              })}
-            </h2>
-            <p className="mx-auto mt-3 max-w-xl text-white/75">
-              {t("campaigns.ctaBody", {
-                defaultValue:
-                  "Post an open call once and review applications from verified creators.",
-              })}
-            </p>
-            <div className="mt-6 flex justify-center [&_a]:bg-white [&_a]:text-gray-900 [&_a:hover]:scale-105 [&_a:hover]:bg-gray-100">
-              {postButton}
-            </div>
-          </section>
-        </Reveal>
-      )}
+      
     </div>
   );
 }
