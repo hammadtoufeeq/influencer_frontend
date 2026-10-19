@@ -377,7 +377,14 @@ function Search() {
     );
   }
 
-  const faces = (data?.people ?? []).slice(0, 5);
+  // The hero is fixed: it always shows the same top profiles and the full count,
+  // whatever is typed or filtered below
+  const { data: heroData } = useQuery({
+    ...peopleQuery(new URLSearchParams({ limit: "5", sort: "followers" })),
+    staleTime: 5 * 60 * 1000,
+  });
+  const faces = heroData?.people ?? [];
+  const heroTotal = heroData?.meta.total ?? 0;
   const filterFields = (
     <div className="space-y-4">
       {filterDefs.map((f) =>
@@ -512,11 +519,9 @@ function Search() {
                 ))}
               </div>
               <p className="font-display text-5xl font-extrabold">
-                <CountUp value={total} />
+                <CountUp value={heroTotal} />
               </p>
-              <p className="text-sm text-white/70">
-                {t("search.peopleFound", { count: total })}
-              </p>
+              <p className="text-sm text-white/70">{t("home.statProfiles")}</p>
             </div>
           )}
         </div>
