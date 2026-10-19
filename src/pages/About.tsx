@@ -291,11 +291,11 @@ function About() {
                   key={p._id}
                   to={`/people/${p.slug}`}
                   style={{ animationDelay: `${i * -2.2}s` }}
-                  className={`block animate-float overflow-hidden rounded-3xl shadow-2xl ring-4 ring-white ${
-                    ["mt-8", "", "mt-12"][i]
+                  className={`relative block animate-float overflow-hidden rounded-3xl shadow-2xl ring-4 ring-white ${
+                    ["mt-8 aspect-[3/4]", "", "mt-12 aspect-[3/4]"][i]
                   }`}
                 >
-                  <Photo person={p} className="aspect-[3/4] w-full" />
+                  <Photo person={p} className="absolute inset-0 h-full w-full" />
                 </Link>
               ))}
             </div>
