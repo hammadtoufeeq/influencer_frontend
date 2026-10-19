@@ -27,8 +27,7 @@ const ROLE_ICONS: Record<SignupRole, IconDefinition> = {
 }
 const MIN_PASSWORD = 8
 const inputClass = (error?: string) =>
-  `min-h-11 w-full rounded-lg border bg-white px-3 py-2 text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-gray-900 focus:ring-2 focus:ring-gray-900/10 ${
-    error ? 'border-red-500' : 'border-gray-300'
+  `min-h-11 w-full rounded-lg border bg-white px-3 py-2 text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-gray-900 focus:ring-2 focus:ring-gray-900/10 ${error ? 'border-red-500' : 'border-gray-300'
   }`
 const isUrl = (value: string) => /^https?:\/\/\S+\.\S+/i.test(value)
 
@@ -100,10 +99,10 @@ function Register() {
 
   const field =
     <T,>(key: string, setter: (value: T) => void) =>
-    (value: T) => {
-      setter(value)
-      if (errors[key]) setErrors((prev) => ({ ...prev, [key]: '' }))
-    }
+      (value: T) => {
+        setter(value)
+        if (errors[key]) setErrors((prev) => ({ ...prev, [key]: '' }))
+      }
 
   function validate(current: SignupRole) {
     const found: Record<string, string> = {}
@@ -172,20 +171,18 @@ function Register() {
     }
   }
 
-  // ✅ Qadam 1: account type chuno
+
   if (!role) {
     return (
       <section className="mx-auto grid w-full max-w-[1040px] overflow-hidden rounded-[28px] border border-gray-200 bg-white shadow-[0_24px_70px_rgb(23_23_23_/_9%)] md:grid-cols-[minmax(230px,0.72fr)_minmax(0,1.28fr)] max-md:block max-md:rounded-[22px]">
-        {/* ✅ Left aside — keep-dark. SAME structure as Step 2 */}
+        
         <div className="keep-dark relative flex min-h-[580px] flex-col overflow-hidden bg-gray-900 px-[34px] py-[42px] text-white max-md:min-h-0 max-md:px-6 max-md:py-[26px] max-md:pb-[30px] before:absolute before:-right-[110px] before:-top-[90px] before:h-[290px] before:w-[290px] before:rounded-full before:bg-[#e85d3f] before:opacity-90 after:absolute after:-bottom-[110px] after:-right-[70px] after:h-[250px] after:w-[250px] after:rounded-full after:border after:border-white/20">
-          <span className="relative z-10 text-[0.7rem] font-bold tracking-[0.2em] text-[#f8a08e]">
-            01 / 02
-          </span>
-          {/* ✅ Icon — mt-auto se bottom push */}
+          
+          
           <span className="relative z-10 mt-auto flex h-[54px] w-[54px] items-center justify-center rounded-[17px] bg-[#e85d3f] text-[1.2rem] max-md:mt-7">
             <FontAwesomeIcon icon={faStar} />
           </span>
-          {/* ✅ Title — mt-6 fixed gap */}
+         
           <h1 className="relative z-10 mt-6 max-w-[240px] font-display text-[clamp(2rem,4vw,3.25rem)] font-bold leading-[0.98] tracking-[-0.04em] max-md:mt-[34px] max-md:max-w-[330px] max-md:text-4xl">
             {t('register.title')}
           </h1>
@@ -193,10 +190,10 @@ function Register() {
             {t('register.subtitle')}
           </p>
           <div className="relative z-10 mt-8 flex gap-2 max-md:mt-5" aria-hidden="true">
-  <span className="block h-[5px] w-[62px] animate-pulse rounded-[5px] bg-[#f8a08e]" />
-  <span className="block h-[5px] w-[34px] rounded-[5px] bg-white/35" />
-  <span className="block h-[5px] w-[34px] rounded-[5px] bg-white/35" />
-</div>
+            <span className="block h-[5px] w-[62px] animate-pulse rounded-[5px] bg-[#f8a08e]" />
+            <span className="block h-[5px] w-[34px] rounded-[5px] bg-white/35" />
+            <span className="block h-[5px] w-[34px] rounded-[5px] bg-white/35" />
+          </div>
         </div>
 
         {/* Right content */}
@@ -294,9 +291,7 @@ function Register() {
     <section className="mx-auto grid w-full max-w-[1040px] overflow-hidden rounded-[28px] border border-gray-200 bg-white shadow-[0_24px_70px_rgb(23_23_23_/_9%)] md:grid-cols-[minmax(230px,0.72fr)_minmax(0,1.28fr)] max-md:block max-md:rounded-[22px]">
       {/* ✅ Left aside — keep-dark. SAME structure as Step 1 */}
       <div className="keep-dark relative flex min-h-[650px] flex-col overflow-hidden bg-gray-900 px-[34px] py-[42px] text-white max-md:min-h-0 max-md:px-6 max-md:py-[26px] max-md:pb-[30px] before:absolute before:-right-[110px] before:-top-[90px] before:h-[290px] before:w-[290px] before:rounded-full before:bg-[#e85d3f] before:opacity-90 after:absolute after:-bottom-[110px] after:-right-[70px] after:h-[250px] after:w-[250px] after:rounded-full after:border after:border-white/20">
-        <span className="relative z-10 text-[0.7rem] font-bold tracking-[0.2em] text-[#f8a08e]">
-          02 / 02
-        </span>
+       
         {/* ✅ Icon — mt-auto se bottom push */}
         <span className="relative z-10 mt-auto flex h-[54px] w-[54px] items-center justify-center rounded-[17px] bg-[#e85d3f] text-[1.2rem] max-md:mt-7">
           <FontAwesomeIcon icon={ROLE_ICONS[role]} />
