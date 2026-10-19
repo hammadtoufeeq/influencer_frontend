@@ -5,9 +5,9 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBullhorn,
-  faHandshake,
+
   faMagnifyingGlass,
-  faPaperPlane,
+
   faPlus,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
