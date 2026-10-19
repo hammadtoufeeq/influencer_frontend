@@ -382,16 +382,6 @@ function Home() {
                 </div>
               </Link>
             ))}
-            {reach > 0 && (
-              <div className="absolute bottom-0 start-1/2 z-20 -translate-x-1/2 animate-float-slow rounded-2xl bg-white px-4 py-2.5 text-gray-900 shadow-xl">
-                <p className="font-display text-2xl font-extrabold leading-none">
-                  {formatCount(reach)}
-                </p>
-                <p className="mt-1 text-xs text-gray-500">
-                  {d('home.combinedReach', 'combined reach')}
-                </p>
-              </div>
-            )}
           </div>
         </div>
       </section>
@@ -415,7 +405,7 @@ function Home() {
       {/* Scrolling strip of top creators */}
       {people.length > 0 && (
         <section className="group mt-14 overflow-hidden" aria-label={t('home.mostFollowed')}>
-          <div className="flex w-max animate-marquee gap-4 group-hover:[animation-play-state:paused]">
+          <div className="flex w-max animate-marquee gap-4">
             {[...people, ...people].map((p, i) => (
               <Link
                 key={`${p._id}-${i}`}
