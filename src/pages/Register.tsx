@@ -27,7 +27,7 @@ const ROLE_ICONS: Record<SignupRole, IconDefinition> = {
 }
 const MIN_PASSWORD = 8
 const inputClass = (error?: string) =>
-  `min-h-11 w-full rounded-lg border bg-white px-3 py-2 outline-none transition focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/10 ${
+  `min-h-11 w-full rounded-lg border bg-white px-3 py-2 text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-gray-900 focus:ring-2 focus:ring-gray-900/10 ${
     error ? 'border-red-500' : 'border-gray-300'
   }`
 const isUrl = (value: string) => /^https?:\/\/\S+\.\S+/i.test(value)
@@ -44,10 +44,10 @@ function FieldLabel({
 }) {
   const { t } = useTranslation()
   return (
-    <label htmlFor={htmlFor} className="mb-1 block text-sm font-medium">
+    <label htmlFor={htmlFor} className="mb-1 block text-sm font-medium text-gray-700">
       {children}
       {optional ? (
-        <span className="ms-1 text-xs font-normal text-gray-400">({t('register.optional')})</span>
+        <span className="ms-1 text-xs font-normal text-gray-500">({t('register.optional')})</span>
       ) : (
         <span className="ms-0.5 text-red-500" aria-hidden="true">
           *
@@ -178,53 +178,68 @@ function Register() {
   // Qadam 1: account type chuno
   if (!role) {
     return (
-      <section className="mx-auto grid w-full max-w-[1040px] overflow-hidden rounded-[28px] border border-neutral-200 bg-white shadow-[0_24px_70px_rgb(23_23_23_/_9%)] md:grid-cols-[minmax(230px,0.72fr)_minmax(0,1.28fr)] max-md:block max-md:rounded-[22px]">
-        <div className="relative flex min-h-[580px] flex-col overflow-hidden bg-neutral-900 px-[34px] py-[42px] text-white max-md:min-h-0 max-md:px-6 max-md:py-[26px] max-md:pb-[30px] before:absolute before:-right-[110px] before:-top-[90px] before:h-[290px] before:w-[290px] before:rounded-full before:bg-[#e85d3f] before:opacity-90 after:absolute after:-bottom-[110px] after:-right-[70px] after:h-[250px] after:w-[250px] after:rounded-full after:border after:border-white/20">
-          <span className="relative z-10 text-[0.7rem] font-bold tracking-[0.2em] text-[#f8a08e]">01 / 02</span>
-          <h1 className="relative z-10 mt-auto max-w-[240px] font-display text-[clamp(2rem,4vw,3.25rem)] font-bold leading-[0.98] tracking-[-0.04em] max-md:mt-[34px] max-md:max-w-[330px] max-md:text-4xl">{t('register.title')}</h1>
-          <p className="relative z-10 mt-[18px] max-w-[270px] text-[0.9rem] leading-[1.65] text-neutral-300 max-md:mt-3">{t('register.subtitle')}</p>
+      <section className="mx-auto grid w-full max-w-[1040px] overflow-hidden rounded-[28px] border border-gray-200 bg-white shadow-[0_24px_70px_rgb(23_23_23_/_9%)] md:grid-cols-[minmax(230px,0.72fr)_minmax(0,1.28fr)] max-md:block max-md:rounded-[22px]">
+        {/* ✅ Left aside — keep-dark se dark mode mein bhi dark + text white */}
+        <div className="keep-dark relative flex min-h-[580px] flex-col overflow-hidden bg-gray-900 px-[34px] py-[42px] text-white max-md:min-h-0 max-md:px-6 max-md:py-[26px] max-md:pb-[30px] before:absolute before:-right-[110px] before:-top-[90px] before:h-[290px] before:w-[290px] before:rounded-full before:bg-[#e85d3f] before:opacity-90 after:absolute after:-bottom-[110px] after:-right-[70px] after:h-[250px] after:w-[250px] after:rounded-full after:border after:border-white/20">
+          <span className="relative z-10 text-[0.7rem] font-bold tracking-[0.2em] text-[#f8a08e]">
+            01 / 02
+          </span>
+          <h1 className="relative z-10 mt-auto max-w-[240px] font-display text-[clamp(2rem,4vw,3.25rem)] font-bold leading-[0.98] tracking-[-0.04em] max-md:mt-[34px] max-md:max-w-[330px] max-md:text-4xl">
+            {t('register.title')}
+          </h1>
+          <p className="relative z-10 mt-[18px] max-w-[270px] text-[0.9rem] leading-[1.65] text-gray-300 max-md:mt-3">
+            {t('register.subtitle')}
+          </p>
           <div className="relative z-10 mt-8 flex gap-2 max-md:mt-5" aria-hidden="true">
-          <span className="block h-[5px] w-[62px] rounded-[5px] bg-[#f8a08e]" />
-          <span className="block h-[5px] w-[34px] rounded-[5px] bg-white opacity-35" />
-          <span className="block h-[5px] w-[34px] rounded-[5px] bg-white opacity-35" />
+            <span className="block h-[5px] w-[62px] rounded-[5px] bg-[#f8a08e]" />
+            <span className="block h-[5px] w-[34px] rounded-[5px] bg-white opacity-35" />
+            <span className="block h-[5px] w-[34px] rounded-[5px] bg-white opacity-35" />
           </div>
         </div>
+
+        {/* Right content */}
         <div className="min-w-0 px-12 py-[42px] max-md:px-[22px] max-md:py-[30px]">
-          <div className="flex items-center gap-[9px] text-[0.72rem] font-bold uppercase tracking-[0.04em] text-neutral-500">
-          <span className="inline-flex h-[25px] w-[25px] items-center justify-center rounded-full border border-neutral-900 bg-neutral-900 text-white">1</span>
-          <span className="h-px w-[30px] bg-neutral-300" />
-          <span className="inline-flex h-[25px] w-[25px] items-center justify-center rounded-full border border-neutral-300">2</span>
-          <span>{t('register.title')}</span>
+          <div className="flex items-center gap-[9px] text-[0.72rem] font-bold uppercase tracking-[0.04em] text-gray-500">
+            <span className="inline-flex h-[25px] w-[25px] items-center justify-center rounded-full bg-gray-900 text-white">
+              1
+            </span>
+            <span className="h-px w-[30px] bg-gray-300" />
+            <span className="inline-flex h-[25px] w-[25px] items-center justify-center rounded-full border border-gray-300">
+              2
+            </span>
+            <span>{t('register.title')}</span>
           </div>
-          <h2 className="font-display text-[clamp(1.75rem,3vw,2.35rem)] font-bold tracking-[-0.04em] text-neutral-900">{t('register.title')}</h2>
-          <p className="mt-2 text-[0.92rem] leading-[1.55] text-neutral-500">{t('register.subtitle')}</p>
+          <h2 className="mt-5 font-display text-[clamp(1.75rem,3vw,2.35rem)] font-bold tracking-[-0.04em] text-gray-900">
+            {t('register.title')}
+          </h2>
+          <p className="mt-2 text-[0.92rem] leading-[1.55] text-gray-600">{t('register.subtitle')}</p>
 
           <div className="mt-7 grid gap-3 md:grid-cols-3">
-          {SIGNUP_ROLE_OPTIONS.map((option) => (
-            <button
-              key={option.value}
-              type="button"
-              onClick={() => chooseRole(option.value)}
-              className="group flex flex-col items-start rounded-xl border border-neutral-200 bg-white p-5 text-start transition hover:-translate-y-1 hover:border-neutral-900 hover:shadow-[0_12px_24px_rgb(23_23_23_/_8%)] focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:outline-none"
-            >
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-neutral-900 text-white transition group-hover:bg-[#e85d3f]">
-                <FontAwesomeIcon icon={ROLE_ICONS[option.value]} />
-              </span>
-              <span className="mt-4 block font-semibold">{option.label}</span>
-              <span className="mt-1 block flex-1 text-sm text-gray-500">{option.description}</span>
-              <span className="mt-4 text-sm font-medium text-gray-900 underline-offset-4 group-hover:underline">
-                {t('register.continueAs', { type: option.label })}
-              </span>
-            </button>
-          ))}
-        </div>
+            {SIGNUP_ROLE_OPTIONS.map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                onClick={() => chooseRole(option.value)}
+                className="group flex flex-col items-start rounded-xl border border-gray-200 bg-white p-5 text-start transition hover:-translate-y-1 hover:border-gray-900 hover:shadow-[0_12px_24px_rgb(23_23_23_/_8%)] focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:outline-none"
+              >
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gray-900 text-white transition group-hover:bg-[#e85d3f]">
+                  <FontAwesomeIcon icon={ROLE_ICONS[option.value]} />
+                </span>
+                <span className="mt-4 block font-semibold text-gray-900">{option.label}</span>
+                <span className="mt-1 block flex-1 text-sm text-gray-600">{option.description}</span>
+                <span className="mt-4 text-sm font-medium text-gray-900 underline-offset-4 group-hover:underline">
+                  {t('register.continueAs', { type: option.label })}
+                </span>
+              </button>
+            ))}
+          </div>
 
-        <p className="mt-7 text-center text-sm text-gray-600">
-          {t('register.haveAccount')}{' '}
-          <Link to="/login" className="font-medium text-gray-900 underline">
-            {t('register.login')}
-          </Link>
-        </p>
+          <p className="mt-7 text-center text-sm text-gray-600">
+            {t('register.haveAccount')}{' '}
+            <Link to="/login" className="font-medium text-gray-900 underline">
+              {t('register.login')}
+            </Link>
+          </p>
         </div>
       </section>
     )
@@ -274,226 +289,243 @@ function Register() {
 
   // Qadam 2: chune hue type ka form (sirf us ke zaroori fields)
   return (
-    <section className="mx-auto grid w-full max-w-[1040px] overflow-hidden rounded-[28px] border border-neutral-200 bg-white shadow-[0_24px_70px_rgb(23_23_23_/_9%)] md:grid-cols-[minmax(230px,0.72fr)_minmax(0,1.28fr)] max-md:block max-md:rounded-[22px]">
-      <div className="relative flex min-h-[650px] flex-col overflow-hidden bg-neutral-900 px-[34px] py-[42px] text-white max-md:min-h-0 max-md:px-6 max-md:py-[26px] max-md:pb-[30px] before:absolute before:-right-[110px] before:-top-[90px] before:h-[290px] before:w-[290px] before:rounded-full before:bg-[#e85d3f] before:opacity-90 after:absolute after:-bottom-[110px] after:-right-[70px] after:h-[250px] after:w-[250px] after:rounded-full after:border after:border-white/20">
-        <span className="relative z-10 text-[0.7rem] font-bold tracking-[0.2em] text-[#f8a08e]">02 / 02</span>
+    <section className="mx-auto grid w-full max-w-[1040px] overflow-hidden rounded-[28px] border border-gray-200 bg-white shadow-[0_24px_70px_rgb(23_23_23_/_9%)] md:grid-cols-[minmax(230px,0.72fr)_minmax(0,1.28fr)] max-md:block max-md:rounded-[22px]">
+      {/* ✅ Left aside — keep-dark */}
+      <div className="keep-dark relative flex min-h-[650px] flex-col overflow-hidden bg-gray-900 px-[34px] py-[42px] text-white max-md:min-h-0 max-md:px-6 max-md:py-[26px] max-md:pb-[30px] before:absolute before:-right-[110px] before:-top-[90px] before:h-[290px] before:w-[290px] before:rounded-full before:bg-[#e85d3f] before:opacity-90 after:absolute after:-bottom-[110px] after:-right-[70px] after:h-[250px] after:w-[250px] after:rounded-full after:border after:border-white/20">
+        <span className="relative z-10 text-[0.7rem] font-bold tracking-[0.2em] text-[#f8a08e]">
+          02 / 02
+        </span>
         <span className="relative z-10 mt-auto flex h-[54px] w-[54px] items-center justify-center rounded-[17px] bg-[#e85d3f] text-[1.2rem] max-md:mt-7">
           <FontAwesomeIcon icon={ROLE_ICONS[role]} />
         </span>
-        <h1 className="relative z-10 mt-auto max-w-[240px] font-display text-[clamp(2rem,4vw,3.25rem)] font-bold leading-[0.98] tracking-[-0.04em] max-md:mt-[34px] max-md:max-w-[330px] max-md:text-4xl">{t('register.signUpAs', { type: option.label })}</h1>
-        <p className="relative z-10 mt-[18px] max-w-[270px] text-[0.9rem] leading-[1.65] text-neutral-300 max-md:mt-3">{t(`register.note.${role}`)}</p>
+        <h1 className="relative z-10 mt-auto max-w-[240px] font-display text-[clamp(2rem,4vw,3.25rem)] font-bold leading-[0.98] tracking-[-0.04em] max-md:mt-[34px] max-md:max-w-[330px] max-md:text-4xl">
+          {t('register.signUpAs', { type: option.label })}
+        </h1>
+        <p className="relative z-10 mt-[18px] max-w-[270px] text-[0.9rem] leading-[1.65] text-gray-300 max-md:mt-3">
+          {t(`register.note.${role}`)}
+        </p>
         <div className="relative z-10 mt-8 flex gap-2 max-md:mt-5" aria-hidden="true">
           <span className="block h-[5px] w-[62px] rounded-[5px] bg-[#f8a08e]" />
           <span className="block h-[5px] w-[34px] rounded-[5px] bg-white opacity-35" />
           <span className="block h-[5px] w-[34px] rounded-[5px] bg-white opacity-35" />
         </div>
       </div>
+
+      {/* Right content */}
       <div className="min-w-0 px-12 py-[42px] max-md:px-[22px] max-md:py-[30px]">
         <button
           type="button"
           onClick={() => chooseRole(null)}
-          className="inline-flex items-center gap-2 text-sm font-medium text-neutral-500 hover:text-neutral-900"
+          className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-900"
         >
           <FontAwesomeIcon icon={faArrowLeft} className="text-xs rtl:rotate-180" />
           {t('register.changeType')}
         </button>
 
-        <div className="mt-6 flex items-center gap-[9px] text-[0.72rem] font-bold uppercase tracking-[0.04em] text-neutral-500">
-          <span className="inline-flex h-[25px] w-[25px] items-center justify-center rounded-full border border-neutral-900 bg-neutral-900 text-white">1</span>
-          <span className="h-px w-[30px] bg-neutral-900" />
-          <span className="inline-flex h-[25px] w-[25px] items-center justify-center rounded-full border border-neutral-900 bg-neutral-900 text-white">2</span>
+        <div className="mt-6 flex items-center gap-[9px] text-[0.72rem] font-bold uppercase tracking-[0.04em] text-gray-500">
+          <span className="inline-flex h-[25px] w-[25px] items-center justify-center rounded-full bg-gray-900 text-white">
+            1
+          </span>
+          <span className="h-px w-[30px] bg-gray-900" />
+          <span className="inline-flex h-[25px] w-[25px] items-center justify-center rounded-full bg-gray-900 text-white">
+            2
+          </span>
           <span>{t('register.loginDetails')}</span>
         </div>
-        <h2 className="mt-5 font-display text-[clamp(1.75rem,3vw,2.35rem)] font-bold tracking-[-0.04em] text-neutral-900">{t('register.signUpAs', { type: option.label })}</h2>
-        <p className="mt-2 text-[0.92rem] leading-[1.55] text-neutral-500">{t(`register.note.${role}`)}</p>
 
-      <form onSubmit={handleSubmit} className="mt-7 space-y-5" noValidate>
-        {isBusiness ? (
-          <>
-            <p className="text-sm font-semibold">{t('register.aboutOrganization')}</p>
-            <div>
-              <FieldLabel htmlFor="organizationType">{t('register.orgType')}</FieldLabel>
-              <select
-                id="organizationType"
-                value={organizationType}
-                onChange={(e) =>
-                  field(
-                    'organizationType',
-                    setOrganizationType,
-                  )(e.target.value as OrganizationType | '')
-                }
-                className={inputClass(errors.organizationType)}
-              >
-                <option value="">{t('register.chooseOrgType')}</option>
-                {ORGANIZATION_TYPES.map((type) => (
-                  <option key={type} value={type}>
-                    {t(`orgType.${type}`)}
-                  </option>
-                ))}
-              </select>
-              <FieldError message={errors.organizationType} />
-            </div>
-            <div>
-              <FieldLabel htmlFor="companyName">{t('register.orgName')}</FieldLabel>
-              <input
-                id="companyName"
-                autoComplete="organization"
-                maxLength={120}
-                value={companyName}
-                onChange={(e) => field('companyName', setCompanyName)(e.target.value)}
-                className={inputClass(errors.companyName)}
-              />
-              <FieldError message={errors.companyName} />
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {countryField}
-              {websiteField(t('business.fields.websiteUrl'))}
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
+        <h2 className="mt-5 font-display text-[clamp(1.75rem,3vw,2.35rem)] font-bold tracking-[-0.04em] text-gray-900">
+          {t('register.signUpAs', { type: option.label })}
+        </h2>
+        <p className="mt-2 text-[0.92rem] leading-[1.55] text-gray-600">
+          {t(`register.note.${role}`)}
+        </p>
+
+        <form onSubmit={handleSubmit} className="mt-7 space-y-5" noValidate>
+          {isBusiness ? (
+            <>
+              <p className="text-sm font-semibold text-gray-900">{t('register.aboutOrganization')}</p>
               <div>
-                <FieldLabel htmlFor="industry" optional>
-                  {t('business.fields.industry')}
-                </FieldLabel>
-                <input
-                  id="industry"
-                  maxLength={80}
-                  placeholder={t('business.fields.industryPlaceholder')}
-                  value={industry}
-                  onChange={(e) => field('industry', setIndustry)(e.target.value)}
-                  className={inputClass(errors.industry)}
-                />
-                <FieldError message={errors.industry} />
-              </div>
-              <div>
-                <FieldLabel htmlFor="companySize" optional>
-                  {t('business.fields.companySize')}
-                </FieldLabel>
+                <FieldLabel htmlFor="organizationType">{t('register.orgType')}</FieldLabel>
                 <select
-                  id="companySize"
-                  value={companySize}
+                  id="organizationType"
+                  value={organizationType}
                   onChange={(e) =>
-                    field('companySize', setCompanySize)(e.target.value as CompanySize | '')
+                    field(
+                      'organizationType',
+                      setOrganizationType,
+                    )(e.target.value as OrganizationType | '')
                   }
-                  className={inputClass(errors.companySize)}
+                  className={inputClass(errors.organizationType)}
                 >
-                  <option value="">{t('business.fields.chooseSize')}</option>
-                  {COMPANY_SIZES.map((size) => (
-                    <option key={size} value={size}>
-                      {t('business.fields.employees', { size })}
+                  <option value="">{t('register.chooseOrgType')}</option>
+                  {ORGANIZATION_TYPES.map((type) => (
+                    <option key={type} value={type}>
+                      {t(`orgType.${type}`)}
                     </option>
                   ))}
                 </select>
-                <FieldError message={errors.companySize} />
+                <FieldError message={errors.organizationType} />
               </div>
-            </div>
-            <div>
-              <FieldLabel htmlFor="description" optional>
-                {t('business.fields.description')}
-              </FieldLabel>
-              <textarea
-                id="description"
-                rows={3}
-                maxLength={1000}
-                value={description}
-                onChange={(e) => field('description', setDescription)(e.target.value)}
-                placeholder={t('business.fields.descriptionPlaceholder')}
-                className={inputClass(errors.description)}
-              />
-              <FieldError message={errors.description} />
-            </div>
-          </>
-        ) : (
-          <>
-            <p className="text-sm font-semibold">{t('register.aboutYou')}</p>
-            <div>
-              <FieldLabel htmlFor="name">{t('register.fullName')}</FieldLabel>
-              <input
-                id="name"
-                autoComplete="name"
-                maxLength={100}
-                value={name}
-                onChange={(e) => field('name', setName)(e.target.value)}
-                className={inputClass(errors.name)}
-              />
-              <FieldError message={errors.name} />
-            </div>
-            {role === 'representative' && (
-              <>
+              <div>
+                <FieldLabel htmlFor="companyName">{t('register.orgName')}</FieldLabel>
+                <input
+                  id="companyName"
+                  autoComplete="organization"
+                  maxLength={120}
+                  value={companyName}
+                  onChange={(e) => field('companyName', setCompanyName)(e.target.value)}
+                  className={inputClass(errors.companyName)}
+                />
+                <FieldError message={errors.companyName} />
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {countryField}
+                {websiteField(t('business.fields.websiteUrl'))}
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2">
                 <div>
-                  <FieldLabel htmlFor="agencyName" optional>
-                    {t('register.agencyName')}
+                  <FieldLabel htmlFor="industry" optional>
+                    {t('business.fields.industry')}
                   </FieldLabel>
                   <input
-                    id="agencyName"
-                    autoComplete="organization"
-                    maxLength={120}
-                    placeholder={t('register.agencyPlaceholder')}
-                    value={agencyName}
-                    onChange={(e) => field('agencyName', setAgencyName)(e.target.value)}
-                    className={inputClass(errors.agencyName)}
+                    id="industry"
+                    maxLength={80}
+                    placeholder={t('business.fields.industryPlaceholder')}
+                    value={industry}
+                    onChange={(e) => field('industry', setIndustry)(e.target.value)}
+                    className={inputClass(errors.industry)}
                   />
-                  <FieldError message={errors.agencyName} />
+                  <FieldError message={errors.industry} />
                 </div>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {countryField}
-                  {websiteField(t('register.managerWebsite'))}
+                <div>
+                  <FieldLabel htmlFor="companySize" optional>
+                    {t('business.fields.companySize')}
+                  </FieldLabel>
+                  <select
+                    id="companySize"
+                    value={companySize}
+                    onChange={(e) =>
+                      field('companySize', setCompanySize)(e.target.value as CompanySize | '')
+                    }
+                    className={inputClass(errors.companySize)}
+                  >
+                    <option value="">{t('business.fields.chooseSize')}</option>
+                    {COMPANY_SIZES.map((size) => (
+                      <option key={size} value={size}>
+                        {t('business.fields.employees', { size })}
+                      </option>
+                    ))}
+                  </select>
+                  <FieldError message={errors.companySize} />
                 </div>
-              </>
-            )}
-          </>
-        )}
-
-        <p className="border-t border-gray-100 pt-5 text-sm font-semibold text-neutral-900">
-          {t('register.loginDetails')}
-        </p>
-        <div>
-          <FieldLabel htmlFor="email">
-            {isBusiness ? t('register.workEmail') : t('login.email')}
-          </FieldLabel>
-          <input
-            id="email"
-            type="email"
-            autoComplete="email"
-            dir="ltr"
-            value={email}
-            onChange={(e) => field('email', setEmail)(e.target.value)}
-            className={inputClass(errors.email)}
-          />
-          <FieldError message={errors.email} />
-        </div>
-        <PasswordField
-          id="password"
-          label={
-            <>
-              {t('login.password')}
-              <span className="ms-0.5 text-red-500" aria-hidden="true">
-                *
-              </span>
+              </div>
+              <div>
+                <FieldLabel htmlFor="description" optional>
+                  {t('business.fields.description')}
+                </FieldLabel>
+                <textarea
+                  id="description"
+                  rows={3}
+                  maxLength={1000}
+                  value={description}
+                  onChange={(e) => field('description', setDescription)(e.target.value)}
+                  placeholder={t('business.fields.descriptionPlaceholder')}
+                  className={inputClass(errors.description)}
+                />
+                <FieldError message={errors.description} />
+              </div>
             </>
-          }
-          autoComplete="new-password"
-          value={password}
-          onChange={field('password', setPassword)}
-          error={errors.password}
-        />
-        <p className="text-xs text-gray-500">{t('register.passwordHint')}</p>
+          ) : (
+            <>
+              <p className="text-sm font-semibold text-gray-900">{t('register.aboutYou')}</p>
+              <div>
+                <FieldLabel htmlFor="name">{t('register.fullName')}</FieldLabel>
+                <input
+                  id="name"
+                  autoComplete="name"
+                  maxLength={100}
+                  value={name}
+                  onChange={(e) => field('name', setName)(e.target.value)}
+                  className={inputClass(errors.name)}
+                />
+                <FieldError message={errors.name} />
+              </div>
+              {role === 'representative' && (
+                <>
+                  <div>
+                    <FieldLabel htmlFor="agencyName" optional>
+                      {t('register.agencyName')}
+                    </FieldLabel>
+                    <input
+                      id="agencyName"
+                      autoComplete="organization"
+                      maxLength={120}
+                      placeholder={t('register.agencyPlaceholder')}
+                      value={agencyName}
+                      onChange={(e) => field('agencyName', setAgencyName)(e.target.value)}
+                      className={inputClass(errors.agencyName)}
+                    />
+                    <FieldError message={errors.agencyName} />
+                  </div>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    {countryField}
+                    {websiteField(t('register.managerWebsite'))}
+                  </div>
+                </>
+              )}
+            </>
+          )}
 
-        <p className="text-xs text-gray-500">{t('register.requiredHint')}</p>
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full rounded-lg bg-gray-900 py-3 font-medium text-white transition hover:-translate-y-px hover:bg-gray-800 hover:shadow-[0_10px_20px_rgb(23_23_23_/_18%)] disabled:opacity-60"
-        >
-          {isSubmitting ? t('register.submitting') : t('register.submit')}
-        </button>
-      </form>
+          <p className="border-t border-gray-200 pt-5 text-sm font-semibold text-gray-900">
+            {t('register.loginDetails')}
+          </p>
+          <div>
+            <FieldLabel htmlFor="email">
+              {isBusiness ? t('register.workEmail') : t('login.email')}
+            </FieldLabel>
+            <input
+              id="email"
+              type="email"
+              autoComplete="email"
+              dir="ltr"
+              value={email}
+              onChange={(e) => field('email', setEmail)(e.target.value)}
+              className={inputClass(errors.email)}
+            />
+            <FieldError message={errors.email} />
+          </div>
+          <PasswordField
+            id="password"
+            label={
+              <>
+                {t('login.password')}
+                <span className="ms-0.5 text-red-500" aria-hidden="true">
+                  *
+                </span>
+              </>
+            }
+            autoComplete="new-password"
+            value={password}
+            onChange={field('password', setPassword)}
+            error={errors.password}
+          />
+          <p className="text-xs text-gray-500">{t('register.passwordHint')}</p>
+          <p className="text-xs text-gray-500">{t('register.requiredHint')}</p>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="keep-dark w-full rounded-lg bg-gray-900 py-3 font-medium text-white transition hover:-translate-y-px hover:bg-gray-800 hover:shadow-[0_10px_20px_rgb(23_23_23_/_18%)] disabled:opacity-60"
+          >
+            {isSubmitting ? t('register.submitting') : t('register.submit')}
+          </button>
+        </form>
 
-      <p className="mt-7 text-center text-sm text-gray-600">
-        {t('register.haveAccount')}{' '}
-        <Link to="/login" className="font-medium text-gray-900 underline">
-          {t('register.login')}
-        </Link>
-      </p>
+        <p className="mt-7 text-center text-sm text-gray-600">
+          {t('register.haveAccount')}{' '}
+          <Link to="/login" className="font-medium text-gray-900 underline">
+            {t('register.login')}
+          </Link>
+        </p>
       </div>
     </section>
   )
