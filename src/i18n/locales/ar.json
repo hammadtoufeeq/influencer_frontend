@@ -2225,7 +2225,8 @@
     "openCampaigns": "حملات مفتوحة",
     "noOpenCampaigns": "لا توجد حملات مفتوحة حالياً.",
     "representedTalents": "المواهب التي يمثلها",
-    "noRepresentedTalents": "لا يمثل أي موهبة على المنصة بعد."
+    "noRepresentedTalents": "لا يمثل أي موهبة على المنصة بعد.",
+    "viewBusiness": "عرض النشاط التجاري"
   },
   "orgType": {
     "company": "شركة",

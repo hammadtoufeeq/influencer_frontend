@@ -4,24 +4,12 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faArrowUpRightFromSquare,
-  faCalendar,
-  faCircleCheck,
-  faHourglassHalf,
-  faLocationDot,
-  faMagnifyingGlass,
-  faUserPlus,
-  faUsers,
-  faXmark,
-} from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass, faUserPlus, faXmark } from '@fortawesome/free-solid-svg-icons'
 import Pagination from '../Pagination'
-import RatingBadge from '../agreements/RatingBadge'
-import { hostOf, imageOf } from './directoryUtils'
+import { BusinessCard, ManagerCard } from './DirectoryCards'
 import { directoryQuery } from '../../api/queries'
 import { useAuth } from '../../hooks/useAuth'
 import type { DirectoryBusiness, DirectoryManager } from '../../types/directory'
-import { countryName, initials } from '../../utils/format'
 
 const PAGE_SIZE = 12
 
@@ -38,140 +26,6 @@ const HEADER_IMAGES: Record<Kind, string> = {
 
 // Kis account type se sign up (register page pe pehle se chuna hua)
 const SIGNUP_TYPE: Record<Kind, string> = { businesses: 'business', managers: 'representative' }
-
-function Badge({
-  tone,
-  icon,
-  children,
-}: {
-  tone: string
-  icon: IconDefinition
-  children: ReactNode
-}) {
-  return (
-    <span
-      className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium whitespace-nowrap sm:text-xs ${tone}`}
-    >
-      <FontAwesomeIcon icon={icon} className="text-[9px] sm:text-[10px]" />
-      {children}
-    </span>
-  )
-}
-
-// Ek business ya manager ka card
-function EntryCard({
-  name,
-  subtitle,
-  description,
-  entry,
-  extra,
-  to,
-}: {
-  name: string
-  subtitle?: string
-  description?: string
-  entry: DirectoryBusiness | DirectoryManager
-  extra?: ReactNode
-  // Poora card is page ka link (talent card jaisa)
-  to: string
-}) {
-  const { t, i18n } = useTranslation()
-  const location = [entry.city, countryName(entry.country)].filter(Boolean).join(', ')
-  const joined = new Date(entry.joinedAt).toLocaleDateString(i18n.language, {
-    month: 'short',
-    year: 'numeric',
-  })
-
-  return (
-    <article className="relative flex flex-col rounded-2xl border border-gray-200 bg-white p-4 transition hover:border-gray-400 hover:shadow-sm sm:p-5">
-      <div className="flex items-start gap-3 sm:gap-4">
-        {/* Avatar: mobile pe chhota */}
-        {imageOf(entry) ? (
-          <img
-            src={imageOf(entry)}
-            alt=""
-            loading="lazy"
-            className="h-10 w-10 shrink-0 rounded-xl bg-gray-100 object-cover ring-1 ring-gray-200 sm:h-12 sm:w-12"
-          />
-        ) : (
-          <span
-            aria-hidden="true"
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gray-900 text-sm font-semibold text-white sm:h-12 sm:w-12 sm:text-base"
-          >
-            {initials(name)}
-          </span>
-        )}
-
-        <div className="min-w-0 flex-1">
-          {/* Title + badges: mobile pe wrap honge, chhote text */}
-          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
-            <h3 className="min-w-0 truncate text-sm font-semibold text-gray-900 sm:text-base">
-              <Link to={to} className="after:absolute after:inset-0 after:rounded-2xl">
-                {name}
-              </Link>
-            </h3>
-            {entry.verified ? (
-              <Badge tone="bg-blue-50 text-blue-700" icon={faCircleCheck}>
-                {t('site.verified')}
-              </Badge>
-            ) : entry.inReview ? (
-              <Badge tone="bg-amber-50 text-amber-800" icon={faHourglassHalf}>
-                {t('directory.inReview')}
-              </Badge>
-            ) : (
-              <Badge tone="bg-gray-100 text-gray-600" icon={faHourglassHalf}>
-                {t('directory.notVerified')}
-              </Badge>
-            )}
-          </div>
-
-          {subtitle && (
-            <p className="mt-0.5 line-clamp-2 text-xs text-gray-600 sm:truncate sm:text-sm">
-              {subtitle}
-            </p>
-          )}
-          {entry.rating && (
-            <div className="mt-1">
-              <RatingBadge rating={entry.rating} />
-            </div>
-          )}
-        </div>
-      </div>
-
-      {description && (
-        <p className="mt-2 line-clamp-2 text-xs text-gray-600 sm:mt-3 sm:text-sm">
-          {description}
-        </p>
-      )}
-
-      {/* Meta row: mobile pe column, sm pe row */}
-      <div className="mt-auto flex flex-wrap gap-x-3 gap-y-1 pt-3 text-[11px] text-gray-500 sm:gap-x-4 sm:pt-4 sm:text-xs">
-        {location && (
-          <span className="inline-flex items-center">
-            <FontAwesomeIcon icon={faLocationDot} className="me-1 text-gray-400" />
-            <span className="truncate">{location}</span>
-          </span>
-        )}
-        {extra}
-        <span className="inline-flex items-center">
-          <FontAwesomeIcon icon={faCalendar} className="me-1 text-gray-400" />
-          {t('directory.joined', { date: joined })}
-        </span>
-        {entry.websiteUrl && (
-          <a
-            href={entry.websiteUrl}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-            className="relative z-10 inline-flex max-w-full items-center gap-1 font-medium text-gray-700 hover:text-gray-950 hover:underline"
-          >
-            <span className="truncate">{hostOf(entry.websiteUrl)}</span>
-            <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="shrink-0 text-[9px]" />
-          </a>
-        )}
-      </div>
-    </article>
-  )
-}
 
 // /businesses aur /managers: jo bhi us qism ka account banaye, yahan aa jata hai
 function DirectoryPage({ kind, icon }: { kind: Kind; icon: IconDefinition }) {
@@ -219,9 +73,18 @@ function DirectoryPage({ kind, icon }: { kind: Kind; icon: IconDefinition }) {
   let results: ReactNode
   if (isLoading) {
     results = (
-      <div className="grid gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {Array.from({ length: 6 }, (_, i) => (
-          <div key={i} className="h-40 animate-pulse rounded-2xl bg-gray-200/70 sm:h-44" />
+      <div
+        className={
+          kind === 'businesses'
+            ? 'grid gap-5 md:grid-cols-2 xl:grid-cols-3'
+            : 'grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4'
+        }
+      >
+        {Array.from({ length: kind === 'businesses' ? 6 : 8 }, (_, i) => (
+          <div
+            key={i}
+            className={`animate-pulse rounded-3xl bg-gray-200/70 ${kind === 'businesses' ? 'h-72' : 'aspect-[4/5]'}`}
+          />
         ))}
       </div>
     )
@@ -256,41 +119,19 @@ function DirectoryPage({ kind, icon }: { kind: Kind; icon: IconDefinition }) {
   } else {
     results = (
       <>
-        <div className="grid gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {kind === 'businesses'
-            ? (data.items as DirectoryBusiness[]).map((b) => (
-                <EntryCard
-                  key={b._id}
-                  to={`/businesses/${b._id}`}
-                  entry={b}
-                  name={b.name}
-                  subtitle={[
-                    b.organizationType && t(`orgType.${b.organizationType}`),
-                    b.industry,
-                    b.companySize && t('directory.employees', { size: b.companySize }),
-                  ]
-                    .filter(Boolean)
-                    .join(' · ')}
-                  description={b.description}
-                />
-              ))
-            : (data.items as DirectoryManager[]).map((m) => (
-                <EntryCard
-                  key={m._id}
-                  to={`/managers/${m._id}`}
-                  entry={m}
-                  name={m.name}
-                  subtitle={m.agencyName}
-                  description={m.bio}
-                  extra={
-                    <span className="inline-flex items-center">
-                      <FontAwesomeIcon icon={faUsers} className="me-1 text-gray-400" />
-                      {t('directory.talents', { count: m.talents })}
-                    </span>
-                  }
-                />
-              ))}
-        </div>
+        {kind === 'businesses' ? (
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {(data.items as DirectoryBusiness[]).map((b) => (
+              <BusinessCard key={b._id} business={b} />
+            ))}
+          </div>
+        ) : (
+          <div className="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
+            {(data.items as DirectoryManager[]).map((m) => (
+              <ManagerCard key={m._id} manager={m} />
+            ))}
+          </div>
+        )}
         <Pagination page={page} totalPages={totalPages} onChange={setPage} />
       </>
     )
@@ -317,9 +158,7 @@ function DirectoryPage({ kind, icon }: { kind: Kind; icon: IconDefinition }) {
           <h1 className="mt-2 text-xl font-bold tracking-tight sm:text-2xl md:text-3xl">
             {t(`directory.${kind}.title`)}
           </h1>
-          <p className="mt-1 text-xs text-white/70 sm:text-sm">
-            {t(`directory.${kind}.subtitle`)}
-          </p>
+          <p className="mt-1 text-xs text-white/70 sm:text-sm">{t(`directory.${kind}.subtitle`)}</p>
 
           {/* Search: mobile pe column, sm+ pe row */}
           <form

@@ -2225,7 +2225,8 @@
     "openCampaigns": "Open campaigns",
     "noOpenCampaigns": "No open campaigns right now.",
     "representedTalents": "Talents they represent",
-    "noRepresentedTalents": "Not representing any talent on the platform yet."
+    "noRepresentedTalents": "Not representing any talent on the platform yet.",
+    "viewBusiness": "View business"
   },
   "orgType": {
     "company": "Company",
