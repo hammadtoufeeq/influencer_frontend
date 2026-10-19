@@ -1,50 +1,75 @@
-# Influence Platform: Frontend
+# Influence Platform
 
-React + TypeScript + Vite + Tailwind CSS.
+**Live website:** https://influencer-frontend-kappa.vercel.app
 
-## Run locally
+Influence Platform is a website where **businesses find, hire and work with talent**: creators, journalists, speakers, experts and public figures. It keeps everything in one place, from the first search to a signed agreement and a final review.
 
-```bash
-npm install
-npm run dev
-```
+This guide explains **every page, every tab and every button** in plain language. You do not need any technical knowledge to read it.
 
-The app opens at http://localhost:3000. The backend (`influencer_backend`) must also be running on port 5000.
+---
 
-## How the frontend reaches the backend
+## Contents
 
-The app always calls `/api/...` on its own domain, so no environment variable is needed:
+1. [The idea in one minute](#1-the-idea-in-one-minute)
+2. [The four kinds of accounts](#2-the-four-kinds-of-accounts)
+3. [The top bar (navbar)](#3-the-top-bar-navbar)
+4. [Pages anyone can visit](#4-pages-anyone-can-visit)
+5. [Creating an account, logging in and passwords](#5-creating-an-account-logging-in-and-passwords)
+6. [Talent: dashboard and every tab](#6-talent-dashboard-and-every-tab)
+7. [Business / Organization: dashboard and every tab](#7-business--organization-dashboard-and-every-tab)
+8. [Manager / Agent: dashboard and every tab](#8-manager--agent-dashboard-and-every-tab)
+9. [Admin panel: every tab](#9-admin-panel-every-tab)
+10. [Pages every logged-in user has](#10-pages-every-logged-in-user-has)
+11. [Full journeys, step by step](#11-full-journeys-step-by-step)
+12. [What the coloured labels mean](#12-what-the-coloured-labels-mean)
+13. [Languages, dark mode and mobile](#13-languages-dark-mode-and-mobile)
+14. [Trust, safety and privacy](#14-trust-safety-and-privacy)
+15. [Frequently asked questions](#15-frequently-asked-questions)
+16. [For the technical team](#16-for-the-technical-team)
 
-- Locally, the Vite dev server proxies `/api` to `http://localhost:5000` (see `vite.config.ts`).
-- On Vercel, `vercel.json` rewrites `/api/*` to `https://influencer-backend.vercel.app/api/*`.
+---
 
-## Folder structure
+## 1. The idea in one minute
 
-```
-src/
-├─ api/          axios instance (backend se baat karne ke liye)
-├─ api/auth.ts   register / login / logout / me calls
-├─ api/people.ts people search, profile, taxonomy calls
-├─ components/   reusable UI pieces (Navbar, Footer, Layout, FormField, ProtectedRoute)
-├─ pages/        full pages, one per route (Home, Search, Profile, Login, Register, Dashboard, NotFound)
-├─ context/      AuthProvider (who is logged in)
-├─ hooks/        custom hooks (useAuth, useTaxonomy)
-├─ types/        TypeScript types (API response, User)
-├─ constants/    app-wide constants (PLATFORM_NAME, signup roles)
-├─ utils/        helpers (backend error messages, number / country / language formatting)
-├─ App.tsx       routes
-└─ main.tsx      entry point (providers)
-```
+Finding the right person for a campaign, event or story is usually slow. Follower numbers are scattered across apps, you never know who is real, and deals happen over chats with nothing in writing.
 
-## Auth
+Influence Platform fixes this in four steps:
 
-- `useAuth()` gives `user`, `isLoading`, `login`, `register`, `logout`.
-- Wrap a page in `<ProtectedRoute>` (optionally `roles={['business']}`) to require login.
-- Tokens are httpOnly cookies set by the backend. When the access token expires, `api/axios.ts` calls `/auth/refresh` once and retries the request.
+| Step | What happens |
+|---|---|
+| **1. Discover** | Search talent by profession, industry, topic, country, city, language and number of followers. |
+| **2. Connect and hire** | A verified business sends a **hire request**, or posts a **campaign** that talent can apply to. |
+| **3. Agree and sign** | Both sides agree on the work, milestones and payments in a digital **agreement**, then sign it with a code sent to their email. |
+| **4. Deliver and review** | The talent delivers each milestone, the business approves it, and at the end both sides leave a **star review**. |
 
-## Pages
+The platform is **free to use** right now. It is a platform, **not an agency**: businesses deal with talent (or their manager) directly. Payments are arranged between the two sides; the platform records what was agreed.
 
-| URL | Page |
+---
+
+## 2. The four kinds of accounts
+
+When you sign up you choose one of three account types. The fourth (Admin) is for the platform's own team.
+
+| Account | Who it is for | What they can do |
+|---|---|---|
+| **Talent** | Creators, journalists, speakers, experts, public figures | Claim or create a public profile, list services and prices, set availability, receive hire requests, apply to campaigns, sign agreements, get reviews, choose a manager. |
+| **Business / Organization** | Companies, brands, marketing/PR agencies, NGOs, universities, event organizers, government bodies | Get verified, hire talent, post campaigns, keep shortlists, compare people, draft and sign agreements, leave reviews. |
+| **Manager / Agent** | People or agencies who represent talent | Get verified, link with talent (only with the talent's approval), manage their profiles and services, answer their hire requests and handle their agreements. |
+| **Admin** | The platform team | Approve profile claims, verify businesses and managers, handle reports and disputes, manage users, read the audit log and the newsletter list. |
+
+> **"Verified"** means the platform team has checked that the person or company is real. Only verified businesses can hire, and only verified talent can be hired.
+
+---
+
+## 3. The top bar (navbar)
+
+The top bar is a floating, rounded bar that stays at the top of every page while you scroll.
+
+**On the left:** the name **Influence Platform**. Click it to go back to the home page.
+
+**In the middle (on large screens):**
+
+| Link | Goes to |
 |---|---|
 | `/` | Home: search bar, browse by industry, most followed |
 | `/search?q=&profession=&industry=&topic=&country=&city=&language=&minFollowers=&status=&sort=&page=` | Search with filters. All filters live in the URL, so results can be shared and the back button works |
@@ -93,27 +118,85 @@ Homepage testimonials come from `src/constants/testimonials.ts`; the section is 
 
 All navbar links live in `src/constants/navigation.ts` (`MAIN_NAV`, `UTILITY_NAV`, `ACCOUNT_NAV`), each with the roles that can see it. Talent, business and manager accounts reach their own pages (profile, Services, Hire requests, Agreements, business or manager details, Shortlists, My talents, My manager) from a sidebar like the admin panel's, built in `src/components/dashboard-panel/DashboardLayout.tsx`, instead of the navbar. Pages that are planned but not built yet (`/inbox`) show a "Coming soon" page.
 
-## Admin panel (`/admin`)
+### 11.6 A manager starts representing a talent
+1. Sign up as **Manager / Agent** → **Manager details** → **Send for verification** → the admin verifies you.
+2. Open a talent's profile → **Request to represent** with a short introduction. (Or the talent invites you by email.)
+3. The talent **accepts** and chooses your permissions (**Manage profile**, **Handle hire requests**).
+4. The talent now shows *"Represented by [you]"*, and you work for them from **My talents**, **Hire requests** and **Agreements**.
+5. The talent can change permissions or remove you at any time; either side can end it.
 
-Admins only (`ProtectedRoute roles={['admin']}`). Sidebar: Dashboard, Claims, Businesses, Agreements, Users, Reports, Audit log.
+---
 
-| URL | Page |
+## 12. What the coloured labels mean
+
+| Area | Labels |
 |---|---|
-| `/admin` | Overview: claims needing action, open reports, users, profiles |
-| `/admin/claims`, `/admin/claims/:id` | Claims table (status filter) and detail: evidence, code, approve/reject |
-| `/admin/businesses`, `/admin/businesses/:id` | Business verification queue and detail: company details, send / reset the code, verify manually, approve after the correct code, reject / revoke |
-| `/admin/agreements`, `/admin/agreements/:id` | All agreements; resolve disputes (continue / complete / cancel) |
-| `/admin/users` | Search, role/status filter, change role, suspend/unsuspend |
-| `/admin/reports`, `/admin/reports/:id` | Reports queue and detail: status, admin note, takedown |
-| `/admin/audit-logs` | Read-only audit log with filters and before/after view |
-| `/people/:slug/report` | Public "Report an error or request removal" form |
+| **Profile claim** | Send code → Waiting for talent → Verified (code correct) → Approved / Rejected / OTP failed |
+| **Business** | Waiting for code → Code sent → Code verified → Verified / Rejected / Locked |
+| **Manager** | Pending review → Verified / Rejected |
+| **Hire request** | Waiting for reply → Accepted / Declined / Cancelled |
+| **Campaign** | Draft → Open → Closed |
+| **Application** | Under review → Selected / Not selected / Withdrawn |
+| **Agreement** | Agreeing terms → Active → Completed, or Disputed / Cancelled |
+| **Milestone** | To do → Delivered → Approved |
+| **Report** | Open → Reviewing → Resolved / Rejected |
+| **User** | Active / Suspended |
 
-The older admin dashboard at `/dashboard` (profile cards, create/edit) is unchanged.
+---
 
-## i18n
+## 13. Languages, dark mode and mobile
 
-`react-i18next` with English, Urdu and Arabic in `src/i18n/locales/*.json`. The admin panel has a language switch; Urdu and Arabic set `dir="rtl"` on the admin area. Use `t('key')` for new strings and add the key to all three files.
+- **Three languages:** English, **اردو (Urdu)** and **العربية (Arabic)**. Urdu and Arabic switch the whole layout to **right-to-left**. Change it from the globe in the top bar (or the menu on phones).
+- **Dark mode:** from the moon/sun icon, or **Settings → Appearance** (Light, Dark, System).
+- **Mobile friendly:** every page works on phones and tablets. Menus collapse into the ☰ button, tab bars scroll sideways, filters open as a sheet, and tables fit the screen.
 
-## Author
+---
 
-Built and maintained by [Hammad Toufeeq](https://github.com/hammadtoufeeq).
+## 14. Trust, safety and privacy
+
+- **Verification everywhere:** talent prove their profile with a one-time code; businesses and managers are checked by the team before they can hire or represent anyone.
+- **Honest reviews:** reviews come only from **completed agreements**, so every star comes from real work.
+- **Public data only:** unclaimed profiles are built from public sources, which are listed on the profile. Anyone can report a mistake or ask for removal.
+- **Contacts are private** until a hire request is accepted.
+- **Managers act only with the talent's permission**, and every action they take is shown as done on the talent's behalf.
+- **Signed agreements** carry a fingerprint, signing time and record of who signed.
+- **Admin actions are logged** in the audit log, and important actions always ask for confirmation.
+- **Security:** limits on repeated login and code attempts (codes lock after 5 wrong tries), secure log-in sessions, and protected file uploads (images only, up to 2 MB).
+- **Delete your account** any time from Settings.
+
+---
+
+## 15. Frequently asked questions
+
+**Is it free?**
+Yes, everything is free right now: searching, accounts, claiming, shortlists, hire requests, campaigns and agreements.
+
+**Is this an agency?**
+No. Businesses contact talent (or their manager) directly, and talent set their own prices.
+
+**Who can hire?**
+Only **verified businesses**, and only **verified talent** can be hired.
+
+**How are payments made?**
+Payment is arranged directly between the two sides, following the milestones and payment terms written in the signed agreement.
+
+**I found a mistake on a profile.**
+Open the profile and use **Report an error or request removal**.
+
+**I can't find my profile.**
+Create one from your talent dashboard. It goes live after your official account is verified.
+
+**How do I contact the team?**
+Email **hello@influenceplatform.com** or use **Contact us** in the footer. The team replies within 1–2 working days.
+
+---
+
+## 16. For the technical team
+
+- **Live website:** https://influencer-frontend-kappa.vercel.app
+- **Live backend (API):** https://influencer-backend-psi.vercel.app. The website reaches it through `/api` on its own domain, set in `vercel.json`.
+- **Code:** this repository (website) and `influencer_backend` (server and database).
+- **Built with:** React, TypeScript, Vite, Tailwind CSS, React Router, TanStack Query, and i18next for the three languages.
+- **Hosting:** Vercel. Every push to `main` deploys automatically.
+- **Useful commands:** `npm install`, `npm run dev` (development), `npm run build` (production build), `npm run lint` (code checks).
+- **Translations** live in `src/i18n/locales/` (`en.json`, `ur.json`, `ar.json`). Every text on the site must exist in all three.
