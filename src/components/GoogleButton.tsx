@@ -62,9 +62,13 @@ function GoogleButton({
     queryKey: ['auth', 'google-config'],
     queryFn: getGoogleConfig,
     staleTime: Infinity,
-    retry: false,
+    retry: 1,
   })
-  const clientId = data?.enabled ? data.clientId : null
+  // Pehle server ka client ID; na ho to frontend ke Vercel env (VITE_GOOGLE_CLIENT_ID) wala
+  const clientId =
+    (data?.enabled ? data.clientId : null) ||
+    (import.meta.env.VITE_GOOGLE_CLIENT_ID as string | undefined)?.trim() ||
+    null
 
   useEffect(() => {
     latest.current = onCredential
