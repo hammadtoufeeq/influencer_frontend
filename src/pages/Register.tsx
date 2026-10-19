@@ -27,7 +27,7 @@ const ROLE_ICONS: Record<SignupRole, IconDefinition> = {
 }
 const MIN_PASSWORD = 8
 const inputClass = (error?: string) =>
-  `w-full rounded-lg border bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-gray-900 ${
+  `min-h-11 w-full rounded-lg border bg-white px-3 py-2 outline-none transition focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/10 ${
     error ? 'border-red-500' : 'border-gray-300'
   }`
 const isUrl = (value: string) => /^https?:\/\/\S+\.\S+/i.test(value)
@@ -178,22 +178,36 @@ function Register() {
   // Qadam 1: account type chuno
   if (!role) {
     return (
-      <section className="mx-auto max-w-3xl rounded-2xl bg-white p-6 shadow-sm md:p-8">
-        <p className="text-xs font-medium tracking-wide text-gray-500 uppercase">
-          {t('forgot.step', { current: 1, total: 2 })}
-        </p>
-        <h1 className="mt-1 text-2xl font-bold">{t('register.title')}</h1>
-        <p className="mt-1 text-sm text-gray-500">{t('register.subtitle')}</p>
+      <section className="mx-auto grid w-full max-w-[1040px] overflow-hidden rounded-[28px] border border-neutral-200 bg-white shadow-[0_24px_70px_rgb(23_23_23_/_9%)] md:grid-cols-[minmax(230px,0.72fr)_minmax(0,1.28fr)] max-md:block max-md:rounded-[22px]">
+        <div className="relative flex min-h-[580px] flex-col overflow-hidden bg-neutral-900 px-[34px] py-[42px] text-white max-md:min-h-0 max-md:px-6 max-md:py-[26px] max-md:pb-[30px] before:absolute before:-right-[110px] before:-top-[90px] before:h-[290px] before:w-[290px] before:rounded-full before:bg-[#e85d3f] before:opacity-90 after:absolute after:-bottom-[110px] after:-right-[70px] after:h-[250px] after:w-[250px] after:rounded-full after:border after:border-white/20">
+          <span className="relative z-10 text-[0.7rem] font-bold tracking-[0.2em] text-[#f8a08e]">01 / 02</span>
+          <h1 className="relative z-10 mt-auto max-w-[240px] font-display text-[clamp(2rem,4vw,3.25rem)] font-bold leading-[0.98] tracking-[-0.04em] max-md:mt-[34px] max-md:max-w-[330px] max-md:text-4xl">{t('register.title')}</h1>
+          <p className="relative z-10 mt-[18px] max-w-[270px] text-[0.9rem] leading-[1.65] text-neutral-300 max-md:mt-3">{t('register.subtitle')}</p>
+          <div className="relative z-10 mt-8 flex gap-2 max-md:mt-5" aria-hidden="true">
+          <span className="block h-[5px] w-[62px] rounded-[5px] bg-[#f8a08e]" />
+          <span className="block h-[5px] w-[34px] rounded-[5px] bg-white opacity-35" />
+          <span className="block h-[5px] w-[34px] rounded-[5px] bg-white opacity-35" />
+          </div>
+        </div>
+        <div className="min-w-0 px-12 py-[42px] max-md:px-[22px] max-md:py-[30px]">
+          <div className="flex items-center gap-[9px] text-[0.72rem] font-bold uppercase tracking-[0.04em] text-neutral-500">
+          <span className="inline-flex h-[25px] w-[25px] items-center justify-center rounded-full border border-neutral-900 bg-neutral-900 text-white">1</span>
+          <span className="h-px w-[30px] bg-neutral-300" />
+          <span className="inline-flex h-[25px] w-[25px] items-center justify-center rounded-full border border-neutral-300">2</span>
+          <span>{t('register.title')}</span>
+          </div>
+          <h2 className="font-display text-[clamp(1.75rem,3vw,2.35rem)] font-bold tracking-[-0.04em] text-neutral-900">{t('register.title')}</h2>
+          <p className="mt-2 text-[0.92rem] leading-[1.55] text-neutral-500">{t('register.subtitle')}</p>
 
-        <div className="mt-6 grid gap-3 md:grid-cols-3">
+          <div className="mt-7 grid gap-3 md:grid-cols-3">
           {SIGNUP_ROLE_OPTIONS.map((option) => (
             <button
               key={option.value}
               type="button"
               onClick={() => chooseRole(option.value)}
-              className="group flex flex-col items-start rounded-xl border border-gray-300 p-5 text-start transition hover:border-gray-900 hover:shadow-md focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:outline-none"
+              className="group flex flex-col items-start rounded-xl border border-neutral-200 bg-white p-5 text-start transition hover:-translate-y-1 hover:border-neutral-900 hover:shadow-[0_12px_24px_rgb(23_23_23_/_8%)] focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:outline-none"
             >
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gray-900 text-white">
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-neutral-900 text-white transition group-hover:bg-[#e85d3f]">
                 <FontAwesomeIcon icon={ROLE_ICONS[option.value]} />
               </span>
               <span className="mt-4 block font-semibold">{option.label}</span>
@@ -205,12 +219,13 @@ function Register() {
           ))}
         </div>
 
-        <p className="mt-6 text-center text-sm text-gray-600">
+        <p className="mt-7 text-center text-sm text-gray-600">
           {t('register.haveAccount')}{' '}
           <Link to="/login" className="font-medium text-gray-900 underline">
             {t('register.login')}
           </Link>
         </p>
+        </div>
       </section>
     )
   }
@@ -259,30 +274,40 @@ function Register() {
 
   // Qadam 2: chune hue type ka form (sirf us ke zaroori fields)
   return (
-    <section className="mx-auto max-w-2xl rounded-2xl bg-white p-6 shadow-sm md:p-8">
-      <button
-        type="button"
-        onClick={() => chooseRole(null)}
-        className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-gray-900"
-      >
-        <FontAwesomeIcon icon={faArrowLeft} className="text-xs rtl:rotate-180" />
-        {t('register.changeType')}
-      </button>
-
-      <div className="mt-5 flex items-center gap-4">
-        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gray-900 text-lg text-white">
+    <section className="mx-auto grid w-full max-w-[1040px] overflow-hidden rounded-[28px] border border-neutral-200 bg-white shadow-[0_24px_70px_rgb(23_23_23_/_9%)] md:grid-cols-[minmax(230px,0.72fr)_minmax(0,1.28fr)] max-md:block max-md:rounded-[22px]">
+      <div className="relative flex min-h-[650px] flex-col overflow-hidden bg-neutral-900 px-[34px] py-[42px] text-white max-md:min-h-0 max-md:px-6 max-md:py-[26px] max-md:pb-[30px] before:absolute before:-right-[110px] before:-top-[90px] before:h-[290px] before:w-[290px] before:rounded-full before:bg-[#e85d3f] before:opacity-90 after:absolute after:-bottom-[110px] after:-right-[70px] after:h-[250px] after:w-[250px] after:rounded-full after:border after:border-white/20">
+        <span className="relative z-10 text-[0.7rem] font-bold tracking-[0.2em] text-[#f8a08e]">02 / 02</span>
+        <span className="relative z-10 mt-auto flex h-[54px] w-[54px] items-center justify-center rounded-[17px] bg-[#e85d3f] text-[1.2rem] max-md:mt-7">
           <FontAwesomeIcon icon={ROLE_ICONS[role]} />
         </span>
-        <div>
-          <p className="text-xs font-medium tracking-wide text-gray-500 uppercase">
-            {t('forgot.step', { current: 2, total: 2 })}
-          </p>
-          <h1 className="text-2xl font-bold">{t('register.signUpAs', { type: option.label })}</h1>
+        <h1 className="relative z-10 mt-auto max-w-[240px] font-display text-[clamp(2rem,4vw,3.25rem)] font-bold leading-[0.98] tracking-[-0.04em] max-md:mt-[34px] max-md:max-w-[330px] max-md:text-4xl">{t('register.signUpAs', { type: option.label })}</h1>
+        <p className="relative z-10 mt-[18px] max-w-[270px] text-[0.9rem] leading-[1.65] text-neutral-300 max-md:mt-3">{t(`register.note.${role}`)}</p>
+        <div className="relative z-10 mt-8 flex gap-2 max-md:mt-5" aria-hidden="true">
+          <span className="block h-[5px] w-[62px] rounded-[5px] bg-[#f8a08e]" />
+          <span className="block h-[5px] w-[34px] rounded-[5px] bg-white opacity-35" />
+          <span className="block h-[5px] w-[34px] rounded-[5px] bg-white opacity-35" />
         </div>
       </div>
-      <p className="mt-3 text-sm text-gray-500">{t(`register.note.${role}`)}</p>
+      <div className="min-w-0 px-12 py-[42px] max-md:px-[22px] max-md:py-[30px]">
+        <button
+          type="button"
+          onClick={() => chooseRole(null)}
+          className="inline-flex items-center gap-2 text-sm font-medium text-neutral-500 hover:text-neutral-900"
+        >
+          <FontAwesomeIcon icon={faArrowLeft} className="text-xs rtl:rotate-180" />
+          {t('register.changeType')}
+        </button>
 
-      <form onSubmit={handleSubmit} className="mt-6 space-y-4" noValidate>
+        <div className="mt-6 flex items-center gap-[9px] text-[0.72rem] font-bold uppercase tracking-[0.04em] text-neutral-500">
+          <span className="inline-flex h-[25px] w-[25px] items-center justify-center rounded-full border border-neutral-900 bg-neutral-900 text-white">1</span>
+          <span className="h-px w-[30px] bg-neutral-900" />
+          <span className="inline-flex h-[25px] w-[25px] items-center justify-center rounded-full border border-neutral-900 bg-neutral-900 text-white">2</span>
+          <span>{t('register.loginDetails')}</span>
+        </div>
+        <h2 className="mt-5 font-display text-[clamp(1.75rem,3vw,2.35rem)] font-bold tracking-[-0.04em] text-neutral-900">{t('register.signUpAs', { type: option.label })}</h2>
+        <p className="mt-2 text-[0.92rem] leading-[1.55] text-neutral-500">{t(`register.note.${role}`)}</p>
+
+      <form onSubmit={handleSubmit} className="mt-7 space-y-5" noValidate>
         {isBusiness ? (
           <>
             <p className="text-sm font-semibold">{t('register.aboutOrganization')}</p>
@@ -418,7 +443,7 @@ function Register() {
           </>
         )}
 
-        <p className="border-t border-gray-100 pt-4 text-sm font-semibold">
+        <p className="border-t border-gray-100 pt-5 text-sm font-semibold text-neutral-900">
           {t('register.loginDetails')}
         </p>
         <div>
@@ -457,18 +482,19 @@ function Register() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full rounded-lg bg-gray-900 py-2.5 font-medium text-white hover:bg-gray-800 disabled:opacity-60"
+          className="w-full rounded-lg bg-gray-900 py-3 font-medium text-white transition hover:-translate-y-px hover:bg-gray-800 hover:shadow-[0_10px_20px_rgb(23_23_23_/_18%)] disabled:opacity-60"
         >
           {isSubmitting ? t('register.submitting') : t('register.submit')}
         </button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-gray-600">
+      <p className="mt-7 text-center text-sm text-gray-600">
         {t('register.haveAccount')}{' '}
         <Link to="/login" className="font-medium text-gray-900 underline">
           {t('register.login')}
         </Link>
       </p>
+      </div>
     </section>
   )
 }
