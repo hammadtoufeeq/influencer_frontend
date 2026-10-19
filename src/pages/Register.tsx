@@ -193,10 +193,10 @@ function Register() {
             {t('register.subtitle')}
           </p>
           <div className="relative z-10 mt-8 flex gap-2 max-md:mt-5" aria-hidden="true">
-            <span className="block h-[5px] w-[62px] rounded-[5px] bg-[#f8a08e]" />
-            <span className="block h-[5px] w-[34px] rounded-[5px] bg-white opacity-35" />
-            <span className="block h-[5px] w-[34px] rounded-[5px] bg-white opacity-35" />
-          </div>
+  <span className="block h-[5px] w-[62px] animate-pulse rounded-[5px] bg-[#f8a08e]" />
+  <span className="block h-[5px] w-[34px] rounded-[5px] bg-white/35" />
+  <span className="block h-[5px] w-[34px] rounded-[5px] bg-white/35" />
+</div>
         </div>
 
         {/* Right content */}

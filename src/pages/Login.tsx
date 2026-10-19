@@ -52,10 +52,10 @@ function Login() {
         <h1 className="relative z-10 mt-auto max-w-[240px] font-display text-[clamp(2rem,4vw,3.25rem)] font-bold leading-[0.98] tracking-[-0.04em] max-md:mt-[34px] max-md:max-w-[330px] max-md:text-4xl">{t('login.title')}</h1>
         <p className="relative z-10 mt-[18px] max-w-[270px] text-[0.9rem] leading-[1.65] text-gray-30 max-md:mt-3">{t('login.subtitle')}</p>
         <div className="relative z-10 mt-8 flex gap-2 max-md:mt-5" aria-hidden="true">
-          <span className="block h-[5px] w-[62px] rounded-[5px] bg-[#f8a08e]" />
-          <span className="block h-[5px] w-[34px] rounded-[5px] bg-white opacity-35" />
-          <span className="block h-[5px] w-[34px] rounded-[5px] bg-white opacity-35" />
-        </div>
+  <span className="block h-[5px] w-[62px] animate-pulse rounded-[5px] bg-[#f8a08e]" />
+  <span className="block h-[5px] w-[34px] rounded-[5px] bg-white/35" />
+  <span className="block h-[5px] w-[34px] rounded-[5px] bg-white/35" />
+</div>
       </div>
       <div className="min-w-0 px-12 py-[42px] max-md:px-[22px] max-md:py-[30px]">
         <div className="flex items-center gap-[9px] text-[0.72rem] font-bold uppercase tracking-[0.04em] text-gray-500">
