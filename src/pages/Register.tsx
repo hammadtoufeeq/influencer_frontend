@@ -65,7 +65,7 @@ function Register() {
   const { t } = useTranslation()
   const { user, register } = useAuth()
   const navigate = useNavigate()
-  // /register?type=business -> account type pehle se chuna hua (Businesses / Managers page se)
+  // /register?type=business -> account type pehle se chuna hua
   const [searchParams, setSearchParams] = useSearchParams()
   const typeParam = searchParams.get('type')
   const role = SIGNUP_ROLE_OPTIONS.some((o) => o.value === typeParam)
@@ -81,7 +81,7 @@ function Register() {
   const [websiteUrl, setWebsiteUrl] = useState('')
   // Sirf manager
   const [agencyName, setAgencyName] = useState('')
-  // Sirf business: naam ki jagah organization ki details
+  // Sirf business
   const [organizationType, setOrganizationType] = useState<OrganizationType | ''>('')
   const [companyName, setCompanyName] = useState('')
   const [industry, setIndustry] = useState('')
@@ -93,13 +93,11 @@ function Register() {
 
   if (user) return <Navigate to="/dashboard" replace />
 
-  // Type URL mein, taake back button pehle qadam pe le jaye
   const chooseRole = (next: SignupRole | null) => {
     setErrors({})
     setSearchParams(next ? { type: next } : {}, { replace: false })
   }
 
-  // Har field badalte hi us ka purana error hata do
   const field =
     <T,>(key: string, setter: (value: T) => void) =>
     (value: T) => {
@@ -107,7 +105,6 @@ function Register() {
       if (errors[key]) setErrors((prev) => ({ ...prev, [key]: '' }))
     }
 
-  // Server se pehle yahin jaanch: sirf is type ke zaroori fields
   function validate(current: SignupRole) {
     const found: Record<string, string> = {}
     if (current === 'business') {
@@ -175,16 +172,21 @@ function Register() {
     }
   }
 
-  // Qadam 1: account type chuno
+  // ✅ Qadam 1: account type chuno
   if (!role) {
     return (
       <section className="mx-auto grid w-full max-w-[1040px] overflow-hidden rounded-[28px] border border-gray-200 bg-white shadow-[0_24px_70px_rgb(23_23_23_/_9%)] md:grid-cols-[minmax(230px,0.72fr)_minmax(0,1.28fr)] max-md:block max-md:rounded-[22px]">
-        {/* ✅ Left aside — keep-dark se dark mode mein bhi dark + text white */}
+        {/* ✅ Left aside — keep-dark. SAME structure as Step 2 */}
         <div className="keep-dark relative flex min-h-[580px] flex-col overflow-hidden bg-gray-900 px-[34px] py-[42px] text-white max-md:min-h-0 max-md:px-6 max-md:py-[26px] max-md:pb-[30px] before:absolute before:-right-[110px] before:-top-[90px] before:h-[290px] before:w-[290px] before:rounded-full before:bg-[#e85d3f] before:opacity-90 after:absolute after:-bottom-[110px] after:-right-[70px] after:h-[250px] after:w-[250px] after:rounded-full after:border after:border-white/20">
           <span className="relative z-10 text-[0.7rem] font-bold tracking-[0.2em] text-[#f8a08e]">
             01 / 02
           </span>
-          <h1 className="relative z-10 mt-auto max-w-[240px] font-display text-[clamp(2rem,4vw,3.25rem)] font-bold leading-[0.98] tracking-[-0.04em] max-md:mt-[34px] max-md:max-w-[330px] max-md:text-4xl">
+          {/* ✅ Icon — mt-auto se bottom push */}
+          <span className="relative z-10 mt-auto flex h-[54px] w-[54px] items-center justify-center rounded-[17px] bg-[#e85d3f] text-[1.2rem] max-md:mt-7">
+            <FontAwesomeIcon icon={faStar} />
+          </span>
+          {/* ✅ Title — mt-6 fixed gap */}
+          <h1 className="relative z-10 mt-6 max-w-[240px] font-display text-[clamp(2rem,4vw,3.25rem)] font-bold leading-[0.98] tracking-[-0.04em] max-md:mt-[34px] max-md:max-w-[330px] max-md:text-4xl">
             {t('register.title')}
           </h1>
           <p className="relative z-10 mt-[18px] max-w-[270px] text-[0.9rem] leading-[1.65] text-gray-300 max-md:mt-3">
@@ -287,18 +289,20 @@ function Register() {
     </div>
   )
 
-  // Qadam 2: chune hue type ka form (sirf us ke zaroori fields)
+  // ✅ Qadam 2: form — SAME structure as Step 1
   return (
     <section className="mx-auto grid w-full max-w-[1040px] overflow-hidden rounded-[28px] border border-gray-200 bg-white shadow-[0_24px_70px_rgb(23_23_23_/_9%)] md:grid-cols-[minmax(230px,0.72fr)_minmax(0,1.28fr)] max-md:block max-md:rounded-[22px]">
-      {/* ✅ Left aside — keep-dark */}
+      {/* ✅ Left aside — keep-dark. SAME structure as Step 1 */}
       <div className="keep-dark relative flex min-h-[650px] flex-col overflow-hidden bg-gray-900 px-[34px] py-[42px] text-white max-md:min-h-0 max-md:px-6 max-md:py-[26px] max-md:pb-[30px] before:absolute before:-right-[110px] before:-top-[90px] before:h-[290px] before:w-[290px] before:rounded-full before:bg-[#e85d3f] before:opacity-90 after:absolute after:-bottom-[110px] after:-right-[70px] after:h-[250px] after:w-[250px] after:rounded-full after:border after:border-white/20">
         <span className="relative z-10 text-[0.7rem] font-bold tracking-[0.2em] text-[#f8a08e]">
           02 / 02
         </span>
+        {/* ✅ Icon — mt-auto se bottom push */}
         <span className="relative z-10 mt-auto flex h-[54px] w-[54px] items-center justify-center rounded-[17px] bg-[#e85d3f] text-[1.2rem] max-md:mt-7">
           <FontAwesomeIcon icon={ROLE_ICONS[role]} />
         </span>
-        <h1 className="relative z-10 mt-auto max-w-[240px] font-display text-[clamp(2rem,4vw,3.25rem)] font-bold leading-[0.98] tracking-[-0.04em] max-md:mt-[34px] max-md:max-w-[330px] max-md:text-4xl">
+        {/* ✅ Title — mt-6 fixed gap (SAME as Step 1) */}
+        <h1 className="relative z-10 mt-6 max-w-[240px] font-display text-[clamp(2rem,4vw,3.25rem)] font-bold leading-[0.98] tracking-[-0.04em] max-md:mt-[34px] max-md:max-w-[330px] max-md:text-4xl">
           {t('register.signUpAs', { type: option.label })}
         </h1>
         <p className="relative z-10 mt-[18px] max-w-[270px] text-[0.9rem] leading-[1.65] text-gray-300 max-md:mt-3">
