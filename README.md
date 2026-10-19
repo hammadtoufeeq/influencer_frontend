@@ -564,7 +564,7 @@ Email **hello@influenceplatform.com** or use **Contact us** in the footer. The t
 ## 16. For the technical team
 
 - **Live website:** https://influencer-frontend-kappa.vercel.app
-- **Live backend (API):** https://influencer-backend-psi.vercel.app. The website reaches it through `/api` on its own domain, set in `vercel.json`.
+- **Live backend (API):** https://influencer-backend.vercel.app. The website reaches it through `/api` on its own domain, set in `vercel.json`.
 - **Code:** this repository (website) and `influencer_backend` (server and database).
 - **Built with:** React, TypeScript, Vite, Tailwind CSS, React Router, TanStack Query, and i18next for the three languages.
 - **Hosting:** Vercel. Every push to `main` deploys automatically.
