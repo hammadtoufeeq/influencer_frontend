@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { useLocation } from 'react-router-dom'
 import TopLink from './nav/TopLink'
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -39,6 +40,8 @@ interface FooterLink {
 // Site ke neeche: brand, newsletter, paanch columns ke links, social accounts aur copyright
 function Footer() {
   const { t } = useTranslation()
+  // Home pe neeche kone wala gol "upar jao" button hai, wahan ye link nahi
+  const isHome = useLocation().pathname === '/'
   const { user } = useAuth()
 
   const home = user ? (user.role === 'admin' ? '/admin' : '/dashboard') : null
@@ -175,14 +178,16 @@ function Footer() {
           <p className="text-xs text-gray-500">
             © {currentYear} {PLATFORM_NAME}. {t('footer.rights')}
           </p>
-          <button
-            type="button"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="inline-flex items-center gap-2 text-xs text-gray-400 transition hover:text-white"
-          >
-            {t('footer.backToTop')}
-            <FontAwesomeIcon icon={faArrowUp} />
-          </button>
+          {!isHome && (
+            <button
+              type="button"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="inline-flex items-center gap-2 text-xs text-gray-400 transition hover:text-white"
+            >
+              {t('footer.backToTop')}
+              <FontAwesomeIcon icon={faArrowUp} />
+            </button>
+          )}
         </div>
       </div>
     </footer>
