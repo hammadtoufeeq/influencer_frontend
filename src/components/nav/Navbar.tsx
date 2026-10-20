@@ -82,22 +82,22 @@ function Navbar() {
         <TopLink
           to="/"
           aria-label={PLATFORM_NAME}
-          className="me-2 flex shrink-0 items-center gap-2.5 xl:justify-self-start"
+          className="flex shrink-0 items-center gap-2.5 xl:justify-self-start"
         >
           {/* Favicon wala logo + do line mein naam */}
-          <img src="/favicon.svg?v=3" alt="" className="h-10 w-10 shrink-0 sm:h-11 sm:w-11" />
+          <img src="/logo.svg?v=1" alt="" className="h-9 w-9 shrink-0 rounded-full sm:h-10 sm:w-10" />
           <span className="flex flex-col" aria-hidden="true">
-            <span className="font-display text-lg font-bold leading-[1.05] tracking-tight text-gray-950 sm:text-[22px]">
+            <span className="font-display text-[17px] font-bold leading-[1.05] tracking-tight text-gray-950 sm:text-xl">
               {PLATFORM_NAME.split(' ')[0]}
             </span>
-            <span className="text-lg font-normal leading-[1.05] tracking-tight text-gray-500 sm:text-[22px]">
+            <span className="text-[17px] font-normal leading-[1.05] tracking-tight text-gray-500 sm:text-xl">
               {PLATFORM_NAME.split(' ').slice(1).join(' ')}
             </span>
           </span>
         </TopLink>
 
         {/* Desktop: beech wale links */}
-        <div className="hidden items-center justify-center gap-1 xl:flex">
+        <div className="hidden flex-1 items-center justify-center gap-1 xl:flex">
           {mainItems.map((item) => (
             <TopLink key={item.to} to={item.to} className={linkClass(active(item))}>
               <span className="hidden 2xl:inline-flex">
@@ -109,7 +109,7 @@ function Navbar() {
         </div>
 
         {/* Desktop: right side */}
-        <div className="ms-auto hidden items-center gap-1 xl:flex xl:justify-self-end">
+        <div className="hidden items-center gap-1 xl:flex xl:justify-self-end">
           <ThemeToggle />
           <LanguageMenu />
           {user ? (
