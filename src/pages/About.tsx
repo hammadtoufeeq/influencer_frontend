@@ -312,35 +312,33 @@ function About() {
       </section>
 
       {/* How it works */}
-      <section>
-        <Heading title={t("about.howTitle")} sub={t("about.howSubtitle")} />
-        <ol className="relative mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          <span
-            aria-hidden="true"
-            className="absolute start-[12%] end-[12%] top-8 hidden h-0.5 bg-gradient-to-r from-gray-900 via-gray-400 to-gray-900 lg:block"
-          />
-          {steps.map((step, i) => (
-            <li key={step.title}>
-              <Reveal delay={i * 150} className="h-full">
-                <div className="relative h-full rounded-3xl bg-white p-6 text-center shadow-sm ring-1 ring-gray-100 transition duration-300 hover:-translate-y-1.5 hover:shadow-xl">
-                  <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gray-900 text-lg text-white shadow-lg">
-                    <FontAwesomeIcon icon={step.icon} />
-                  </span>
-                  <p className="mt-3 text-xs font-semibold tracking-wider text-gray-400">
-                    0{i + 1}
-                  </p>
-                  <h3 className="mt-1 font-display text-lg font-bold">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                    {step.body}
-                  </p>
-                </div>
-              </Reveal>
-            </li>
-          ))}
-        </ol>
-      </section>
+   {/* How it works */}
+<section>
+  <Heading title={t('about.howTitle')} sub={t('about.howSubtitle')} />
+  <ol className="relative mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    {/* ✅ Line — cards ke vertical center par, peeche */}
+    <span
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-x-[12%] top-1/2 -z-10 hidden h-0.5 -translate-y-1/2 bg-gradient-to-r from-gray-900 via-gray-400 to-gray-900 lg:block"
+    />
+    {steps.map((step, i) => (
+      <li key={step.title} className="relative">
+        <Reveal delay={i * 150} className="h-full">
+          <div className="relative h-full rounded-3xl bg-white p-6 text-center shadow-sm ring-1 ring-gray-100 transition duration-300 hover:-translate-y-1.5 hover:shadow-xl">
+            <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gray-900 text-lg text-white shadow-lg">
+              <FontAwesomeIcon icon={step.icon} />
+            </span>
+            <p className="mt-3 text-xs font-semibold tracking-wider text-gray-400">
+              0{i + 1}
+            </p>
+            <h3 className="mt-1 font-display text-lg font-bold">{step.title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-gray-600">{step.body}</p>
+          </div>
+        </Reveal>
+      </li>
+    ))}
+  </ol>
+</section>
 
       {/* Statement band with a picture */}
       <Reveal>
