@@ -85,12 +85,12 @@ function Navbar() {
           className="me-2 flex shrink-0 items-center gap-2.5 xl:justify-self-start"
         >
           {/* Favicon wala logo + do line mein naam */}
-          <img src="/favicon.svg?v=3" alt="" className="h-9 w-9 shrink-0 sm:h-10 sm:w-10" />
-          <span className="flex flex-col leading-none" aria-hidden="true">
-            <span className="font-display text-base font-extrabold tracking-tight text-gray-950 sm:text-lg">
+          <img src="/favicon.svg?v=3" alt="" className="h-10 w-10 shrink-0 sm:h-11 sm:w-11" />
+          <span className="flex flex-col" aria-hidden="true">
+            <span className="font-display text-lg font-bold leading-[1.05] tracking-tight text-gray-950 sm:text-[22px]">
               {PLATFORM_NAME.split(' ')[0]}
             </span>
-            <span className="mt-0.5 text-sm font-normal text-gray-500 sm:text-base">
+            <span className="text-lg font-normal leading-[1.05] tracking-tight text-gray-500 sm:text-[22px]">
               {PLATFORM_NAME.split(' ').slice(1).join(' ')}
             </span>
           </span>
