@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { taxName } from '../utils/taxonomy'
 import Sentence from '../components/admin-panel/Sentence'
+import ScrollProgressButton from '../components/home/ScrollProgressButton'
 import { MARK } from '../components/admin-panel/sentenceSlots'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -267,6 +268,7 @@ function Home() {
 
   return (
     <div className="home-page overflow-x-hidden pb-16">
+      <ScrollProgressButton />
       {/* Hero */}
       <section
         aria-label={t('home.heroLabel')}
