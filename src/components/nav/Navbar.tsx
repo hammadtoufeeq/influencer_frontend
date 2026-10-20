@@ -81,9 +81,19 @@ function Navbar() {
         
         <TopLink
           to="/"
-          className="me-2 truncate text-base font-bold sm:text-xl xl:justify-self-start"
+          aria-label={PLATFORM_NAME}
+          className="me-2 flex shrink-0 items-center gap-2.5 xl:justify-self-start"
         >
-          {PLATFORM_NAME}
+          {/* Favicon wala logo + do line mein naam */}
+          <img src="/favicon.svg?v=3" alt="" className="h-9 w-9 shrink-0 sm:h-10 sm:w-10" />
+          <span className="flex flex-col leading-none" aria-hidden="true">
+            <span className="font-display text-base font-extrabold tracking-tight text-gray-950 sm:text-lg">
+              {PLATFORM_NAME.split(' ')[0]}
+            </span>
+            <span className="mt-0.5 text-sm font-normal text-gray-500 sm:text-base">
+              {PLATFORM_NAME.split(' ').slice(1).join(' ')}
+            </span>
+          </span>
         </TopLink>
 
         {/* Desktop: beech wale links */}
