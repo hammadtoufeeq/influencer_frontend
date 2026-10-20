@@ -35,6 +35,7 @@ import {
   PlatformStrip,
   Reveal,
 } from "../components/home/HomeSections";
+import ScrollProgressButton from "../components/home/ScrollProgressButton";
 import { useAuth } from "../hooks/useAuth";
 import { useTaxonomy } from "../hooks/useTaxonomy";
 // import type { PersonSummary } from "../types/person";
@@ -194,6 +195,7 @@ function About() {
 
   return (
     <div className="space-y-20 overflow-x-clip md:space-y-28">
+      <ScrollProgressButton />
       {/* Hero: same picture as before, now with motion */}
       <section className="keep-dark relative isolate overflow-hidden rounded-3xl bg-gray-900 px-5 py-14 text-white sm:px-10 md:py-24">
         <img
