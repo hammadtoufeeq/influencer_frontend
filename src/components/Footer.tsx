@@ -40,8 +40,8 @@ interface FooterLink {
 // Site ke neeche: brand, newsletter, paanch columns ke links, social accounts aur copyright
 function Footer() {
   const { t } = useTranslation()
-  // Home pe neeche kone wala gol "upar jao" button hai, wahan ye link nahi
-  const isHome = useLocation().pathname === '/'
+  // Home aur About pe neeche kone wala gol "upar jao" button hai, wahan ye link nahi
+  const hasRoundButton = ['/', '/about'].includes(useLocation().pathname)
   const { user } = useAuth()
 
   const home = user ? (user.role === 'admin' ? '/admin' : '/dashboard') : null
@@ -178,7 +178,7 @@ function Footer() {
           <p className="text-xs text-gray-500">
             © {currentYear} {PLATFORM_NAME}. {t('footer.rights')}
           </p>
-          {!isHome && (
+          {!hasRoundButton && (
             <button
               type="button"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
