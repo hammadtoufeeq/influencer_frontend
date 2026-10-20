@@ -66,16 +66,16 @@ function Login() {
 
   return (
     <section className="mx-auto grid w-full max-w-[1040px] overflow-hidden rounded-[28px] border border-gray-200 bg-white shadow-[0_24px_70px_rgb(23_23_23_/_9%)] md:grid-cols-[minmax(230px,0.72fr)_minmax(0,1.28fr)] max-md:rounded-[22px]">
-      {/* ✅ Left aside — icon + text ek saath */}
+      {/* ✅ Left aside — keep-dark (hamesha dark + white text) */}
       <div className="keep-dark relative flex min-h-[540px] flex-col overflow-hidden bg-gray-900 px-[34px] py-[42px] text-white max-md:min-h-0 max-md:px-6 max-md:py-[26px] max-md:pb-[30px] before:absolute before:-right-[110px] before:-top-[90px] before:h-[290px] before:w-[290px] before:rounded-full before:bg-[#e85d3f] before:opacity-90 after:absolute after:-bottom-[110px] after:-right-[70px] after:h-[250px] after:w-[250px] after:rounded-full after:border after:border-white/20">
         <span className="relative z-10 text-[0.7rem] font-bold tracking-[0.2em] text-[#f8a08e]">
           WELCOME BACK
         </span>
-        {/* ✅ Icon — mt-auto (bottom pe push) */}
+        {/* Icon — mt-auto (bottom push) */}
         <span className="relative z-10 mt-auto flex h-[54px] w-[54px] items-center justify-center rounded-[17px] bg-[#e85d3f] text-[1.2rem] max-md:mt-7">
           <FontAwesomeIcon icon={faRightToBracket} />
         </span>
-        {/* ✅ Title — mt-6 (fixed gap, mt-auto NAHI) */}
+        {/* Title — mt-6 (fixed gap) */}
         <h1 className="relative z-10 mt-6 max-w-[240px] font-display text-[clamp(2rem,4vw,3.25rem)] font-bold leading-[0.98] tracking-[-0.04em] max-md:mt-[34px] max-md:max-w-[330px] max-md:text-4xl">
           {t('login.title')}
         </h1>
@@ -136,10 +136,16 @@ function Login() {
               {t('forgot.link')}
             </Link>
           </div>
+          {/*
+            ✅ INVERSE button — Tailwind v4 auto-invert se:
+            - Light mode: bg-gray-900 (dark) + text-white (white)
+            - Dark mode: bg-gray-900 invert → light + text-white invert → dark
+            Koi `keep-dark` nahi — kyunke `keep-dark` lagaoge to hamesha dark rahega.
+          */}
           <button
             type="submit"
             disabled={isSubmitting}
-            className="keep-dark inline-flex w-full items-center justify-center gap-2 rounded-lg bg-gray-900 py-3 font-medium text-white transition hover:-translate-y-px hover:bg-gray-800 hover:shadow-[0_10px_20px_rgb(23_23_23_/_18%)] disabled:opacity-60"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-gray-900 py-3 font-medium text-white transition hover:-translate-y-px hover:bg-gray-800 hover:shadow-[0_10px_20px_rgb(23_23_23_/_18%)] disabled:opacity-60"
           >
             {isSubmitting ? t('login.submitting') : t('login.submit')}
             {!isSubmitting && (

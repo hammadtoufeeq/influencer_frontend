@@ -40,8 +40,6 @@ function loadScript() {
   return scriptPromise
 }
 
-// "Sign in with Google" / "Sign up with Google" ka asal Google button.
-// Server pe GOOGLE_CLIENT_ID na ho to kuch nahi dikhta
 function GoogleButton({
   mode,
   onCredential,
@@ -51,11 +49,8 @@ function GoogleButton({
 }: {
   mode: 'signin' | 'signup'
   onCredential: (credential: string) => void
-  // "or" wali line (button ke upar): sirf jab button dikhe
   divider?: string
-  // Button ke neeche chhoti si baat
   hint?: string
-  // Login / signup chal raha hai: spinner, dobara click nahi
   busy?: boolean
 }) {
   const { t, i18n } = useTranslation()
@@ -70,7 +65,6 @@ function GoogleButton({
     staleTime: Infinity,
     retry: 1,
   })
-  // Pehle server ka client ID; na ho to frontend ke Vercel env (VITE_GOOGLE_CLIENT_ID) wala
   const clientId =
     (data?.enabled ? data.clientId : null) ||
     (import.meta.env.VITE_GOOGLE_CLIENT_ID as string | undefined)?.trim() ||
@@ -93,9 +87,6 @@ function GoogleButton({
           context: mode,
           callback: (response) => response.credential && latest.current(response.credential),
         })
-        // Google ka asal button (iframe) hamare button ke upar bilkul transparent rakhte hain:
-        // click Google ka hi hota hai, magar shakal hamari. Google 400px se chaura nahi banata,
-        // is liye scale karke poore button pe phaila dete hain
         const { offsetWidth: width, offsetHeight: height } = wrap.current
         const googleWidth = Math.min(400, Math.max(200, width))
         box.current.innerHTML = ''
@@ -131,15 +122,22 @@ function GoogleButton({
         </div>
       )}
       <div ref={wrap} className={`group relative h-12 w-full ${busy ? 'pointer-events-none' : ''}`}>
-        {/* Hamara button (sirf dikhawa); click upar wale transparent Google button pe */}
+        {/*
+          ✅ INVERSE button:
+          - Light mode: dark bg + white text
+          - Dark mode: white bg + dark text
+          Tailwind v4 auto-invert se yeh khud ho jata hai:
+          - Light: bg-gray-900 (dark) + text-white (light)
+          - Dark: bg-gray-900 invert → light + text-white invert → dark
+        */}
         <div
           aria-hidden="true"
-          className={`flex h-full w-full items-center justify-center gap-3 rounded-xl border border-gray-200 bg-white text-[15px] font-semibold text-gray-800 shadow-sm transition duration-200 group-hover:-translate-y-px group-hover:border-gray-300 group-hover:shadow-[0_10px_24px_rgb(23_23_23_/_10%)] group-focus-within:ring-2 group-focus-within:ring-gray-900/15 ${
+          className={`flex h-full w-full items-center justify-center gap-3 rounded-xl border border-gray-300 bg-gray-900 text-[15px] font-semibold text-white shadow-sm transition duration-200 group-hover:-translate-y-px group-hover:bg-gray-800 group-hover:shadow-[0_10px_24px_rgb(23_23_23_/_20%)] group-focus-within:ring-2 group-focus-within:ring-gray-900/15 ${
             ready && !busy ? '' : 'opacity-60'
           }`}
         >
           {busy ? (
-            <span className="h-5 w-5 animate-spin rounded-full border-2 border-gray-300 border-t-gray-800" />
+            <span className="h-5 w-5 animate-spin rounded-full border-2 border-white/30 border-t-white" />
           ) : (
             <GoogleLogo />
           )}
