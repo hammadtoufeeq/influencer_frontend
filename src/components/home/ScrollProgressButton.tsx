@@ -9,8 +9,6 @@ const SHOW_FROM = 0.01
 const RADIUS = 24
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS
 
-// Home aur About page: neeche right kone mein "upar jao" button. Kinare ka gol daira batata hai
-// ke page kitna scroll ho chuka (0 se 100%)
 function ScrollProgressButton() {
   const { t } = useTranslation()
   const [progress, setProgress] = useState(0)
