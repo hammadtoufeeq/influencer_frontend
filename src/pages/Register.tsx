@@ -4,8 +4,16 @@ import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
-import { faArrowLeft, faBuilding, faStar, faUserTie } from '@fortawesome/free-solid-svg-icons'
+import {
+  faArrowLeft,
+  faArrowRight,
+  faBuilding,
+  faStar,
+  faUserTie,
+} from '@fortawesome/free-solid-svg-icons'
 import GoogleButton from '../components/GoogleButton'
+import AuthShowcase from '../components/auth/AuthShowcase'
+import { AUTH_BUTTON, AUTH_INPUT } from '../components/auth/authStyles'
 import PasswordField from '../components/PasswordField'
 import { COUNTRY_OPTIONS } from '../constants/people'
 import { SIGNUP_ROLE_OPTIONS } from '../constants/roles'
@@ -28,9 +36,7 @@ const ROLE_ICONS: Record<SignupRole, IconDefinition> = {
 }
 const MIN_PASSWORD = 8
 const inputClass = (error?: string) =>
-  `min-h-11 w-full rounded-lg border bg-white px-3 py-2 text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-gray-900 focus:ring-2 focus:ring-gray-900/10 ${
-    error ? 'border-red-500' : 'border-gray-300'
-  }`
+  `${AUTH_INPUT} ${error ? 'border-red-500 bg-red-50/40' : ''}`
 const isUrl = (value: string) => /^https?:\/\/\S+\.\S+/i.test(value)
 
 // Label ke saath "*" (zaroori) ya "(optional)"
@@ -60,6 +66,26 @@ function FieldLabel({
 
 function FieldError({ message }: { message?: string }) {
   return message ? <p className="mt-1 text-sm text-red-600">{message}</p> : null
+}
+
+// "1 —— 2" qadam: pehle account type, phir details
+function Steps({ current, label }: { current: 1 | 2; label: string }) {
+  const dot = (n: number) =>
+    `inline-flex h-6 w-6 items-center justify-center rounded-full text-[11px] transition ${
+      n <= current ? 'bg-gray-900 text-white' : 'border border-gray-300 text-gray-500'
+    }`
+  return (
+    <div className="flex items-center gap-2 text-[11px] font-bold tracking-[0.12em] text-gray-500 uppercase motion-safe:animate-fade-up">
+      <span className={dot(1)}>1</span>
+      <span className="relative h-0.5 w-8 overflow-hidden rounded-full bg-gray-200">
+        <span
+          className={`absolute inset-y-0 start-0 bg-gray-900 transition-all duration-700 ${current === 2 ? 'w-full' : 'w-0'}`}
+        />
+      </span>
+      <span className={dot(2)}>2</span>
+      <span className="ms-1">{label}</span>
+    </div>
+  )
 }
 
 function Register() {
@@ -214,56 +240,46 @@ function Register() {
   // ✅ Qadam 1: role select
   if (!role) {
     return (
-      <section className="mx-auto grid w-full max-w-[1040px] overflow-hidden rounded-[28px] border border-gray-200 bg-white shadow-[0_24px_70px_rgb(23_23_23_/_9%)] md:grid-cols-[minmax(230px,0.72fr)_minmax(0,1.28fr)] max-md:block max-md:rounded-[22px]">
-        <div className="keep-dark relative flex min-h-[580px] flex-col overflow-hidden bg-gray-900 px-[34px] py-[42px] text-white max-md:min-h-0 max-md:px-6 max-md:py-[26px] max-md:pb-[30px] before:absolute before:-right-[110px] before:-top-[90px] before:h-[290px] before:w-[290px] before:rounded-full before:bg-[#e85d3f] before:opacity-90 after:absolute after:-bottom-[110px] after:-right-[70px] after:h-[250px] after:w-[250px] after:rounded-full after:border after:border-white/20">
-          <span className="relative z-10 mt-auto flex h-[54px] w-[54px] items-center justify-center rounded-[17px] bg-[#e85d3f] text-[1.2rem] max-md:mt-7">
-            <FontAwesomeIcon icon={faStar} />
-          </span>
-          <h1 className="relative z-10 mt-6 max-w-[240px] font-display text-[clamp(2rem,4vw,3.25rem)] font-bold leading-[0.98] tracking-[-0.04em] max-md:mt-[34px] max-md:max-w-[330px] max-md:text-4xl">
-            {t('register.title')}
-          </h1>
-          <p className="relative z-10 mt-[18px] max-w-[270px] text-[0.9rem] leading-[1.65] text-gray-300 max-md:mt-3">
-            {t('register.subtitle')}
-          </p>
-          <div className="relative z-10 mt-8 flex gap-2 max-md:mt-5" aria-hidden="true">
-            <span className="block h-[5px] w-[62px] animate-pulse rounded-[5px] bg-[#f8a08e]" />
-            <span className="block h-[5px] w-[34px] rounded-[5px] bg-white/35" />
-            <span className="block h-[5px] w-[34px] rounded-[5px] bg-white/35" />
-          </div>
-        </div>
+      <section className="mx-auto grid w-full max-w-6xl overflow-clip rounded-[28px] bg-white shadow-[0_30px_80px_rgb(23_23_23_/_12%)] ring-1 ring-gray-200/70 lg:grid-cols-[1fr_1.15fr]">
+        <AuthShowcase
+          eyebrow={t('auth.joinEyebrow')}
+          title={t('auth.registerTitle')}
+          subtitle={t('auth.registerSubtitle')}
+        />
 
-        {/* Right content */}
-        <div className="min-w-0 px-12 py-[42px] max-md:px-[22px] max-md:py-[30px]">
-          <div className="flex items-center gap-[9px] text-[0.72rem] font-bold uppercase tracking-[0.04em] text-gray-500">
-            <span className="inline-flex h-[25px] w-[25px] items-center justify-center rounded-full bg-gray-900 text-white">
-              1
-            </span>
-            <span className="h-px w-[30px] bg-gray-300" />
-            <span className="inline-flex h-[25px] w-[25px] items-center justify-center rounded-full border border-gray-300">
-              2
-            </span>
-            <span>{t('register.title')}</span>
-          </div>
-          <h2 className="mt-5 font-display text-[clamp(1.75rem,3vw,2.35rem)] font-bold tracking-[-0.04em] text-gray-900">
+        <div className="flex min-w-0 flex-col justify-center px-6 py-9 sm:px-12 sm:py-12">
+          <Steps current={1} label={t('register.title')} />
+          <h2
+            className="mt-4 font-display text-3xl font-extrabold tracking-tight text-gray-900 motion-safe:animate-fade-up sm:text-4xl"
+            style={{ animationDelay: '60ms' }}
+          >
             {t('register.title')}
           </h2>
-          <p className="mt-2 text-[0.92rem] leading-[1.55] text-gray-600">{t('register.subtitle')}</p>
+          <p
+            className="mt-2 text-[15px] text-gray-600 motion-safe:animate-fade-up"
+            style={{ animationDelay: '120ms' }}
+          >
+            {t('register.subtitle')}
+          </p>
 
-          <div className="mt-7 grid gap-3 md:grid-cols-3">
-            {SIGNUP_ROLE_OPTIONS.map((option) => (
+          <div className="mt-8 grid gap-3">
+            {SIGNUP_ROLE_OPTIONS.map((option, i) => (
               <button
                 key={option.value}
                 type="button"
                 onClick={() => chooseRole(option.value)}
-                className="group flex flex-col items-start rounded-xl border border-gray-200 bg-white p-5 text-start transition hover:-translate-y-1 hover:border-gray-900 hover:shadow-[0_12px_24px_rgb(23_23_23_/_8%)] focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:outline-none"
+                style={{ animationDelay: `${180 + i * 80}ms` }}
+                className="group relative flex items-center gap-4 overflow-hidden rounded-2xl border border-gray-200 bg-white p-4 text-start transition duration-300 hover:-translate-y-0.5 hover:border-gray-900 hover:shadow-[0_16px_36px_rgb(23_23_23_/_10%)] focus-visible:ring-4 focus-visible:ring-gray-900/15 focus-visible:outline-none motion-safe:animate-fade-up sm:p-5"
               >
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gray-900 text-white transition group-hover:bg-[#e85d3f]">
+                <span className="keep-dark flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-gray-700 to-gray-950 text-lg text-white shadow-md transition duration-300 group-hover:scale-110 group-hover:rotate-[-6deg]">
                   <FontAwesomeIcon icon={ROLE_ICONS[option.value]} />
                 </span>
-                <span className="mt-4 block font-semibold text-gray-900">{option.label}</span>
-                <span className="mt-1 block flex-1 text-sm text-gray-600">{option.description}</span>
-                <span className="mt-4 text-sm font-medium text-gray-900 underline-offset-4 group-hover:underline">
-                  {t('register.continueAs', { type: option.label })}
+                <span className="min-w-0 flex-1">
+                  <span className="block font-semibold text-gray-900">{option.label}</span>
+                  <span className="mt-0.5 block text-sm text-gray-600">{option.description}</span>
+                </span>
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gray-100 text-xs text-gray-700 transition duration-300 group-hover:translate-x-1 group-hover:bg-gray-900 group-hover:text-white rtl:group-hover:-translate-x-1">
+                  <FontAwesomeIcon icon={faArrowRight} className="rtl:rotate-180" />
                 </span>
               </button>
             ))}
@@ -324,55 +340,42 @@ function Register() {
 
   // ✅ Qadam 2: form
   return (
-    <section className="mx-auto grid w-full max-w-[1040px] overflow-hidden rounded-[28px] border border-gray-200 bg-white shadow-[0_24px_70px_rgb(23_23_23_/_9%)] md:grid-cols-[minmax(230px,0.72fr)_minmax(0,1.28fr)] max-md:block max-md:rounded-[22px]">
-      {/* ✅ Left aside — keep-dark */}
-      <div className="keep-dark relative flex min-h-[650px] flex-col overflow-hidden bg-gray-900 px-[34px] py-[42px] text-white max-md:min-h-0 max-md:px-6 max-md:py-[26px] max-md:pb-[30px] before:absolute before:-right-[110px] before:-top-[90px] before:h-[290px] before:w-[290px] before:rounded-full before:bg-[#e85d3f] before:opacity-90 after:absolute after:-bottom-[110px] after:-right-[70px] after:h-[250px] after:w-[250px] after:rounded-full after:border after:border-white/20">
-        <span className="relative z-10 mt-auto flex h-[54px] w-[54px] items-center justify-center rounded-[17px] bg-[#e85d3f] text-[1.2rem] max-md:mt-7">
-          <FontAwesomeIcon icon={ROLE_ICONS[role]} />
-        </span>
-        <h1 className="relative z-10 mt-6 max-w-[240px] font-display text-[clamp(2rem,4vw,3.25rem)] font-bold leading-[0.98] tracking-[-0.04em] max-md:mt-[34px] max-md:max-w-[330px] max-md:text-4xl">
-          {t('register.signUpAs', { type: option.label })}
-        </h1>
-        <p className="relative z-10 mt-[18px] max-w-[270px] text-[0.9rem] leading-[1.65] text-gray-300 max-md:mt-3">
-          {t(`register.note.${role}`)}
-        </p>
-        <div className="relative z-10 mt-8 flex gap-2 max-md:mt-5" aria-hidden="true">
-          <span className="block h-[5px] w-[62px] rounded-[5px] bg-[#f8a08e]" />
-          <span className="block h-[5px] w-[34px] rounded-[5px] bg-white opacity-35" />
-          <span className="block h-[5px] w-[34px] rounded-[5px] bg-white opacity-35" />
-        </div>
-      </div>
+    <section className="mx-auto grid w-full max-w-6xl overflow-clip rounded-[28px] bg-white shadow-[0_30px_80px_rgb(23_23_23_/_12%)] ring-1 ring-gray-200/70 lg:grid-cols-[1fr_1.15fr]">
+      <AuthShowcase
+        eyebrow={t('auth.joinEyebrow')}
+        title={t('register.signUpAs', { type: option.label })}
+        subtitle={t(`register.note.${role}`)}
+      />
 
-      {/* Right content */}
-      <div className="min-w-0 px-12 py-[42px] max-md:px-[22px] max-md:py-[30px]">
+      <div className="min-w-0 px-6 py-9 sm:px-12 sm:py-12">
         <button
           type="button"
           onClick={() => chooseRole(null)}
-          className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-900"
+          className="inline-flex items-center gap-2 rounded-full border border-gray-200 px-3 py-1.5 text-sm font-medium text-gray-600 transition hover:border-gray-900 hover:text-gray-900"
         >
           <FontAwesomeIcon icon={faArrowLeft} className="text-xs rtl:rotate-180" />
           {t('register.changeType')}
         </button>
 
-        <div className="mt-6 flex items-center gap-[9px] text-[0.72rem] font-bold uppercase tracking-[0.04em] text-gray-500">
-          <span className="inline-flex h-[25px] w-[25px] items-center justify-center rounded-full bg-gray-900 text-white">
-            1
-          </span>
-          <span className="h-px w-[30px] bg-gray-900" />
-          <span className="inline-flex h-[25px] w-[25px] items-center justify-center rounded-full bg-gray-900 text-white">
-            2
-          </span>
-          <span>{t('register.loginDetails')}</span>
+        <div className="mt-6">
+          <Steps current={2} label={t('register.loginDetails')} />
         </div>
 
-        <h2 className="mt-5 font-display text-[clamp(1.75rem,3vw,2.35rem)] font-bold tracking-[-0.04em] text-gray-900">
-          {t('register.signUpAs', { type: option.label })}
-        </h2>
-        <p className="mt-2 text-[0.92rem] leading-[1.55] text-gray-600">
-          {t(`register.note.${role}`)}
-        </p>
+        <div className="mt-4 flex items-center gap-3 motion-safe:animate-fade-up">
+          <span className="keep-dark flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-gray-700 to-gray-950 text-white shadow-md">
+            <FontAwesomeIcon icon={ROLE_ICONS[role]} />
+          </span>
+          <h2 className="font-display text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">
+            {t('register.signUpAs', { type: option.label })}
+          </h2>
+        </div>
 
-        <form onSubmit={handleSubmit} className="mt-7 space-y-5" noValidate>
+        <form
+          onSubmit={handleSubmit}
+          className="mt-7 space-y-5 motion-safe:animate-fade-up"
+          style={{ animationDelay: '120ms' }}
+          noValidate
+        >
           {isBusiness ? (
             <>
               <p className="text-sm font-semibold text-gray-900">{t('register.aboutOrganization')}</p>
@@ -540,17 +543,19 @@ function Register() {
             value={password}
             onChange={field('password', setPassword)}
             error={errors.password}
+            inputClassName={AUTH_INPUT}
           />
           <p className="text-xs text-gray-500">{t('register.passwordHint')}</p>
           <p className="text-xs text-gray-500">{t('register.requiredHint')}</p>
 
-          {/* ✅ Submit button — INVERSE (light: dark bg/white text, dark: white bg/dark text) */}
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full rounded-lg bg-gray-900 py-3 font-medium text-white transition hover:-translate-y-px hover:bg-gray-800 hover:shadow-[0_10px_20px_rgb(23_23_23_/_18%)] disabled:opacity-60"
-          >
+          <button type="submit" disabled={isSubmitting} className={AUTH_BUTTON}>
             {isSubmitting ? t('register.submitting') : t('register.submit')}
+            {!isSubmitting && (
+              <FontAwesomeIcon
+                icon={faArrowRight}
+                className="text-xs transition group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
+              />
+            )}
           </button>
 
           <GoogleButton

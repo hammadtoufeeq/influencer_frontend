@@ -11,6 +11,7 @@ function PasswordField({
   onChange,
   error,
   autoComplete,
+  inputClassName,
 }: {
   id: string
   label: ReactNode
@@ -18,6 +19,8 @@ function PasswordField({
   onChange: (value: string) => void
   error?: string
   autoComplete: string
+  // Poori input class badalni ho (login / signup ka bara input)
+  inputClassName?: string
 }) {
   const { t } = useTranslation()
   const [visible, setVisible] = useState(false)
@@ -34,15 +37,19 @@ function PasswordField({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           aria-invalid={Boolean(error)}
-          className={`w-full rounded-lg border bg-white py-2 ps-3 pe-10 outline-none focus:ring-2 focus:ring-gray-900 ${
-            error ? 'border-red-500' : 'border-gray-300'
-          }`}
+          className={
+            inputClassName
+              ? `${inputClassName} pe-11 ${error ? 'border-red-500' : ''}`
+              : `w-full rounded-lg border bg-white py-2 ps-3 pe-10 outline-none focus:ring-2 focus:ring-gray-900 ${
+                  error ? 'border-red-500' : 'border-gray-300'
+                }`
+          }
         />
         <button
           type="button"
           onClick={() => setVisible((v) => !v)}
           aria-label={visible ? t('settings.hidePassword') : t('settings.showPassword')}
-          className="absolute inset-y-0 end-0 flex w-10 items-center justify-center text-gray-400 hover:text-gray-700"
+          className="absolute inset-y-0 end-0 flex w-11 items-center justify-center text-gray-400 hover:text-gray-700"
         >
           <FontAwesomeIcon icon={visible ? faEyeSlash : faEye} />
         </button>
