@@ -40,6 +40,16 @@ function loadScript() {
   return scriptPromise
 }
 
+// Pichli dafa ka client ID: reload pe server ke jawab ka intezaar kiye baghair button foran
+const CACHE_KEY = 'googleClientId'
+function cachedClientId() {
+  try {
+    return localStorage.getItem(CACHE_KEY)
+  } catch {
+    return null
+  }
+}
+
 function GoogleButton({
   mode,
   onCredential,
@@ -59,16 +69,36 @@ function GoogleButton({
   const [ready, setReady] = useState(false)
   const latest = useRef(onCredential)
   const [failed, setFailed] = useState(false)
-  const { data } = useQuery({
+  const { data, isPending } = useQuery({
     queryKey: ['auth', 'google-config'],
     queryFn: getGoogleConfig,
     staleTime: Infinity,
     retry: 1,
   })
+  const envClientId = (import.meta.env.VITE_GOOGLE_CLIENT_ID as string | undefined)?.trim()
+  // Server ka jawab aa gaya ho to wahi; warna Vercel env ya pichli dafa ka yaad rakha hua
   const clientId =
     (data?.enabled ? data.clientId : null) ||
-    (import.meta.env.VITE_GOOGLE_CLIENT_ID as string | undefined)?.trim() ||
+    envClientId ||
+    // Server ne jawab na diya (ya abhi soch raha hai): pichli dafa wala
+    (!data ? cachedClientId() : null) ||
     null
+
+  // Server ka jawab yaad rakho (band ho jaye to bhool jao)
+  useEffect(() => {
+    if (!data) return
+    try {
+      if (data.enabled && data.clientId) localStorage.setItem(CACHE_KEY, data.clientId)
+      else localStorage.removeItem(CACHE_KEY)
+    } catch {
+      // Private window: koi baat nahi
+    }
+  }, [data])
+
+  // Google ki script foran load karna shuru: client ID ka intezaar nahi
+  useEffect(() => {
+    loadScript().catch(() => setFailed(true))
+  }, [])
 
   useEffect(() => {
     latest.current = onCredential
@@ -108,7 +138,8 @@ function GoogleButton({
     }
   }, [clientId, mode, i18n.language])
 
-  if (!clientId || failed) return null
+  // Server abhi soch raha hai (aur kuch yaad nahi): button ki jagah pehle se dikhao, dabega nahi
+  if (failed || (!clientId && !isPending)) return null
   return (
     <div className="space-y-4">
       {divider && (
