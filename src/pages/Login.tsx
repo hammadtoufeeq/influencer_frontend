@@ -67,7 +67,7 @@ function Login() {
   }
 
   return (
-    <section className="mx-auto grid w-full max-w-6xl overflow-clip rounded-[28px] bg-white shadow-[0_30px_80px_rgb(23_23_23_/_12%)] ring-1 ring-gray-200/70 lg:grid-cols-[1.05fr_1fr]">
+    <section className="mx-auto grid w-full max-w-2xl overflow-clip rounded-[28px] lg:max-w-6xl bg-white shadow-[0_30px_80px_rgb(23_23_23_/_12%)] ring-1 ring-gray-200/70 lg:grid-cols-[1.05fr_1fr]">
       <AuthShowcase
         eyebrow={t('login.eyebrow')}
         title={t('auth.loginTitle')}

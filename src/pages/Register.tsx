@@ -240,7 +240,7 @@ function Register() {
   // ✅ Qadam 1: role select
   if (!role) {
     return (
-      <section className="mx-auto grid w-full max-w-6xl overflow-clip rounded-[28px] bg-white shadow-[0_30px_80px_rgb(23_23_23_/_12%)] ring-1 ring-gray-200/70 lg:grid-cols-[1fr_1.15fr]">
+      <section className="mx-auto grid w-full max-w-2xl overflow-clip rounded-[28px] lg:max-w-6xl bg-white shadow-[0_30px_80px_rgb(23_23_23_/_12%)] ring-1 ring-gray-200/70 lg:grid-cols-[1fr_1.15fr]">
         <AuthShowcase
           eyebrow={t('auth.joinEyebrow')}
           title={t('auth.registerTitle')}
@@ -340,7 +340,7 @@ function Register() {
 
   // ✅ Qadam 2: form
   return (
-    <section className="mx-auto grid w-full max-w-6xl overflow-clip rounded-[28px] bg-white shadow-[0_30px_80px_rgb(23_23_23_/_12%)] ring-1 ring-gray-200/70 lg:grid-cols-[1fr_1.15fr]">
+    <section className="mx-auto grid w-full max-w-2xl overflow-clip rounded-[28px] lg:max-w-6xl bg-white shadow-[0_30px_80px_rgb(23_23_23_/_12%)] ring-1 ring-gray-200/70 lg:grid-cols-[1fr_1.15fr]">
       <AuthShowcase
         eyebrow={t('auth.joinEyebrow')}
         title={t('register.signUpAs', { type: option.label })}

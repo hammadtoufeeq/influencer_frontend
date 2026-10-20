@@ -16,7 +16,8 @@ const POINTS: { icon: IconDefinition; title: string; body: string }[] = [
   { icon: faFileSignature, title: 'home.b3', body: 'home.b3b' },
 ]
 
-// Login / signup ka left panel: Home ke hero jaisa andhera, heading aur khoobiyan
+// Login / signup ka left panel: Home ke hero jaisa andhera, heading aur khoobiyan.
+// Sirf bari screen (1024px+) pe; tablet aur mobile pe seedha form
 function AuthShowcase({
   eyebrow,
   title,
@@ -31,7 +32,7 @@ function AuthShowcase({
   const { t } = useTranslation()
 
   return (
-    <aside className="keep-dark relative isolate flex flex-col overflow-clip bg-brand-plum px-6 py-7 text-white sm:px-10 sm:py-10 lg:min-h-[660px]">
+    <aside className="keep-dark relative isolate hidden flex-col overflow-clip bg-brand-plum px-10 py-10 text-white lg:flex lg:min-h-[660px]">
       {/* Peeche: halki tasveer, roshni ke dhabbe, neeche andhera */}
       <img
         src={BG_IMAGE}
@@ -71,8 +72,8 @@ function AuthShowcase({
           </p>
           {children}
 
-          {/* Khoobiyan: sirf bari screen pe (mobile pe form jaldi nazar aaye) */}
-          <ul className="mt-10 hidden space-y-5 lg:block">
+          {/* Khoobiyan */}
+          <ul className="mt-10 space-y-5">
             {POINTS.map((point, i) => (
               <li
                 key={point.title}
