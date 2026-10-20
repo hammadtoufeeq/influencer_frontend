@@ -88,7 +88,7 @@ function ClaimAction({ person }: { person: Person }) {
   // 7. Talent jis ki koi profile nahi
   return (
     <Link to={`/people/${person.slug}/claim`} className={outline}>
-      Is this you? Claim
+      {t('claimAction.claim')}
     </Link>
   )
 }

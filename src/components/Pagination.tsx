@@ -40,7 +40,7 @@ function Pagination({ page, totalPages, onChange }: PaginationProps) {
 
   return (
     <nav
-      aria-label="Pagination"
+      aria-label={t('common.pagination')}
       className="mt-10 flex flex-wrap items-center justify-center gap-2"
     >
       <button className={btn} disabled={page <= 1} onClick={() => onChange(page - 1)}>

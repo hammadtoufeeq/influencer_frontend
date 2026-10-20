@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { taxName } from '../../utils/taxonomy'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import type { TaxonomyItem } from '../../types/person'
@@ -15,7 +16,7 @@ interface TaxonomyPickerProps {
 function TaxonomyPicker({ label, items, selected, onChange, error }: TaxonomyPickerProps) {
   const { t } = useTranslation()
   const available = items.filter((item) => !selected.includes(item.slug))
-  const nameOf = (slug: string) => items.find((item) => item.slug === slug)?.name ?? slug
+  const nameOf = (slug: string) => (() => { const item = items.find((i) => i.slug === slug); return item ? taxName(item) : slug })()
 
   return (
     <div>
@@ -48,7 +49,7 @@ function TaxonomyPicker({ label, items, selected, onChange, error }: TaxonomyPic
         <option value="">{t('oldAdmin.add', { what: label.toLowerCase() })}</option>
         {available.map((item) => (
           <option key={item._id} value={item.slug}>
-            {item.name}
+            {taxName(item)}
           </option>
         ))}
       </select>

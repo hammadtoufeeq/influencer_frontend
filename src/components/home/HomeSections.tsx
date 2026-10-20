@@ -108,7 +108,16 @@ export function CountUp({ value }: { value: number }) {
 }
 
 // Profile photo; falls back to a gradient with initials
-export function Photo({ person, className }: { person: PersonSummary; className: string }) {
+export function Photo({
+  person,
+  className,
+  fallbackClass = 'items-center',
+}: {
+  person: PersonSummary
+  className: string
+  // Photo na ho to initials kahan: card mein naam neeche hota hai, is liye upar
+  fallbackClass?: string
+}) {
   const [failed, setFailed] = useState(false)
   if (person.photoUrl && !failed) {
     return (
@@ -125,7 +134,7 @@ export function Photo({ person, className }: { person: PersonSummary; className:
   return (
     <div
       aria-hidden="true"
-      className={`${className} keep-dark flex items-center justify-center bg-gradient-to-br from-gray-600 to-gray-900 text-lg font-bold text-white`}
+      className={`${className} keep-dark flex justify-center bg-gradient-to-br from-gray-600 to-gray-900 text-lg font-bold text-white ${fallbackClass}`}
     >
       {initials(person.name)}
     </div>
@@ -201,6 +210,7 @@ function Showcase({
   flip?: boolean
   children: ReactNode
 }) {
+  const { t } = useTranslation()
   return (
     <div
       className={`grid min-w-0 grid-cols-1 items-center gap-6 sm:gap-8 md:grid-cols-2 md:gap-14 ${
@@ -222,7 +232,7 @@ function Showcase({
       <Reveal delay={150} className="min-w-0 w-full">
         <div className="relative w-full min-w-0 rounded-2xl bg-gradient-to-br from-gray-100 to-gray-50 p-3 ring-1 ring-gray-100 sm:rounded-3xl sm:p-5">
           <span className="absolute end-3 top-2 text-[10px] text-gray-400 sm:end-4 sm:top-3 sm:text-[11px]">
-            Example
+            {t('home.example')}
           </span>
           <div className="space-y-2.5 pt-4 sm:space-y-3">{children}</div>
         </div>
@@ -298,22 +308,22 @@ export function FeatureShowcase({ people }: { people: PersonSummary[] }) {
       >
         <MockRow
           person={a}
-          title="Creator"
-          note={a?.headline ?? 'Technology · Pakistan'}
+          title={d('home.mockCreator', 'Creator')}
+          note={a?.headline ?? d('home.mockNote1', 'Technology · Pakistan')}
           delay={0}
           tag={<span className={`${pill} bg-green-100 text-green-700`}>{d('home.openToWork', 'Open to work')}</span>}
         />
         <MockRow
           person={b}
-          title="Creator"
-          note={b?.headline ?? 'Media & News · Pakistan'}
+          title={d('home.mockCreator', 'Creator')}
+          note={b?.headline ?? d('home.mockNote2', 'Media & News · Pakistan')}
           delay={120}
           tag={<FontAwesomeIcon icon={faCircleCheck} className="text-sky-500" />}
         />
         <MockRow
           person={c}
-          title="Creator"
-          note={c?.headline ?? 'Entertainment · Pakistan'}
+          title={d('home.mockCreator', 'Creator')}
+          note={c?.headline ?? d('home.mockNote3', 'Entertainment · Pakistan')}
           delay={240}
           tag={<FontAwesomeIcon icon={faCircleCheck} className="text-sky-500" />}
         />
@@ -329,9 +339,9 @@ export function FeatureShowcase({ people }: { people: PersonSummary[] }) {
           d('home.fShortlist3', 'Hire straight from the list'),
         ]}
       >
-        <MockRow title="Summer launch" note="3 people saved" delay={0} tag={<span className={`${pill} animate-pulse bg-gray-900 text-white`}>Compare</span>} />
-        <MockRow person={b} title="Creator" note="“Great fit for the reel”" delay={120} tag={<FontAwesomeIcon icon={faCheck} className="text-green-500" />} />
-        <MockRow person={c} title="Creator" note="“Ask about rates”" delay={240} />
+        <MockRow title={d('home.mockList', 'Summer launch')} note={d('home.mockSaved', '3 people saved')} delay={0} tag={<span className={`${pill} animate-pulse bg-gray-900 text-white`}>{d('home.mockCompare', 'Compare')}</span>} />
+        <MockRow person={b} title={d('home.mockCreator', 'Creator')} note={d('home.mockNoteFit', '“Great fit for the reel”')} delay={120} tag={<FontAwesomeIcon icon={faCheck} className="text-green-500" />} />
+        <MockRow person={c} title={d('home.mockCreator', 'Creator')} note={d('home.mockNoteRates', '“Ask about rates”')} delay={240} />
       </Showcase>
 
       <Showcase
@@ -346,11 +356,11 @@ export function FeatureShowcase({ people }: { people: PersonSummary[] }) {
         <Reveal>
           <div className="rounded-2xl bg-white p-3 shadow-sm ring-1 ring-gray-100 sm:p-4">
             <div className="flex items-center justify-between gap-2">
-              <p className="text-sm font-semibold sm:text-base">Product launch reel</p>
-              <span className={`${pill} bg-green-100 text-green-700`}>Open</span>
+              <p className="text-sm font-semibold sm:text-base">{d('home.mockCampaign', 'Product launch reel')}</p>
+              <span className={`${pill} bg-green-100 text-green-700`}>{d('home.mockOpen', 'Open')}</span>
             </div>
             <p className="mt-1 text-[11px] text-gray-500 sm:text-xs">
-              18 applications · 3 of 5 slots filled
+              {d('home.mockApplications', '18 applications · 3 of 5 slots filled')}
             </p>
             <div className="mt-3">
               <Progress percent={60} />
@@ -359,10 +369,10 @@ export function FeatureShowcase({ people }: { people: PersonSummary[] }) {
         </Reveal>
         <MockRow
           person={a}
-          title="Creator"
-          note="“I'd love to cover this…”"
+          title={d('home.mockCreator', 'Creator')}
+          note={d('home.mockPitch', '“I would love to cover this…”')}
           delay={150}
-          tag={<span className={`${pill} bg-green-100 text-green-700`}>Accepted</span>}
+          tag={<span className={`${pill} bg-green-100 text-green-700`}>{d('home.mockAccepted', 'Accepted')}</span>}
         />
       </Showcase>
 
@@ -376,10 +386,10 @@ export function FeatureShowcase({ people }: { people: PersonSummary[] }) {
           d('home.fAgreement3', 'Reviews after the work is done'),
         ]}
       >
-        <MockRow title="1. Script approved" note="Delivered and approved" delay={0} tag={<FontAwesomeIcon icon={faCheck} className="text-green-500" />} />
+        <MockRow title={d('home.mockMilestone1', '1. Script approved')} note={d('home.mockMilestone1Note', 'Delivered and approved')} delay={0} tag={<FontAwesomeIcon icon={faCheck} className="text-green-500" />} />
         <MockRow
-          title="2. Video delivered"
-          note="Waiting for approval"
+          title={d('home.mockMilestone2', '2. Video delivered')}
+          note={d('home.mockMilestone2Note', 'Waiting for approval')}
           delay={120}
           tag={
             <span className="relative flex h-2.5 w-2.5">
@@ -388,7 +398,7 @@ export function FeatureShowcase({ people }: { people: PersonSummary[] }) {
             </span>
           }
         />
-        <MockRow title="Signed by both sides" note="Terms locked" delay={240} tag={<FontAwesomeIcon icon={faFileSignature} className="text-gray-900" />} />
+        <MockRow title={d('home.mockSigned', 'Signed by both sides')} note={d('home.mockLocked', 'Terms locked')} delay={240} tag={<FontAwesomeIcon icon={faFileSignature} className="text-gray-900" />} />
       </Showcase>
     </section>
   )

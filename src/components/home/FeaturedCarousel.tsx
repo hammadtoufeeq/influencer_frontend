@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { taxName } from '../../utils/taxonomy'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -19,7 +20,7 @@ const CARD_WIDTH = 'w-[78%] sm:w-[calc((100%-1rem)/2)] lg:w-[calc((100%-3rem)/4)
 // Ek profile card: followers, engagement aur niche (pehla pesha)
 function FeaturedCard({ person }: { person: PersonSummary }) {
   const { t } = useTranslation()
-  const niche = person.professions[0]?.name
+  const niche = person.professions[0] && taxName(person.professions[0])
   return (
     <Link
       to={`/people/${person.slug}`}

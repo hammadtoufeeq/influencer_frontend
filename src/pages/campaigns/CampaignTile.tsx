@@ -53,9 +53,9 @@ function useDaysLeft(deadline?: string) {
 function useDaysLabel(days: number | null) {
   const { t } = useTranslation();
   if (days === null || days < 0) return null;
-  const text =
-    days === 0 ? "Last day" : days === 1 ? "1 day left" : `${days} days left`;
-  return t("campaigns.daysLeft", { count: days, defaultValue: text });
+  if (days === 0) return t("campaigns.lastDay");
+  if (days === 1) return t("campaigns.oneDayLeft");
+  return t("campaigns.daysLeft", { days });
 }
 
 // Bar that fills when it scrolls into view
@@ -162,7 +162,7 @@ export function CampaignTile({ campaign }: { campaign: Campaign }) {
         </div>
 
         <span className="mt-4 flex items-center justify-between border-t border-gray-100 pt-4 text-sm font-semibold text-gray-900">
-          {t("campaigns.viewDetails", { defaultValue: "View & apply" })}
+          {t("campaigns.viewDetails")}
           <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-xs transition duration-300 group-hover:translate-x-1 group-hover:bg-gray-900 group-hover:text-white rtl:group-hover:-translate-x-1">
             <FontAwesomeIcon icon={faArrowRight} className="rtl:rotate-180" />
           </span>
@@ -197,7 +197,7 @@ export function CampaignSpotlight({ campaign }: { campaign: Campaign }) {
         <div>
           <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-semibold text-gray-900">
             <FontAwesomeIcon icon={faBolt} />
-            {t("campaigns.spotlight", { defaultValue: "Spotlight" })}
+            {t("campaigns.spotlight")}
           </span>
           {business && (
             <p className="mt-5 flex items-center gap-3 text-sm text-white/80">
@@ -257,7 +257,7 @@ export function CampaignSpotlight({ campaign }: { campaign: Campaign }) {
             </p>
           </div>
           <span className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 transition group-hover:scale-105">
-            {t("campaigns.viewDetails", { defaultValue: "View & apply" })}
+            {t("campaigns.viewDetails")}
             <FontAwesomeIcon
               icon={faArrowRight}
               className="text-xs transition group-hover:translate-x-1 rtl:rotate-180"

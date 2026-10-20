@@ -47,7 +47,7 @@ function AdminPersonEditor() {
     },
   })
 
-  if (!isNew && isLoading) return <p className="text-gray-500">Loading...</p>
+  if (!isNew && isLoading) return <p className="text-gray-500">{t('common.loading')}</p>
   if (!isNew && (isError || !person)) return <p className="text-red-600">{t('profile.notFound')}</p>
 
   // Claimed profile: admin edit nahi kar sakta (backend bhi rokta hai)

@@ -37,7 +37,7 @@ function EditMyProfile() {
     },
   })
 
-  if (isLoading) return <p className="text-gray-500">Loading...</p>
+  if (isLoading) return <p className="text-gray-500">{t('common.loading')}</p>
   // Profile claim nahi hui to edit ka sawal hi nahi
   if (!profile) return <Navigate to="/dashboard" replace />
 

@@ -161,7 +161,7 @@ function AdminDashboard() {
             </select>
           </div>
 
-          {isLoading && <p className="text-gray-500">Loading...</p>}
+          {isLoading && <p className="text-gray-500">{t('common.loading')}</p>}
 
           {data && data.people.length === 0 && (
             <p className="rounded-2xl border border-dashed border-gray-300 p-8 text-center text-gray-500">

@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { taxName } from '../../utils/taxonomy'
 import { Link } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -33,7 +34,11 @@ function TalentCard({ person }: { person: PersonSummary }) {
         onMouseEnter={() => queryClient.prefetchQuery(personQuery(person.slug))}
         className="keep-dark relative block aspect-[4/5] overflow-hidden rounded-3xl bg-brand-plum text-white shadow-md transition duration-500 hover:-translate-y-1.5 hover:shadow-2xl"
       >
-        <Photo person={person} className="h-full w-full transition duration-700 group-hover:scale-105" />
+        <Photo
+          person={person}
+          className="h-full w-full transition duration-700 group-hover:scale-105"
+          fallbackClass="items-start pt-[24%] text-3xl text-white/80"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
 
         {isOpen && (
@@ -50,7 +55,7 @@ function TalentCard({ person }: { person: PersonSummary }) {
           </p>
           {person.headline && <p className="mt-1 line-clamp-2 text-xs text-white/80">{person.headline}</p>}
           <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-white/70">
-            {person.professions[0] && <span>{person.professions.map((p) => p.name).join(' · ')}</span>}
+            {person.professions[0] && <span>{person.professions.map(taxName).join(' · ')}</span>}
             {location && (
               <span>
                 <FontAwesomeIcon icon={faLocationDot} className="me-1" />

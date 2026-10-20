@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { taxName } from '../utils/taxonomy'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot, faUsers, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
@@ -80,7 +81,7 @@ function PersonCard({ person }: { person: PersonSummary }) {
 
           {person.professions.length > 0 && (
             <p className="mt-2 text-xs font-medium text-gray-500">
-              {person.professions.map((p) => p.name).join(' · ')}
+              {person.professions.map(taxName).join(' · ')}
             </p>
           )}
 

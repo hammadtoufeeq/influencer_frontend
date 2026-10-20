@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { taxName } from '../utils/taxonomy'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faGlobe, faLanguage, faLocationDot, faUserTie } from '@fortawesome/free-solid-svg-icons'
 import { Link, useParams } from 'react-router-dom'
@@ -33,7 +34,7 @@ function TagList({ title, items, param }: { title: string; items: TaxonomyItem[]
             to={`/search?${param}=${item.slug}`}
             className="rounded-full bg-gray-100 px-3 py-1 text-sm hover:bg-gray-200"
           >
-            {item.name}
+            {taxName(item)}
           </Link>
         ))}
       </div>

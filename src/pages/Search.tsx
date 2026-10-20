@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { taxName } from '../utils/taxonomy'
 import { useEffect, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { Link, useSearchParams } from "react-router-dom";
@@ -213,7 +214,7 @@ function Search() {
 
   const get = (name: string) => searchParams.get(name) ?? "";
   const toOptions = (items?: { slug: string; name: string }[]): Option[] =>
-    items?.map((item) => ({ value: item.slug, label: item.name })) ?? [];
+    items?.map((item) => ({ value: item.slug, label: taxName(item) })) ?? [];
   const activeFilters = FILTER_KEYS.filter((key) =>
     searchParams.get(key),
   ).length;
@@ -495,7 +496,7 @@ function Search() {
                         : "border-white/25 bg-white/10 text-white/90 hover:bg-white/20"
                     }`}
                   >
-                    {p.name}
+                    {taxName(p)}
                   </button>
                 );
               })}
@@ -616,7 +617,7 @@ function Search() {
           >
             <button
               type="button"
-              aria-label="Close"
+              aria-label={t('common.close')}
               onClick={() => setShowFilters(false)}
               className="absolute inset-0 animate-fade bg-black/60"
             />

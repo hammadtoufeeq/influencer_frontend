@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react'
+import { taxName } from '../utils/taxonomy'
+import Sentence from '../components/admin-panel/Sentence'
+import { MARK } from '../components/admin-panel/sentenceSlots'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
@@ -84,7 +87,7 @@ function RotatingWord({ words }: { words: string[] }) {
   return (
     <span
       key={i}
-      className="inline-block animate-word bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent"
+      className="inline-block animate-word bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent rtl:bg-gradient-to-l"
     >
       {words[i]}
     </span>
@@ -168,7 +171,7 @@ function Home() {
   const sub = (p: PersonSummary) =>
     p.totalFollowers > 0
       ? t('site.followers', { value: formatCount(p.totalFollowers) })
-      : (p.professions[0]?.name ?? '')
+      : (p.professions[0] ? taxName(p.professions[0]) : '')
   const { user } = useAuth()
   const { data: industries } = useTaxonomy('industries')
   const [tab, setTab] = useState<'brands' | 'talent' | 'managers'>('brands')
@@ -314,7 +317,11 @@ function Home() {
               {t('home.subtitle')}
             </p>
             <p className="mt-5 font-display text-xl font-bold text-white sm:text-2xl md:text-3xl">
-              {d('home.findTop', 'Find top')} <RotatingWord words={words} />
+              {/* Poora jumla translation se: Urdu / Arabic mein lafz apni sahi jagah aata hai */}
+              <Sentence
+                template={t('home.findTopTemplate', { word: `${MARK}word${MARK}` })}
+                parts={{ word: <RotatingWord words={words} /> }}
+              />
             </p>
 
             <div className="mx-auto mt-6 max-w-xl lg:mx-0">
@@ -328,7 +335,7 @@ function Home() {
               </Link>
               {industries?.slice(0, 3).map((industry) => (
                 <Link key={industry._id} to={`/search?industry=${industry.slug}`} className={chip}>
-                  {industry.name}
+                  {taxName(industry)}
                 </Link>
               ))}
             </div>
@@ -438,7 +445,7 @@ function Home() {
                   <Reveal key={industry._id} delay={(i % 4) * 80}>
                     <IndustryTile
                       to={`/search?industry=${industry.slug}`}
-                      name={industry.name}
+                      name={taxName(industry)}
                       index={i}
                     />
                   </Reveal>

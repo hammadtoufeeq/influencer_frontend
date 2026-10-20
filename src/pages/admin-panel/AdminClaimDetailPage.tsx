@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { taxName } from '../../utils/taxonomy'
 import { Link, useParams } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
@@ -202,13 +203,13 @@ function AdminClaimDetailPage() {
                     ],
                     [
                       t('personForm.professions'),
-                      claim.person.professions?.map((x) => x.name).join(', '),
+                      claim.person.professions?.map(taxName).join(', '),
                     ],
                     [
                       t('personForm.industries'),
-                      claim.person.industries?.map((x) => x.name).join(', '),
+                      claim.person.industries?.map(taxName).join(', '),
                     ],
-                    [t('personForm.topics'), claim.person.topics?.map((x) => x.name).join(', ')],
+                    [t('personForm.topics'), claim.person.topics?.map(taxName).join(', ')],
                     [t('personForm.website'), claim.person.websiteUrl],
                   ]
                     .filter(([, value]) => value)

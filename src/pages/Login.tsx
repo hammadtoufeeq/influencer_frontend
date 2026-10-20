@@ -69,7 +69,7 @@ function Login() {
       {/* ✅ Left aside — keep-dark (hamesha dark + white text) */}
       <div className="keep-dark relative flex min-h-[540px] flex-col overflow-hidden bg-gray-900 px-[34px] py-[42px] text-white max-md:min-h-0 max-md:px-6 max-md:py-[26px] max-md:pb-[30px] before:absolute before:-right-[110px] before:-top-[90px] before:h-[290px] before:w-[290px] before:rounded-full before:bg-[#e85d3f] before:opacity-90 after:absolute after:-bottom-[110px] after:-right-[70px] after:h-[250px] after:w-[250px] after:rounded-full after:border after:border-white/20">
         <span className="relative z-10 text-[0.7rem] font-bold tracking-[0.2em] text-[#f8a08e]">
-          WELCOME BACK
+          {t('login.eyebrow')}
         </span>
         {/* Icon — mt-auto (bottom push) */}
         <span className="relative z-10 mt-auto flex h-[54px] w-[54px] items-center justify-center rounded-[17px] bg-[#e85d3f] text-[1.2rem] max-md:mt-7">
@@ -95,7 +95,7 @@ function Login() {
           <span className="inline-flex h-[25px] w-[25px] items-center justify-center rounded-full bg-gray-900 text-white">
             <FontAwesomeIcon icon={faRightToBracket} className="text-[10px]" />
           </span>
-          <span>SECURE SIGN IN</span>
+          <span>{t('login.secure')}</span>
         </div>
         <h2 className="mt-5 font-display text-[clamp(1.75rem,3vw,2.35rem)] font-bold tracking-[-0.04em] text-gray-900">
           {t('login.title')}

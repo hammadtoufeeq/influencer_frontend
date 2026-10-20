@@ -1,4 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react'
+import { taxName } from '../utils/taxonomy'
 import { createPortal } from 'react-dom'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
@@ -248,7 +249,7 @@ function Browse() {
   const term = filter.trim().toLowerCase()
   const visible = (label: string) => !term || label.toLowerCase().includes(term)
   const toItems = (items: { _id: string; name: string; slug: string }[] = []) =>
-    items.map((item) => ({ key: item.slug, label: item.name })).filter((i) => visible(i.label))
+    items.map((item) => ({ key: item.slug, label: taxName(item) })).filter((i) => visible(i.label))
 
   const industryItems = toItems(industries)
   const professionItems = toItems(professions)

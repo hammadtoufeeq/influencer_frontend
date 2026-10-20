@@ -19,7 +19,7 @@ function AdminPager({ page, limit, total, onChange }: AdminPagerProps) {
     'inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-sm hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40'
 
   return (
-    <nav className="mt-4 flex items-center justify-between gap-3" aria-label="Pagination">
+    <nav className="mt-4 flex items-center justify-between gap-3" aria-label={t('common.pagination')}>
       <button className={button} disabled={page <= 1} onClick={() => onChange(page - 1)}>
         <FontAwesomeIcon icon={faChevronLeft} className="text-xs rtl:rotate-180" />
         {t('common.previous')}
