@@ -291,9 +291,8 @@ function About() {
                   key={p._id}
                   to={`/people/${p.slug}`}
                   style={{ animationDelay: `${i * -2.2}s` }}
-                  className={`relative block animate-float overflow-hidden rounded-3xl shadow-2xl ring-4 ring-white ${
-                    ["mt-8 aspect-[3/4]", "", "mt-12 aspect-[3/4]"][i]
-                  }`}
+                  className={`relative block animate-float overflow-hidden rounded-3xl shadow-2xl ring-4 ring-white ${["mt-8 aspect-[3/4]", "", "mt-12 aspect-[3/4]"][i]
+                    }`}
                 >
                   <Photo person={p} className="absolute inset-0 h-full w-full" />
                 </Link>
@@ -312,33 +311,33 @@ function About() {
       </section>
 
       {/* How it works */}
-   {/* How it works */}
-<section>
-  <Heading title={t('about.howTitle')} sub={t('about.howSubtitle')} />
-  <ol className="relative mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-    {/* ✅ Line — cards ke vertical center par, peeche */}
-    <span
-      aria-hidden="true"
-      className="pointer-events-none absolute inset-x-[12%] top-1/2 -z-10 hidden h-0.5 -translate-y-1/2 bg-gradient-to-r from-gray-900 via-gray-400 to-gray-900 lg:block"
-    />
-    {steps.map((step, i) => (
-      <li key={step.title} className="relative">
-        <Reveal delay={i * 150} className="h-full">
-          <div className="relative h-full rounded-3xl bg-white p-6 text-center shadow-sm ring-1 ring-gray-100 transition duration-300 hover:-translate-y-1.5 hover:shadow-xl">
-            <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gray-900 text-lg text-white shadow-lg">
-              <FontAwesomeIcon icon={step.icon} />
-            </span>
-            <p className="mt-3 text-xs font-semibold tracking-wider text-gray-400">
-              0{i + 1}
-            </p>
-            <h3 className="mt-1 font-display text-lg font-bold">{step.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-gray-600">{step.body}</p>
-          </div>
-        </Reveal>
-      </li>
-    ))}
-  </ol>
-</section>
+      {/* How it works */}
+      <section>
+        <Heading title={t('about.howTitle')} sub={t('about.howSubtitle')} />
+        <ol className="relative mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {/* ✅ Line — cards ke vertical center par, peeche */}
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-[12%] top-1/2 -z-10 hidden h-0.5 -translate-y-1/2 bg-gradient-to-r from-gray-900 via-gray-400 to-gray-900 lg:block"
+          />
+          {steps.map((step, i) => (
+            <li key={step.title} className="relative">
+              <Reveal delay={i * 150} className="h-full">
+                <div className="relative h-full rounded-3xl bg-white p-6 text-center shadow-sm ring-1 ring-gray-100 transition duration-300 hover:-translate-y-1.5 hover:shadow-xl">
+                  <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gray-900 text-lg text-white shadow-lg">
+                    <FontAwesomeIcon icon={step.icon} />
+                  </span>
+                  <p className="mt-3 text-xs font-semibold tracking-wider text-gray-400">
+                    0{i + 1}
+                  </p>
+                  <h3 className="mt-1 font-display text-lg font-bold">{step.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-gray-600">{step.body}</p>
+                </div>
+              </Reveal>
+            </li>
+          ))}
+        </ol>
+      </section>
 
       {/* Statement band with a picture */}
       <Reveal>
@@ -416,16 +415,14 @@ function About() {
             return (
               <Reveal key={audience.key} delay={i * 120} className="h-full">
                 <div
-                  className={`flex h-full flex-col rounded-3xl p-6 transition duration-300 hover:-translate-y-2 hover:shadow-2xl md:p-8 ${
-                    dark
+                  className={`flex h-full flex-col rounded-3xl p-6 transition duration-300 hover:-translate-y-2 hover:shadow-2xl md:p-8 ${dark
                       ? "keep-dark bg-gray-900 text-white"
                       : "bg-white shadow-sm ring-1 ring-gray-100"
-                  }`}
+                    }`}
                 >
                   <span
-                    className={`flex h-12 w-12 items-center justify-center rounded-xl ${
-                      dark ? "bg-white text-gray-900" : "bg-gray-900 text-white"
-                    }`}
+                    className={`flex h-12 w-12 items-center justify-center rounded-xl ${dark ? "bg-white text-gray-900" : "bg-gray-900 text-white"
+                      }`}
                   >
                     <FontAwesomeIcon icon={audience.icon} />
                   </span>
@@ -453,11 +450,10 @@ function About() {
                   {!user && (
                     <Link
                       to={`/register?type=${audience.type}`}
-                      className={`mt-6 inline-flex items-center gap-2 self-start rounded-xl px-4 py-2.5 text-sm font-medium transition hover:scale-105 ${
-                        dark
+                      className={`mt-6 inline-flex items-center gap-2 self-start rounded-xl px-4 py-2.5 text-sm font-medium transition hover:scale-105 ${dark
                           ? "bg-white text-gray-900 hover:bg-gray-100"
                           : "bg-gray-900 text-white hover:bg-gray-800"
-                      }`}
+                        }`}
                     >
                       {t(`about.for.${audience.key}Join`)}
                       <FontAwesomeIcon
@@ -522,9 +518,8 @@ function About() {
                   />
                 </button>
                 <div
-                  className={`grid transition-[grid-template-rows] duration-300 ${
-                    openFaq === i ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                  }`}
+                  className={`grid transition-[grid-template-rows] duration-300 ${openFaq === i ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                    }`}
                 >
                   <p className="overflow-hidden px-5 text-sm leading-relaxed text-gray-600">
                     <span className="block pb-5">{faq.a}</span>
