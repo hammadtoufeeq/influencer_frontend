@@ -99,12 +99,9 @@ function CampaignsPage() {
       </Link>
     ) : null;
 
-  // First campaign gets the big dark card (only on the plain first page)
-  const spotlight =
-    data && page === 1 && !filtered && data.items.length >= 3
-      ? data.items[0]
-      : null;
-  const gridItems = data ? (spotlight ? data.items.slice(1) : data.items) : [];
+  // Saari khuli campaigns grid mein (pehle pehli campaign "spotlight" ke liye nikalti thi
+  // magar dikhti nahi thi, is liye gayab ho jati thi)
+  const gridItems = data?.items ?? [];
 
   let results: ReactNode;
   if (isLoading) {

@@ -2507,7 +2507,8 @@
     "viewDetails": "View & apply",
     "lastDay": "Last day",
     "oneDayLeft": "1 day left",
-    "daysLeft": "{{days}} days left"
+    "daysLeft": "{{days}} days left",
+    "deadlinePassed": "Deadline passed · not on the Campaigns page"
   },
   "reviews": {
     "ratingTitle": "Rated {{average}} out of 5 by {{count}} business(es)",

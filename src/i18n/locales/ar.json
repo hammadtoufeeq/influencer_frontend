@@ -2507,7 +2507,8 @@
     "viewDetails": "عرض وتقديم",
     "lastDay": "اليوم الأخير",
     "oneDayLeft": "يوم واحد متبقٍ",
-    "daysLeft": "متبقٍ {{days}} أيام"
+    "daysLeft": "متبقٍ {{days}} أيام",
+    "deadlinePassed": "انتهى الموعد · غير ظاهرة في صفحة الحملات"
   },
   "reviews": {
     "ratingTitle": "تقييم {{average}} من 5 من {{count}} جهة",

@@ -81,6 +81,12 @@ function MyCampaignsPage() {
                     <div className="flex flex-wrap items-center gap-2">
                       <h2 className="font-semibold text-gray-900">{campaign.title}</h2>
                       <CampaignStatusBadge status={campaign.status} />
+                      {/* Open hai magar "Apply by" guzar gayi: public Campaigns page pe nahi dikhti */}
+                      {campaign.status === 'open' && !campaign.acceptingApplications && (
+                        <span className="rounded-full bg-amber-50 px-2.5 py-0.5 text-xs font-medium text-amber-800 ring-1 ring-amber-200">
+                          {t('campaigns.deadlinePassed')}
+                        </span>
+                      )}
                     </div>
                     <p className="mt-0.5 text-xs text-gray-500">
                       {t(`services.category.${campaign.category}`)} ·{' '}

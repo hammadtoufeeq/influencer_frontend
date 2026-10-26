@@ -2507,7 +2507,8 @@
     "viewDetails": "دیکھیں اور اپلائی کریں",
     "lastDay": "آخری دن",
     "oneDayLeft": "1 دن باقی",
-    "daysLeft": "{{days}} دن باقی"
+    "daysLeft": "{{days}} دن باقی",
+    "deadlinePassed": "آخری تاریخ گزر گئی · کیمپینز صفحے پر نہیں"
   },
   "reviews": {
     "ratingTitle": "{{count}} بزنس کی جانب سے 5 میں سے {{average}} ریٹنگ",
