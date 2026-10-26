@@ -935,7 +935,11 @@
     "noMetrics": "تظهر أرقام الجمهور بعد أن يطالب صاحب الملف به ويتحقق منه.",
     "sourceLabel": "المصدر:",
     "photoLabel": "الصورة:",
-    "noMetricsClaimed": "لم تُضَف أرقام الجمهور بعد."
+    "noMetricsClaimed": "لم تُضَف أرقام الجمهور بعد.",
+    "viewPhoto": "عرض صورة {{name}}",
+    "platforms": "المنصات",
+    "reviewsCount": "{{count}} تقييم",
+    "statusLabel": "حالة الملف"
   },
   "register": {
     "title": "أنشئ حسابك",

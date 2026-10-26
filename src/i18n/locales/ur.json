@@ -935,7 +935,11 @@
     "noMetrics": "جب یہ شخص پروفائل کلیم اور تصدیق کرے گا تو آڈینس کے اعداد یہاں آئیں گے۔",
     "sourceLabel": "ذریعہ:",
     "photoLabel": "تصویر:",
-    "noMetricsClaimed": "آڈینس کے اعداد ابھی شامل نہیں کیے گئے۔"
+    "noMetricsClaimed": "آڈینس کے اعداد ابھی شامل نہیں کیے گئے۔",
+    "viewPhoto": "{{name}} کی تصویر دیکھیں",
+    "platforms": "پلیٹ فارمز",
+    "reviewsCount": "{{count}} ریویوز",
+    "statusLabel": "پروفائل کی حالت"
   },
   "register": {
     "title": "اپنا اکاؤنٹ بنائیں",

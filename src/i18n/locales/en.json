@@ -935,7 +935,11 @@
     "noMetrics": "Audience numbers appear once the person claims and verifies this profile.",
     "sourceLabel": "Source:",
     "photoLabel": "Photo:",
-    "noMetricsClaimed": "Audience numbers haven't been added yet."
+    "noMetricsClaimed": "Audience numbers haven't been added yet.",
+    "viewPhoto": "View {{name}}'s photo",
+    "platforms": "Platforms",
+    "reviewsCount": "{{count}} review(s)",
+    "statusLabel": "Profile status"
   },
   "register": {
     "title": "Create your account",
