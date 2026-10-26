@@ -439,7 +439,7 @@ function Home() {
 
         <section>
           <Reveal>
-            <SectionHeader title={t('home.browseByIndustry')} to="/browse" />
+            <SectionHeader title={t('home.browseByIndustry')} />
           </Reveal>
           <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {industries
@@ -665,18 +665,21 @@ function Home() {
   )
 }
 
-function SectionHeader({ title, to }: { title: string; to: string }) {
+// "See all" sirf jab koi page ho jahan le ja sake
+function SectionHeader({ title, to }: { title: string; to?: string }) {
   const { t } = useTranslation()
   return (
     <div className="flex items-center justify-between gap-3">
       <h2 className="font-display text-2xl font-bold md:text-3xl">{title}</h2>
-      <Link
-        to={to}
-        className="inline-flex shrink-0 items-center gap-1.5 text-sm font-medium text-gray-500 hover:text-gray-900"
-      >
-        {t('home.seeAll')}
-        <FontAwesomeIcon icon={faArrowRight} className="text-[10px] rtl:rotate-180" />
-      </Link>
+      {to && (
+        <Link
+          to={to}
+          className="inline-flex shrink-0 items-center gap-1.5 text-sm font-medium text-gray-500 hover:text-gray-900"
+        >
+          {t('home.seeAll')}
+          <FontAwesomeIcon icon={faArrowRight} className="text-[10px] rtl:rotate-180" />
+        </Link>
+      )}
     </div>
   )
 }

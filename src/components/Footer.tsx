@@ -65,14 +65,6 @@ function Footer() {
       ],
     },
     {
-      title: t('footer.resources'),
-      links: [
-        { label: t('footer.howItWorks'), to: '/#how-it-works' },
-        { label: t('footer.features'), to: '/#features' },
-        { label: t('footer.faq'), to: '/#faq' },
-      ],
-    },
-    {
       title: t('footer.company'),
       links: [
         { label: t('footer.about'), to: '/about' },
@@ -131,7 +123,7 @@ function Footer() {
           {/* Link columns */}
           <nav
             aria-label={t('footer.siteLinks')}
-            className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-5 lg:col-span-8 lg:gap-8"
+            className="grid grid-cols-2 gap-6 sm:grid-cols-4 lg:col-span-8 lg:gap-8"
           >
             {columns.map((column) => (
               <div key={column.title}>
