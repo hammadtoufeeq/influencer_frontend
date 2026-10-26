@@ -8,6 +8,19 @@ This guide explains **every page, every tab and every button** in plain language
 
 ---
 
+## Test accounts
+
+Log in at https://influencer-frontend-kappa.vercel.app/login with any of these to try each kind of account.
+
+| Account | Email | Password |
+|---|---|---|
+| Admin | hammad123@gmail.com | hammad123 |
+| Business / Organization | devsyncbusiness@gmail.com | 123456789 |
+| Manager / Agent | abdullahmanager@gmail.com | 123456789 |
+| Talent | mmohid069@gmail.com | 123456789 |
+
+---
+
 ## Contents
 
 1. [The idea in one minute](#1-the-idea-in-one-minute)
