@@ -22,8 +22,25 @@ const STATUS_TONE: Record<CampaignStatus, string> = {
   closed: 'bg-gray-900 text-white',
 }
 
-export function CampaignStatusBadge({ status }: { status: CampaignStatus }) {
+// expired: "Open" hai magar "Apply by" guzar gayi -> "Deadline passed" (public page pe nahi dikhti)
+export function CampaignStatusBadge({
+  status,
+  expired = false,
+}: {
+  status: CampaignStatus
+  expired?: boolean
+}) {
   const { t } = useTranslation()
+  if (status === 'open' && expired) {
+    return (
+      <span
+        title={t('campaigns.deadlinePassedHint')}
+        className="rounded-full bg-amber-50 px-2.5 py-0.5 text-xs font-medium whitespace-nowrap text-amber-800 ring-1 ring-amber-200"
+      >
+        {t('campaigns.deadlinePassed')}
+      </span>
+    )
+  }
   return (
     <span
       className={`rounded-full px-2.5 py-0.5 text-xs font-medium whitespace-nowrap ${STATUS_TONE[status]}`}

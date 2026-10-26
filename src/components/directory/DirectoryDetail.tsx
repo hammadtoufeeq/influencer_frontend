@@ -12,23 +12,29 @@ import {
   faLocationDot,
 } from '@fortawesome/free-solid-svg-icons'
 import RatingBadge from '../agreements/RatingBadge'
+import ProfileHero, { HeroChip, type HeroStat } from '../profile/ProfileHero'
 import type { DirectoryBusiness, DirectoryManager } from '../../types/directory'
-import { countryName, initials } from '../../utils/format'
+import { countryName } from '../../utils/format'
 import { hostOf, imageOf } from './directoryUtils'
 
-// Business / manager ke page ka upar wala hissa: naam, tasdeeq, sitare, jagah, website
+// Business / manager ke page ka upar wala hissa (talent page jaisa): cover, logo / photo,
+// naam, tasdeeq, jagah, website aur neeche stats
 export function DirectoryHeader({
   entry,
   icon,
   subtitle,
   facts,
   actions,
+  stats,
+  shape = 'round',
 }: {
   entry: DirectoryBusiness | DirectoryManager
   icon: IconDefinition
   subtitle?: string
   facts?: ReactNode
   actions?: ReactNode
+  stats?: HeroStat[]
+  shape?: 'round' | 'square'
 }) {
   const { t, i18n } = useTranslation()
   const location = [entry.city, countryName(entry.country)].filter(Boolean).join(', ')
@@ -51,72 +57,62 @@ export function DirectoryHeader({
         }
 
   return (
-    <section className="rounded-2xl bg-white p-6 shadow-sm md:p-8">
-      <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
-        {imageOf(entry) ? (
-          <img
-            src={imageOf(entry)}
-            alt=""
-            loading="lazy"
-            className="h-20 w-20 shrink-0 rounded-2xl bg-gray-100 object-cover ring-1 ring-gray-200"
-          />
-        ) : (
-          <span
-            aria-hidden="true"
-            className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-gray-900 text-2xl font-semibold text-white"
-          >
-            {initials(entry.name)}
+    <ProfileHero
+      name={entry.name}
+      photo={imageOf(entry)}
+      shape={shape}
+      verified={entry.verified}
+      caption={subtitle}
+      badges={
+        <span
+          className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium ${badge.tone}`}
+        >
+          <FontAwesomeIcon icon={badge.icon} className="text-[10px]" />
+          {badge.label}
+        </span>
+      }
+      subtitle={
+        subtitle && (
+          <span className="flex items-center gap-2">
+            <FontAwesomeIcon icon={icon} className="text-sm text-gray-400" />
+            {subtitle}
           </span>
-        )}
-        <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center gap-2">
-            <h1 className="text-2xl font-bold md:text-3xl">{entry.name}</h1>
-            <span
-              className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium ${badge.tone}`}
-            >
-              <FontAwesomeIcon icon={badge.icon} className="text-[10px]" />
-              {badge.label}
-            </span>
-          </div>
-          {subtitle && (
-            <p className="mt-1 flex items-center gap-2 text-gray-600">
-              <FontAwesomeIcon icon={icon} className="text-sm text-gray-400" />
-              {subtitle}
-            </p>
-          )}
+        )
+      }
+      chips={
+        <>
           {entry.rating && (
-            <a href="#reviews" className="mt-2 inline-flex rounded-md hover:opacity-80">
-              <RatingBadge rating={entry.rating} size="md" />
+            <a href="#reviews" className="inline-flex items-center rounded-full border border-gray-200 px-3 py-1 hover:border-gray-900">
+              <RatingBadge rating={entry.rating} />
             </a>
           )}
-          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-500">
-            {location && (
-              <span>
-                <FontAwesomeIcon icon={faLocationDot} className="me-1.5 text-gray-400" />
-                {location}
-              </span>
-            )}
-            <span>
-              <FontAwesomeIcon icon={faCalendar} className="me-1.5 text-gray-400" />
-              {t('directory.joined', { date: joined })}
-            </span>
-            {facts}
-            {entry.websiteUrl && (
-              <a
-                href={entry.websiteUrl}
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                className="inline-flex items-center gap-1 font-medium text-gray-700 hover:text-gray-950 hover:underline"
-              >
-                {hostOf(entry.websiteUrl)}
-                <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-[10px]" />
-              </a>
-            )}
-          </div>
-        </div>
-        {actions && <div className="flex flex-col gap-2 sm:w-48">{actions}</div>}
-      </div>
-    </section>
+          {location && (
+            <HeroChip>
+              <FontAwesomeIcon icon={faLocationDot} className="text-gray-400" />
+              {location}
+            </HeroChip>
+          )}
+          <HeroChip>
+            <FontAwesomeIcon icon={faCalendar} className="text-gray-400" />
+            {t('directory.joined', { date: joined })}
+          </HeroChip>
+          {facts}
+          {entry.websiteUrl && (
+            <a
+              href={entry.websiteUrl}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 px-3 py-1 font-medium text-gray-800 transition hover:border-gray-900 hover:bg-gray-900 hover:text-white"
+            >
+              {hostOf(entry.websiteUrl)}
+              <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-[10px]" />
+            </a>
+          )}
+        </>
+      }
+      actions={actions}
+      stats={stats}
+    />
   )
 }
 
@@ -137,8 +133,11 @@ export function DetailState({ loading, backTo }: { loading: boolean; backTo: str
   if (loading) {
     return (
       <div className="space-y-6">
-        <div className="h-48 animate-pulse rounded-2xl bg-gray-200/70" />
-        <div className="h-64 animate-pulse rounded-2xl bg-gray-200/70" />
+        <div className="h-80 animate-pulse rounded-3xl bg-gray-200/70" />
+        <div className="grid gap-6 md:grid-cols-[1fr_340px]">
+          <div className="h-64 animate-pulse rounded-3xl bg-gray-200/70" />
+          <div className="h-64 animate-pulse rounded-3xl bg-gray-200/70" />
+        </div>
       </div>
     )
   }

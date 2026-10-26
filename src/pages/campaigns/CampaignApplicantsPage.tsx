@@ -210,7 +210,7 @@ function CampaignApplicantsPage() {
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
               <h1 className="text-xl font-bold tracking-tight md:text-2xl">{campaign.title}</h1>
-              <CampaignStatusBadge status={campaign.status} />
+              <CampaignStatusBadge status={campaign.status} expired={!campaign.acceptingApplications} />
             </div>
             <p className="mt-1 text-sm text-gray-500">
               {t(`services.category.${campaign.category}`)} ·{' '}

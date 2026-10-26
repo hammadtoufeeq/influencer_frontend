@@ -191,7 +191,7 @@ export function ReviewsSection({
   const { rating } = firstPage
 
   return (
-    <section id="reviews" className="scroll-mt-24 rounded-2xl bg-white p-6 shadow-sm">
+    <section id="reviews" className="scroll-mt-24 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-200/70">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h2 className="text-lg font-semibold">{title}</h2>
         <RatingBadge

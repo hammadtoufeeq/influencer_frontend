@@ -288,7 +288,9 @@ function CampaignDetailPage() {
               <FontAwesomeIcon icon={categoryIcon(campaign.category)} className="text-[10px]" />
               {t(`services.category.${campaign.category}`)}
             </span>
-            {campaign.status !== 'open' && <CampaignStatusBadge status={campaign.status} />}
+            {!campaign.acceptingApplications && (
+              <CampaignStatusBadge status={campaign.status} expired />
+            )}
           </div>
           <h1 className="mt-3 text-2xl font-bold tracking-tight md:text-3xl">{campaign.title}</h1>
           {campaign.publishedAt && (

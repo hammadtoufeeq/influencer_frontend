@@ -2346,7 +2346,9 @@
     "noRepresentedTalents": "Not representing any talent on the platform yet.",
     "viewBusiness": "View business",
     "viewManager": "View manager",
-    "talentsLabel": "talents represented"
+    "talentsLabel": "talents represented",
+    "completedLabel": "Completed projects",
+    "memberSince": "Member since"
   },
   "orgType": {
     "company": "Company",
@@ -2508,7 +2510,8 @@
     "lastDay": "Last day",
     "oneDayLeft": "1 day left",
     "daysLeft": "{{days}} days left",
-    "deadlinePassed": "Deadline passed · not on the Campaigns page"
+    "deadlinePassed": "Deadline passed",
+    "deadlinePassedHint": "Not shown on the Campaigns page. Change the “Apply by” date to open it again."
   },
   "reviews": {
     "ratingTitle": "Rated {{average}} out of 5 by {{count}} business(es)",

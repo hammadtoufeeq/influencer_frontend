@@ -16,7 +16,7 @@ function PublicAvailability({ availability }: { availability?: Availability }) {
   const showFrom = from && from.getTime() > openedAt
 
   return (
-    <section className="rounded-2xl bg-white p-6 shadow-sm">
+    <section className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-200/70">
       <h2 className="text-lg font-semibold">{t('services.availability')}</h2>
       <p
         className={`mt-3 inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-medium ${

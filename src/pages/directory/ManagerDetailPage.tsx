@@ -2,20 +2,28 @@ import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserTie, faUsers } from '@fortawesome/free-solid-svg-icons'
+import {
+  faArrowUpRightFromSquare,
+  faCalendarDays,
+  faLayerGroup,
+  faStar,
+  faUserTie,
+  faUsers,
+} from '@fortawesome/free-solid-svg-icons'
 import { getDirectoryReviews } from '../../api/directory'
 import { directoryReviewsQuery, managerDetailQuery } from '../../api/queries'
-import Avatar from '../../components/Avatar'
+import { Photo } from '../../components/home/HomeSections'
 import VerifiedBadge from '../../components/VerifiedBadge'
 import { ReviewsSection } from '../../components/agreements/PublicReviews'
 import { BackLink, DetailState, DirectoryHeader } from '../../components/directory/DirectoryDetail'
 import { fromTalent } from '../../components/directory/directoryUtils'
+import { DETAIL_CARD, PLATFORM_TONES, rise } from '../../components/profile/profileStyles'
 import { PLATFORM_ICONS, PLATFORM_LABELS } from '../../constants/people'
 import { formatCount } from '../../utils/format'
 
 // /managers/:id -> ek manager / agent ki public tafseel aur jin talents ko represent karta hai
 function ManagerDetailPage() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { id = '' } = useParams()
   const { data, isLoading } = useQuery(managerDetailQuery(id))
   const { data: reviews } = useQuery({ ...directoryReviewsQuery('managers', id), retry: false })
@@ -30,25 +38,39 @@ function ManagerDetailPage() {
         entry={manager}
         icon={faUserTie}
         subtitle={manager.agencyName || t('manager.independent')}
-        facts={
-          <span>
-            <FontAwesomeIcon icon={faUsers} className="me-1.5 text-gray-400" />
-            {t('directory.talents', { count: manager.talents })}
-          </span>
-        }
+        stats={[
+          { icon: faUsers, value: manager.talents, label: t('directory.talentsLabel', { count: manager.talents }) },
+          {
+            icon: faStar,
+            value: manager.rating?.count ? manager.rating.average.toFixed(1) : '—',
+            label: manager.rating?.count
+              ? t('profile.reviewsCount', { count: manager.rating.count })
+              : t('agreements.noRatings'),
+            href: '#reviews',
+          },
+          { icon: faLayerGroup, value: manager.socialAccounts.length, label: t('profile.platforms') },
+          {
+            icon: faCalendarDays,
+            value: new Date(manager.joinedAt).toLocaleDateString(i18n.language, {
+              month: 'short',
+              year: 'numeric',
+            }),
+            label: t('directory.memberSince'),
+          },
+        ]}
       />
 
-      <div className="grid gap-6 md:grid-cols-[1fr_320px]">
-        <div className="space-y-6">
+      <div className="grid gap-6 md:grid-cols-[1fr_340px]">
+        <div className="min-w-0 space-y-6">
           {manager.bio && (
-            <section className="rounded-2xl bg-white p-6 shadow-sm">
-              <h2 className="text-lg font-semibold">{t('directory.aboutManager')}</h2>
-              <p className="mt-3 whitespace-pre-line text-gray-700">{manager.bio}</p>
+            <section className={DETAIL_CARD} style={rise(2)}>
+              <h2 className="font-display text-xl font-bold">{t('directory.aboutManager')}</h2>
+              <p className="mt-3 whitespace-pre-line leading-relaxed text-gray-700">{manager.bio}</p>
             </section>
           )}
 
-          <section className="rounded-2xl bg-white p-6 shadow-sm">
-            <h2 className="text-lg font-semibold">{t('directory.representedTalents')}</h2>
+          <section className={DETAIL_CARD} style={rise(3)}>
+            <h2 className="font-display text-xl font-bold">{t('directory.representedTalents')}</h2>
             {talents.length === 0 ? (
               <p className="mt-2 text-sm text-gray-500">{t('directory.noRepresentedTalents')}</p>
             ) : (
@@ -57,11 +79,20 @@ function ManagerDetailPage() {
                   <li key={person._id}>
                     <Link
                       to={`/people/${person.slug}`}
-                      className="flex items-center gap-3 rounded-xl border border-gray-200 p-3 transition hover:border-gray-400"
+                      className="group flex items-center gap-3 rounded-2xl border border-gray-200 p-3 transition duration-300 hover:-translate-y-0.5 hover:border-gray-900 hover:shadow-md"
                     >
-                      <Avatar name={person.name} photoUrl={person.photoUrl} size="sm" />
+                      <span className="relative shrink-0 rounded-full p-0.5">
+                        <span
+                          aria-hidden="true"
+                          className="absolute inset-0 rounded-full bg-[conic-gradient(from_0deg,#111827,#9ca3af,#f9fafb,#6b7280,#111827)] opacity-0 transition group-hover:opacity-100"
+                        />
+                        <Photo
+                          person={person}
+                          className="relative h-12 w-12 rounded-full text-xs ring-2 ring-white"
+                        />
+                      </span>
                       <span className="min-w-0">
-                        <span className="flex items-center gap-1.5 font-medium text-gray-900">
+                        <span className="flex items-center gap-1.5 font-semibold text-gray-900">
                           <span className="truncate">{person.name}</span>
                           {person.verified && <VerifiedBadge />}
                         </span>
@@ -83,45 +114,54 @@ function ManagerDetailPage() {
             )}
           </section>
 
-          <ReviewsSection
-            title={t('directory.reviewsFromTalent')}
-            firstPage={
-              reviews && { rating: reviews.rating, reviews: reviews.reviews.map(fromTalent) }
-            }
-            allKey={['directory', 'managers', id, 'reviews', 'all']}
-            loadPage={async (page, limit) => {
-              const result = await getDirectoryReviews('managers', id, page, limit)
-              return { ...result, reviews: result.reviews.map(fromTalent) }
-            }}
-          />
+          <div className="motion-safe:animate-fade-up" style={rise(4)}>
+            <ReviewsSection
+              title={t('directory.reviewsFromTalent')}
+              firstPage={
+                reviews && { rating: reviews.rating, reviews: reviews.reviews.map(fromTalent) }
+              }
+              allKey={['directory', 'managers', id, 'reviews', 'all']}
+              loadPage={async (page, limit) => {
+                const result = await getDirectoryReviews('managers', id, page, limit)
+                return { ...result, reviews: result.reviews.map(fromTalent) }
+              }}
+            />
+          </div>
           {reviews?.rating.count === 0 && (
-            <section className="rounded-2xl bg-white p-6 text-sm text-gray-500 shadow-sm">
-              <h2 className="mb-1 text-lg font-semibold text-gray-900">
-                {t('directory.reviewsFromTalent')}
-              </h2>
-              {t('directory.noReviewsManager')}
+            <section id="reviews" className={DETAIL_CARD} style={rise(4)}>
+              <h2 className="font-display text-xl font-bold">{t('directory.reviewsFromTalent')}</h2>
+              <p className="mt-2 text-sm text-gray-500">{t('directory.noReviewsManager')}</p>
             </section>
           )}
         </div>
 
-        <aside className="space-y-4">
+        <aside className="min-w-0 space-y-6">
           {manager.socialAccounts.length > 0 && (
-            <section className="rounded-2xl bg-white p-5 shadow-sm">
-              <h2 className="font-semibold">{t('personForm.social')}</h2>
-              <ul className="mt-3 space-y-2">
+            <section className={DETAIL_CARD} style={rise(2)}>
+              <h2 className="font-display text-xl font-bold">{t('personForm.social')}</h2>
+              <ul className="mt-4 space-y-2">
                 {manager.socialAccounts.map((account) => (
                   <li key={account.url}>
                     <a
                       href={account.url}
                       target="_blank"
                       rel="noopener noreferrer nofollow"
-                      className="flex items-center gap-3 rounded-lg px-2 py-1.5 text-sm text-gray-700 hover:bg-gray-50"
+                      className="group flex items-center gap-3 rounded-2xl p-2 transition hover:bg-gray-50"
                     >
+                      <span
+                        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl shadow-sm transition group-hover:scale-110 ${
+                          PLATFORM_TONES[account.platform] ?? 'bg-gray-100 text-gray-700'
+                        }`}
+                      >
+                        <FontAwesomeIcon icon={PLATFORM_ICONS[account.platform]} />
+                      </span>
+                      <span className="flex-1 text-sm font-medium text-gray-900">
+                        {PLATFORM_LABELS[account.platform]}
+                      </span>
                       <FontAwesomeIcon
-                        icon={PLATFORM_ICONS[account.platform]}
-                        className="w-4 text-gray-500"
+                        icon={faArrowUpRightFromSquare}
+                        className="text-[10px] text-gray-300 transition group-hover:text-gray-700"
                       />
-                      {PLATFORM_LABELS[account.platform]}
                     </a>
                   </li>
                 ))}

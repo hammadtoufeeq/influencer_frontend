@@ -10,7 +10,7 @@ function PublicServices({ services }: { services: Service[] }) {
   const { t } = useTranslation()
   if (services.length === 0) return null
   return (
-    <section className="rounded-2xl bg-white p-6 shadow-sm">
+    <section className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-200/70">
       <h2 className="text-lg font-semibold">{t('services.publicTitle')}</h2>
       <ul className="mt-4 divide-y divide-gray-100">
         {services.map((service) => (

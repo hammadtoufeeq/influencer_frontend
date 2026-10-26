@@ -113,7 +113,8 @@ export function Photo({
   className,
   fallbackClass = 'items-center',
 }: {
-  person: PersonSummary
+  // Sirf naam aur photo chahiye (talent card, manager ke talents waghera)
+  person: Pick<PersonSummary, 'name' | 'photoUrl'>
   className: string
   // Photo na ho to initials kahan: card mein naam neeche hota hai, is liye upar
   fallbackClass?: string

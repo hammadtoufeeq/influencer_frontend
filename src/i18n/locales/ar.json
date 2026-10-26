@@ -2346,7 +2346,9 @@
     "noRepresentedTalents": "لا يمثل أي موهبة على المنصة بعد.",
     "viewBusiness": "عرض النشاط التجاري",
     "viewManager": "عرض المدير",
-    "talentsLabel": "مواهب يمثلها"
+    "talentsLabel": "مواهب يمثلها",
+    "completedLabel": "مشاريع مكتملة",
+    "memberSince": "عضو منذ"
   },
   "orgType": {
     "company": "شركة",
@@ -2508,7 +2510,8 @@
     "lastDay": "اليوم الأخير",
     "oneDayLeft": "يوم واحد متبقٍ",
     "daysLeft": "متبقٍ {{days}} أيام",
-    "deadlinePassed": "انتهى الموعد · غير ظاهرة في صفحة الحملات"
+    "deadlinePassed": "انتهى الموعد",
+    "deadlinePassedHint": "لا تظهر في صفحة الحملات. غيّر تاريخ «آخر موعد للتقديم» لفتحها مجدداً."
   },
   "reviews": {
     "ratingTitle": "تقييم {{average}} من 5 من {{count}} جهة",
