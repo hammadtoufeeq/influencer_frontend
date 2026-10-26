@@ -2511,7 +2511,9 @@
     "oneDayLeft": "1 دن باقی",
     "daysLeft": "{{days}} دن باقی",
     "deadlinePassed": "آخری تاریخ گزر گئی",
-    "deadlinePassedHint": "کیمپینز صفحے پر نہیں دکھتی۔ دوبارہ کھولنے کے لیے ”اپلائی کی آخری تاریخ“ بدلیں۔"
+    "deadlinePassedHint": "کیمپینز صفحے پر نہیں دکھتی۔ دوبارہ کھولنے کے لیے ”اپلائی کی آخری تاریخ“ بدلیں۔",
+    "selectedLabel": "منتخب ٹیلنٹ",
+    "appliedLabel": "درخواستیں"
   },
   "reviews": {
     "ratingTitle": "{{count}} بزنس کی جانب سے 5 میں سے {{average}} ریٹنگ",

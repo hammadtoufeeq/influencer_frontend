@@ -2511,7 +2511,9 @@
     "oneDayLeft": "1 day left",
     "daysLeft": "{{days}} days left",
     "deadlinePassed": "Deadline passed",
-    "deadlinePassedHint": "Not shown on the Campaigns page. Change the “Apply by” date to open it again."
+    "deadlinePassedHint": "Not shown on the Campaigns page. Change the “Apply by” date to open it again.",
+    "selectedLabel": "Talents selected",
+    "appliedLabel": "Applications"
   },
   "reviews": {
     "ratingTitle": "Rated {{average}} out of 5 by {{count}} business(es)",

@@ -2511,7 +2511,9 @@
     "oneDayLeft": "يوم واحد متبقٍ",
     "daysLeft": "متبقٍ {{days}} أيام",
     "deadlinePassed": "انتهى الموعد",
-    "deadlinePassedHint": "لا تظهر في صفحة الحملات. غيّر تاريخ «آخر موعد للتقديم» لفتحها مجدداً."
+    "deadlinePassedHint": "لا تظهر في صفحة الحملات. غيّر تاريخ «آخر موعد للتقديم» لفتحها مجدداً.",
+    "selectedLabel": "المواهب المختارة",
+    "appliedLabel": "الطلبات"
   },
   "reviews": {
     "ratingTitle": "تقييم {{average}} من 5 من {{count}} جهة",
