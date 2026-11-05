@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -20,6 +20,7 @@ const primary = 'rounded-lg bg-gray-900 px-4 py-2 text-center text-sm font-mediu
 function HireAction({ person }: { person: Person }) {
   const { t } = useTranslation()
   const { user } = useAuth()
+  const location = useLocation()
   const queryClient = useQueryClient()
   const isBusiness = user?.role === 'business'
   const business = useQuery({ ...myBusinessQuery, enabled: isBusiness })
@@ -42,6 +43,19 @@ function HireAction({ person }: { person: Person }) {
       toast.error(message)
     },
   })
+
+  // Guest: login pe bhejo, login ke baad wapas isi profile pe
+  if (!user) {
+    return (
+      <Link
+        to="/login"
+        state={{ from: location.pathname }}
+        className={`${primary} transition hover:bg-gray-800`}
+      >
+        {t('profile.contact')}
+      </Link>
+    )
+  }
 
   if (!isBusiness) {
     return (
