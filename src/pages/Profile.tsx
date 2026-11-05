@@ -129,6 +129,14 @@ function Profile() {
   const isOpen = person.status === 'hireable' || person.availability?.isOpen
   // Har platform ka hissa (bar ke liye)
   const biggest = Math.max(1, ...person.socialAccounts.map((a) => a.followers ?? 0))
+  // Khud aaye hue numbers andaza hain (public profile se): "~" aur kab mile
+  const fetchedDates = person.socialAccounts
+    .map((a) => a.followersUpdatedAt)
+    .filter((date): date is string => Boolean(date))
+    .sort()
+  const approx = fetchedDates.length > 0 ? '~' : ''
+  const shortDate = (date: string) =>
+    new Date(date).toLocaleDateString(i18n.language, { day: 'numeric', month: 'short' })
 
   return (
     <div className="space-y-6">
@@ -262,7 +270,7 @@ function Profile() {
         <div className="grid grid-cols-2 divide-gray-100 border-t border-gray-100 md:grid-cols-4 md:divide-x rtl:md:divide-x-reverse">
           <Stat
             icon={faUsers}
-            value={person.totalFollowers > 0 ? formatCount(person.totalFollowers) : '—'}
+            value={person.totalFollowers > 0 ? approx + formatCount(person.totalFollowers) : '—'}
             label={t('profile.totalFollowers')}
           />
           <Stat
@@ -331,9 +339,15 @@ function Profile() {
             {person.totalFollowers > 0 || person.socialAccounts.length > 0 ? (
               <div className="keep-dark mt-4 rounded-2xl bg-gradient-to-br from-gray-800 to-gray-950 p-4 text-white">
                 <p className="font-display text-4xl font-extrabold">
+                  {approx}
                   {formatCount(person.totalFollowers)}
                 </p>
                 <p className="text-sm text-white/70">{t('profile.totalFollowers')}</p>
+                {fetchedDates.length > 0 && (
+                  <p className="mt-1 text-xs text-white/50">
+                    {t('profile.followersApprox', { date: shortDate(fetchedDates.at(-1)!) })}
+                  </p>
+                )}
               </div>
             ) : (
               // Koi number ghar ke nahi likhte: claim / verify ke baad aate hain
@@ -367,7 +381,10 @@ function Profile() {
                               {PLATFORM_LABELS[account.platform]}
                             </span>
                             <span className="shrink-0 font-semibold text-gray-900">
-                              {account.followers !== undefined ? formatCount(account.followers) : '—'}
+                              {account.followers === undefined
+                                ? '—'
+                                : (account.followersUpdatedAt ? '~' : '') +
+                                  formatCount(account.followers)}
                             </span>
                           </span>
                           {account.followers !== undefined && (
@@ -376,6 +393,13 @@ function Profile() {
                                 className="block h-full origin-left rounded-full bg-gray-900 motion-safe:animate-[grow_1.1s_ease-out_both] rtl:origin-right"
                                 style={{ width: `${Math.max(share, 4)}%` }}
                               />
+                            </span>
+                          )}
+                          {account.followersUpdatedAt && (
+                            <span className="mt-1 block text-xs text-gray-400">
+                              {t('profile.followersUpdated', {
+                                date: shortDate(account.followersUpdatedAt),
+                              })}
                             </span>
                           )}
                           {account.engagementRate !== undefined && (

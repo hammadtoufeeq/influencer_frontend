@@ -23,6 +23,14 @@ export async function updatePerson(id: string, input: PersonInput) {
   return res.data.data.person
 }
 
+// Followers abhi dobara lao (ghante mein ek dafa)
+export async function refreshFollowers(id: string) {
+  const res = await api.post<ApiSuccess<{ person: Person; checked: number; updated: number }>>(
+    `/people/${id}/refresh-followers`,
+  )
+  return res.data.data
+}
+
 export async function deletePerson(id: string) {
   await api.delete(`/people/${id}`)
 }

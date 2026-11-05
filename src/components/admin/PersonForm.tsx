@@ -1,9 +1,13 @@
 import { useTranslation } from 'react-i18next'
 import { useState, type FormEvent, type ReactNode } from 'react'
-import { useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import toast from 'react-hot-toast'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons'
 import FormField from '../FormField'
 import PhotoUploader from '../PhotoUploader'
 import { removePersonPhoto, uploadPersonPhoto } from '../../api/auth'
+import { refreshFollowers } from '../../api/admin'
 import TaxonomyPicker from './TaxonomyPicker'
 import {
   COUNTRY_OPTIONS,
@@ -13,8 +17,10 @@ import {
 } from '../../constants/people'
 import { useTaxonomy } from '../../hooks/useTaxonomy'
 import type { PersonInput } from '../../types/admin'
-import type { Person, ProfileStatus, SocialPlatform } from '../../types/person'
-import { countryName, languageName } from '../../utils/format'
+import type { Person, ProfileStatus, SocialAccount, SocialPlatform } from '../../types/person'
+import { getApiError } from '../../utils/apiError'
+import { countryName, formatCount, languageName } from '../../utils/format'
+import { FOLLOWER_PLATFORMS, handleFromUrl } from '../../utils/socialHandle'
 
 const SOURCE_TYPES = ['public_web', 'research_sheet', 'self_submitted', 'admin']
 
@@ -23,7 +29,6 @@ interface SocialRow {
   platform: SocialPlatform
   url: string
   handle: string
-  followers: string
   engagementRate: string
 }
 
@@ -51,9 +56,18 @@ const emptySocial = (): SocialRow => ({
   platform: 'instagram',
   url: '',
   handle: '',
-  followers: '',
   engagementRate: '',
 })
+
+// Form ki row ka saved account (wahi platform + handle, ya wahi link)
+function savedAccount(person: Person | undefined, row: SocialRow): SocialAccount | undefined {
+  const handle = row.handle.trim().replace(/^@+/, '').toLowerCase()
+  return person?.socialAccounts.find(
+    (a) =>
+      a.platform === row.platform &&
+      (handle ? a.handle?.toLowerCase() === handle : a.url === row.url.trim()),
+  )
+}
 
 function toFormState(person?: Person, needsSocial = false): FormState {
   const socialAccounts =
@@ -61,7 +75,6 @@ function toFormState(person?: Person, needsSocial = false): FormState {
       platform: a.platform,
       url: a.url,
       handle: a.handle ?? '',
-      followers: a.followers?.toString() ?? '',
       engagementRate: a.engagementRate?.toString() ?? '',
     })) ?? []
   return {
@@ -102,7 +115,7 @@ function toInput(form: FormState, isNew: boolean, mode: PersonFormMode): PersonI
       platform: row.platform,
       url: row.url.trim(),
       handle: row.handle.trim() || undefined,
-      followers: row.followers ? Number(row.followers) : undefined,
+      // Followers yahan se nahi jate: backend khud laata hai
       engagementRate: row.engagementRate ? Number(row.engagementRate) : undefined,
     })),
   }
@@ -161,7 +174,7 @@ function PersonForm({
   children,
   submitLabel,
 }: PersonFormProps) {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const isNew = !person
   const isOwner = mode === 'owner'
   const isAdmin = mode === 'admin'
@@ -185,8 +198,48 @@ function PersonForm({
   function updateSocial(index: number, patch: Partial<SocialRow>) {
     update(
       'socialAccounts',
-      form.socialAccounts.map((row, i) => (i === index ? { ...row, ...patch } : row)),
+      form.socialAccounts.map((row, i) => {
+        if (i !== index) return row
+        const next = { ...row, ...patch }
+        // Handle khali ho ya pichle link se bana ho to naye link se khud bharo
+        const before = handleFromUrl(row.platform, row.url)
+        if ((patch.url !== undefined || patch.platform) && (!row.handle || row.handle === before)) {
+          next.handle = handleFromUrl(next.platform, next.url)
+        }
+        return next
+      }),
     )
+  }
+
+  // Followers abhi dobara lao (ghante mein ek dafa)
+  const refresh = useMutation({
+    mutationFn: () => refreshFollowers(person!._id),
+    onSuccess: ({ updated }) => {
+      toast.success(t('personForm.followersRefreshed', { count: updated }))
+      queryClient.invalidateQueries()
+    },
+    onError: (error) => toast.error(getApiError(error).message),
+  })
+
+  function followersNote(row: SocialRow) {
+    if (!FOLLOWER_PLATFORMS.includes(row.platform)) return t('personForm.followersNotTracked')
+    if (!row.handle.trim()) return t('personForm.followersNeedHandle')
+    const saved = savedAccount(person, row)
+    if (saved?.followers !== undefined) {
+      const count = formatCount(saved.followers)
+      return saved.followersUpdatedAt
+        ? t('personForm.followersFound', {
+            count,
+            date: new Date(saved.followersUpdatedAt).toLocaleDateString(i18n.language, {
+              day: 'numeric',
+              month: 'short',
+              year: 'numeric',
+            }),
+          })
+        : t('personForm.followersCurrent', { count })
+    }
+    if (saved?.followersStatus === 'not_found') return t('personForm.followersNotFound')
+    return t('personForm.followersPending')
   }
 
   function toggleLanguage(code: string) {
@@ -351,17 +404,34 @@ function PersonForm({
             {needsSocial && (
               <p className="text-sm text-gray-500">{t('personForm.socialRequiredHint')}</p>
             )}
+            <p className="text-sm text-gray-500">{t('personForm.followersAutoHint')}</p>
           </div>
-          <button
-            type="button"
-            onClick={() => {
-              update('socialAccounts', [...form.socialAccounts, emptySocial()])
-              setLocalErrors((prev) => ({ ...prev, socialAccounts: '' }))
-            }}
-            className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm hover:bg-gray-100"
-          >
-            {t('personForm.addAccount')}
-          </button>
+          <div className="flex shrink-0 flex-col items-end gap-2 sm:flex-row sm:items-center">
+            {person && mode !== 'submit' && (
+              <button
+                type="button"
+                onClick={() => refresh.mutate()}
+                disabled={refresh.isPending}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 px-3 py-1.5 text-sm hover:bg-gray-100 disabled:opacity-60"
+              >
+                <FontAwesomeIcon
+                  icon={faArrowsRotate}
+                  className={refresh.isPending ? 'animate-spin' : ''}
+                />
+                {t('personForm.refreshFollowers')}
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => {
+                update('socialAccounts', [...form.socialAccounts, emptySocial()])
+                setLocalErrors((prev) => ({ ...prev, socialAccounts: '' }))
+              }}
+              className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm hover:bg-gray-100"
+            >
+              {t('personForm.addAccount')}
+            </button>
+          </div>
         </div>
         {form.socialAccounts.length === 0 && (
           <p className="text-sm text-gray-500">{t('personForm.noSocial')}</p>
@@ -408,28 +478,19 @@ function PersonForm({
               value={row.handle}
               onChange={(e) => updateSocial(index, { handle: e.target.value })}
             />
-            <div className="grid grid-cols-2 gap-3">
-              <FormField
-                id={`social-followers-${index}`}
-                label={t('personForm.followers')}
-                type="number"
-                min={0}
-                value={row.followers}
-                onChange={(e) => updateSocial(index, { followers: e.target.value })}
-                error={errors[`socialAccounts.${index}.followers`]}
-              />
-              <FormField
-                id={`social-eng-${index}`}
-                label={t('personForm.engagement')}
-                type="number"
-                min={0}
-                max={100}
-                step="0.1"
-                value={row.engagementRate}
-                onChange={(e) => updateSocial(index, { engagementRate: e.target.value })}
-                error={errors[`socialAccounts.${index}.engagementRate`]}
-              />
-            </div>
+            <FormField
+              id={`social-eng-${index}`}
+              label={t('personForm.engagement')}
+              type="number"
+              min={0}
+              max={100}
+              step="0.1"
+              value={row.engagementRate}
+              onChange={(e) => updateSocial(index, { engagementRate: e.target.value })}
+              error={errors[`socialAccounts.${index}.engagementRate`]}
+            />
+            {/* Followers khud aate hain: yahan sirf dikhte hain */}
+            <p className="self-end pb-2 text-sm text-gray-600">{followersNote(row)}</p>
             {/* Talent ka aakhri social account hataya nahi ja sakta */}
             {!(needsSocial && form.socialAccounts.length === 1) && (
               <button

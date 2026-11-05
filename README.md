@@ -162,7 +162,7 @@ Opened by clicking any talent card.
   - **Verified manager:** **Request to represent**.
   - **Everyone:** **Contact / Hire** (asks you to log in or sign up).
 - **About:** bio, professions, industries, topics, website.
-- **Influence:** every social account (Instagram, YouTube, TikTok, X, Facebook, LinkedIn, Snapchat, Twitch, Podcast, Website) with followers and engagement %, and the **total followers across all platforms**.
+- **Influence:** every social account (Instagram, YouTube, TikTok, X, Facebook, LinkedIn, Snapchat, Twitch, Podcast, Website) with its followers and engagement %, and the **total followers across all platforms** on top. Followers are **fetched automatically**: YouTube from YouTube itself, Instagram, Facebook, X and TikTok from their public profiles. These are shown as approximate numbers (for example **~5.4M**) with the date they were last updated. LinkedIn, Snapchat, Twitch, podcasts and websites show no follower count.
 - **Services:** what they offer and the price (fixed, a range, or *"Price on request"*), with delivery time.
 - **Availability:** *Available for hire* or *Not taking new work right now*, what they are open to, how quickly they usually reply, and *Available from* date.
 - **Reviews from businesses:** star average and the four latest reviews, with **Show all reviews** to open the full list.
@@ -284,7 +284,7 @@ Open **Dashboard** from the top bar. A row of tabs appears at the top (on phones
 Edit everything shown on your public profile:
 - **Profile photo** at the top (**Upload / Change photo**, **Remove**; JPG, PNG or WebP, up to 2 MB).
 - **Identity:** headline, bio, country, city, languages. (To change your name, contact support.)
-- **Social accounts:** at least **one is required**. For each: platform, profile link, handle, followers and engagement %. **+ Add account** to add more.
+- **Social accounts:** at least **one is required**. For each: platform, profile link, handle and engagement %. **+ Add account** to add more. Nobody types followers by hand: paste the profile link and the **handle fills itself** (you can correct it). After saving, followers are fetched automatically and refreshed about once a week. Under each account you see the number found and when (or *Couldn't find followers for this account yet*). **Refresh followers** fetches them again right away (once an hour).
 - **Website** (optional).
 - **Categories:** professions, industries, topics.
 - **Save changes**.

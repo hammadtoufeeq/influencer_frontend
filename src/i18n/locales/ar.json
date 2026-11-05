@@ -939,7 +939,9 @@
     "viewPhoto": "عرض صورة {{name}}",
     "platforms": "المنصات",
     "reviewsCount": "{{count}} تقييم",
-    "statusLabel": "حالة الملف"
+    "statusLabel": "حالة الملف",
+    "followersApprox": "تقريبي، من الملفات العامة · {{date}}",
+    "followersUpdated": "آخر تحديث {{date}}"
   },
   "register": {
     "title": "أنشئ حسابك",
@@ -1241,7 +1243,17 @@
     "socialRequired": "أضف حساباً واحداً على الأقل في وسائل التواصل",
     "socialUrlRequired": "أدخل رابط الحساب (https://...)",
     "socialRequiredHint": "حساب واحد على الأقل مطلوب لتتمكن الجهات من رؤية أعمالك ومدى وصولك.",
-    "photo": "صورة الملف"
+    "photo": "صورة الملف",
+    "followersAutoHint": "يتم جلب المتابعين تلقائيًا من كل ملف عام (مرة أسبوعيًا تقريبًا). أضف الرابط فقط وسيُملأ اسم المستخدم تلقائيًا.",
+    "refreshFollowers": "تحديث المتابعين",
+    "followersRefreshed_one": "تم تحديث حساب واحد",
+    "followersRefreshed_other": "تم تحديث {{count}} حسابات",
+    "followersNotTracked": "لا يتم جلب المتابعين لهذه المنصة.",
+    "followersNeedHandle": "أضف اسم المستخدم لنتمكن من إيجاد المتابعين.",
+    "followersFound": "~{{count}} متابع · وُجد في {{date}}",
+    "followersCurrent": "{{count}} متابع (سيتم التحديث تلقائيًا)",
+    "followersNotFound": "لم نعثر على متابعي هذا الحساب بعد.",
+    "followersPending": "سيتم جلب المتابعين بعد الحفظ."
   },
   "oldClaims": {
     "title": "طلبات المطالبة",

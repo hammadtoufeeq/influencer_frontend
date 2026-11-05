@@ -34,7 +34,6 @@ export interface PersonInput {
     platform: SocialPlatform
     url: string
     handle?: string
-    followers?: number
     engagementRate?: number
   }[]
   status?: ProfileStatus

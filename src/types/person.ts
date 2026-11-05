@@ -25,8 +25,14 @@ export interface SocialAccount {
   platform: SocialPlatform
   handle?: string
   url: string
+  // Khud aate hain (YouTube API / public profile se andaza), haath se nahi
   followers?: number
   engagementRate?: number
+  // Number kis page se mila, kab mila, aur aakhri koshish ka nateeja
+  followersSourceUrl?: string
+  followersUpdatedAt?: string
+  followersCheckedAt?: string
+  followersStatus?: 'ok' | 'not_found' | 'error'
 }
 
 // Search results mein aane wala chhota version

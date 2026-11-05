@@ -939,7 +939,9 @@
     "viewPhoto": "{{name}} کی تصویر دیکھیں",
     "platforms": "پلیٹ فارمز",
     "reviewsCount": "{{count}} ریویوز",
-    "statusLabel": "پروفائل کی حالت"
+    "statusLabel": "پروفائل کی حالت",
+    "followersApprox": "Andaza, public profiles se · {{date}}",
+    "followersUpdated": "Update: {{date}}"
   },
   "register": {
     "title": "اپنا اکاؤنٹ بنائیں",
@@ -1241,7 +1243,17 @@
     "socialRequired": "کم از کم ایک سوشل اکاؤنٹ شامل کریں",
     "socialUrlRequired": "پروفائل کا لنک لکھیں (https://...)",
     "socialRequiredHint": "کم از کم ایک سوشل اکاؤنٹ لازمی ہے تاکہ بزنسز آپ کا کام اور ریچ دیکھ سکیں۔",
-    "photo": "پروفائل تصویر"
+    "photo": "پروفائل تصویر",
+    "followersAutoHint": "Followers har public profile se khud aate hain (taqreeban hafte mein ek dafa). Bas link daalein, username khud bhar jayega.",
+    "refreshFollowers": "Followers dobara lao",
+    "followersRefreshed_one": "{{count}} account update hua",
+    "followersRefreshed_other": "{{count}} accounts update hue",
+    "followersNotTracked": "Is platform ke followers nahi aate.",
+    "followersNeedHandle": "Username likhein taake followers mil sakein.",
+    "followersFound": "~{{count}} followers · {{date}} ko mile",
+    "followersCurrent": "{{count}} followers (khud update honge)",
+    "followersNotFound": "Is account ke followers abhi nahi mile.",
+    "followersPending": "Save karne ke baad followers khud aa jayenge."
   },
   "oldClaims": {
     "title": "کلیم کی درخواستیں",

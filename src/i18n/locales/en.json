@@ -939,7 +939,9 @@
     "viewPhoto": "View {{name}}'s photo",
     "platforms": "Platforms",
     "reviewsCount": "{{count}} review(s)",
-    "statusLabel": "Profile status"
+    "statusLabel": "Profile status",
+    "followersApprox": "Approximate, from public profiles · {{date}}",
+    "followersUpdated": "Updated {{date}}"
   },
   "register": {
     "title": "Create your account",
@@ -1241,7 +1243,17 @@
     "socialRequired": "Add at least one social account",
     "socialUrlRequired": "Enter the profile link (https://...)",
     "socialRequiredHint": "At least one social account is required, so businesses can see your work and reach.",
-    "photo": "Profile photo"
+    "photo": "Profile photo",
+    "followersAutoHint": "Followers are fetched automatically from each public profile (about once a week). Just add the link; the username fills itself.",
+    "refreshFollowers": "Refresh followers",
+    "followersRefreshed_one": "Updated {{count}} account",
+    "followersRefreshed_other": "Updated {{count}} accounts",
+    "followersNotTracked": "Followers aren't fetched for this platform.",
+    "followersNeedHandle": "Add the username so we can find the followers.",
+    "followersFound": "~{{count}} followers · found {{date}}",
+    "followersCurrent": "{{count}} followers (will update automatically)",
+    "followersNotFound": "Couldn't find followers for this account yet.",
+    "followersPending": "Followers will be fetched after you save."
   },
   "oldClaims": {
     "title": "Claim requests",
