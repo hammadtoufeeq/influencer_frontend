@@ -1253,7 +1253,7 @@
     "followersFound": "~{{count}} متابع · وُجد في {{date}}",
     "followersCurrent": "{{count}} متابع (سيتم التحديث تلقائيًا)",
     "followersNotFound": "لم نعثر على متابعي هذا الحساب بعد.",
-    "followersPending": "سيتم جلب المتابعين بعد الحفظ."
+    "followersPending": "سيتم جلب المتابعين تلقائيًا (خلال يوم)."
   },
   "oldClaims": {
     "title": "طلبات المطالبة",

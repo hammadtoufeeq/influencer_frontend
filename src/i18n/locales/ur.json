@@ -1253,7 +1253,7 @@
     "followersFound": "~{{count}} followers · {{date}} ko mile",
     "followersCurrent": "{{count}} followers (khud update honge)",
     "followersNotFound": "Is account ke followers abhi nahi mile.",
-    "followersPending": "Save karne ke baad followers khud aa jayenge."
+    "followersPending": "Followers khud aa jayenge (ek din ke andar)."
   },
   "oldClaims": {
     "title": "کلیم کی درخواستیں",

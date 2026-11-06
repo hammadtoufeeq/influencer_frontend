@@ -1253,7 +1253,7 @@
     "followersFound": "~{{count}} followers · found {{date}}",
     "followersCurrent": "{{count}} followers (will update automatically)",
     "followersNotFound": "Couldn't find followers for this account yet.",
-    "followersPending": "Followers will be fetched after you save."
+    "followersPending": "Followers will be fetched automatically (within a day)."
   },
   "oldClaims": {
     "title": "Claim requests",

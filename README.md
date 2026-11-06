@@ -284,7 +284,7 @@ Open **Dashboard** from the top bar. A row of tabs appears at the top (on phones
 Edit everything shown on your public profile:
 - **Profile photo** at the top (**Upload / Change photo**, **Remove**; JPG, PNG or WebP, up to 2 MB).
 - **Identity:** headline, bio, country, city, languages. (To change your name, contact support.)
-- **Social accounts:** at least **one is required**. For each: platform, profile link, handle and engagement %. **+ Add account** to add more. Nobody types followers by hand: paste the profile link and the **handle fills itself** (you can correct it). After saving, followers are fetched automatically and refreshed about once a week. Under each account you see the number found and when (or *Couldn't find followers for this account yet*). **Refresh followers** fetches them again right away (once an hour).
+- **Social accounts:** at least **one is required**. For each: platform, profile link, handle and engagement %. **+ Add account** to add more. Nobody types followers by hand: paste the profile link and the **handle fills itself** (you can correct it). After saving, followers are fetched automatically and refreshed about once a week. Under each account you see the number found and when (or *Couldn't find followers for this account yet*). **Refresh followers** fetches them again right away. Followers are looked up **at most once a day** per talent: saving several times in a day doesn't fetch them again, and an account added later that day is filled in the next day.
 - **Website** (optional).
 - **Categories:** professions, industries, topics.
 - **Save changes**.
