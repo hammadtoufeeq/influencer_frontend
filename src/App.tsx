@@ -46,6 +46,8 @@ import AdminClaimDetailPage from "./pages/admin-panel/AdminClaimDetailPage";
 import AdminUsersPage from "./pages/admin-panel/AdminUsersPage";
 import AdminReportsPage from "./pages/admin-panel/AdminReportsPage";
 import AdminReportDetailPage from "./pages/admin-panel/AdminReportDetailPage";
+import AdminInquiriesPage from "./pages/admin-panel/AdminInquiriesPage";
+import AdminInquiryDetailPage from "./pages/admin-panel/AdminInquiryDetailPage";
 import AdminAuditLogPage from "./pages/admin-panel/AdminAuditLogPage";
 import AdminBusinessesPage from "./pages/admin-panel/AdminBusinessesPage";
 import AdminBusinessDetailPage from "./pages/admin-panel/AdminBusinessDetailPage";
@@ -326,6 +328,8 @@ function App() {
           <Route path="users" element={<AdminUsersPage />} />
           <Route path="reports" element={<AdminReportsPage />} />
           <Route path="reports/:id" element={<AdminReportDetailPage />} />
+          <Route path="inquiries" element={<AdminInquiriesPage />} />
+          <Route path="inquiries/:id" element={<AdminInquiryDetailPage />} />
           <Route path="businesses" element={<AdminBusinessesPage />} />
           <Route path="businesses/:id" element={<AdminBusinessDetailPage />} />
           <Route path="managers" element={<AdminManagersPage />} />

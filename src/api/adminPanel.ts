@@ -1,11 +1,13 @@
 import api from './axios'
 import type { ApiSuccess } from '../types/api'
 import type {
+  AdminInquiry,
   AdminReport,
   AdminStats,
   AdminUser,
   AuditLogEntry,
   ClaimDetail,
+  InquiryStatus,
   ReportReason,
   ReportStatus,
 } from '../types/adminPanel'
@@ -63,6 +65,31 @@ export async function updateAdminReport(
 ) {
   const res = await api.patch<ApiSuccess<{ report: AdminReport }>>(`/admin/reports/${id}`, input)
   return res.data.data.report
+}
+
+export async function listAdminInquiries(params: URLSearchParams) {
+  const res = await api.get<ApiSuccess<{ inquiries: AdminInquiry[] }>>('/admin/inquiries', {
+    params,
+  })
+  return { inquiries: res.data.data.inquiries, meta: res.data.meta! }
+}
+
+export async function getAdminInquiry(id: string) {
+  const res = await api.get<ApiSuccess<{ inquiry: AdminInquiry; history: AuditLogEntry[] }>>(
+    `/admin/inquiries/${id}`,
+  )
+  return res.data.data
+}
+
+export async function updateAdminInquiry(
+  id: string,
+  input: { status: Exclude<InquiryStatus, 'new'>; adminNote?: string },
+) {
+  const res = await api.patch<ApiSuccess<{ inquiry: AdminInquiry }>>(
+    `/admin/inquiries/${id}`,
+    input,
+  )
+  return res.data.data.inquiry
 }
 
 export async function listAuditLogs(params: URLSearchParams) {

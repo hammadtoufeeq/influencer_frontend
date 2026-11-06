@@ -94,6 +94,32 @@ export const REPORT_REASONS: ReportReason[] = [
   'other',
 ]
 
+// Kisi talent ke baare mein sawal (guest bhi bhej sakta hai), sirf admin dekhta hai
+export type InquiryStatus = 'new' | 'in_progress' | 'answered' | 'closed'
+export const INQUIRY_STATUSES: InquiryStatus[] = ['new', 'in_progress', 'answered', 'closed']
+
+export interface AdminInquiry {
+  _id: string
+  person: {
+    _id: string
+    name: string
+    slug: string
+    photoUrl?: string
+    visibility: 'visible' | 'hidden'
+  } | null
+  name: string
+  email: string
+  phone?: string
+  message: string
+  // Login user ne bheja ho to us ka account
+  user?: { name: string; email: string; role: Role }
+  status: InquiryStatus
+  adminNote?: string
+  handledBy?: { name: string; email: string }
+  handledAt?: string
+  createdAt: string
+}
+
 export interface AdminReport {
   _id: string
   person: {

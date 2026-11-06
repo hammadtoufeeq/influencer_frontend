@@ -11,7 +11,8 @@
     "businesses": "کاروبار",
     "agreements": "معاہدے",
     "managers": "مینیجرز",
-    "newsletter": "نیوز لیٹر"
+    "newsletter": "نیوز لیٹر",
+    "inquiries": "Sawal"
   },
   "common": {
     "loading": "لوڈ ہو رہا ہے...",
@@ -328,6 +329,9 @@
       "manager": {
         "approve": "{{actor}} نے مینیجر {{target}} کی تصدیق کی۔",
         "reject": "{{actor}} نے مینیجر {{target}} کو مسترد کیا۔"
+      },
+      "inquiry": {
+        "update": "{{actor}} ne {{target}} ke baare mein sawal update kiya."
       }
     },
     "field": "فیلڈ",
@@ -340,7 +344,8 @@
     "report": "رپورٹ",
     "business": "کاروبار",
     "agreement": "معاہدہ",
-    "manager": "مینیجر"
+    "manager": "مینیجر",
+    "inquiry": "Sawal"
   },
   "auditAction": {
     "person": {
@@ -386,6 +391,9 @@
     "manager": {
       "approve": "مینیجر کی تصدیق کی",
       "reject": "مینیجر مسترد کیا"
+    },
+    "inquiry": {
+      "update": "Sawal update kiya"
     }
   },
   "reportForm": {
@@ -1444,7 +1452,8 @@
       "campaign_application": "{{person}} نے آپ کی کیمپین \"{{campaign}}\" پر اپلائی کیا۔",
       "campaign_accepted": "{{business}} نے آپ کو \"{{campaign}}\" کے لیے منتخب کیا۔ آپ کی ہائر ریکویسٹ تیار ہے۔",
       "campaign_rejected": "اس بار آپ \"{{campaign}}\" کے لیے منتخب نہیں ہوئے۔",
-      "manager_reviewed": "{{name}} نے آپ کو {{rating}} اسٹار دیے۔"
+      "manager_reviewed": "{{name}} نے آپ کو {{rating}} اسٹار دیے۔",
+      "inquiry_new": "{{person}} ke baare mein {{name}} ka naya sawal."
     },
     "categoriesLabel": "نوٹیفکیشن کی اقسام",
     "unreadOnly": "صرف ان پڑھی دکھائیں",
@@ -2903,5 +2912,50 @@
     "joinEyebrow": "مفت شامل ہوں",
     "registerTitle": "جہاں حقیقی رسائی حقیقی کام سے ملتی ہے",
     "registerSubtitle": "تصدیق شدہ تخلیق کار، صحافی اور ماہرین، انہیں ہائر کرنے والے برانڈز اور ان کی نمائندگی کرنے والے مینیجرز۔"
+  },
+  "inquiry": {
+    "button": "Sawal bhejein",
+    "title": "{{name}} ke baare mein poochein",
+    "intro": "Aap ka sawal hamari team ke paas jayega, seedha talent ke paas nahi. Hum email pe jawab denge.",
+    "name": "Aap ka naam",
+    "email": "Aap ki email",
+    "phone": "Phone (zaroori nahi)",
+    "message": "Aap ka sawal",
+    "messagePlaceholder": "Maslan: kya {{name}} agle mahine brand campaign ke liye available hain? Rates kya hain?",
+    "send": "Sawal bhejein",
+    "sending": "Bhej rahe hain...",
+    "sent": "Aap ka sawal bhej diya gaya. Hum jald email pe jawab denge.",
+    "errors": {
+      "name": "Apna naam likhein",
+      "email": "Sahi email likhein",
+      "message": "Apna sawal likhein (kam az kam 10 harf)"
+    }
+  },
+  "inquiries": {
+    "title": "Talent ke baare mein sawal",
+    "subtitle": "Visitors ke bheje hue sawal. Email pe jawab dein, phir status badlein.",
+    "allStatuses": "Sab status",
+    "colPerson": "Talent",
+    "colFrom": "Kis ne bheja",
+    "colMessage": "Sawal",
+    "colStatus": "Status",
+    "colDate": "Kab aaya",
+    "emptyTitle": "Abhi koi sawal nahi",
+    "emptyText": "Talent profiles se bheje gaye sawal yahan aayenge.",
+    "detailTitle": "{{name}} ke baare mein sawal",
+    "replyByEmail": "Email pe jawab dein",
+    "replySubject": "{{name}} ke baare mein aap ka sawal",
+    "update": "Sawal update karein",
+    "newStatus": "Status",
+    "adminNote": "Andar ka note",
+    "adminNotePlaceholder": "Sirf admin dekhte hain",
+    "updated": "Sawal update ho gaya",
+    "handled": "Aakhri dafa {{name}} ne {{date}} ko dekha"
+  },
+  "inquiryStatus": {
+    "new": "Naya",
+    "in_progress": "Jaari",
+    "answered": "Jawab de diya",
+    "closed": "Band"
   }
 }

@@ -20,6 +20,10 @@ const STYLES: Record<string, string> = {
   invited: 'bg-violet-50 text-violet-700',
   requested: 'bg-violet-50 text-violet-700',
   ended: 'bg-gray-100 text-gray-600',
+  new: 'bg-amber-50 text-amber-800',
+  in_progress: 'bg-blue-50 text-blue-700',
+  answered: 'bg-green-50 text-green-700',
+  closed: 'bg-gray-100 text-gray-600',
 }
 
 function StatusPill({ status, label }: { status: string; label: string }) {

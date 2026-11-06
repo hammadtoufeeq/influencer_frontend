@@ -161,6 +161,7 @@ Opened by clicking any talent card.
   - **Owner:** *"This is your profile"* and **Edit profile**.
   - **Verified manager:** **Request to represent**.
   - **Everyone:** **Contact / Hire** (asks you to log in or sign up).
+  - **Everyone, even without an account:** **Send a query** under the buttons. A small form asks for name, email, phone (optional) and the question. It goes to the admin team, not to the talent, and they reply by email. The talent doesn't see this button on their own profile.
 - **About:** bio, professions, industries, topics, website.
 - **Influence:** every social account (Instagram, YouTube, TikTok, X, Facebook, LinkedIn, Snapchat, Twitch, Podcast, Website) with its followers and engagement %, and the **total followers across all platforms** on top. Followers are **fetched automatically**: YouTube from YouTube itself, Instagram, Facebook, X and TikTok from their public profiles. These are shown as approximate numbers (for example **~5.4M**) with the date they were last updated. LinkedIn, Snapchat, Twitch, podcasts and websites show no follower count.
 - **Services:** what they offer and the price (fixed, a range, or *"Price on request"*), with delivery time.
@@ -428,6 +429,9 @@ Search by name or email, filter by role and status. Actions: **Suspend / Unsuspe
 
 ### Reports
 Reports and takedown requests about profiles. Filter by status (**Open, Reviewing, Resolved, Rejected**) and reason. On the detail page the admin sets a new status, writes an admin note, and can **take the profile down** (hide it) or **delete it permanently** (it won't be added again from public sources).
+
+### Queries
+Questions visitors sent about a talent with **Send a query** (guests too). The list shows the talent, who asked (name and email), the question, the status and the date; filter by status (**New, In progress, Answered, Closed**). On the detail page the admin sees the email and phone, presses **Reply by email** (opens their mail app with the subject filled in), then sets the status and an internal note. Every change is in the history and the audit log. A new query also shows up in the admin's notifications.
 
 ### Audit log
 A read-only record of **every admin action**: time, admin, action and target. Filter by action, target type and date range. **Show changes** opens a box showing who did it, when, on what, a one-line summary, and a table of exactly **what changed (Before → After)**.

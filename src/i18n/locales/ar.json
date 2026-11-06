@@ -11,7 +11,8 @@
     "businesses": "الشركات",
     "agreements": "الاتفاقيات",
     "managers": "المديرون",
-    "newsletter": "النشرة البريدية"
+    "newsletter": "النشرة البريدية",
+    "inquiries": "الاستفسارات"
   },
   "common": {
     "loading": "جارٍ التحميل...",
@@ -328,6 +329,9 @@
       "manager": {
         "approve": "وثّق {{actor}} المدير {{target}}.",
         "reject": "رفض {{actor}} المدير {{target}}."
+      },
+      "inquiry": {
+        "update": "حدّث {{actor}} استفسارًا عن {{target}}."
       }
     },
     "field": "الحقل",
@@ -340,7 +344,8 @@
     "report": "بلاغ",
     "business": "شركة",
     "agreement": "اتفاقية",
-    "manager": "مدير"
+    "manager": "مدير",
+    "inquiry": "استفسار"
   },
   "auditAction": {
     "person": {
@@ -386,6 +391,9 @@
     "manager": {
       "approve": "وثّق مديرًا",
       "reject": "رفض مديرًا"
+    },
+    "inquiry": {
+      "update": "تحديث استفسار"
     }
   },
   "reportForm": {
@@ -1444,7 +1452,8 @@
       "campaign_application": "تقدّم {{person}} لحملتك \"{{campaign}}\".",
       "campaign_accepted": "اختارتك {{business}} لحملة \"{{campaign}}\". طلب التعاقد جاهز.",
       "campaign_rejected": "لم يتم اختيارك لحملة \"{{campaign}}\" هذه المرة.",
-      "manager_reviewed": "منحك {{name}} {{rating}} نجمة."
+      "manager_reviewed": "منحك {{name}} {{rating}} نجمة.",
+      "inquiry_new": "استفسار جديد عن {{person}} من {{name}}."
     },
     "categoriesLabel": "فئات الإشعارات",
     "unreadOnly": "عرض غير المقروءة فقط",
@@ -2903,5 +2912,50 @@
     "joinEyebrow": "انضم مجاناً",
     "registerTitle": "حيث يلتقي الوصول الحقيقي بالعمل الحقيقي",
     "registerSubtitle": "صنّاع محتوى وصحفيون وخبراء موثّقون، والعلامات التي توظفهم، والمديرون الذين يمثلونهم."
+  },
+  "inquiry": {
+    "button": "أرسل استفسارًا",
+    "title": "اسأل عن {{name}}",
+    "intro": "يصل سؤالك إلى فريقنا وليس إلى الموهبة مباشرة. سنرد عليك عبر البريد الإلكتروني.",
+    "name": "اسمك",
+    "email": "بريدك الإلكتروني",
+    "phone": "الهاتف (اختياري)",
+    "message": "سؤالك",
+    "messagePlaceholder": "مثال: هل {{name}} متاح لحملة إعلانية الشهر القادم؟ ما هي الأسعار؟",
+    "send": "إرسال",
+    "sending": "جارٍ الإرسال...",
+    "sent": "تم إرسال استفسارك. سنرد عليك قريبًا عبر البريد الإلكتروني.",
+    "errors": {
+      "name": "أدخل اسمك",
+      "email": "أدخل بريدًا إلكترونيًا صحيحًا",
+      "message": "اكتب سؤالك (10 أحرف على الأقل)"
+    }
+  },
+  "inquiries": {
+    "title": "استفسارات عن المواهب",
+    "subtitle": "أسئلة أرسلها الزوار عن موهبة. رد عبر البريد ثم حدّث الحالة.",
+    "allStatuses": "كل الحالات",
+    "colPerson": "الموهبة",
+    "colFrom": "من",
+    "colMessage": "السؤال",
+    "colStatus": "الحالة",
+    "colDate": "تاريخ الاستلام",
+    "emptyTitle": "لا توجد استفسارات بعد",
+    "emptyText": "ستظهر هنا الأسئلة المرسلة من ملفات المواهب.",
+    "detailTitle": "استفسار عن {{name}}",
+    "replyByEmail": "الرد عبر البريد",
+    "replySubject": "سؤالك عن {{name}}",
+    "update": "تحديث الاستفسار",
+    "newStatus": "الحالة",
+    "adminNote": "ملاحظة داخلية",
+    "adminNotePlaceholder": "يراها المشرفون فقط",
+    "updated": "تم تحديث الاستفسار",
+    "handled": "آخر من تعامل معه {{name}} في {{date}}"
+  },
+  "inquiryStatus": {
+    "new": "جديد",
+    "in_progress": "قيد المعالجة",
+    "answered": "تم الرد",
+    "closed": "مغلق"
   }
 }

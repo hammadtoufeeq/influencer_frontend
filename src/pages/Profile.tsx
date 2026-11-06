@@ -18,6 +18,7 @@ import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { personQuery } from '../api/queries'
 import ClaimAction from '../components/ClaimAction'
+import InquiryAction from '../components/InquiryAction'
 import HireAction from '../components/business/HireAction'
 import SaveToShortlist from '../components/shortlists/SaveToShortlist'
 import RepresentAction from '../components/manager/RepresentAction'
@@ -262,6 +263,8 @@ function Profile() {
               <SaveToShortlist personId={person._id} personName={person.name} variant="button" />
               <RepresentAction person={person} />
               <ClaimAction person={person} />
+              {/* Koi bhi (login ke baghair bhi) is talent ke baare mein sawal admin ko bheje */}
+              <InquiryAction person={person} />
             </div>
           </div>
         </div>

@@ -11,7 +11,8 @@
     "businesses": "Businesses",
     "agreements": "Agreements",
     "managers": "Managers",
-    "newsletter": "Newsletter"
+    "newsletter": "Newsletter",
+    "inquiries": "Queries"
   },
   "common": {
     "loading": "Loading...",
@@ -328,6 +329,9 @@
       "manager": {
         "approve": "{{actor}} verified the manager {{target}}.",
         "reject": "{{actor}} rejected the manager {{target}}."
+      },
+      "inquiry": {
+        "update": "{{actor}} updated a query about {{target}}."
       }
     },
     "field": "Field",
@@ -340,7 +344,8 @@
     "report": "Report",
     "business": "Business",
     "agreement": "Agreement",
-    "manager": "Manager"
+    "manager": "Manager",
+    "inquiry": "Query"
   },
   "auditAction": {
     "person": {
@@ -386,6 +391,9 @@
     "manager": {
       "approve": "Verified manager",
       "reject": "Rejected manager"
+    },
+    "inquiry": {
+      "update": "Updated query"
     }
   },
   "reportForm": {
@@ -1444,7 +1452,8 @@
       "campaign_application": "{{person}} applied to your campaign \"{{campaign}}\".",
       "campaign_accepted": "{{business}} selected you for \"{{campaign}}\". Your hire request is ready.",
       "campaign_rejected": "You weren't selected for \"{{campaign}}\" this time.",
-      "manager_reviewed": "{{name}} gave you {{rating}} star(s)."
+      "manager_reviewed": "{{name}} gave you {{rating}} star(s).",
+      "inquiry_new": "New query about {{person}} from {{name}}."
     },
     "categoriesLabel": "Notification categories",
     "unreadOnly": "Show unread only",
@@ -2903,5 +2912,50 @@
     "joinEyebrow": "Join for free",
     "registerTitle": "Where real reach meets real work",
     "registerSubtitle": "Verified creators, journalists and experts, the brands that hire them and the managers who represent them."
+  },
+  "inquiry": {
+    "button": "Send a query",
+    "title": "Ask about {{name}}",
+    "intro": "Your question goes to our team, not directly to the talent. We'll reply by email.",
+    "name": "Your name",
+    "email": "Your email",
+    "phone": "Phone (optional)",
+    "message": "Your question",
+    "messagePlaceholder": "For example: Is {{name}} available for a brand campaign next month? What are the rates?",
+    "send": "Send query",
+    "sending": "Sending...",
+    "sent": "Your query was sent. We'll reply by email soon.",
+    "errors": {
+      "name": "Enter your name",
+      "email": "Enter a valid email",
+      "message": "Please write your question (at least 10 characters)"
+    }
+  },
+  "inquiries": {
+    "title": "Talent queries",
+    "subtitle": "Questions visitors sent about a talent. Reply by email, then update the status.",
+    "allStatuses": "All statuses",
+    "colPerson": "Talent",
+    "colFrom": "From",
+    "colMessage": "Question",
+    "colStatus": "Status",
+    "colDate": "Received",
+    "emptyTitle": "No queries yet",
+    "emptyText": "Questions sent from talent profiles will show up here.",
+    "detailTitle": "Query about {{name}}",
+    "replyByEmail": "Reply by email",
+    "replySubject": "Your question about {{name}}",
+    "update": "Update query",
+    "newStatus": "Status",
+    "adminNote": "Internal note",
+    "adminNotePlaceholder": "Only admins see this",
+    "updated": "Query updated",
+    "handled": "Last handled by {{name}} on {{date}}"
+  },
+  "inquiryStatus": {
+    "new": "New",
+    "in_progress": "In progress",
+    "answered": "Answered",
+    "closed": "Closed"
   }
 }

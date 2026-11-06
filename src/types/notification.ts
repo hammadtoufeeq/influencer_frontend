@@ -7,6 +7,7 @@ export type NotificationType =
   | 'claim.code_verified'
   | 'claim.otp_locked'
   | 'report.new'
+  | 'inquiry.new'
   | 'claim.code_sent'
   | 'claim.approved'
   | 'claim.rejected'

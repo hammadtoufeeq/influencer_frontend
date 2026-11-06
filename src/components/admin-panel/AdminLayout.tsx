@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faBuilding,
   faChartPie,
+  faCircleQuestion,
   faClipboardList,
   faEnvelopeOpenText,
   faFileContract,
@@ -23,6 +24,7 @@ const LINKS: { to: string; key: string; icon: IconDefinition; end?: boolean }[] 
   { to: '/admin/agreements', key: 'nav.agreements', icon: faFileContract },
   { to: '/admin/users', key: 'nav.users', icon: faUsers },
   { to: '/admin/reports', key: 'nav.reports', icon: faFlag },
+  { to: '/admin/inquiries', key: 'nav.inquiries', icon: faCircleQuestion },
   { to: '/admin/audit-logs', key: 'nav.auditLog', icon: faClipboardList },
   { to: '/admin/newsletter', key: 'nav.newsletter', icon: faEnvelopeOpenText },
 ]
