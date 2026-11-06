@@ -106,7 +106,7 @@ function AdminManagersPage() {
                     <p className="font-medium">{manager.owner?.name ?? t('claims.deletedUser')}</p>
                     <p className="truncate text-xs text-gray-500">{manager.owner?.email}</p>
                   </td>
-                  <td className="px-4 py-3 text-gray-600">{manager.agencyName || t('manager.independent')}</td>
+                  <td className="px-4 py-3 text-gray-600">{manager.agencyName || '—'}</td>
                   <td className="px-4 py-3">{countryName(manager.country)}</td>
                   <td className="px-4 py-3">
                     <StatusPill status={manager.status} label={t(`managerStatus.${manager.status}`)} />

@@ -2162,7 +2162,6 @@
     "verifiedManager": "Verified manager",
     "underReview": "Under review",
     "notVerified": "Not verified",
-    "independent": "Independent manager",
     "pendingText": "Sent on {{date}}. An admin is checking your details. You can link to talents once you are verified.",
     "approvedText": "You are verified. Open a talent's profile and click \"Request to represent\", or ask your talents to invite you by your login email.",
     "findTalents": "Find talents",

@@ -92,7 +92,7 @@ function AdminManagerDetailPage() {
               <section className={card}>
                 <h2 className="font-semibold">{t('dashNav.managerDetails')}</h2>
                 <dl className="mt-2 divide-y divide-gray-100">
-                  <Row label={t('manager.fields.agencyName')}>{manager.agencyName || t('manager.independent')}</Row>
+                  <Row label={t('manager.fields.agencyName')}>{manager.agencyName || '—'}</Row>
                   <Row label={t('personForm.social')}>
                     {manager.socialAccounts?.length > 0 && (
                       <ul className="space-y-1">

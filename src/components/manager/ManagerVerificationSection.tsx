@@ -70,7 +70,9 @@ function ManagerVerificationSection() {
               {manager.status === 'pending' ? t('manager.underReview') : t('manager.notVerified')}
             </p>
           )}
-          <h2 className="mt-1 text-lg font-semibold">{manager.agencyName || t('manager.independent')}</h2>
+          {manager.agencyName && (
+            <h2 className="mt-1 text-lg font-semibold">{manager.agencyName}</h2>
+          )}
           <p className="text-sm text-gray-500">{where}</p>
         </div>
         <Link to="/dashboard/manager" className={outline}>

@@ -37,7 +37,7 @@ function ManagerDetailPage() {
       <DirectoryHeader
         entry={manager}
         icon={faUserTie}
-        subtitle={manager.agencyName || t('manager.independent')}
+        subtitle={manager.agencyName || undefined}
         stats={[
           { icon: faUsers, value: manager.talents, label: t('directory.talentsLabel', { count: manager.talents }) },
           {

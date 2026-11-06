@@ -222,10 +222,13 @@ export function ManagerCard({ manager }: { manager: DirectoryManager }) {
               />
             )}
           </h3>
-          <p className="mt-0.5 flex items-center gap-1.5 truncate text-xs text-gray-500">
-            <FontAwesomeIcon icon={faBriefcase} className="shrink-0 text-[10px] text-gray-400" />
-            <span className="truncate">{manager.agencyName || t('manager.independent')}</span>
-          </p>
+          {/* Agency sirf tab jab manager ne likhi ho */}
+          {manager.agencyName && (
+            <p className="mt-0.5 flex items-center gap-1.5 truncate text-xs text-gray-500">
+              <FontAwesomeIcon icon={faBriefcase} className="shrink-0 text-[10px] text-gray-400" />
+              <span className="truncate">{manager.agencyName}</span>
+            </p>
+          )}
         </div>
       </div>
 

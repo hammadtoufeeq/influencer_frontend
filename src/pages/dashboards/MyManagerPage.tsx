@@ -50,7 +50,7 @@ function ManagerCard({ rep }: { rep: Representation }) {
           )}
         </p>
         <p className="text-sm text-gray-600">
-          {[profile?.agencyName || t('manager.independent'), profile?.city, profile && countryName(profile.country)]
+          {[profile?.agencyName, profile?.city, profile && countryName(profile.country)]
             .filter(Boolean)
             .join(' · ')}
         </p>
