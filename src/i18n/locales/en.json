@@ -1384,7 +1384,8 @@
     "approveBody": "The profile {{person}} will be published and owned by {{claimant}}.",
     "draftBadge": "New profile · pending",
     "draftPending": "Pending claim",
-    "draftHint": "Goes public when its claim is approved"
+    "draftHint": "Goes public when its claim is approved",
+    "photoFailed": "Your profile was sent, but the photo could not be uploaded."
   },
   "notifications": {
     "title": "Notifications",
@@ -2647,7 +2648,9 @@
     "errors": {
       "type": "Choose a JPG, PNG or WebP image",
       "size": "The image must be 2 MB or smaller"
-    }
+    },
+    "uploadOnSend": "JPG, PNG or WebP, up to 2 MB. It is uploaded when you send your profile.",
+    "chosen": "Photo added. It will be uploaded with your profile."
   },
   "adminNewsletter": {
     "title": "Newsletter",

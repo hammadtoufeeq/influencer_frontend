@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { useState, type FormEvent, type ReactNode } from 'react'
+import { useEffect, useState, type FormEvent, type ReactNode } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -160,6 +160,8 @@ interface PersonFormProps {
   // Submit button se pehle extra hissa (jaise admin ke liye note)
   children?: ReactNode
   submitLabel?: string
+  // Nayi profile (abhi id nahi): photo yahin chuni jati hai, profile bhejne ke baad upload
+  onPhotoChange?: (file: File | null) => void
 }
 
 const selectClass = 'w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm'
@@ -173,6 +175,7 @@ function PersonForm({
   onSubmit,
   children,
   submitLabel,
+  onPhotoChange,
 }: PersonFormProps) {
   const { t, i18n } = useTranslation()
   const isNew = !person
@@ -184,6 +187,9 @@ function PersonForm({
   const canUploadPhoto = Boolean(person) && (isOwner || (isAdmin && !person?.claimedBy))
   const queryClient = useQueryClient()
   const [form, setForm] = useState<FormState>(() => toFormState(person, needsSocial))
+  // Nayi profile ki chuni hui photo ka preview (browser ke andar ka link)
+  const [photoPreview, setPhotoPreview] = useState('')
+  useEffect(() => () => URL.revokeObjectURL(photoPreview), [photoPreview])
   // Yahin ki jaanch ke errors (server ke errors ke upar)
   const [localErrors, setLocalErrors] = useState<Record<string, string>>({})
   const shownErrors = { ...errors, ...localErrors }
@@ -286,6 +292,26 @@ function PersonForm({
               await removePersonPhoto(person._id)
               update('photoUrl', '')
               queryClient.invalidateQueries({ queryKey: ['person'] })
+            }}
+          />
+        </section>
+      )}
+      {/* Nayi profile: photo abhi chuno, profile bhejte hi upload hogi */}
+      {!person && onPhotoChange && (
+        <section className={sectionClass}>
+          <PhotoUploader
+            name={form.name || '?'}
+            photoUrl={photoPreview}
+            label={t('personForm.photo')}
+            hint={t('photo.uploadOnSend')}
+            savedMessage={t('photo.chosen')}
+            onUpload={async (file) => {
+              setPhotoPreview(URL.createObjectURL(file))
+              onPhotoChange(file)
+            }}
+            onRemove={async () => {
+              setPhotoPreview('')
+              onPhotoChange(null)
             }}
           />
         </section>

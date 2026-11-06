@@ -12,6 +12,7 @@ import {
   faMagnifyingGlass,
   faUserCheck,
 } from '@fortawesome/free-solid-svg-icons'
+import { uploadPersonPhoto } from '../../api/auth'
 import { createNewProfileClaim } from '../../api/claims'
 import { myClaimsQuery, myProfileQuery } from '../../api/queries'
 import Avatar from '../../components/Avatar'
@@ -29,6 +30,8 @@ function CreateMyProfile() {
   const queryClient = useQueryClient()
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [note, setNote] = useState('')
+  // Form ke upar chuni hui photo: profile bante hi us pe upload
+  const [photo, setPhoto] = useState<File | null>(null)
   // Milti julti profiles mili to yahan; talent "nayi hi banao" bhi chun sakta hai
   const [pending, setPending] = useState<{ input: PersonInput; matches: ProfileMatch[] } | null>(
     null,
@@ -45,7 +48,15 @@ function CreateMyProfile() {
         force,
       }),
     onMutate: () => setErrors({}),
-    onSuccess: () => {
+    onSuccess: async (claim) => {
+      if (photo && claim.person) {
+        try {
+          await uploadPersonPhoto(claim.person._id, photo)
+        } catch (error) {
+          // Profile chali gayi; photo baad mein "Edit profile" se lag sakti hai
+          toast.error(`${t('newProfile.photoFailed')} ${getApiError(error).message}`)
+        }
+      }
       toast.success(t('newProfile.sent'))
       queryClient.invalidateQueries({ queryKey: ['claims'] })
       navigate('/dashboard')
@@ -160,6 +171,7 @@ function CreateMyProfile() {
         isSaving={submit.isPending}
         errors={errors}
         submitLabel={t('newProfile.submit')}
+        onPhotoChange={setPhoto}
         onSubmit={(input) => {
           setPending(null)
           submit.mutate({ input })

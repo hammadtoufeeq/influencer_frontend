@@ -20,6 +20,7 @@ function PhotoUploader({
   label,
   hint,
   shape = 'round',
+  savedMessage,
 }: {
   name: string
   photoUrl?: string | null
@@ -29,6 +30,8 @@ function PhotoUploader({
   hint?: string
   // Business logo chaukor, insaan ki photo gol
   shape?: 'round' | 'square'
+  // Chunne ke baad ka toast (jaise photo abhi sirf chuni, baad mein upload hogi)
+  savedMessage?: string
 }) {
   const { t } = useTranslation()
   const input = useRef<HTMLInputElement>(null)
@@ -36,7 +39,7 @@ function PhotoUploader({
 
   const upload = useMutation({
     mutationFn: onUpload,
-    onSuccess: () => toast.success(t('photo.uploaded')),
+    onSuccess: () => toast.success(savedMessage ?? t('photo.uploaded')),
     onError: (err) => setError(getApiError(err).fields.photo ?? getApiError(err).message),
   })
   const remove = useMutation({

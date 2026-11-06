@@ -1384,7 +1384,8 @@
     "approveBody": "پروفائل {{person}} شائع ہو جائے گی اور {{claimant}} کی ہو گی۔",
     "draftBadge": "نئی پروفائل · زیرِ جائزہ",
     "draftPending": "کلیم زیرِ التوا",
-    "draftHint": "کلیم منظور ہونے پر شائع ہو گی"
+    "draftHint": "کلیم منظور ہونے پر شائع ہو گی",
+    "photoFailed": "Profile chali gayi, lekin photo upload nahi hui."
   },
   "notifications": {
     "title": "اطلاعات",
@@ -2647,7 +2648,9 @@
     "errors": {
       "type": "JPG، PNG یا WebP تصویر منتخب کریں",
       "size": "تصویر 2 MB یا اس سے چھوٹی ہو"
-    }
+    },
+    "uploadOnSend": "JPG, PNG ya WebP, 2 MB tak. Profile bhejte hi upload ho jayegi.",
+    "chosen": "Photo lag gayi. Profile ke saath upload hogi."
   },
   "adminNewsletter": {
     "title": "نیوز لیٹر",
