@@ -97,7 +97,7 @@ function AdminUsersPage() {
           <button
             type="submit"
             aria-label={t('common.search')}
-            className="rounded-lg bg-gray-900 px-4 py-2 text-sm text-white"
+            className="rounded-lg bg-brand px-4 py-2 text-sm text-on-brand"
           >
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </button>

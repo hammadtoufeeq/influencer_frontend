@@ -6,7 +6,7 @@ function VerifiedBadge() {
   return (
     <span
       title={t('site.verifiedTitle')}
-      className="inline-flex items-center rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700"
+      className="inline-flex items-center rounded-full bg-star-soft px-2 py-0.5 text-xs font-medium text-star-ink"
     >
       <FontAwesomeIcon icon={faCircleCheck} className="me-1" />
       {t('site.verified')}

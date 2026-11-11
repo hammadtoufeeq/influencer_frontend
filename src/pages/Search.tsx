@@ -84,7 +84,7 @@ function FilterSelect({
       <select
         value={value}
         onChange={(e) => onChange(name, e.target.value)}
-        className={`w-full truncate rounded-xl border bg-white px-3 py-2 text-sm transition focus:outline-none focus:ring-2 focus:ring-gray-900 ${
+        className={`w-full truncate rounded-xl border bg-white px-3 py-2 text-sm transition focus:outline-none focus:ring-2 focus:ring-brand ${
           value
             ? "border-gray-900 font-medium"
             : "border-gray-200 hover:border-gray-400"
@@ -129,7 +129,7 @@ function CityFilter({
         onBlur={() => onChange(draft.trim())}
         onKeyDown={(e) => e.key === "Enter" && onChange(draft.trim())}
         placeholder={t("search.cityPlaceholder")}
-        className={`w-full rounded-xl border bg-white px-3 py-2 text-sm transition focus:outline-none focus:ring-2 focus:ring-gray-900 ${
+        className={`w-full rounded-xl border bg-white px-3 py-2 text-sm transition focus:outline-none focus:ring-2 focus:ring-brand ${
           value
             ? "border-gray-900 font-medium"
             : "border-gray-200 hover:border-gray-400"
@@ -321,7 +321,7 @@ function Search() {
           {activeFilters > 0 && (
             <button
               onClick={clearFilters}
-              className="rounded-xl bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
+              className="rounded-xl bg-brand px-4 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover"
             >
               {t("search.clearFilters")}
             </button>
@@ -367,7 +367,7 @@ function Search() {
             </div>
             <Link
               to="/my-profile/new"
-              className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
+              className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-brand px-4 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover"
             >
               <FontAwesomeIcon icon={faPlus} className="text-xs" />
               {t("newProfile.cta")}
@@ -414,7 +414,7 @@ function Search() {
         <FontAwesomeIcon icon={faSliders} className="text-gray-500" />
         {t("search.filters")}
         {activeFilters > 0 && (
-          <span className="rounded-full bg-gray-900 px-2 py-0.5 text-[11px] font-semibold text-white">
+          <span className="rounded-full bg-brand px-2 py-0.5 text-[11px] font-semibold text-on-brand">
             {activeFilters}
           </span>
         )}
@@ -438,7 +438,7 @@ function Search() {
       aria-label={mode}
       className={`flex h-9 w-9 items-center justify-center rounded-lg text-sm transition ${
         view === mode
-          ? "bg-gray-900 text-white"
+          ? "bg-brand text-on-brand"
           : "text-gray-500 hover:text-gray-900"
       }`}
     >
@@ -462,9 +462,9 @@ function Search() {
           />
         )}
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-brand-plum/80 via-brand-plum/30 to-transparent rtl:bg-gradient-to-l" />
-        <div className="absolute -start-20 -top-24 -z-10 h-80 w-80 animate-drift rounded-full bg-white/10 blur-3xl" />
+        <div className="absolute -start-20 -top-24 -z-10 h-80 w-80 animate-drift rounded-full bg-brand-violet/35 blur-3xl" />
         <div
-          className="absolute -bottom-24 end-10 -z-10 h-72 w-72 animate-drift rounded-full bg-gray-400/20 blur-3xl"
+          className="absolute -bottom-24 end-10 -z-10 h-72 w-72 animate-drift rounded-full bg-brand-magenta/25 blur-3xl"
           style={{ animationDelay: "-7s" }}
         />
         <div className="grid items-center gap-8 lg:grid-cols-[1.3fr_0.7fr]">
@@ -559,7 +559,7 @@ function Search() {
                 <FontAwesomeIcon icon={faSliders} />
                 {t("search.filters")}
                 {activeFilters > 0 && (
-                  <span className="rounded-full bg-gray-900 px-2 py-0.5 text-[11px] text-white">
+                  <span className="rounded-full bg-brand px-2 py-0.5 text-[11px] text-on-brand">
                     {activeFilters}
                   </span>
                 )}
@@ -593,7 +593,7 @@ function Search() {
                     type="button"
                     onClick={chip.remove}
                     aria-label={t("search.removeFilter", { name: chip.text })}
-                    className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-800 transition hover:bg-gray-900 hover:text-white"
+                    className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-800 transition hover:bg-brand hover:text-on-brand"
                   >
                     {chip.text}
                     <FontAwesomeIcon icon={faXmark} className="text-[10px]" />
@@ -636,7 +636,7 @@ function Search() {
               <button
                 type="button"
                 onClick={() => setShowFilters(false)}
-                className="mt-5 w-full rounded-xl bg-gray-900 py-3 text-sm font-semibold text-white"
+                className="mt-5 w-full rounded-xl bg-brand py-3 text-sm font-semibold text-on-brand"
               >
                 {total} {t("search.peopleFound", { count: total })}
               </button>

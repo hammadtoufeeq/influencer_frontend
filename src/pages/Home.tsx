@@ -155,7 +155,7 @@ function CtaCard({
         to={to}
         className={
           variant === 'solid'
-            ? 'mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 transition hover:scale-105 sm:w-auto sm:justify-start'
+            ? 'mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-2.5 text-sm font-semibold text-on-brand transition hover:scale-105 sm:w-auto sm:justify-start'
             : 'mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/40 px-5 py-2.5 text-sm font-semibold text-white transition hover:scale-105 hover:bg-white/10 sm:w-auto sm:justify-start'
         }
       >
@@ -298,13 +298,13 @@ function Home() {
             />
           )}
 
-          <div className="absolute -start-24 -top-24 h-96 w-96 animate-drift rounded-full bg-white/10 blur-3xl" />
+          <div className="absolute -start-24 -top-24 h-96 w-96 animate-drift rounded-full bg-brand-violet/35 blur-3xl" />
           <div
-            className="absolute -bottom-32 end-0 h-[30rem] w-[30rem] animate-drift rounded-full bg-gray-400/20 blur-3xl"
+            className="absolute -bottom-32 end-0 h-[30rem] w-[30rem] animate-drift rounded-full bg-brand-magenta/25 blur-3xl"
             style={{ animationDelay: '-6s' }}
           />
           <div
-            className="absolute start-1/3 top-1/2 h-64 w-64 animate-drift rounded-full bg-white/10 blur-3xl"
+            className="absolute start-1/3 top-1/2 h-64 w-64 animate-drift rounded-full bg-brand-coral/15 blur-3xl"
             style={{ animationDelay: '-11s' }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-brand-plum/95 via-brand-plum/50 to-transparent" />
@@ -345,7 +345,7 @@ function Home() {
             <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center lg:justify-start">
               <Link
                 to="/search"
-                className="keep-dark inline-flex justify-center rounded-xl bg-white px-6 py-3 font-semibold text-gray-900 shadow-lg transition hover:scale-105 hover:bg-gray-100"
+                className="keep-dark inline-flex justify-center rounded-xl bg-brand px-6 py-3 font-semibold text-on-brand shadow-lg shadow-brand/30 transition hover:scale-105 hover:bg-brand-hover"
               >
                 {d('home.findInfluencers', 'Find influencers')}
               </Link>
@@ -384,7 +384,7 @@ function Home() {
                   <p className="flex items-center gap-1.5 truncate text-sm font-semibold">
                     {p.name}
                     {p.verified && (
-                      <FontAwesomeIcon icon={faCircleCheck} className="text-xs text-sky-300" />
+                      <FontAwesomeIcon icon={faCircleCheck} className="text-xs text-brand-sun" />
                     )}
                   </p>
                   <p className="text-xs text-white/80">{sub(p)}</p>
@@ -495,7 +495,7 @@ function Home() {
                         <p className="flex items-center gap-2 font-display text-lg font-bold">
                           <span className="truncate">{p.name}</span>
                           {p.verified && (
-                            <FontAwesomeIcon icon={faCircleCheck} className="text-sm text-sky-300" />
+                            <FontAwesomeIcon icon={faCircleCheck} className="text-sm text-brand-sun" />
                           )}
                         </p>
                         {p.headline && (
@@ -537,7 +537,7 @@ function Home() {
                   onClick={() => setTab(id)}
                   className={`inline-flex min-w-0 items-center justify-center gap-2 rounded-full px-3 py-2 text-xs font-semibold transition sm:px-5 sm:text-sm ${
                     tab === id
-                      ? 'bg-gray-900 text-white shadow'
+                      ? 'bg-brand text-on-brand shadow'
                       : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >
@@ -555,7 +555,7 @@ function Home() {
                     className="flex animate-slide-in gap-3"
                     style={{ animationDelay: `${i * 120}ms` }}
                   >
-                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gray-900 text-white">
+                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand text-on-brand">
                       <FontAwesomeIcon icon={faCheck} className="text-xs" />
                     </span>
                     <span className="text-gray-700">{point}</span>
@@ -578,7 +578,7 @@ function Home() {
                 </h3>
                 <Link
                   to={current.to}
-                  className="mt-6 inline-flex items-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 transition hover:scale-105"
+                  className="mt-6 inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-2.5 text-sm font-semibold text-on-brand transition hover:scale-105"
                 >
                   {current.cta}
                   <FontAwesomeIcon icon={faArrowRight} className="text-xs rtl:rotate-180" />
@@ -606,9 +606,9 @@ function Home() {
               className="absolute inset-0 -z-20 h-full w-full object-cover"
             />
             <div className="absolute inset-0 -z-10 bg-gradient-to-br from-brand-plum/95 via-brand-plum/85 to-black/70" />
-            <div className="absolute -start-20 -top-20 -z-10 h-80 w-80 animate-drift rounded-full bg-white/10 blur-3xl" />
+            <div className="absolute -start-20 -top-20 -z-10 h-80 w-80 animate-drift rounded-full bg-brand-violet/35 blur-3xl" />
             <div
-              className="absolute -bottom-24 end-0 -z-10 h-80 w-80 animate-drift rounded-full bg-gray-400/20 blur-3xl"
+              className="absolute -bottom-24 end-0 -z-10 h-80 w-80 animate-drift rounded-full bg-brand-magenta/25 blur-3xl"
               style={{ animationDelay: '-8s' }}
             />
 

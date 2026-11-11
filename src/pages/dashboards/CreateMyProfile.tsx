@@ -101,7 +101,7 @@ function CreateMyProfile() {
       <ol className="grid gap-3 sm:grid-cols-3">
         {steps.map((step) => (
           <li key={step.text} className="flex gap-3 rounded-2xl bg-white p-4 text-sm shadow-sm">
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gray-900 text-xs text-white">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand text-xs text-on-brand">
               <FontAwesomeIcon icon={step.icon} />
             </span>
             <span className="text-gray-600">{step.text}</span>
@@ -137,7 +137,7 @@ function CreateMyProfile() {
                 ) : (
                   <Link
                     to={`/people/${match.slug}`}
-                    className="inline-flex items-center gap-1.5 rounded-lg bg-gray-900 px-3 py-1.5 text-xs font-medium text-white hover:bg-gray-800"
+                    className="inline-flex items-center gap-1.5 rounded-lg bg-brand px-3 py-1.5 text-xs font-medium text-on-brand hover:bg-brand-hover"
                   >
                     {t('newProfile.thisIsMe')}
                     <FontAwesomeIcon icon={faArrowRight} className="text-[10px] rtl:rotate-180" />

@@ -35,7 +35,7 @@ function AdminLayout() {
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     `flex shrink-0 items-center gap-3 whitespace-nowrap rounded-lg px-3 py-2 text-sm transition ${
-      isActive ? 'bg-gray-900 text-white' : 'text-gray-700 hover:bg-gray-100'
+      isActive ? 'bg-brand text-on-brand' : 'text-gray-700 hover:bg-gray-100'
     }`
 
   return (

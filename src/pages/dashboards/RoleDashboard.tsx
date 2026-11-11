@@ -150,7 +150,7 @@ function RoleDashboard({ role }: { role: SignupRole }) {
             className="flex flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"
           >
             <div className="flex items-start justify-between gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gray-900 text-white">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand text-on-brand">
                 <FontAwesomeIcon icon={card.icon} />
               </span>
               {!card.action && (
@@ -164,7 +164,7 @@ function RoleDashboard({ role }: { role: SignupRole }) {
             {card.action && (
               <Link
                 to={card.action.to}
-                className="mt-4 self-start rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
+                className="mt-4 self-start rounded-lg bg-brand px-4 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover"
               >
                 {t(card.action.label)}{' '}
                 <FontAwesomeIcon icon={faArrowRight} className="ms-1 rtl:rotate-180" />

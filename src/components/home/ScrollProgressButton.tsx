@@ -46,7 +46,7 @@ function ScrollProgressButton() {
       title={t('footer.backToTop')}
       tabIndex={visible ? 0 : -1}
       aria-hidden={!visible}
-      className={`group fixed end-5 bottom-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-white text-gray-900 shadow-[0_10px_30px_rgb(23_23_23_/_18%)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgb(23_23_23_/_24%)] focus-visible:ring-4 focus-visible:ring-gray-900/20 focus-visible:outline-none sm:end-8 sm:bottom-8 ${
+      className={`group fixed end-5 bottom-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-white text-gray-900 shadow-[0_10px_30px_rgb(23_23_23_/_18%)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgb(23_23_23_/_24%)] focus-visible:ring-4 focus-visible:ring-brand/20 focus-visible:outline-none sm:end-8 sm:bottom-8 ${
         visible ? 'translate-y-0 scale-100 opacity-100' : 'pointer-events-none translate-y-4 scale-75 opacity-0'
       }`}
     >
@@ -62,7 +62,7 @@ function ScrollProgressButton() {
           strokeLinecap="round"
           strokeDasharray={CIRCUMFERENCE}
           strokeDashoffset={CIRCUMFERENCE * (1 - progress)}
-          className="stroke-gray-900 transition-[stroke-dashoffset] duration-150 ease-out"
+          className="stroke-brand transition-[stroke-dashoffset] duration-150 ease-out"
         />
       </svg>
       <FontAwesomeIcon

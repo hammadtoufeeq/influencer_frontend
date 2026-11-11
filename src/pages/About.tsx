@@ -206,7 +206,7 @@ function About() {
           className="absolute inset-0 -z-10 h-full w-full animate-[fade_1.2s_ease-out_both] object-cover"
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-gray-950/95 via-gray-950/75 to-gray-950/25 rtl:bg-gradient-to-l" />
-        <div className={`${glow} -start-16 -top-20 h-72 w-72 bg-white/10`} />
+        <div className={`${glow} -start-16 -top-20 h-72 w-72 bg-brand-violet/35`} />
         <div className="max-w-2xl">
           <p className="animate-word text-xs font-medium tracking-wider text-white/60 uppercase">
             {t("about.eyebrow")}
@@ -229,7 +229,7 @@ function About() {
           >
             <Link
               to="/search"
-              className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-gray-900 transition hover:scale-105"
+              className="inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-3 text-sm font-semibold text-on-brand transition hover:scale-105"
             >
               {t("about.ctaExplore")}
               <FontAwesomeIcon
@@ -300,7 +300,7 @@ function About() {
                 </Link>
               ))}
             </div>
-            <div className="mx-auto mt-8 w-fit rounded-2xl bg-gray-900 px-6 py-3 text-center text-white shadow-xl">
+            <div className="mx-auto mt-8 w-fit rounded-2xl bg-brand px-6 py-3 text-center text-on-brand shadow-xl">
               <p className="font-display text-2xl leading-none font-extrabold">
                 <CountUp value={peopleData?.meta.total ?? 0} />
               </p>
@@ -326,7 +326,7 @@ function About() {
             <li key={step.title} className="relative">
               <Reveal delay={i * 150} className="h-full">
                 <div className="relative h-full rounded-3xl bg-white p-6 text-center shadow-sm ring-1 ring-gray-100 transition duration-300 hover:-translate-y-1.5 hover:shadow-xl">
-                  <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gray-900 text-lg text-white shadow-lg">
+                  <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-brand text-lg text-on-brand shadow-lg">
                     <FontAwesomeIcon icon={step.icon} />
                   </span>
                   <p className="mt-3 text-xs font-semibold tracking-wider text-gray-400">
@@ -355,9 +355,9 @@ function About() {
               className="absolute inset-0 -z-10 h-full w-full object-cover opacity-25"
             />
           )}
-          <div className={`${glow} -start-20 -top-24 h-80 w-80 bg-white/10`} />
+          <div className={`${glow} -start-20 -top-24 h-80 w-80 bg-brand-violet/35`} />
           <div
-            className={`${glow} -bottom-24 end-0 h-80 w-80 bg-gray-400/20`}
+            className={`${glow} -bottom-24 end-0 h-80 w-80 bg-brand-magenta/25`}
             style={{ animationDelay: "-8s" }}
           />
           <h2 className="mx-auto max-w-3xl font-display text-3xl font-extrabold leading-tight md:text-6xl">
@@ -382,7 +382,7 @@ function About() {
           {featureDefs.map(([key, icon], i) => (
             <Reveal key={key} delay={(i % 3) * 90} className="h-full">
               <div className="group h-full rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-100 transition duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:ring-gray-300">
-                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gray-900 text-white transition duration-300 group-hover:rotate-6 group-hover:scale-110">
+                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand text-on-brand transition duration-300 group-hover:rotate-6 group-hover:scale-110">
                   <FontAwesomeIcon icon={icon} />
                 </span>
                 <h3 className="mt-4 font-display text-lg font-bold">
@@ -423,7 +423,7 @@ function About() {
                     }`}
                 >
                   <span
-                    className={`flex h-12 w-12 items-center justify-center rounded-xl ${dark ? "bg-white text-gray-900" : "bg-gray-900 text-white"
+                    className={`flex h-12 w-12 items-center justify-center rounded-xl ${dark ? "bg-white text-gray-900" : "bg-brand text-on-brand"
                       }`}
                   >
                     <FontAwesomeIcon icon={audience.icon} />
@@ -453,8 +453,8 @@ function About() {
                     <Link
                       to={`/register?type=${audience.type}`}
                       className={`mt-6 inline-flex items-center gap-2 self-start rounded-xl px-4 py-2.5 text-sm font-medium transition hover:scale-105 ${dark
-                          ? "bg-white text-gray-900 hover:bg-gray-100"
-                          : "bg-gray-900 text-white hover:bg-gray-800"
+                          ? "bg-brand text-on-brand hover:bg-brand-hover"
+                          : "bg-brand text-on-brand hover:bg-brand-hover"
                         }`}
                     >
                       {t(`about.for.${audience.key}Join`)}
@@ -482,7 +482,7 @@ function About() {
             <li key={value.title}>
               <Reveal delay={i * 100} className="h-full">
                 <div className="group h-full rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-100 transition duration-300 hover:-translate-y-1.5 hover:shadow-xl">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gray-900 text-white transition duration-300 group-hover:rotate-6 group-hover:scale-110">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand text-on-brand transition duration-300 group-hover:rotate-6 group-hover:scale-110">
                     <FontAwesomeIcon icon={value.icon} />
                   </span>
                   <h3 className="mt-4 font-display text-lg font-bold">
@@ -536,9 +536,9 @@ function About() {
       {/* Aakhri dawat */}
       <Reveal>
         <section className="keep-dark relative isolate flex flex-col items-center gap-7 overflow-hidden rounded-3xl bg-brand-plum p-6 text-center text-white md:p-12">
-          <div className={`${glow} -start-16 -top-20 h-72 w-72 bg-white/10`} />
+          <div className={`${glow} -start-16 -top-20 h-72 w-72 bg-brand-violet/35`} />
           <div
-            className={`${glow} -bottom-24 end-0 h-72 w-72 bg-gray-400/20`}
+            className={`${glow} -bottom-24 end-0 h-72 w-72 bg-brand-magenta/25`}
             style={{ animationDelay: "-8s" }}
           />
           <div className="max-w-2xl">
@@ -554,7 +554,7 @@ function About() {
           <div className="flex flex-wrap justify-center gap-3 sm:flex-nowrap">
             <Link
               to="/search"
-              className="inline-flex items-center gap-2 whitespace-nowrap rounded-xl bg-white px-5 py-3 text-sm font-semibold text-gray-900 transition hover:scale-105"
+              className="inline-flex items-center gap-2 whitespace-nowrap rounded-xl bg-brand px-5 py-3 text-sm font-semibold text-on-brand transition hover:scale-105"
             >
               {t("about.ctaExplore")}
               <FontAwesomeIcon

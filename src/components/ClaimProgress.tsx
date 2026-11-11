@@ -95,7 +95,7 @@ function ClaimProgress({ claim }: { claim: Claim }) {
         {STEPS.map((step, index) => (
           <li key={step} className="text-center">
             <div
-              className={`h-1.5 rounded-full ${index <= current ? 'bg-gray-900' : 'bg-gray-200'}`}
+              className={`h-1.5 rounded-full ${index <= current ? 'bg-brand' : 'bg-gray-200'}`}
             />
             <span
               className={`mt-1.5 block text-[11px] leading-tight sm:text-xs ${index <= current ? 'font-medium text-gray-900' : 'text-gray-400'}`}
@@ -145,7 +145,7 @@ function ClaimProgress({ claim }: { claim: Claim }) {
               <button
                 type="submit"
                 disabled={code.length !== 6 || verify.isPending}
-                className="rounded-lg bg-gray-900 px-5 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+                className="rounded-lg bg-brand px-5 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:opacity-50"
               >
                 {verify.isPending ? t('claimProgress.checking') : t('claimProgress.verify')}
               </button>

@@ -58,7 +58,7 @@ function ShortlistsPage() {
         {!creating && (
           <button
             onClick={() => setCreating(true)}
-            className="inline-flex items-center gap-2 rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
+            className="inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover"
           >
             <FontAwesomeIcon icon={faPlus} className="text-xs" />
             {t('shortlists.newList')}
@@ -101,7 +101,7 @@ function ShortlistsPage() {
             <button
               type="submit"
               disabled={!name.trim() || create.isPending}
-              className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+              className="rounded-lg bg-brand px-4 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:opacity-50"
             >
               {create.isPending ? t('common.saving') : t('shortlists.create')}
             </button>

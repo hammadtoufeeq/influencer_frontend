@@ -36,14 +36,14 @@ function ManagerCard({ rep }: { rep: Representation }) {
   const profile = rep.managerProfile
   return (
     <div className="flex flex-wrap items-start gap-3">
-      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gray-900 text-white">
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand text-on-brand">
         <FontAwesomeIcon icon={faUserTie} />
       </span>
       <div className="min-w-0 flex-1">
         <p className="flex flex-wrap items-center gap-2 font-semibold">
           {manager.name}
           {profile?.verified && (
-            <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700">
+            <span className="inline-flex items-center gap-1 rounded-full bg-star-soft px-2 py-0.5 text-xs font-medium text-star-ink">
               <FontAwesomeIcon icon={faCircleCheck} />
               {t('manager.verifiedManager')}
             </span>
@@ -104,7 +104,7 @@ function RequestCard({ rep }: { rep: Representation }) {
           type="button"
           disabled={respond.isPending}
           onClick={() => respond.mutate('accept')}
-          className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
+          className="rounded-lg bg-brand px-4 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover"
         >
           {t('manager.acceptManager')}
         </button>
@@ -150,13 +150,13 @@ function ManagerReview({ rep }: { rep: Representation }) {
             value={comment}
             onChange={(e) => setComment(e.target.value)}
             placeholder={t('manager.reviewPlaceholder')}
-            className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-gray-900"
+            className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-brand"
           />
           <button
             type="button"
             disabled={send.isPending}
             onClick={() => send.mutate()}
-            className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-60"
+            className="rounded-lg bg-brand px-4 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:opacity-60"
           >
             {send.isPending ? t('common.saving') : t('manager.sendReview')}
           </button>
@@ -216,7 +216,7 @@ function ActiveManager({ rep }: { rep: Representation }) {
           type="button"
           disabled={!changed || save.isPending}
           onClick={() => save.mutate()}
-          className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+          className="rounded-lg bg-brand px-4 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:opacity-50"
         >
           {save.isPending ? t('common.saving') : t('manager.savePermissions')}
         </button>
@@ -295,7 +295,7 @@ function InviteForm() {
         <button
           type="submit"
           disabled={!email.trim() || invite.isPending}
-          className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+          className="rounded-lg bg-brand px-4 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:opacity-50"
         >
           {invite.isPending ? t('common.saving') : t('manager.sendInvite')}
         </button>

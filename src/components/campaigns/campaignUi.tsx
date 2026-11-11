@@ -115,7 +115,7 @@ export function CampaignBusiness({ campaign }: { campaign: Campaign }) {
       ) : (
         <span
           aria-hidden="true"
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gray-900 text-sm font-semibold text-white"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand text-sm font-semibold text-on-brand"
         >
           {initials(business.name)}
         </span>
@@ -126,7 +126,7 @@ export function CampaignBusiness({ campaign }: { campaign: Campaign }) {
           {business.verified && (
             <FontAwesomeIcon
               icon={faCircleCheck}
-              className="shrink-0 text-blue-600"
+              className="shrink-0 text-star"
               title={t('site.verified')}
             />
           )}

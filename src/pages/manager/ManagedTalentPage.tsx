@@ -160,7 +160,7 @@ function ManagedTalentPage() {
             type="button"
             onClick={() => setParams({ tab: item.key }, { replace: true })}
             className={`inline-flex shrink-0 items-center gap-2 rounded-xl px-4 py-2 text-sm transition ${
-              tab === item.key ? 'bg-gray-900 text-white' : 'text-gray-700 hover:bg-gray-100'
+              tab === item.key ? 'bg-brand text-on-brand' : 'text-gray-700 hover:bg-gray-100'
             }`}
           >
             <FontAwesomeIcon icon={permissions[item.needs] ? item.icon : faLock} className="w-4" />

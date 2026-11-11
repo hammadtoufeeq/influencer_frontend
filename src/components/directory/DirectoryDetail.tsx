@@ -43,7 +43,7 @@ export function DirectoryHeader({
     year: 'numeric',
   })
   const badge = entry.verified
-    ? { tone: 'bg-blue-50 text-blue-700', icon: faCircleCheck, label: t('site.verified') }
+    ? { tone: 'bg-star-soft text-star-ink', icon: faCircleCheck, label: t('site.verified') }
     : entry.inReview
       ? {
           tone: 'bg-amber-50 text-amber-800',
@@ -102,7 +102,7 @@ export function DirectoryHeader({
               href={entry.websiteUrl}
               target="_blank"
               rel="noopener noreferrer nofollow"
-              className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 px-3 py-1 font-medium text-gray-800 transition hover:border-gray-900 hover:bg-gray-900 hover:text-white"
+              className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 px-3 py-1 font-medium text-gray-800 transition hover:border-brand hover:bg-brand hover:text-on-brand"
             >
               {hostOf(entry.websiteUrl)}
               <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-[10px]" />

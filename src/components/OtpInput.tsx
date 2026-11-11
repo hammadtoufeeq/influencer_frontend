@@ -90,7 +90,7 @@ function OtpInput({
           disabled={disabled}
           aria-label={`${label} ${index + 1}`}
           aria-invalid={invalid}
-          className={`h-12 w-10 rounded-xl border bg-white text-center font-mono text-xl font-semibold outline-none transition focus:border-gray-900 focus:ring-2 focus:ring-gray-900/15 disabled:opacity-60 sm:h-14 sm:w-12 sm:text-2xl ${
+          className={`h-12 w-10 rounded-xl border bg-white text-center font-mono text-xl font-semibold outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/15 disabled:opacity-60 sm:h-14 sm:w-12 sm:text-2xl ${
             invalid ? 'border-red-500 text-red-600' : digit ? 'border-gray-400' : 'border-gray-300'
           }`}
         />

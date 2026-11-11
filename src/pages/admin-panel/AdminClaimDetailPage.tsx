@@ -379,7 +379,7 @@ function AdminClaimDetailPage() {
                         setCode(null)
                         refresh()
                       }}
-                      className={`${button} ms-auto bg-gray-900 text-white hover:bg-gray-800`}
+                      className={`${button} ms-auto bg-brand text-on-brand hover:bg-brand-hover`}
                     >
                       <FontAwesomeIcon icon={faPaperPlane} className="rtl:-scale-x-100" />
                       {t('claims.codeDone')}
@@ -416,7 +416,7 @@ function AdminClaimDetailPage() {
                             sendCode.mutate({ url: selectedUrl, reset: claim.status !== 'pending' })
                           }
                           disabled={sendCode.isPending || !selectedUrl}
-                          className={`${button} bg-gray-900 text-white hover:bg-gray-800`}
+                          className={`${button} bg-brand text-on-brand hover:bg-brand-hover`}
                         >
                           <FontAwesomeIcon
                             icon={claim.status === 'pending' ? faKey : faRotateRight}

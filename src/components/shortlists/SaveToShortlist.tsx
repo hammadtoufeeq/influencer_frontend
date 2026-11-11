@@ -156,7 +156,7 @@ function ShortlistPicker({
             <button
               type="submit"
               disabled={!newName.trim() || create.isPending}
-              className="inline-flex items-center gap-1.5 rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-brand px-3 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:opacity-50"
             >
               <FontAwesomeIcon icon={faPlus} className="text-xs" />
               {t('shortlists.createAndAdd')}

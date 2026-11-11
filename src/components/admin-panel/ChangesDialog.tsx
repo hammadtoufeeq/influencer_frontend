@@ -74,7 +74,7 @@ function ChangesDialog({ log, onClose }: { log: AuditLogEntry; onClose: () => vo
         className="flex max-h-[88vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-gray-50 shadow-2xl ring-1 ring-black/5"
       >
         <header className="flex items-start gap-3 border-b border-gray-200 bg-white px-5 py-4">
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gray-900 text-white">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand text-on-brand">
             <FontAwesomeIcon icon={faClockRotateLeft} />
           </span>
           <div className="min-w-0 flex-1">
@@ -102,7 +102,7 @@ function ChangesDialog({ log, onClose }: { log: AuditLogEntry; onClose: () => vo
           <div className="grid gap-3 sm:grid-cols-3">
             <Meta icon={faUserShield} label={t('audit.colActor')}>
               <div className="flex items-center gap-2.5">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-900 text-xs font-semibold text-white">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand text-xs font-semibold text-on-brand">
                   {initials(actorName)}
                 </span>
                 <div className="min-w-0">

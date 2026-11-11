@@ -32,7 +32,7 @@ function Pagination({ page, totalPages, onChange }: PaginationProps) {
   const numBtn = (active: boolean) =>
     `flex h-9 min-w-9 items-center justify-center rounded-xl px-2 text-sm font-semibold transition duration-300 ${
       active
-        ? 'bg-gray-900 text-white shadow-md shadow-gray-900/20'
+        ? 'bg-brand text-on-brand shadow-md shadow-brand/20'
         : 'border border-gray-200 bg-white text-gray-700 hover:-translate-y-0.5 hover:border-gray-400 hover:shadow-md'
     }`
 

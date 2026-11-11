@@ -91,7 +91,7 @@ function AdminDashboard() {
       <DashboardHeader>
         <Link
           to="/dashboard/people/new"
-          className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
+          className="rounded-lg bg-brand px-4 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover"
         >
           <FontAwesomeIcon icon={faPlus} className="me-1.5" />
           {t('oldAdmin.newProfile')}
@@ -145,7 +145,7 @@ function AdminDashboard() {
                 aria-label={t('oldAdmin.searchProfiles')}
                 className="min-w-0 flex-1 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm"
               />
-              <button type="submit" className="rounded-lg bg-gray-900 px-4 py-2 text-sm text-white">
+              <button type="submit" className="rounded-lg bg-brand px-4 py-2 text-sm text-on-brand">
                 {t('common.search')}
               </button>
             </form>

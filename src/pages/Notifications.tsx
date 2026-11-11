@@ -194,7 +194,7 @@ function Notifications() {
   const chip = (active: boolean) =>
     `inline-flex shrink-0 items-center gap-2 rounded-full px-3.5 py-2 text-sm font-medium whitespace-nowrap transition ${
       active
-        ? 'bg-gray-900 text-white shadow-sm'
+        ? 'bg-brand text-on-brand shadow-sm'
         : 'bg-white text-gray-700 ring-1 ring-gray-200 hover:bg-gray-50'
     }`
   const badge = (count: number, active: boolean) =>
@@ -270,7 +270,7 @@ function Notifications() {
           type="checkbox"
           checked={unreadOnly}
           onChange={(e) => setUnreadOnly(e.target.checked)}
-          className="h-4 w-4 rounded border-gray-300 accent-gray-900"
+          className="h-4 w-4 rounded border-gray-300 accent-brand"
         />
         {t('notifications.unreadOnly')}
       </label>

@@ -44,7 +44,7 @@ function ReviewItem({ review }: { review: ReviewItemData }) {
       ) : (
         <span
           aria-hidden="true"
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gray-900 text-xs font-semibold text-white"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand text-xs font-semibold text-on-brand"
         >
           {initials(name)}
         </span>

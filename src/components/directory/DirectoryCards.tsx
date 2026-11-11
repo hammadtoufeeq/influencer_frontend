@@ -96,7 +96,7 @@ export function BusinessCard({ business }: { business: DirectoryBusiness }) {
       to={`/businesses/${business._id}`}
       className="group relative flex h-full flex-col overflow-hidden rounded-3xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:ring-gray-300"
     >
-      <span className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gray-900 transition-transform duration-500 group-hover:scale-x-100 rtl:origin-right" />
+      <span className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-brand transition-transform duration-500 group-hover:scale-x-100 rtl:origin-right" />
 
       <div className="flex min-w-0 items-center gap-3">
         <Picture
@@ -110,7 +110,7 @@ export function BusinessCard({ business }: { business: DirectoryBusiness }) {
             {business.verified && (
               <FontAwesomeIcon
                 icon={faCircleCheck}
-                className="shrink-0 text-sm text-blue-600"
+                className="shrink-0 text-sm text-star"
                 title={t('site.verified')}
               />
             )}
@@ -178,7 +178,7 @@ export function BusinessCard({ business }: { business: DirectoryBusiness }) {
 
         <span className="mt-4 flex items-center justify-between border-t border-gray-100 pt-4 text-sm font-semibold text-gray-900">
           {t('directory.viewBusiness')}
-          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-xs transition duration-300 group-hover:translate-x-1 group-hover:bg-gray-900 group-hover:text-white rtl:group-hover:-translate-x-1">
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-xs transition duration-300 group-hover:translate-x-1 group-hover:bg-brand group-hover:text-on-brand rtl:group-hover:-translate-x-1">
             <FontAwesomeIcon icon={faArrowRight} className="rtl:rotate-180" />
           </span>
         </span>
@@ -203,7 +203,7 @@ export function ManagerCard({ manager }: { manager: DirectoryManager }) {
       to={`/managers/${manager._id}`}
       className="group relative flex h-full flex-col overflow-hidden rounded-3xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:ring-gray-300"
     >
-      <span className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gray-900 transition-transform duration-500 group-hover:scale-x-100 rtl:origin-right" />
+      <span className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-brand transition-transform duration-500 group-hover:scale-x-100 rtl:origin-right" />
 
       <div className="flex min-w-0 items-center gap-3">
         <Picture
@@ -217,7 +217,7 @@ export function ManagerCard({ manager }: { manager: DirectoryManager }) {
             {manager.verified && (
               <FontAwesomeIcon
                 icon={faCircleCheck}
-                className="shrink-0 text-sm text-blue-600"
+                className="shrink-0 text-sm text-star"
                 title={t('site.verified')}
               />
             )}
@@ -276,7 +276,7 @@ export function ManagerCard({ manager }: { manager: DirectoryManager }) {
 
         <span className="mt-4 flex items-center justify-between border-t border-gray-100 pt-4 text-sm font-semibold text-gray-900">
           {t('directory.viewManager')}
-          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-xs transition duration-300 group-hover:translate-x-1 group-hover:bg-gray-900 group-hover:text-white rtl:group-hover:-translate-x-1">
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-xs transition duration-300 group-hover:translate-x-1 group-hover:bg-brand group-hover:text-on-brand rtl:group-hover:-translate-x-1">
             <FontAwesomeIcon icon={faArrowRight} className="rtl:rotate-180" />
           </span>
         </span>

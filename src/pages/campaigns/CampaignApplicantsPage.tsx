@@ -66,7 +66,7 @@ function ApplicantCard({
               className="h-12 w-12 shrink-0 rounded-full object-cover"
             />
           ) : (
-            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gray-900 text-sm font-semibold text-white">
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand text-sm font-semibold text-on-brand">
               {initials(person?.name ?? '?')}
             </span>
           )}
@@ -74,7 +74,7 @@ function ApplicantCard({
             <p className="flex items-center gap-1.5 font-semibold text-gray-900">
               <span className="truncate">{person?.name ?? t('campaigns.removedProfile')}</span>
               {person?.verified && (
-                <FontAwesomeIcon icon={faCircleCheck} className="text-blue-600" />
+                <FontAwesomeIcon icon={faCircleCheck} className="text-star" />
               )}
             </p>
             {person?.headline && (
@@ -122,7 +122,7 @@ function ApplicantCard({
               disabled={respond.isPending || !canSelect}
               title={canSelect ? undefined : t('campaigns.fullHint')}
               onClick={() => respond.mutate('accept')}
-              className="inline-flex items-center gap-1.5 rounded-xl bg-gray-900 px-3 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-brand px-3 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:opacity-50"
             >
               <FontAwesomeIcon icon={faCheck} className="text-xs" />
               {t('campaigns.select')}
@@ -227,7 +227,7 @@ function CampaignApplicantsPage() {
                 disabled={setStatus.isPending || !canPublish}
                 title={canPublish ? undefined : t('campaigns.verifyToPublish')}
                 onClick={() => setStatus.mutate('open')}
-                className="rounded-xl bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+                className="rounded-xl bg-brand px-4 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:opacity-50"
               >
                 {t('campaigns.publish')}
               </button>
@@ -292,7 +292,7 @@ function CampaignApplicantsPage() {
               onClick={() => setTab(key)}
               className={`rounded-full px-3 py-1.5 text-sm font-medium transition ${
                 tab === key
-                  ? 'bg-gray-900 text-white'
+                  ? 'bg-brand text-on-brand'
                   : 'bg-white text-gray-700 ring-1 ring-gray-200 hover:bg-gray-50'
               }`}
             >

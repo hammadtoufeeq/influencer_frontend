@@ -84,7 +84,7 @@ function TestimonialsSlider({ items = TESTIMONIALS }: { items?: Testimonial[] })
                 aria-current={i === index % count}
                 onClick={() => setIndex(i)}
                 className={`h-2.5 rounded-full transition-all ${
-                  i === index % count ? 'w-6 bg-gray-900' : 'w-2.5 bg-gray-300 hover:bg-gray-400'
+                  i === index % count ? 'w-6 bg-brand' : 'w-2.5 bg-gray-300 hover:bg-gray-400'
                 }`}
               />
             ))}

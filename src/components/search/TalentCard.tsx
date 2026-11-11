@@ -51,7 +51,7 @@ function TalentCard({ person }: { person: PersonSummary }) {
         <div className="absolute inset-x-0 bottom-0 p-3.5">
           <p className="flex items-center gap-1.5 font-display text-base font-bold leading-tight">
             <span className="truncate">{person.name}</span>
-            {person.verified && <FontAwesomeIcon icon={faCircleCheck} className="shrink-0 text-sm text-sky-300" />}
+            {person.verified && <FontAwesomeIcon icon={faCircleCheck} className="shrink-0 text-sm text-brand-sun" />}
           </p>
           {person.headline && <p className="mt-1 line-clamp-2 text-xs text-white/80">{person.headline}</p>}
           <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-white/70">

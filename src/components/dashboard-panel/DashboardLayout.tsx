@@ -146,7 +146,7 @@ function Panel({ titleKey, links, extra }: { titleKey: string; links: SideLink[]
   const linkClass = (link: SideLink) => ({ isActive }: { isActive: boolean }) => {
     const active = isActive || (link.also?.includes(pathname) ?? false)
     return `flex shrink-0 items-center gap-3 whitespace-nowrap rounded-lg px-3 py-2 text-sm transition ${
-      active ? 'bg-gray-900 text-white' : 'text-gray-700 hover:bg-gray-100'
+      active ? 'bg-brand text-on-brand' : 'text-gray-700 hover:bg-gray-100'
     }`
   }
 

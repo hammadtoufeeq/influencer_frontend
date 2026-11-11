@@ -158,7 +158,7 @@ function AdminAgreementDetailPage() {
                     <button
                       onClick={() => setConfirming(true)}
                       disabled={note.trim().length < 3}
-                      className="inline-flex items-center gap-2 rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+                      className="inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:opacity-50"
                     >
                       <FontAwesomeIcon icon={faScaleBalanced} />
                       {t('adminAgreements.resolve')}

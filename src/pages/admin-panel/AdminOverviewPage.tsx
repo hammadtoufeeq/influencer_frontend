@@ -34,7 +34,7 @@ function StatCard(props: {
         props.highlight ? 'border-amber-300' : 'border-gray-200'
       }`}
     >
-      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gray-900 text-white">
+      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand text-on-brand">
         <FontAwesomeIcon icon={props.icon} />
       </span>
       <p className="mt-4 text-sm text-gray-500">{props.label}</p>

@@ -20,7 +20,7 @@ import { countryName } from '../../utils/format'
 
 const MAX_LINKS = 5
 const selectClass =
-  'w-full rounded-lg border border-gray-300 bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-gray-900'
+  'w-full rounded-lg border border-gray-300 bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-brand'
 
 // Pehli dafa: signup pe di gayi details se shuru (User.manager)
 function toForm(manager: ManagerProfile | null, signup?: User['manager']): ManagerInput {
@@ -182,7 +182,7 @@ function ManagerForm({ manager }: { manager: ManagerProfile | null }) {
                   aria-label={t('personForm.platform')}
                   value={account.platform}
                   onChange={(e) => setSocial(index, { platform: e.target.value as SocialPlatform })}
-                  className="w-36 shrink-0 rounded-lg border border-gray-300 bg-white px-2 py-2 text-sm outline-none focus:ring-2 focus:ring-gray-900"
+                  className="w-36 shrink-0 rounded-lg border border-gray-300 bg-white px-2 py-2 text-sm outline-none focus:ring-2 focus:ring-brand"
                 >
                   {Object.entries(PLATFORM_LABELS).map(([value, label]) => (
                     <option key={value} value={value}>
@@ -196,7 +196,7 @@ function ManagerForm({ manager }: { manager: ManagerProfile | null }) {
                   placeholder="https://instagram.com/..."
                   value={account.url}
                   onChange={(e) => setSocial(index, { url: e.target.value })}
-                  className={`w-full min-w-0 rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-gray-900 ${
+                  className={`w-full min-w-0 rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-brand ${
                     errors[`socialAccounts.${index}.url`] ? 'border-red-500' : 'border-gray-300'
                   }`}
                 />
@@ -242,7 +242,7 @@ function ManagerForm({ manager }: { manager: ManagerProfile | null }) {
           value={form.bio}
           onChange={(e) => update('bio', e.target.value)}
           placeholder={t('manager.fields.bioPlaceholder')}
-          className="w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:ring-2 focus:ring-gray-900"
+          className="w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:ring-2 focus:ring-brand"
         />
       </label>
       <div className="grid gap-4 sm:grid-cols-2">
@@ -303,7 +303,7 @@ function ManagerForm({ manager }: { manager: ManagerProfile | null }) {
                   placeholder="https://..."
                   value={link}
                   onChange={(e) => setLink(index, e.target.value)}
-                  className={`w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-gray-900 ${
+                  className={`w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-brand ${
                     errors[`proofLinks.${index}`] ? 'border-red-500' : 'border-gray-300'
                   }`}
                 />
@@ -351,7 +351,7 @@ function ManagerForm({ manager }: { manager: ManagerProfile | null }) {
         <button
           type="submit"
           disabled={save.isPending}
-          className="rounded-lg bg-gray-900 px-5 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-60"
+          className="rounded-lg bg-brand px-5 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:opacity-60"
         >
           {save.isPending
             ? t('common.saving')

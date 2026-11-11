@@ -119,7 +119,7 @@ function ReportUpdateForm({ report }: { report: AdminReport }) {
       )}
       <button
         type="submit"
-        className="rounded-lg bg-gray-900 px-5 py-2 text-sm font-medium text-white hover:bg-gray-800"
+        className="rounded-lg bg-brand px-5 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover"
       >
         {t('common.save')}
       </button>

@@ -60,7 +60,7 @@ function TagList({ title, items, param }: { title: string; items: TaxonomyItem[]
           <Link
             key={item._id}
             to={`/search?${param}=${item.slug}`}
-            className="rounded-full border border-gray-200 bg-gray-50 px-3.5 py-1.5 text-sm text-gray-700 transition hover:-translate-y-0.5 hover:border-gray-900 hover:bg-gray-900 hover:text-white"
+            className="rounded-full border border-gray-200 bg-gray-50 px-3.5 py-1.5 text-sm text-gray-700 transition hover:-translate-y-0.5 hover:border-brand hover:bg-brand hover:text-on-brand"
           >
             {taxName(item)}
           </Link>
@@ -159,9 +159,9 @@ function Profile() {
               className="absolute inset-0 -z-10 h-full w-full scale-125 object-cover opacity-60 blur-2xl motion-safe:animate-hero-zoom"
             />
           )}
-          <div className="absolute -start-16 -top-20 -z-10 h-64 w-64 rounded-full bg-white/15 blur-3xl motion-safe:animate-drift" />
+          <div className="absolute -start-16 -top-20 -z-10 h-64 w-64 rounded-full bg-brand-violet/35 blur-3xl motion-safe:animate-drift" />
           <div
-            className="absolute -end-10 -bottom-24 -z-10 h-72 w-72 rounded-full bg-gray-400/25 blur-3xl motion-safe:animate-drift"
+            className="absolute -end-10 -bottom-24 -z-10 h-72 w-72 rounded-full bg-brand-magenta/25 blur-3xl motion-safe:animate-drift"
             style={{ animationDelay: '-6s' }}
           />
           <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
@@ -393,7 +393,7 @@ function Profile() {
                           {account.followers !== undefined && (
                             <span className="mt-1.5 block h-1.5 overflow-hidden rounded-full bg-gray-100">
                               <span
-                                className="block h-full origin-left rounded-full bg-gray-900 motion-safe:animate-[grow_1.1s_ease-out_both] rtl:origin-right"
+                                className="block h-full origin-left rounded-full bg-brand motion-safe:animate-[grow_1.1s_ease-out_both] rtl:origin-right"
                                 style={{ width: `${Math.max(share, 4)}%` }}
                               />
                             </span>
@@ -426,7 +426,7 @@ function Profile() {
                 href={person.websiteUrl}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
-                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-gray-200 px-4 py-2.5 text-sm font-medium text-gray-800 transition hover:border-gray-900 hover:bg-gray-900 hover:text-white"
+                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-gray-200 px-4 py-2.5 text-sm font-medium text-gray-800 transition hover:border-brand hover:bg-brand hover:text-on-brand"
               >
                 <FontAwesomeIcon icon={faGlobe} />
                 {t('profile.website')}

@@ -66,9 +66,9 @@ function ProfileHero({
             className="absolute inset-0 -z-10 h-full w-full scale-125 object-cover opacity-60 blur-2xl motion-safe:animate-hero-zoom"
           />
         )}
-        <div className="absolute -start-16 -top-20 -z-10 h-64 w-64 rounded-full bg-white/15 blur-3xl motion-safe:animate-drift" />
+        <div className="absolute -start-16 -top-20 -z-10 h-64 w-64 rounded-full bg-brand-violet/35 blur-3xl motion-safe:animate-drift" />
         <div
-          className="absolute -end-10 -bottom-24 -z-10 h-72 w-72 rounded-full bg-gray-400/25 blur-3xl motion-safe:animate-drift"
+          className="absolute -end-10 -bottom-24 -z-10 h-72 w-72 rounded-full bg-brand-magenta/25 blur-3xl motion-safe:animate-drift"
           style={{ animationDelay: '-6s' }}
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />

@@ -283,7 +283,7 @@ function Progress({ percent }: { percent: number }) {
     <div ref={ref} className="h-2 overflow-hidden rounded-full bg-gray-100 sm:h-2.5">
       <div
         style={{ width: seen ? `${percent}%` : '0%' }}
-        className="h-full rounded-full bg-gray-900 transition-[width] duration-[1600ms] ease-out"
+        className="h-full rounded-full bg-brand transition-[width] duration-[1600ms] ease-out"
       />
     </div>
   )
@@ -319,14 +319,14 @@ export function FeatureShowcase({ people }: { people: PersonSummary[] }) {
           title={d('home.mockCreator', 'Creator')}
           note={b?.headline ?? d('home.mockNote2', 'Media & News · Pakistan')}
           delay={120}
-          tag={<FontAwesomeIcon icon={faCircleCheck} className="text-sky-500" />}
+          tag={<FontAwesomeIcon icon={faCircleCheck} className="text-star" />}
         />
         <MockRow
           person={c}
           title={d('home.mockCreator', 'Creator')}
           note={c?.headline ?? d('home.mockNote3', 'Entertainment · Pakistan')}
           delay={240}
-          tag={<FontAwesomeIcon icon={faCircleCheck} className="text-sky-500" />}
+          tag={<FontAwesomeIcon icon={faCircleCheck} className="text-star" />}
         />
       </Showcase>
 
@@ -340,7 +340,7 @@ export function FeatureShowcase({ people }: { people: PersonSummary[] }) {
           d('home.fShortlist3', 'Hire straight from the list'),
         ]}
       >
-        <MockRow title={d('home.mockList', 'Summer launch')} note={d('home.mockSaved', '3 people saved')} delay={0} tag={<span className={`${pill} animate-pulse bg-gray-900 text-white`}>{d('home.mockCompare', 'Compare')}</span>} />
+        <MockRow title={d('home.mockList', 'Summer launch')} note={d('home.mockSaved', '3 people saved')} delay={0} tag={<span className={`${pill} animate-pulse bg-brand text-on-brand`}>{d('home.mockCompare', 'Compare')}</span>} />
         <MockRow person={b} title={d('home.mockCreator', 'Creator')} note={d('home.mockNoteFit', '“Great fit for the reel”')} delay={120} tag={<FontAwesomeIcon icon={faCheck} className="text-green-500" />} />
         <MockRow person={c} title={d('home.mockCreator', 'Creator')} note={d('home.mockNoteRates', '“Ask about rates”')} delay={240} />
       </Showcase>
@@ -422,12 +422,12 @@ export function HowItWorks() {
         <span
           aria-hidden="true"
           style={{ transform: seen ? 'scaleX(1)' : 'scaleX(0)' }}
-          className="absolute start-[17%] end-[17%] top-8 hidden h-0.5 origin-left bg-gray-900 transition-transform duration-[1400ms] ease-out md:block"
+          className="absolute start-[17%] end-[17%] top-8 hidden h-0.5 origin-left bg-brand transition-transform duration-[1400ms] ease-out md:block"
         />
         {steps.map((s, i) => (
           <Reveal key={s.title} delay={i * 200}>
             <li className="relative text-center">
-              <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gray-900 text-lg text-white shadow-lg sm:h-16 sm:w-16 sm:text-xl">
+              <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-brand text-lg text-on-brand shadow-lg sm:h-16 sm:w-16 sm:text-xl">
                 <FontAwesomeIcon icon={s.icon} />
               </span>
               <h3 className="mt-4 font-display text-lg font-bold sm:mt-5 sm:text-xl">
@@ -523,7 +523,7 @@ function CampaignCard({
       <p className="flex items-center gap-1.5 text-xs text-gray-500">
         <span className="truncate">{c.business?.name}</span>
         {c.business?.verified && (
-          <FontAwesomeIcon icon={faCircleCheck} className="shrink-0 text-sky-500" />
+          <FontAwesomeIcon icon={faCircleCheck} className="shrink-0 text-star" />
         )}
       </p>
       <h3 className="mt-2 font-display text-base font-bold leading-snug sm:text-lg">
@@ -566,7 +566,7 @@ export function Benefits() {
         {items.map((it, i) => (
           <Reveal key={it.t} delay={(i % 3) * 100}>
             <div className="group h-full rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition duration-300 hover:-translate-y-1.5 hover:shadow-xl sm:rounded-3xl sm:p-6">
-              <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gray-900 text-white transition duration-300 group-hover:rotate-6 group-hover:scale-110 sm:h-12 sm:w-12">
+              <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-brand text-on-brand transition duration-300 group-hover:rotate-6 group-hover:scale-110 sm:h-12 sm:w-12">
                 <FontAwesomeIcon icon={it.icon} />
               </span>
               <h3 className="mt-4 font-display text-base font-bold sm:text-lg">{it.t}</h3>

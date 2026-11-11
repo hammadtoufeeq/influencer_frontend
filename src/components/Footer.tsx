@@ -158,7 +158,7 @@ function Footer() {
           </div>
           <a
             href={`mailto:${CONTACT_EMAIL}`}
-            className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-medium text-gray-950 transition hover:bg-gray-200"
+            className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-medium text-on-brand transition hover:bg-brand-hover"
           >
             <FontAwesomeIcon icon={faEnvelope} />
             <span dir="ltr">{CONTACT_EMAIL}</span>

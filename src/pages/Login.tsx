@@ -77,7 +77,7 @@ function Login() {
       <div className="flex min-w-0 flex-col justify-center px-6 py-9 sm:px-12 sm:py-12">
         <div className="mx-auto w-full max-w-md">
         <div className="flex items-center gap-2 text-[11px] font-bold tracking-[0.12em] text-gray-500 uppercase motion-safe:animate-fade-up">
-          <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-gray-900 text-white">
+          <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand text-on-brand">
             <FontAwesomeIcon icon={faLock} className="text-[9px]" />
           </span>
           <span>{t('login.secure')}</span>

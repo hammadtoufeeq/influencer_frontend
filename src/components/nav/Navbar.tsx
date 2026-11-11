@@ -63,11 +63,11 @@ function Navbar() {
 
   const linkClass = (isActive: boolean) =>
     `inline-flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-1.5 text-sm transition ${
-      isActive ? 'bg-gray-900 text-white' : 'text-gray-700 hover:bg-gray-100'
+      isActive ? 'bg-brand text-on-brand' : 'text-gray-700 hover:bg-gray-100'
     }`
   const iconButton = (isActive: boolean) =>
     `inline-flex h-9 w-9 items-center justify-center rounded-lg transition ${
-      isActive ? 'bg-gray-900 text-white' : 'text-gray-600 hover:bg-gray-100'
+      isActive ? 'bg-brand text-on-brand' : 'text-gray-600 hover:bg-gray-100'
     }`
 
   const homeItem = [ACCOUNT_NAV[0], ADMIN_PANEL_NAV].find((item) => canSee(item, role))
@@ -144,7 +144,7 @@ function Navbar() {
               </TopLink>
               <TopLink
                 to="/register"
-                className="inline-flex items-center gap-2 rounded-lg bg-gray-900 px-3 py-1.5 text-sm whitespace-nowrap text-white hover:bg-gray-800"
+                className="inline-flex items-center gap-2 rounded-lg bg-brand px-3 py-1.5 text-sm whitespace-nowrap text-on-brand hover:bg-brand-hover"
               >
                 <FontAwesomeIcon icon={faUserPlus} />
                 {t('site.nav.signup')}
@@ -238,7 +238,7 @@ function Navbar() {
                   <TopLink
                     to="/register"
                     onClick={() => setMobileOpen(false)}
-                    className="inline-flex items-center gap-2 rounded-lg bg-gray-900 px-3 py-1.5 text-sm text-white"
+                    className="inline-flex items-center gap-2 rounded-lg bg-brand px-3 py-1.5 text-sm text-on-brand"
                   >
                     <FontAwesomeIcon icon={faUserPlus} />
                     {t('site.nav.signup')}

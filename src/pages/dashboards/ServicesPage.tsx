@@ -139,7 +139,7 @@ function ServicesPage({ personId }: { personId?: string } = {}) {
             <div className="mt-6 flex flex-wrap justify-center gap-2">
               <Link
                 to="/search"
-                className="inline-flex items-center gap-2 rounded-xl bg-gray-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-gray-800"
+                className="inline-flex items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-medium text-on-brand hover:bg-brand-hover"
               >
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
                 {t('services.findProfile')}
@@ -233,7 +233,7 @@ function ServicesPage({ personId }: { personId?: string } = {}) {
               disabled={atLimit}
               title={atLimit ? t('services.limitReached') : undefined}
               onClick={() => setDialog({ mode: 'new' })}
-              className="inline-flex items-center gap-2 rounded-xl bg-gray-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-50"
             >
               <FontAwesomeIcon icon={faPlus} />
               {t('services.addService')}

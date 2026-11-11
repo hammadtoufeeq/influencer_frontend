@@ -277,7 +277,7 @@ function AdminBusinessDetailPage() {
                     </button>
                     <button
                       onClick={() => setCode(null)}
-                      className={`${button} ms-auto bg-gray-900 text-white hover:bg-gray-800`}
+                      className={`${button} ms-auto bg-brand text-on-brand hover:bg-brand-hover`}
                     >
                       <FontAwesomeIcon icon={faPaperPlane} className="rtl:-scale-x-100" />
                       {t('claims.codeDone')}
@@ -313,7 +313,7 @@ function AdminBusinessDetailPage() {
                           sendCode.mutate({ to: selected, reset: business.status !== 'pending' })
                         }
                         disabled={sendCode.isPending || !selected}
-                        className={`${button} bg-gray-900 text-white hover:bg-gray-800`}
+                        className={`${button} bg-brand text-on-brand hover:bg-brand-hover`}
                       >
                         <FontAwesomeIcon
                           icon={business.status === 'pending' ? faKey : faRotateRight}

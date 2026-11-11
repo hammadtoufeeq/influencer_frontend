@@ -65,7 +65,7 @@ function PhotoLightbox({
         <figcaption className="mt-4 text-center text-white">
           <p className="flex items-center justify-center gap-1.5 font-display text-lg font-bold">
             {name}
-            {verified && <FontAwesomeIcon icon={faCircleCheck} className="text-sm text-sky-400" />}
+            {verified && <FontAwesomeIcon icon={faCircleCheck} className="text-sm text-brand-sun" />}
           </p>
           {caption && <p className="mt-0.5 text-sm text-white/65">{caption}</p>}
         </figcaption>

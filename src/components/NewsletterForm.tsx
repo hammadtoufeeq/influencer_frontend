@@ -65,7 +65,7 @@ function NewsletterForm() {
         <button
           type="submit"
           disabled={subscribe.isPending}
-          className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-medium text-gray-950 transition hover:bg-gray-200 disabled:opacity-60"
+          className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-medium text-on-brand transition hover:bg-brand-hover disabled:opacity-60"
         >
           <FontAwesomeIcon icon={faPaperPlane} className="text-xs" />
           {subscribe.isPending ? t('footer.newsletterSending') : t('footer.newsletterButton')}

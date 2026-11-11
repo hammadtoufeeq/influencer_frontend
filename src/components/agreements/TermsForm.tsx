@@ -27,7 +27,7 @@ interface MilestoneRow {
 }
 
 const input =
-  'w-full rounded-lg border bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-gray-900'
+  'w-full rounded-lg border bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-brand'
 const border = (error?: string) => (error ? 'border-red-500' : 'border-gray-300')
 
 function FieldError({ message }: { message?: string }) {
@@ -254,7 +254,7 @@ function TermsForm({ initial, errors, isSaving, submitLabel, onSubmit, onCancel 
         <button
           type="submit"
           disabled={isSaving}
-          className="rounded-lg bg-gray-900 px-5 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-60"
+          className="rounded-lg bg-brand px-5 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:opacity-60"
         >
           {isSaving ? t('common.saving') : submitLabel}
         </button>

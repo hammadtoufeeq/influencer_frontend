@@ -63,7 +63,7 @@ function DirectoryPage({ kind, icon }: { kind: Kind; icon: IconDefinition }) {
   const joinButton = (
     <Link
       to={`/register?type=${SIGNUP_TYPE[kind]}`}
-      className="inline-flex items-center gap-2 rounded-xl bg-gray-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-gray-800"
+      className="inline-flex items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-medium text-on-brand hover:bg-brand-hover"
     >
       <FontAwesomeIcon icon={faUserPlus} className="text-xs" />
       {t(`directory.${kind}.join`)}
@@ -86,7 +86,7 @@ function DirectoryPage({ kind, icon }: { kind: Kind; icon: IconDefinition }) {
         <button
           type="button"
           onClick={() => refetch()}
-          className="mt-4 rounded-xl bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
+          className="mt-4 rounded-xl bg-brand px-4 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover"
         >
           {t('common.retry')}
         </button>
@@ -181,7 +181,7 @@ function DirectoryPage({ kind, icon }: { kind: Kind; icon: IconDefinition }) {
             </label>
             <button
               type="submit"
-              className="rounded-xl bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 sm:py-3"
+              className="rounded-xl bg-brand px-5 py-2.5 text-sm font-medium text-on-brand hover:bg-brand-hover sm:py-3"
             >
               {t('common.search')}
             </button>

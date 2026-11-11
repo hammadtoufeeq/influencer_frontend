@@ -15,7 +15,7 @@ import { getApiError } from '../../utils/apiError'
 import { countryName } from '../../utils/format'
 
 const inputClass = (error?: string) =>
-  `w-full rounded-lg border bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-gray-900 ${
+  `w-full rounded-lg border bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-brand ${
     error ? 'border-red-500' : 'border-gray-300'
   }`
 const digits = (value: string) => value.replace(/[^\d]/g, '')
@@ -281,7 +281,7 @@ function CampaignForm({ campaign, canPublish }: { campaign?: Campaign; canPublis
         <button
           type="submit"
           disabled={save.isPending}
-          className="rounded-xl bg-gray-900 px-5 py-2.5 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-60"
+          className="rounded-xl bg-brand px-5 py-2.5 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:opacity-60"
         >
           {save.isPending
             ? t('settings.saving')

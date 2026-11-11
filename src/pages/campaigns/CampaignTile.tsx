@@ -80,7 +80,7 @@ function Fill({
         style={{
           width: seen ? `${Math.max(percent, done > 0 ? 6 : 0)}%` : "0%",
         }}
-        className={`h-full rounded-full transition-[width] duration-[1400ms] ease-out ${dark ? "bg-white" : "bg-gray-900"}`}
+        className={`h-full rounded-full transition-[width] duration-[1400ms] ease-out ${dark ? "bg-white" : "bg-brand"}`}
       />
     </div>
   );
@@ -100,7 +100,7 @@ export function CampaignTile({ campaign }: { campaign: Campaign }) {
       to={`/campaigns/${campaign._id}`}
       className="group relative flex h-full flex-col overflow-hidden rounded-3xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:ring-gray-300"
     >
-      <span className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gray-900 transition-transform duration-500 group-hover:scale-x-100 rtl:origin-right" />
+      <span className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-brand transition-transform duration-500 group-hover:scale-x-100 rtl:origin-right" />
       <div className="flex items-start justify-between gap-3">
         <CampaignBusiness campaign={campaign} />
         <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-700">
@@ -163,7 +163,7 @@ export function CampaignTile({ campaign }: { campaign: Campaign }) {
 
         <span className="mt-4 flex items-center justify-between border-t border-gray-100 pt-4 text-sm font-semibold text-gray-900">
           {t("campaigns.viewDetails")}
-          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-xs transition duration-300 group-hover:translate-x-1 group-hover:bg-gray-900 group-hover:text-white rtl:group-hover:-translate-x-1">
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-xs transition duration-300 group-hover:translate-x-1 group-hover:bg-brand group-hover:text-on-brand rtl:group-hover:-translate-x-1">
             <FontAwesomeIcon icon={faArrowRight} className="rtl:rotate-180" />
           </span>
         </span>
@@ -188,9 +188,9 @@ export function CampaignSpotlight({ campaign }: { campaign: Campaign }) {
       to={`/campaigns/${campaign._id}`}
       className="group keep-dark relative isolate block overflow-hidden rounded-3xl bg-brand-plum p-6 text-white shadow-lg transition duration-500 hover:shadow-2xl md:p-9"
     >
-      <div className="absolute -start-16 -top-20 -z-10 h-72 w-72 animate-drift rounded-full bg-white/10 blur-3xl" />
+      <div className="absolute -start-16 -top-20 -z-10 h-72 w-72 animate-drift rounded-full bg-brand-violet/35 blur-3xl" />
       <div
-        className="absolute -bottom-24 end-0 -z-10 h-72 w-72 animate-drift rounded-full bg-gray-400/20 blur-3xl"
+        className="absolute -bottom-24 end-0 -z-10 h-72 w-72 animate-drift rounded-full bg-brand-magenta/25 blur-3xl"
         style={{ animationDelay: "-8s" }}
       />
       <div className="grid items-center gap-8 md:grid-cols-[1.4fr_1fr]">
@@ -216,7 +216,7 @@ export function CampaignSpotlight({ campaign }: { campaign: Campaign }) {
               {business.verified && (
                 <FontAwesomeIcon
                   icon={faCircleCheck}
-                  className="text-sky-300"
+                  className="text-brand-sun"
                 />
               )}
             </p>
@@ -256,7 +256,7 @@ export function CampaignSpotlight({ campaign }: { campaign: Campaign }) {
               {campaign.slots}
             </p>
           </div>
-          <span className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 transition group-hover:scale-105">
+          <span className="inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-2.5 text-sm font-semibold text-on-brand transition group-hover:scale-105">
             {t("campaigns.viewDetails")}
             <FontAwesomeIcon
               icon={faArrowRight}

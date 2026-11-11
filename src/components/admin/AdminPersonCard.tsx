@@ -40,7 +40,7 @@ function AdminPersonCard({ person, isBusy, onToggleHidden, onDelete }: AdminPers
   const smCols = { 3: 'sm:grid-cols-3', 4: 'sm:grid-cols-4', 5: 'sm:grid-cols-5' }[actionCount]
   // Malikana haalat: unclaimed -> claimed (tasdeeq baqi) -> verified
   const ownership = person.verified
-    ? { key: 'verified', icon: faCircleCheck, tone: 'bg-blue-50 text-blue-800 border-blue-100' }
+    ? { key: 'verified', icon: faCircleCheck, tone: 'bg-star-soft text-star-ink border-star/30' }
     : isClaimed
       ? { key: 'claimed', icon: faUserCheck, tone: 'bg-amber-50 text-amber-800 border-amber-100' }
       : { key: 'unclaimed', icon: faUserClock, tone: 'bg-gray-50 text-gray-600 border-gray-100' }
@@ -132,7 +132,7 @@ function AdminPersonCard({ person, isBusy, onToggleHidden, onDelete }: AdminPers
           {!isClaimed && (
             <Link
               to={`/dashboard/people/${person._id}/edit`}
-              className={`${button} bg-gray-900 text-white hover:bg-gray-800`}
+              className={`${button} bg-brand text-on-brand hover:bg-brand-hover`}
             >
               <FontAwesomeIcon icon={faPen} /> {t('oldAdmin.edit')}
             </Link>

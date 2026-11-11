@@ -20,7 +20,7 @@ function Switch({ checked, onChange, label, disabled, size = 'md' }: SwitchProps
       aria-label={label}
       disabled={disabled}
       onClick={() => onChange(!checked)}
-      className={`keep-dark relative inline-flex shrink-0 items-center rounded-full p-0.5 transition-colors focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 ${track} ${
+      className={`keep-dark relative inline-flex shrink-0 items-center rounded-full p-0.5 transition-colors focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 ${track} ${
         checked ? 'bg-green-600' : 'bg-gray-300 dark:bg-gray-600'
       }`}
     >

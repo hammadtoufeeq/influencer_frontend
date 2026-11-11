@@ -15,7 +15,7 @@ import { countryName } from '../../utils/format'
 
 const box = 'rounded-2xl border bg-white p-5 shadow-sm md:p-6'
 const primary =
-  'inline-flex items-center gap-1.5 rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800'
+  'inline-flex items-center gap-1.5 rounded-lg bg-brand px-4 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover'
 const outline =
   'inline-flex items-center gap-1.5 rounded-lg border border-gray-300 px-4 py-2 text-sm hover:bg-gray-100'
 

@@ -56,7 +56,7 @@ function HiringStatus({ item }: { item: ShortlistItem }) {
       {/* Hire ka form profile page pe hai (services aur budget wahin se) */}
       <Link
         to={`/people/${person.slug}`}
-        className="inline-flex items-center gap-1.5 rounded-lg bg-gray-900 px-3 py-1.5 text-xs font-medium text-white hover:bg-gray-800"
+        className="inline-flex items-center gap-1.5 rounded-lg bg-brand px-3 py-1.5 text-xs font-medium text-on-brand hover:bg-brand-hover"
       >
         <FontAwesomeIcon icon={faHandshake} />
         {t('hire.button')}

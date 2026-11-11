@@ -100,8 +100,8 @@ function SearchBar({
         aria-label={t("common.search")}
         className={`shrink-0 rounded-2xl px-5 font-semibold shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-lg ${
           onDark
-            ? "bg-white text-gray-900 hover:bg-gray-100"
-            : "bg-gray-900 text-white hover:bg-gray-800"
+            ? "bg-brand text-on-brand hover:bg-brand-hover"
+            : "bg-brand text-on-brand hover:bg-brand-hover"
         } ${padding}`}
       >
         <FontAwesomeIcon icon={faMagnifyingGlass} className="sm:me-2" />

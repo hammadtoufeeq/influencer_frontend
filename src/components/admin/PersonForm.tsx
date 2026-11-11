@@ -401,7 +401,7 @@ function PersonForm({
             {LANGUAGE_OPTIONS.map((code) => (
               <label
                 key={code}
-                className={`cursor-pointer rounded-full border px-3 py-1 text-sm ${form.languages.includes(code) ? 'border-gray-900 bg-gray-900 text-white' : 'border-gray-300'}`}
+                className={`cursor-pointer rounded-full border px-3 py-1 text-sm ${form.languages.includes(code) ? 'border-brand bg-brand text-on-brand' : 'border-gray-300'}`}
               >
                 <input
                   type="checkbox"
@@ -640,7 +640,7 @@ function PersonForm({
       <button
         type="submit"
         disabled={isSaving}
-        className="w-full rounded-lg bg-gray-900 py-3 font-medium text-white hover:bg-gray-800 disabled:opacity-60 sm:w-auto sm:px-8"
+        className="w-full rounded-lg bg-brand py-3 font-medium text-on-brand hover:bg-brand-hover disabled:opacity-60 sm:w-auto sm:px-8"
       >
         {isSaving
           ? t('common.saving')

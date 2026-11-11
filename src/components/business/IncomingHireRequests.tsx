@@ -92,7 +92,7 @@ function IncomingHireRequests({ personId, manager = false }: { personId?: string
                         <button
                           type="button"
                           onClick={() => setAnswer({ hire, action: 'accept' })}
-                          className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
+                          className="rounded-lg bg-brand px-4 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover"
                         >
                           {t('hire.accept')}
                         </button>
@@ -103,7 +103,7 @@ function IncomingHireRequests({ personId, manager = false }: { personId?: string
                       (hire.agreement ? (
                         <Link
                           to={`/agreements/${hire.agreement}`}
-                          className="inline-flex items-center gap-1.5 rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
+                          className="inline-flex items-center gap-1.5 rounded-lg bg-brand px-4 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover"
                         >
                           <FontAwesomeIcon icon={faFileContract} />
                           {t('agreements.view')}

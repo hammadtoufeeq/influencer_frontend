@@ -129,7 +129,7 @@ function SignPanel({
               type="button"
               onClick={() => send.mutate()}
               disabled={send.isPending}
-              className="mt-3 rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-60"
+              className="mt-3 rounded-lg bg-brand px-4 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:opacity-60"
             >
               {send.isPending ? t('common.saving') : t('agreements.emailMeCode')}
             </button>
@@ -149,7 +149,7 @@ function SignPanel({
                 <button
                   type="submit"
                   disabled={code.length !== 6 || sign.isPending}
-                  className="rounded-lg bg-gray-900 px-5 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+                  className="rounded-lg bg-brand px-5 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:opacity-50"
                 >
                   {sign.isPending ? t('claimProgress.checking') : t('agreements.signButton')}
                 </button>

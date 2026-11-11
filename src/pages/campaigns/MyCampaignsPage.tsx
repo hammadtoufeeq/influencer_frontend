@@ -22,7 +22,7 @@ function MyCampaignsPage() {
         </div>
         <Link
           to="/dashboard/campaigns/new"
-          className="inline-flex items-center gap-2 rounded-xl bg-gray-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-gray-800"
+          className="inline-flex items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-medium text-on-brand hover:bg-brand-hover"
         >
           <FontAwesomeIcon icon={faPlus} className="text-xs" />
           {t('campaigns.new')}
@@ -53,7 +53,7 @@ function MyCampaignsPage() {
           <button
             type="button"
             onClick={() => refetch()}
-            className="mt-4 rounded-xl bg-gray-900 px-4 py-2 text-sm font-medium text-white"
+            className="mt-4 rounded-xl bg-brand px-4 py-2 text-sm font-medium text-on-brand"
           >
             {t('common.retry')}
           </button>

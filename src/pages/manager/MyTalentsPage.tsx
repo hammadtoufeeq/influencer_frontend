@@ -108,7 +108,7 @@ function MyTalentsPage() {
                   type="button"
                   disabled={respond.isPending || !verified}
                   onClick={() => respond.mutate({ id: rep._id, action: 'accept' })}
-                  className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+                  className="rounded-lg bg-brand px-4 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:opacity-50"
                 >
                   {t('hire.accept')}
                 </button>
@@ -131,7 +131,7 @@ function MyTalentsPage() {
             {verified && (
               <Link
                 to="/search"
-                className="mt-4 inline-flex items-center gap-2 rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
+                className="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover"
               >
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
                 {t('manager.findTalents')}

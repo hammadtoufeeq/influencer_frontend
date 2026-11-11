@@ -40,9 +40,9 @@ function AuthShowcase({
         onError={(e) => (e.currentTarget.style.display = 'none')}
         className="absolute inset-0 -z-10 h-full w-full object-cover opacity-20"
       />
-      <div className="absolute -start-24 -top-24 -z-10 h-80 w-80 rounded-full bg-white/10 blur-3xl motion-safe:animate-drift" />
+      <div className="absolute -start-24 -top-24 -z-10 h-80 w-80 rounded-full bg-brand-violet/35 blur-3xl motion-safe:animate-drift" />
       <div
-        className="absolute -end-16 -bottom-28 -z-10 h-96 w-96 rounded-full bg-gray-400/20 blur-3xl motion-safe:animate-drift"
+        className="absolute -end-16 -bottom-28 -z-10 h-96 w-96 rounded-full bg-brand-magenta/25 blur-3xl motion-safe:animate-drift"
         style={{ animationDelay: '-7s' }}
       />
       <div className="absolute inset-0 -z-10 bg-gradient-to-t from-brand-plum via-brand-plum/70 to-brand-plum/30" />

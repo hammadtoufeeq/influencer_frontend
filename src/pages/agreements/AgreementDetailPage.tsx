@@ -83,7 +83,7 @@ function ReviewForm({ agreement }: { agreement: Agreement }) {
       <button
         type="submit"
         disabled={!rating || save.isPending}
-        className={`${button} bg-gray-900 text-white hover:bg-gray-800`}
+        className={`${button} bg-brand text-on-brand hover:bg-brand-hover`}
       >
         {save.isPending ? t('common.saving') : t('agreements.submitReview')}
       </button>
@@ -190,7 +190,7 @@ function AgreementDetailPage() {
         <div className="mt-2 flex justify-end">
           <button
             onClick={() => setMilestoneDialog({ kind: 'deliver', index })}
-            className={`${button} bg-gray-900 text-white hover:bg-gray-800`}
+            className={`${button} bg-brand text-on-brand hover:bg-brand-hover`}
           >
             <FontAwesomeIcon icon={faTruckFast} />
             {t('agreements.deliver')}

@@ -51,7 +51,7 @@ function DiscoveryMock() {
             <span
               key={chip}
               style={{ animationDelay: `${i * 120}ms` }}
-              className="inline-flex animate-fade-in-up items-center gap-1 rounded-full bg-gray-900 px-2.5 py-1 text-white transition-transform hover:scale-105"
+              className="inline-flex animate-fade-in-up items-center gap-1 rounded-full bg-brand px-2.5 py-1 text-on-brand transition-transform hover:scale-105"
             >
               <FontAwesomeIcon icon={faSliders} className="text-[9px]" />
               {chip}
@@ -66,7 +66,7 @@ function DiscoveryMock() {
             style={{ animationDelay: `${300 + i * 120}ms` }}
             className="flex animate-fade-in-up items-center gap-3 rounded-xl bg-gray-50 p-2.5 transition hover:bg-gray-100"
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gray-900 text-xs font-semibold text-white">
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand text-xs font-semibold text-on-brand">
               {initials}
             </span>
             <span className="flex-1 space-y-1.5">
@@ -113,7 +113,7 @@ function ReachMock() {
             <span className="mt-1 block h-2 overflow-hidden rounded-full bg-gray-100">
               <span
                 style={{ animationDelay: `${i * 150}ms` }}
-                className={`block h-2 origin-left animate-grow-width rounded-full bg-gray-900 ${row.width}`}
+                className={`block h-2 origin-left animate-grow-width rounded-full bg-brand ${row.width}`}
               />
             </span>
           </li>
@@ -130,12 +130,12 @@ function AuthenticityMock() {
   return (
     <Frame>
       <div className="flex items-center gap-3">
-        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-900 font-semibold text-white">
+        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-brand font-semibold text-on-brand">
           HM
         </span>
         <div>
           <p className="font-semibold">Hira Mani</p>
-          <span className="mt-0.5 inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700">
+          <span className="mt-0.5 inline-flex items-center gap-1 rounded-full bg-star-soft px-2 py-0.5 text-xs font-medium text-star-ink">
             <FontAwesomeIcon icon={faCircleCheck} className="animate-pulse-soft" />
             {t('site.verified')}
           </span>
@@ -175,7 +175,7 @@ function OutreachMock() {
           <span
             key={initials}
             style={{ animationDelay: `${i * 100}ms` }}
-            className="flex h-9 w-9 animate-fade-in-up items-center justify-center rounded-full bg-gray-900 text-xs font-semibold text-white ring-2 ring-white transition hover:z-10 hover:scale-110"
+            className="flex h-9 w-9 animate-fade-in-up items-center justify-center rounded-full bg-brand text-xs font-semibold text-on-brand ring-2 ring-white transition hover:z-10 hover:scale-110"
           >
             {initials}
           </span>
@@ -189,7 +189,7 @@ function OutreachMock() {
         </div>
         <div className="mt-3 flex items-center justify-between">
           <span className="text-xs text-gray-500">{t('home.mock.budget')}</span>
-          <span className="inline-flex items-center gap-1.5 rounded-lg bg-gray-900 px-3 py-1.5 text-xs font-medium text-white transition hover:scale-105">
+          <span className="inline-flex items-center gap-1.5 rounded-lg bg-brand px-3 py-1.5 text-xs font-medium text-on-brand transition hover:scale-105">
             <FontAwesomeIcon icon={faPaperPlane} className="animate-float-up text-[10px]" />
             {t('home.mock.send')}
           </span>
@@ -228,7 +228,7 @@ function HiringMock() {
           >
             <span
               className={`flex h-5 w-5 items-center justify-center rounded-full ${
-                milestone.done ? 'bg-gray-900 text-white' : 'border-2 border-gray-300'
+                milestone.done ? 'bg-brand text-on-brand' : 'border-2 border-gray-300'
               }`}
             >
               {milestone.done && <FontAwesomeIcon icon={faCheck} className="text-[10px]" />}
@@ -279,13 +279,13 @@ function FeatureBlocks() {
       {/* Top-left: halka blue blob — floating animation */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 animate-float-slow rounded-full bg-gradient-to-br from-blue-100/70 to-violet-100/50 blur-3xl"
+        className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 animate-float-slow rounded-full bg-gradient-to-br from-violet-100/70 to-fuchsia-100/50 blur-3xl"
       />
 
       {/* Bottom-right: halka amber blob — floating reverse */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -bottom-32 -right-32 h-96 w-96 animate-float-slow-reverse rounded-full bg-gradient-to-tl from-amber-100/60 to-rose-100/40 blur-3xl"
+        className="pointer-events-none absolute -bottom-32 -right-32 h-96 w-96 animate-float-slow-reverse rounded-full bg-gradient-to-tl from-orange-100/60 to-fuchsia-100/40 blur-3xl"
       />
 
       {/* Middle-right: chhota violet glow (desktop) */}
@@ -297,7 +297,7 @@ function FeatureBlocks() {
       {/* Middle-left: chhota emerald glow (desktop) */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/4 top-1/4 hidden h-64 w-64 animate-float-slow-reverse rounded-full bg-emerald-100/40 blur-3xl lg:block"
+        className="pointer-events-none absolute left-1/4 top-1/4 hidden h-64 w-64 animate-float-slow-reverse rounded-full bg-fuchsia-100/40 blur-3xl lg:block"
       />
 
       {/* Dots grid — top-right, gray-400 se visible */}
@@ -415,7 +415,7 @@ function FeatureBlocks() {
               {/* Text side — fade-in-up on view */}
               <div className={i % 2 === 1 ? 'md:order-2' : ''}>
                 <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-gray-500">
-                  <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-gray-900 text-white">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-brand text-on-brand">
                     <FontAwesomeIcon icon={feature.icon} className="text-[11px]" />
                   </span>
                   {t(`home.features.${feature.key}.eyebrow`)}
@@ -438,7 +438,7 @@ function FeatureBlocks() {
                 </ul>
                 <Link
                   to={links[feature.key]}
-                  className="group mt-6 inline-flex items-center gap-2 rounded-xl bg-gray-900 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-gray-800 hover:shadow-lg"
+                  className="group mt-6 inline-flex items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-medium text-on-brand transition hover:bg-brand-hover hover:shadow-lg"
                 >
                   {t(`home.features.${feature.key}.cta`)}
                   <FontAwesomeIcon

@@ -73,7 +73,7 @@ function NoteEditor({ listId, item }: { listId: string; item: ShortlistItem }) {
             type="button"
             onClick={() => save.mutate()}
             disabled={save.isPending}
-            className="rounded-lg bg-gray-900 px-3 py-1 text-xs font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+            className="rounded-lg bg-brand px-3 py-1 text-xs font-medium text-on-brand hover:bg-brand-hover disabled:opacity-50"
           >
             {save.isPending ? t('common.saving') : t('shortlists.saveNote')}
           </button>
@@ -136,7 +136,7 @@ function RenameForm({ list, onDone }: { list: Shortlist; onDone: () => void }) {
         <button
           type="submit"
           disabled={!name.trim() || save.isPending}
-          className="rounded-lg bg-gray-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+          className="rounded-lg bg-brand px-3 py-1.5 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:opacity-50"
         >
           {save.isPending ? t('common.saving') : t('common.save')}
         </button>
@@ -257,7 +257,7 @@ function ShortlistDetailPage() {
                 <p className="mx-auto mt-1 max-w-md text-sm text-gray-500">{t('shortlists.listEmptyText')}</p>
                 <Link
                   to="/search"
-                  className="mt-5 inline-flex items-center gap-2 rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
+                  className="mt-5 inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover"
                 >
                   <FontAwesomeIcon icon={faMagnifyingGlass} />
                   {t('shortlists.findPeople')}
@@ -266,7 +266,7 @@ function ShortlistDetailPage() {
             ) : (
               <>
                 {/* Compare: 2-4 log chuno */}
-                <div className="sticky top-20 z-10 flex flex-wrap items-center justify-between gap-2 rounded-xl bg-gray-900 px-4 py-3 text-sm text-white shadow-lg">
+                <div className="sticky top-20 z-10 flex flex-wrap items-center justify-between gap-2 rounded-xl bg-brand px-4 py-3 text-sm text-on-brand shadow-lg">
                   <span>
                     {selected.length === 0
                       ? t('shortlists.compareHint', { count: MAX_COMPARE })

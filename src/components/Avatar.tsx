@@ -31,7 +31,7 @@ function Avatar({ name, photoUrl, size = 'md' }: AvatarProps) {
   return (
     <div
       aria-hidden="true"
-      className={`${sizeClass} flex shrink-0 items-center justify-center rounded-full bg-gray-900 font-semibold text-white`}
+      className={`${sizeClass} flex shrink-0 items-center justify-center rounded-full bg-brand font-semibold text-on-brand`}
     >
       {initials(name)}
     </div>

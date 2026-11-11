@@ -111,7 +111,7 @@ function AppearanceSection() {
               <span
                 className={`h-4 w-4 shrink-0 rounded-full border-2 ${
                   active
-                    ? 'border-gray-900 bg-gray-900 shadow-[inset_0_0_0_2px_var(--color-white)]'
+                    ? 'border-brand bg-brand shadow-[inset_0_0_0_2px_var(--color-white)]'
                     : 'border-gray-300'
                 }`}
               />
@@ -195,7 +195,7 @@ function PasswordSection() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="rounded-xl bg-gray-900 px-5 py-2.5 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-60"
+          className="rounded-xl bg-brand px-5 py-2.5 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:opacity-60"
         >
           {isSubmitting ? t('settings.saving') : t('settings.updatePassword')}
         </button>

@@ -29,7 +29,7 @@ const HEADER_IMAGE =
   "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1600&q=80";
 
 const selectClass =
-  "rounded-xl border border-gray-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-gray-900";
+  "rounded-xl border border-gray-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-brand";
 
 // /campaigns: businesses ki khuli campaigns, jin pe talent khud apply karte hain
 function CampaignsPage() {
@@ -84,7 +84,7 @@ function CampaignsPage() {
     user?.role === "business" ? (
       <Link
         to="/dashboard/campaigns/new"
-        className="inline-flex items-center gap-2 rounded-xl bg-gray-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-gray-800"
+        className="inline-flex items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-medium text-on-brand hover:bg-brand-hover"
       >
         <FontAwesomeIcon icon={faPlus} className="text-xs" />
         {t("campaigns.new")}
@@ -92,7 +92,7 @@ function CampaignsPage() {
     ) : !user ? (
       <Link
         to="/register?type=business"
-        className="inline-flex items-center gap-2 rounded-xl bg-gray-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-gray-800"
+        className="inline-flex items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-medium text-on-brand hover:bg-brand-hover"
       >
         <FontAwesomeIcon icon={faBullhorn} className="text-xs" />
         {t("campaigns.postOne")}
@@ -122,7 +122,7 @@ function CampaignsPage() {
         <button
           type="button"
           onClick={() => refetch()}
-          className="mt-4 rounded-xl bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
+          className="mt-4 rounded-xl bg-brand px-4 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover"
         >
           {t("common.retry")}
         </button>
@@ -215,7 +215,7 @@ function CampaignsPage() {
             </label>
             <button
               type="submit"
-              className="rounded-xl bg-white px-5 text-sm font-medium text-gray-900 hover:bg-gray-100"
+              className="rounded-xl bg-brand px-5 text-sm font-medium text-on-brand hover:bg-brand-hover"
             >
               {t("common.search")}
             </button>
@@ -235,7 +235,7 @@ function CampaignsPage() {
               aria-pressed={on}
               className={`inline-flex shrink-0 snap-start items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition duration-300 ${
                 on
-                  ? "relative z-10 bg-gray-900 text-white shadow-md ring-1 ring-gray-900"
+                  ? "relative z-10 bg-brand text-on-brand shadow-md ring-1 ring-brand"
                   : "bg-white text-gray-700 ring-1 ring-gray-200 hover:relative hover:z-10 hover:shadow-md hover:ring-gray-400"
               }`}
             >

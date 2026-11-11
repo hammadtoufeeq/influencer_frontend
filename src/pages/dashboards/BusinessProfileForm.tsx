@@ -24,7 +24,7 @@ import { countryName } from '../../utils/format'
 
 const MAX_LINKS = 5
 const selectClass =
-  'w-full rounded-lg border border-gray-300 bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-gray-900'
+  'w-full rounded-lg border border-gray-300 bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-brand'
 
 // Pehli dafa: signup pe di gayi organization details se shuru (User.company)
 function toForm(business: BusinessProfile | null, signup?: User['company']): BusinessInput {
@@ -176,7 +176,7 @@ function BusinessForm({ business }: { business: BusinessProfile | null }) {
           value={form.description}
           onChange={(e) => update('description', e.target.value)}
           placeholder={t('business.fields.descriptionPlaceholder')}
-          className="w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:ring-2 focus:ring-gray-900"
+          className="w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:ring-2 focus:ring-brand"
         />
       </label>
       <div className="grid gap-4 sm:grid-cols-2">
@@ -245,7 +245,7 @@ function BusinessForm({ business }: { business: BusinessProfile | null }) {
                   placeholder="https://..."
                   value={link}
                   onChange={(e) => setLink(index, e.target.value)}
-                  className={`w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-gray-900 ${
+                  className={`w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-brand ${
                     errors[`proofLinks.${index}`] ? 'border-red-500' : 'border-gray-300'
                   }`}
                 />
@@ -293,7 +293,7 @@ function BusinessForm({ business }: { business: BusinessProfile | null }) {
         <button
           type="submit"
           disabled={save.isPending}
-          className="rounded-lg bg-gray-900 px-5 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-60"
+          className="rounded-lg bg-brand px-5 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:opacity-60"
         >
           {save.isPending
             ? t('common.saving')

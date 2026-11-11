@@ -20,7 +20,7 @@ import { countryName } from '../../utils/format'
 
 const box = 'rounded-2xl border bg-white p-5 shadow-sm md:p-6'
 const primary =
-  'inline-flex items-center gap-1.5 rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800'
+  'inline-flex items-center gap-1.5 rounded-lg bg-brand px-4 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover'
 const outline =
   'inline-flex items-center gap-1.5 rounded-lg border border-gray-300 px-4 py-2 text-sm hover:bg-gray-100'
 
@@ -120,7 +120,7 @@ function CodeEntry({ business }: { business: BusinessProfile }) {
           <button
             type="submit"
             disabled={code.length !== 6 || verify.isPending}
-            className="rounded-lg bg-gray-900 px-5 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+            className="rounded-lg bg-brand px-5 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:opacity-50"
           >
             {verify.isPending ? t('claimProgress.checking') : t('claimProgress.verify')}
           </button>
@@ -222,7 +222,7 @@ function BusinessVerificationSection() {
         {STEPS.map((step, index) => (
           <li key={step} className="text-center">
             <div
-              className={`h-1.5 rounded-full ${index <= current ? 'bg-gray-900' : 'bg-gray-200'}`}
+              className={`h-1.5 rounded-full ${index <= current ? 'bg-brand' : 'bg-gray-200'}`}
             />
             <span
               className={`mt-1.5 block text-[11px] leading-tight sm:text-xs ${index <= current ? 'font-medium text-gray-900' : 'text-gray-400'}`}

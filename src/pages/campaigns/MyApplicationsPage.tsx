@@ -60,7 +60,7 @@ function ApplicationRow({ application }: { application: MyApplication }) {
         {application.status === 'accepted' && (
           <Link
             to="/dashboard/hire-requests"
-            className="rounded-xl bg-gray-900 px-3 py-2 text-sm font-medium text-white hover:bg-gray-800"
+            className="rounded-xl bg-brand px-3 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover"
           >
             {t('campaigns.openHire')}
           </Link>
@@ -105,7 +105,7 @@ function MyApplicationsPage() {
         </div>
         <Link
           to="/campaigns"
-          className="inline-flex items-center gap-2 rounded-xl bg-gray-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-gray-800"
+          className="inline-flex items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-medium text-on-brand hover:bg-brand-hover"
         >
           <FontAwesomeIcon icon={faMagnifyingGlass} className="text-xs" />
           {t('campaigns.browse')}

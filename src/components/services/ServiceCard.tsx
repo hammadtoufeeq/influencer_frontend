@@ -26,7 +26,7 @@ function ServiceCard({ service, isBusy, onToggle, onEdit, onDelete }: ServiceCar
       <div className="flex items-start gap-3 sm:gap-4">
         <span
           className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl sm:h-12 sm:w-12 ${
-            service.isActive ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-400'
+            service.isActive ? 'bg-brand text-on-brand' : 'bg-gray-100 text-gray-400'
           }`}
         >
           <FontAwesomeIcon icon={categoryIcon(service.category)} />

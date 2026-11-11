@@ -13,7 +13,7 @@ import type { Person } from '../../types/person'
 import { getApiError } from '../../utils/apiError'
 import HireDialog from './HireDialog'
 
-const primary = 'rounded-lg bg-gray-900 px-4 py-2 text-center text-sm font-medium text-white'
+const primary = 'rounded-lg bg-brand px-4 py-2 text-center text-sm font-medium text-on-brand'
 
 // Profile page ka "Hire" button. Sirf verified business, sirf verified talent ko hire kare.
 // Baqi sab ke liye pehle jaisa "Contact / Hire (Coming soon)"

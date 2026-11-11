@@ -97,7 +97,7 @@ function GeneratedCode({
         </button>
         <button
           onClick={onDone}
-          className={`${button} ms-auto bg-gray-900 text-white hover:bg-gray-800`}
+          className={`${button} ms-auto bg-brand text-on-brand hover:bg-brand-hover`}
         >
           <FontAwesomeIcon icon={faPaperPlane} className="me-1.5" />
           {t('claims.codeDone')}
@@ -301,7 +301,7 @@ const ClaimCard = memo(
                 <button
                   onClick={() => sendCode.mutate()}
                   disabled={busy || !channelUrl}
-                  className={`${button} w-full bg-gray-900 text-white hover:bg-gray-800`}
+                  className={`${button} w-full bg-brand text-on-brand hover:bg-brand-hover`}
                 >
                   <FontAwesomeIcon icon={faKey} className="me-1.5" />
                   {claim.status === 'pending'
@@ -350,7 +350,7 @@ const ClaimCard = memo(
                     value={reason}
                     onChange={(e) => setReason(e.target.value)}
                     placeholder={t('claims.rejectPlaceholder')}
-                    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:ring-1 focus:ring-gray-900 focus:outline-none"
+                    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-brand focus:ring-1 focus:ring-brand focus:outline-none"
                   />
                   <div className="flex gap-2">
                     <button

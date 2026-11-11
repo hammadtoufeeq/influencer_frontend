@@ -15,7 +15,7 @@ interface ConfirmDialogProps {
 }
 
 const TONES = {
-  default: 'bg-gray-900 hover:bg-gray-800',
+  default: 'bg-brand hover:bg-brand-hover',
   danger: 'bg-red-600 hover:bg-red-700',
   success: 'bg-green-600 hover:bg-green-700',
 }

@@ -36,7 +36,7 @@ function BusinessInfo({
       <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm text-gray-700 sm:justify-start">
         <span className="font-medium">{t('hire.from', { business: business.companyName })}</span>
         {business.status === 'approved' && (
-          <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-0.5 text-[10px] font-medium text-blue-700 sm:text-xs">
+          <span className="inline-flex items-center gap-1 rounded-full bg-star-soft px-2 py-0.5 text-[10px] font-medium text-star-ink sm:text-xs">
             <FontAwesomeIcon icon={faCircleCheck} />
             {t('hire.verifiedBusiness')}
           </span>

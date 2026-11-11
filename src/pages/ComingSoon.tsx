@@ -18,7 +18,7 @@ function ComingSoon({ page, icon }: ComingSoonProps) {
 
   return (
     <section className="mx-auto max-w-2xl rounded-2xl bg-white p-8 text-center shadow-sm">
-      <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gray-900 text-xl text-white">
+      <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-brand text-xl text-on-brand">
         <FontAwesomeIcon icon={icon} />
       </span>
       <h1 className="mt-4 text-2xl font-bold">{t(`comingSoon.${page}.title`)}</h1>
@@ -36,7 +36,7 @@ function ComingSoon({ page, icon }: ComingSoonProps) {
       </ul>
       <Link
         to="/dashboard"
-        className="mt-8 inline-block rounded-lg bg-gray-900 px-5 py-2 text-sm font-medium text-white hover:bg-gray-800"
+        className="mt-8 inline-block rounded-lg bg-brand px-5 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover"
       >
         {t('site.backToDashboard')}
       </Link>

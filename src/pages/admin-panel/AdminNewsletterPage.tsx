@@ -97,7 +97,7 @@ function AdminNewsletterPage() {
             type="button"
             onClick={() => exportCsv.mutate()}
             disabled={exportCsv.isPending || !data?.subscribed}
-            className="inline-flex items-center gap-2 rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+            className="inline-flex items-center gap-2 rounded-lg bg-brand px-3 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:opacity-50"
           >
             <FontAwesomeIcon icon={faDownload} className="text-xs" />
             {t('adminNewsletter.export')}

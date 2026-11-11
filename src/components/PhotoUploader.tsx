@@ -71,7 +71,7 @@ function PhotoUploader({
               className="h-24 w-24 rounded-2xl bg-gray-100 object-cover ring-1 ring-gray-200"
             />
           ) : (
-            <span className="flex h-24 w-24 items-center justify-center rounded-2xl bg-gray-900 text-3xl font-semibold text-white">
+            <span className="flex h-24 w-24 items-center justify-center rounded-2xl bg-brand text-3xl font-semibold text-on-brand">
               {name
                 .split(/\s+/)
                 .filter(Boolean)
@@ -97,7 +97,7 @@ function PhotoUploader({
             type="button"
             disabled={busy}
             onClick={() => input.current?.click()}
-            className="inline-flex items-center gap-2 rounded-lg bg-gray-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-60"
+            className="inline-flex items-center gap-2 rounded-lg bg-brand px-3 py-1.5 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:opacity-60"
           >
             <FontAwesomeIcon icon={faCamera} className="text-xs" />
             {photoUrl ? t('photo.change') : t('photo.upload')}

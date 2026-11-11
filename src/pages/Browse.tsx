@@ -120,7 +120,7 @@ function Panel({
       className="scroll-mt-24 overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-gray-200/70"
     >
       <header className="flex items-start gap-4 border-b border-gray-100 px-5 py-5 sm:px-6">
-        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gray-900 text-sm text-white">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand text-sm text-on-brand">
           <FontAwesomeIcon icon={icon} />
         </span>
         <div className="min-w-0 flex-1">
@@ -129,7 +129,7 @@ function Panel({
         </div>
         <span
           className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold tabular-nums ${
-            selectedCount ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-600'
+            selectedCount ? 'bg-brand text-on-brand' : 'bg-gray-100 text-gray-600'
           }`}
         >
           {selectedCount ? t('browse.selectedCount', { count: selectedCount }) : count}
@@ -146,7 +146,7 @@ function Check({ on }: { on: boolean }) {
     <span
       aria-hidden="true"
       className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-md border text-[10px] transition ${
-        on ? 'border-gray-900 bg-gray-900 text-white' : 'border-gray-300 bg-white text-transparent'
+        on ? 'border-brand bg-brand text-on-brand' : 'border-gray-300 bg-white text-transparent'
       }`}
     >
       <FontAwesomeIcon icon={faCheck} />
@@ -373,7 +373,7 @@ function Browse() {
                           <span
                             className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-sm transition ${
                               on
-                                ? 'bg-gray-900 text-white'
+                                ? 'bg-brand text-on-brand'
                                 : 'bg-gray-100 text-gray-700 group-hover:bg-gray-200'
                             }`}
                           >
@@ -481,8 +481,8 @@ function Browse() {
                         onClick={() => toggle('topic', item.key)}
                         className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-sm transition ${
                           on
-                            ? 'border-gray-900 bg-gray-900 text-white'
-                            : 'border-gray-200 text-gray-700 hover:border-gray-900'
+                            ? 'border-brand bg-brand text-on-brand'
+                            : 'border-gray-200 text-gray-700 hover:border-brand'
                         }`}
                       >
                         {on ? (
@@ -507,7 +507,7 @@ function Browse() {
         </div>
         <Link
           to="/search"
-          className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-medium text-gray-900 hover:bg-gray-100"
+          className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-brand px-5 py-3 text-sm font-medium text-on-brand hover:bg-brand-hover"
         >
           {t('browse.ctaButton')}
           <FontAwesomeIcon icon={faArrowRight} className="text-xs rtl:rotate-180" />
@@ -573,7 +573,7 @@ function Browse() {
                 type="button"
                 disabled={matches === 0}
                 onClick={() => navigate(`/search?${resultParams}`)}
-                className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-gray-900 transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
+                className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-semibold text-on-brand transition hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {matches === undefined || (counting && preview === undefined)
                   ? t('browse.showResults')

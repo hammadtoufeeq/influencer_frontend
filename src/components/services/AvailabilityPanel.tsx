@@ -102,7 +102,7 @@ function AvailabilityPanel({ availability, isSaving, onSave }: AvailabilityPanel
           <select
             value={responseTime}
             onChange={(e) => setResponseTime(e.target.value as ResponseTime | '')}
-            className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-gray-900"
+            className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-brand"
           >
             <option value="">{t('services.notSet')}</option>
             {RESPONSE_TIMES.map((value) => (
@@ -118,7 +118,7 @@ function AvailabilityPanel({ availability, isSaving, onSave }: AvailabilityPanel
             type="date"
             value={availableFrom}
             onChange={(e) => setAvailableFrom(e.target.value)}
-            className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-gray-900"
+            className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-brand"
           />
         </label>
       </div>
@@ -131,7 +131,7 @@ function AvailabilityPanel({ availability, isSaving, onSave }: AvailabilityPanel
           value={note}
           onChange={(e) => setNote(e.target.value)}
           placeholder={t('services.notePlaceholder')}
-          className="w-full resize-y rounded-lg border border-gray-300 bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-gray-900"
+          className="w-full resize-y rounded-lg border border-gray-300 bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-brand"
         />
         <span className="mt-1 block text-end text-xs text-gray-400">{note.length}/280</span>
       </label>
@@ -150,7 +150,7 @@ function AvailabilityPanel({ availability, isSaving, onSave }: AvailabilityPanel
               note: note.trim(),
             })
           }
-          className="rounded-xl bg-gray-900 px-5 py-2.5 text-sm font-medium text-white hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded-xl bg-brand px-5 py-2.5 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-50"
         >
           {isSaving ? t('settings.saving') : t('services.saveAvailability')}
         </button>

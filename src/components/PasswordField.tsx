@@ -40,7 +40,7 @@ function PasswordField({
           className={
             inputClassName
               ? `${inputClassName} pe-11 ${error ? 'border-red-500' : ''}`
-              : `w-full rounded-lg border bg-white py-2 ps-3 pe-10 outline-none focus:ring-2 focus:ring-gray-900 ${
+              : `w-full rounded-lg border bg-white py-2 ps-3 pe-10 outline-none focus:ring-2 focus:ring-brand ${
                   error ? 'border-red-500' : 'border-gray-300'
                 }`
           }

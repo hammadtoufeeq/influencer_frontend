@@ -87,7 +87,7 @@ function ApplyBox({ detail }: { detail: CampaignDetail }) {
 
   const box = 'rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-200/70'
   const button =
-    'inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-gray-900 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_10px_24px_rgb(23_23_23_/_16%)] transition hover:-translate-y-0.5 hover:bg-gray-800 disabled:opacity-60'
+    'inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-semibold text-on-brand shadow-[0_10px_24px_rgb(23_23_23_/_16%)] transition hover:-translate-y-0.5 hover:bg-brand-hover disabled:opacity-60'
 
   if (detail.isOwner) {
     return (
@@ -237,7 +237,7 @@ function ApplyBox({ detail }: { detail: CampaignDetail }) {
           if (error) setError('')
         }}
         placeholder={t('campaigns.fields.pitchPlaceholder')}
-        className={`w-full rounded-xl border bg-gray-50 px-4 py-3 text-sm outline-none transition focus:border-gray-900 focus:bg-white focus:ring-4 focus:ring-gray-900/10 ${
+        className={`w-full rounded-xl border bg-gray-50 px-4 py-3 text-sm outline-none transition focus:border-brand focus:bg-white focus:ring-4 focus:ring-brand/10 ${
           error ? 'border-red-500' : 'border-gray-200'
         }`}
       />
@@ -345,7 +345,7 @@ function CampaignDetailPage() {
             >
               {business.name}
               {business.verified && (
-                <FontAwesomeIcon icon={faCircleCheck} className="text-sm text-blue-600" />
+                <FontAwesomeIcon icon={faCircleCheck} className="text-sm text-star" />
               )}
             </Link>
           )
@@ -377,7 +377,7 @@ function CampaignDetailPage() {
           data.isOwner && (
             <Link
               to={`/dashboard/campaigns/${campaign._id}/edit`}
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-gray-200 px-4 py-2.5 text-sm font-medium text-gray-800 transition hover:border-gray-900 hover:bg-gray-900 hover:text-white"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-gray-200 px-4 py-2.5 text-sm font-medium text-gray-800 transition hover:border-brand hover:bg-brand hover:text-on-brand"
             >
               <FontAwesomeIcon icon={faPen} className="text-xs" />
               {t('campaigns.edit')}
@@ -432,7 +432,7 @@ function CampaignDetailPage() {
             </div>
             <div className="mt-3 h-2 overflow-hidden rounded-full bg-gray-200">
               <div
-                className="h-full origin-left rounded-full bg-gray-900 motion-safe:animate-[grow_1.1s_ease-out_both] rtl:origin-right"
+                className="h-full origin-left rounded-full bg-brand motion-safe:animate-[grow_1.1s_ease-out_both] rtl:origin-right"
                 style={{ width: `${Math.max(filled, accepted > 0 ? 6 : 0)}%` }}
               />
             </div>
@@ -454,14 +454,14 @@ function CampaignDetailPage() {
               </p>
               <CampaignBusiness campaign={campaign} />
               {business.verified && (
-                <p className="mt-3 flex items-center gap-2 text-xs text-blue-700">
+                <p className="mt-3 flex items-center gap-2 text-xs text-star-ink">
                   <FontAwesomeIcon icon={faCircleCheck} />
                   {t('campaigns.verifiedBusiness')}
                 </p>
               )}
               <span className="mt-4 flex items-center justify-between border-t border-gray-100 pt-4 text-sm font-semibold text-gray-900">
                 {t('directory.viewBusiness')}
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-xs transition duration-300 group-hover:translate-x-1 group-hover:bg-gray-900 group-hover:text-white rtl:group-hover:-translate-x-1">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-xs transition duration-300 group-hover:translate-x-1 group-hover:bg-brand group-hover:text-on-brand rtl:group-hover:-translate-x-1">
                   <FontAwesomeIcon icon={faArrowRight} className="rtl:rotate-180" />
                 </span>
               </span>

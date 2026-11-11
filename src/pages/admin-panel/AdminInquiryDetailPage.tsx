@@ -76,7 +76,7 @@ function InquiryUpdateForm({ inquiry }: { inquiry: AdminInquiry }) {
       <button
         type="submit"
         disabled={save.isPending}
-        className="rounded-lg bg-gray-900 px-5 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-60"
+        className="rounded-lg bg-brand px-5 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:opacity-60"
       >
         {t('common.save')}
       </button>
@@ -174,7 +174,7 @@ function AdminInquiryDetailPage() {
               <p className="mt-2 whitespace-pre-line">{inquiry.message}</p>
               <a
                 href={`mailto:${inquiry.email}?subject=${replySubject}`}
-                className="mt-4 inline-flex items-center gap-2 rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
+                className="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover"
               >
                 <FontAwesomeIcon icon={faEnvelope} className="text-xs" />
                 {t('inquiries.replyByEmail')}

@@ -13,7 +13,7 @@ import { getApiError } from '../utils/apiError'
 const outline =
   'inline-flex items-center justify-center gap-1.5 rounded-lg border border-gray-300 px-4 py-2 text-center text-sm hover:bg-gray-100'
 const input =
-  'w-full rounded-lg border bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-gray-900'
+  'w-full rounded-lg border bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-brand'
 const border = (error?: string) => (error ? 'border-red-500' : 'border-gray-300')
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -179,7 +179,7 @@ function InquiryDialog({ person, onClose }: { person: Person; onClose: () => voi
             <button
               type="submit"
               disabled={send.isPending}
-              className="inline-flex items-center gap-2 rounded-lg bg-gray-900 px-5 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-60"
+              className="inline-flex items-center gap-2 rounded-lg bg-brand px-5 py-2 text-sm font-medium text-on-brand hover:bg-brand-hover disabled:opacity-60"
             >
               <FontAwesomeIcon icon={faPaperPlane} className="text-xs" />
               {send.isPending ? t('inquiry.sending') : t('inquiry.send')}

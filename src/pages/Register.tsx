@@ -72,14 +72,14 @@ function FieldError({ message }: { message?: string }) {
 function Steps({ current, label }: { current: 1 | 2; label: string }) {
   const dot = (n: number) =>
     `inline-flex h-6 w-6 items-center justify-center rounded-full text-[11px] transition ${
-      n <= current ? 'bg-gray-900 text-white' : 'border border-gray-300 text-gray-500'
+      n <= current ? 'bg-brand text-on-brand' : 'border border-gray-300 text-gray-500'
     }`
   return (
     <div className="flex items-center gap-2 text-[11px] font-bold tracking-[0.12em] text-gray-500 uppercase motion-safe:animate-fade-up">
       <span className={dot(1)}>1</span>
       <span className="relative h-0.5 w-8 overflow-hidden rounded-full bg-gray-200">
         <span
-          className={`absolute inset-y-0 start-0 bg-gray-900 transition-all duration-700 ${current === 2 ? 'w-full' : 'w-0'}`}
+          className={`absolute inset-y-0 start-0 bg-brand transition-all duration-700 ${current === 2 ? 'w-full' : 'w-0'}`}
         />
       </span>
       <span className={dot(2)}>2</span>
@@ -269,7 +269,7 @@ function Register() {
                 type="button"
                 onClick={() => chooseRole(option.value)}
                 style={{ animationDelay: `${180 + i * 80}ms` }}
-                className="group relative flex items-center gap-4 overflow-hidden rounded-2xl border border-gray-200 bg-white p-4 text-start transition duration-300 hover:-translate-y-0.5 hover:border-gray-900 hover:shadow-[0_16px_36px_rgb(23_23_23_/_10%)] focus-visible:ring-4 focus-visible:ring-gray-900/15 focus-visible:outline-none motion-safe:animate-fade-up sm:p-5"
+                className="group relative flex items-center gap-4 overflow-hidden rounded-2xl border border-gray-200 bg-white p-4 text-start transition duration-300 hover:-translate-y-0.5 hover:border-gray-900 hover:shadow-[0_16px_36px_rgb(23_23_23_/_10%)] focus-visible:ring-4 focus-visible:ring-brand/15 focus-visible:outline-none motion-safe:animate-fade-up sm:p-5"
               >
                 <span className="keep-dark flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-gray-700 to-gray-950 text-lg text-white shadow-md transition duration-300 group-hover:scale-110 group-hover:rotate-[-6deg]">
                   <FontAwesomeIcon icon={ROLE_ICONS[option.value]} />
@@ -278,7 +278,7 @@ function Register() {
                   <span className="block font-semibold text-gray-900">{option.label}</span>
                   <span className="mt-0.5 block text-sm text-gray-600">{option.description}</span>
                 </span>
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gray-100 text-xs text-gray-700 transition duration-300 group-hover:translate-x-1 group-hover:bg-gray-900 group-hover:text-white rtl:group-hover:-translate-x-1">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gray-100 text-xs text-gray-700 transition duration-300 group-hover:translate-x-1 group-hover:bg-brand group-hover:text-on-brand rtl:group-hover:-translate-x-1">
                   <FontAwesomeIcon icon={faArrowRight} className="rtl:rotate-180" />
                 </span>
               </button>
