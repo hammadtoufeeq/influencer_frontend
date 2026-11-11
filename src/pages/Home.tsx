@@ -312,8 +312,16 @@ function Home() {
 
         <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 pb-20 pt-28 sm:gap-10 sm:pb-28 sm:pt-32 md:pt-36 lg:grid-cols-2">
           <div className="text-center lg:text-start">
-            <h1 className="font-display text-3xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl">
-              {t('home.title')}
+            {/* ✅ "Discover" aur "influence" ORANGE (AXcel X gradient), baqi WHITE */}
+            <h1 className="font-display text-3xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl md:text-6xl">
+              <span className="bg-gradient-to-tr from-[#FFC400] via-[#FF7A00] to-[#FF2D00] bg-clip-text text-transparent">
+                Discover
+              </span>{' '}
+              <span className="text-white">the people who</span>{' '}
+              <span className="bg-gradient-to-tr from-[#FFC400] via-[#FF7A00] to-[#FF2D00] bg-clip-text text-transparent">
+                influence
+              </span>{' '}
+              <span className="text-white">your world</span>
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/80 md:text-lg lg:mx-0">
               {t('home.subtitle')}

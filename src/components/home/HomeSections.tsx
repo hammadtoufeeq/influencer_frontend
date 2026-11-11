@@ -205,7 +205,7 @@ function Showcase({
   flip,
   children,
 }: {
-  title: string
+  title: ReactNode // 👈 Updated (string se ReactNode kiya taake custom colors pass ho sakein)
   body: string
   points: string[]
   flip?: boolean
@@ -214,9 +214,8 @@ function Showcase({
   const { t } = useTranslation()
   return (
     <div
-      className={`grid min-w-0 grid-cols-1 items-center gap-6 sm:gap-8 md:grid-cols-2 md:gap-14 ${
-        flip ? 'md:[&>*:first-child]:order-2' : ''
-      }`}
+      className={`grid min-w-0 grid-cols-1 items-center gap-6 sm:gap-8 md:grid-cols-2 md:gap-14 ${flip ? 'md:[&>*:first-child]:order-2' : ''
+        }`}
     >
       <Reveal className="min-w-0">
         <h3 className="font-display text-xl font-bold sm:text-2xl md:text-3xl">{title}</h3>
@@ -332,7 +331,14 @@ export function FeatureShowcase({ people }: { people: PersonSummary[] }) {
 
       <Showcase
         flip
-        title={d('home.fShortlistTitle', 'Shortlist, compare and decide')}
+        title={
+          <>
+            <span className="bg-gradient-to-tr from-[#FFC400] via-[#FF7A00] to-[#FF2D00] bg-clip-text text-transparent">
+              Shortlist
+            </span>
+            <span>, compare and decide</span>
+          </>
+        }
         body={d('home.fShortlistBody', 'Keep a named list for every campaign, add private notes, and compare up to four people side by side.')}
         points={[
           d('home.fShortlist1', 'Private notes on every person'),
@@ -346,7 +352,19 @@ export function FeatureShowcase({ people }: { people: PersonSummary[] }) {
       </Showcase>
 
       <Showcase
-        title={d('home.fCampaignTitle', 'Post a campaign and let talent come to you')}
+        title={
+          <>
+            <span>Post a </span>
+            <span className="bg-gradient-to-tr from-[#FFC400] via-[#FF7A00] to-[#FF2D00] bg-clip-text text-transparent">
+              campaign
+            </span>
+            <span> and let </span>
+            <span className="bg-gradient-to-tr from-[#FFC400] via-[#FF7A00] to-[#FF2D00] bg-clip-text text-transparent">
+              talent
+            </span>
+            <span> come to you</span>
+          </>
+        }
         body={d('home.fCampaignBody', 'Describe the job once. Verified creators apply with a pitch, and you pick the ones you want.')}
         points={[
           d('home.fCampaign1', 'Set a budget, deadline and number of slots'),
@@ -379,7 +397,14 @@ export function FeatureShowcase({ people }: { people: PersonSummary[] }) {
 
       <Showcase
         flip
-        title={d('home.fAgreementTitle', 'Sign it properly, pay by milestone')}
+        title={
+          <>
+            <span>Sign it properly, pay by </span>
+            <span className="bg-gradient-to-tr from-[#FFC400] via-[#FF7A00] to-[#FF2D00] bg-clip-text text-transparent">
+              milestone
+            </span>
+          </>
+        }
         body={d('home.fAgreementBody', 'Turn an accepted request into a written agreement. Both sides sign with a one-time code and the terms lock.')}
         points={[
           d('home.fAgreement1', 'Milestones with amounts and due dates'),
@@ -454,20 +479,20 @@ export function OpenCampaigns() {
 
   return (
     <section>
-     {/* ✅ Centered title */}
-<div className="text-center">
-  <h2 className="font-display text-xl font-bold sm:text-2xl md:text-3xl">
-    {d('home.openCampaigns', 'Open campaigns right now')}
-  </h2>
+      {/* ✅ Centered title */}
+      <div className="text-center">
+        <h2 className="font-display text-xl font-bold sm:text-2xl md:text-3xl">
+          {d('home.openCampaigns', 'Open campaigns right now')}
+        </h2>
 
-</div>
-  <Link
-    to="/campaigns"
-    className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-gray-500 hover:text-gray-900 sm:text-sm"
-  >
-    {t('home.seeAll')}
-    <FontAwesomeIcon icon={faArrowRight} className="text-[10px] rtl:rotate-180" />
-  </Link>
+      </div>
+      <Link
+        to="/campaigns"
+        className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-gray-500 hover:text-gray-900 sm:text-sm"
+      >
+        {t('home.seeAll')}
+        <FontAwesomeIcon icon={faArrowRight} className="text-[10px] rtl:rotate-180" />
+      </Link>
 
       {/* ✅ overflow-hidden — koi user scroll nahi. Cards khud right se left chalte hain. */}
       <div className="relative mt-6 overflow-hidden">
@@ -505,7 +530,7 @@ export function OpenCampaigns() {
 // ✅ Card ko alag component banaya — reuse ke liye
 function CampaignCard({
   campaign: c,
-  
+
   d,
   i18n,
 }: {
@@ -611,9 +636,8 @@ export function Faq() {
                 />
               </button>
               <div
-                className={`grid transition-[grid-template-rows] duration-300 ${
-                  open === i ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
-                }`}
+                className={`grid transition-[grid-template-rows] duration-300 ${open === i ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+                  }`}
               >
                 <p className="overflow-hidden px-4 text-xs text-gray-600 sm:px-5 sm:text-sm">
                   <span className="block pb-4 sm:pb-5">{a}</span>
