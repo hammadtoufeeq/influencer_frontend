@@ -200,7 +200,7 @@ function Profile() {
                       className="h-full w-full object-cover object-[center_20%] transition duration-500 group-enabled:group-hover:scale-110"
                     />
                   ) : (
-                    <span className="keep-dark flex h-full w-full items-center justify-center bg-gradient-to-br from-gray-600 to-gray-900 font-display text-4xl font-bold text-white">
+                    <span className="keep-dark flex h-full w-full items-center justify-center bg-gradient-to-br from-brand-violet to-gray-950 font-display text-4xl font-bold text-white">
                       {initials(person.name)}
                     </span>
                   )}
@@ -340,7 +340,7 @@ function Profile() {
           <section className={card} style={rise(3)}>
             <h2 className="font-display text-xl font-bold">{t('profile.influence')}</h2>
             {person.totalFollowers > 0 || person.socialAccounts.length > 0 ? (
-              <div className="keep-dark mt-4 rounded-2xl bg-gradient-to-br from-gray-800 to-gray-950 p-4 text-white">
+              <div className="keep-dark mt-4 rounded-2xl bg-gradient-to-br from-brand-violet/70 to-gray-950 p-4 text-white">
                 <p className="font-display text-4xl font-extrabold">
                   {approx}
                   {formatCount(person.totalFollowers)}

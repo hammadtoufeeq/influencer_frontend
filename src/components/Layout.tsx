@@ -9,7 +9,7 @@ function Layout() {
   const { pathname } = useLocation()
   const fullWidth = pathname === '/'
   return (
-    <div className="flex min-h-screen flex-col bg-gray-50 text-gray-900">
+    <div className="starlight-bg flex min-h-screen flex-col bg-gray-50 text-gray-900">
       {/* Navbar page ke upar tairta hai: wrapper ki oonchai 0, is liye hero bilkul top se
           shuru hota hai aur beech mein koi patti nahi bachti */}
       <div className="sticky top-0 z-50 h-0">

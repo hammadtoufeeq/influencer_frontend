@@ -50,7 +50,7 @@ function AuthShowcase({
       {/* Lamba form ho to bhi panel ka content scroll ke saath nazar mein rahe */}
       <div className="flex flex-1 flex-col lg:sticky lg:top-24 lg:max-h-[620px] lg:min-h-[580px]">
         <Link to="/" className="flex w-fit items-center gap-2.5">
-          <img src="/logo.svg?v=1" alt="" className="h-9 w-9 rounded-full ring-1 ring-white/20" />
+          <img src="/logo-starlight.png?v=1" alt="" className="h-9 w-9 rounded-xl ring-1 ring-white/20" />
           <span className="font-display text-base font-bold tracking-tight">{PLATFORM_NAME}</span>
         </Link>
 

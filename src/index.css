@@ -20,10 +20,10 @@
    Greys mein halki violet jhalak, aur "brand" = logo ka violet: primary buttons,
    active tabs, avatars, progress. "star" = logo ka gold star: verified tick */
 @theme {
-  --color-gray-50: oklch(98.4% 0.007 300);
-  --color-gray-100: oklch(96.2% 0.011 298);
-  --color-gray-200: oklch(92.6% 0.015 296);
-  --color-gray-300: oklch(86.6% 0.02 294);
+  --color-gray-50: oklch(95.6% 0.024 300);
+  --color-gray-100: oklch(93.6% 0.028 298);
+  --color-gray-200: oklch(89.8% 0.032 296);
+  --color-gray-300: oklch(83.8% 0.036 294);
   --color-gray-400: oklch(70.5% 0.028 292);
   --color-gray-500: oklch(55.5% 0.034 290);
   --color-gray-600: oklch(45.5% 0.04 290);
@@ -302,3 +302,38 @@ html.theme-switching *::after {
   }
 }
 
+
+/* ---------- Starlight vibe ----------
+   Page ke peeche logo jaisi roshni (violet, magenta, orange), aur brand wali har cheez
+   (primary buttons, active tabs, avatars, progress) logo ka violet -> magenta gradient */
+:root {
+  --brand-gradient: linear-gradient(135deg, #6d28d9 0%, #9333ea 50%, #c026d3 100%);
+  --brand-gradient-hover: linear-gradient(135deg, #5b21b6 0%, #7e22ce 50%, #a21caf 100%);
+  --starlight-glow:
+    radial-gradient(1100px 620px at -5% -10%, rgb(139 61 245 / 0.22), transparent 62%),
+    radial-gradient(900px 540px at 105% 5%, rgb(217 75 245 / 0.16), transparent 60%),
+    radial-gradient(1000px 640px at 85% 105%, rgb(247 149 58 / 0.14), transparent 62%);
+}
+.dark {
+  --brand-gradient: linear-gradient(135deg, #7c3aed 0%, #9333ea 50%, #c026d3 100%);
+  --brand-gradient-hover: linear-gradient(135deg, #8b3df5 0%, #a855f7 50%, #c026d3 100%);
+  --starlight-glow:
+    radial-gradient(1100px 640px at -5% -10%, rgb(139 61 245 / 0.32), transparent 62%),
+    radial-gradient(900px 560px at 105% 10%, rgb(217 75 245 / 0.18), transparent 60%),
+    radial-gradient(1000px 640px at 80% 108%, rgb(247 149 58 / 0.10), transparent 62%);
+}
+.starlight-bg {
+  background-image: var(--starlight-glow);
+  background-attachment: fixed;
+}
+.bg-brand,
+.hover\:bg-brand:hover,
+.group:hover .group-hover\:bg-brand {
+  background-image: var(--brand-gradient);
+}
+.hover\:bg-brand-hover:hover {
+  background-image: var(--brand-gradient-hover);
+}
+::selection {
+  background: rgb(139 61 245 / 0.3);
+}

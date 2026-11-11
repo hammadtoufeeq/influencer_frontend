@@ -85,7 +85,7 @@ function Navbar() {
           className="flex shrink-0 items-center gap-2.5 xl:justify-self-start"
         >
           {/* Favicon wala logo + do line mein naam */}
-          <img src="/logo.svg?v=1" alt="" className="h-9 w-9 shrink-0 rounded-full sm:h-10 sm:w-10" />
+          <img src="/logo-starlight.png?v=1" alt="" className="h-9 w-9 shrink-0 rounded-xl shadow-md shadow-brand/30 sm:h-10 sm:w-10" />
           <span className="flex flex-col" aria-hidden="true">
             <span className="font-display text-[17px] font-bold leading-[1.05] tracking-tight text-gray-950 sm:text-xl">
               {PLATFORM_NAME.split(' ')[0]}

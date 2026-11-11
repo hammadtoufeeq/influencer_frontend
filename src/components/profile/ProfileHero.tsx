@@ -105,7 +105,7 @@ function ProfileHero({
                     }`}
                   />
                 ) : (
-                  <span className="keep-dark flex h-full w-full items-center justify-center bg-gradient-to-br from-gray-600 to-gray-900 font-display text-4xl font-bold text-white">
+                  <span className="keep-dark flex h-full w-full items-center justify-center bg-gradient-to-br from-brand-violet to-gray-950 font-display text-4xl font-bold text-white">
                     {fallbackIcon ? <FontAwesomeIcon icon={fallbackIcon} /> : initials(name)}
                   </span>
                 )}

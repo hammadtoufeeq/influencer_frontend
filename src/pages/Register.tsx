@@ -271,7 +271,7 @@ function Register() {
                 style={{ animationDelay: `${180 + i * 80}ms` }}
                 className="group relative flex items-center gap-4 overflow-hidden rounded-2xl border border-gray-200 bg-white p-4 text-start transition duration-300 hover:-translate-y-0.5 hover:border-gray-900 hover:shadow-[0_16px_36px_rgb(23_23_23_/_10%)] focus-visible:ring-4 focus-visible:ring-brand/15 focus-visible:outline-none motion-safe:animate-fade-up sm:p-5"
               >
-                <span className="keep-dark flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-gray-700 to-gray-950 text-lg text-white shadow-md transition duration-300 group-hover:scale-110 group-hover:rotate-[-6deg]">
+                <span className="keep-dark flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-violet to-gray-950 text-lg text-white shadow-md transition duration-300 group-hover:scale-110 group-hover:rotate-[-6deg]">
                   <FontAwesomeIcon icon={ROLE_ICONS[option.value]} />
                 </span>
                 <span className="min-w-0 flex-1">
@@ -362,7 +362,7 @@ function Register() {
         </div>
 
         <div className="mt-4 flex items-center gap-3 motion-safe:animate-fade-up">
-          <span className="keep-dark flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-gray-700 to-gray-950 text-white shadow-md">
+          <span className="keep-dark flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-violet to-gray-950 text-white shadow-md">
             <FontAwesomeIcon icon={ROLE_ICONS[role]} />
           </span>
           <h2 className="font-display text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">

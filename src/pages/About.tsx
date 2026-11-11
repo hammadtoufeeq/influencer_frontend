@@ -320,7 +320,7 @@ function About() {
           {/* ✅ Line — cards ke vertical center par, peeche */}
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute inset-x-[12%] top-1/2 -z-10 hidden h-0.5 -translate-y-1/2 bg-gradient-to-r from-gray-900 via-gray-400 to-gray-900 lg:block"
+            className="pointer-events-none absolute inset-x-[12%] top-1/2 -z-10 hidden h-0.5 -translate-y-1/2 bg-gradient-to-r from-brand-violet via-brand-magenta to-brand-coral lg:block"
           />
           {steps.map((step, i) => (
             <li key={step.title} className="relative">

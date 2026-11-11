@@ -73,7 +73,7 @@ function Picture({
   return (
     <span
       aria-hidden="true"
-      className={`${className} keep-dark flex items-center justify-center bg-gradient-to-br from-gray-600 to-gray-900 font-bold text-white ${fallbackClass}`}
+      className={`${className} keep-dark flex items-center justify-center bg-gradient-to-br from-brand-violet to-gray-950 font-bold text-white ${fallbackClass}`}
     >
       {initials(name)}
     </span>

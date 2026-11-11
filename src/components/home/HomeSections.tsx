@@ -135,7 +135,7 @@ export function Photo({
   return (
     <div
       aria-hidden="true"
-      className={`${className} keep-dark flex justify-center bg-gradient-to-br from-gray-600 to-gray-900 text-lg font-bold text-white ${fallbackClass}`}
+      className={`${className} keep-dark flex justify-center bg-gradient-to-br from-brand-violet to-gray-950 text-lg font-bold text-white ${fallbackClass}`}
     >
       {initials(person.name)}
     </div>
@@ -261,7 +261,7 @@ function MockRow({
         {person ? (
           <Photo person={person} className="h-9 w-9 shrink-0 rounded-full sm:h-10 sm:w-10" />
         ) : (
-          <span className="h-9 w-9 shrink-0 rounded-full bg-gradient-to-br from-gray-500 to-gray-800 sm:h-10 sm:w-10" />
+          <span className="h-9 w-9 shrink-0 rounded-full bg-gradient-to-br from-brand-violet to-brand-magenta sm:h-10 sm:w-10" />
         )}
         <span className="min-w-0 flex-1 leading-tight">
           <span className="block truncate text-xs font-semibold sm:text-sm">
