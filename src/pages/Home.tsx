@@ -88,7 +88,7 @@ function RotatingWord({ words }: { words: string[] }) {
   return (
     <span
       key={i}
-      className="inline-block animate-word bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent rtl:bg-gradient-to-l"
+      className="inline-block animate-word bg-gradient-to-tr from-[#FFC400] via-[#FF7A00] to-[#FF2D00] bg-clip-text text-transparent"
     >
       {words[i]}
     </span>

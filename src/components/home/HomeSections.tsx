@@ -296,16 +296,22 @@ export function FeatureShowcase({ people }: { people: PersonSummary[] }) {
       <Title sub={d('home.toolkitSub', 'Search, shortlist, hire and get it in writing, all in one place.')}>
         {d('home.toolkitTitle', 'Everything you need to work with creators')}
       </Title>
-
-      <Showcase
-        title={d('home.fDiscoverTitle', 'Discover the right people in seconds')}
-        body={d('home.fDiscoverBody', 'Filter by profession, industry, country, language and reach. Every verified profile shows its sources openly.')}
-        points={[
-          d('home.fDiscover1', 'Search by name, topic or city'),
-          d('home.fDiscover2', 'Filters that live in the link, so you can share a search'),
-          d('home.fDiscover3', 'Verified badge on claimed profiles'),
-        ]}
-      >
+<Showcase
+  title={
+    <>
+      <span className="bg-gradient-to-tr from-[#FFC400] via-[#FF7A00] to-[#FF2D00] bg-clip-text text-transparent">
+        Discover
+      </span>
+      <span> the right people in seconds</span>
+    </>
+  }
+  body={d('home.fDiscoverBody', 'Filter by profession, industry, country, language and reach. Every verified profile shows its sources openly.')}
+  points={[
+    d('home.fDiscover1', 'Search by name, topic or city'),
+    d('home.fDiscover2', 'Filters that live in the link, so you can share a search'),
+    d('home.fDiscover3', 'Verified badge on claimed profiles'),
+  ]}
+>
         <MockRow
           person={a}
           title={d('home.mockCreator', 'Creator')}
