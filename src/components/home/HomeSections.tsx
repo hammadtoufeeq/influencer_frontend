@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -288,6 +288,14 @@ function Progress({ percent }: { percent: number }) {
   )
 }
 
+// Heading ke khaas lafz orange gradient mein. Jumla translation se aata hai, aur har zaban
+// apne lafz <hl>...</hl> mein band karti hai, is liye Urdu / Arabic mein bhi sahi lafz chamakta hai
+const HIGHLIGHT = 'bg-gradient-to-tr from-[#FFC400] via-[#FF7A00] to-[#FF2D00] bg-clip-text text-transparent'
+
+export function HighlightedText({ i18nKey }: { i18nKey: string }) {
+  return <Trans i18nKey={i18nKey} components={{ hl: <span className={HIGHLIGHT} /> }} />
+}
+
 export function FeatureShowcase({ people }: { people: PersonSummary[] }) {
   const d = useD()
   const [a, b, c] = people
@@ -298,12 +306,7 @@ export function FeatureShowcase({ people }: { people: PersonSummary[] }) {
       </Title>
 <Showcase
   title={
-    <>
-      <span className="bg-gradient-to-tr from-[#FFC400] via-[#FF7A00] to-[#FF2D00] bg-clip-text text-transparent">
-        Discover
-      </span>
-      <span> the right people in seconds</span>
-    </>
+    <HighlightedText i18nKey="home.fDiscoverTitleRich" />
   }
   body={d('home.fDiscoverBody', 'Filter by profession, industry, country, language and reach. Every verified profile shows its sources openly.')}
   points={[
@@ -338,12 +341,7 @@ export function FeatureShowcase({ people }: { people: PersonSummary[] }) {
       <Showcase
         flip
         title={
-          <>
-            <span className="bg-gradient-to-tr from-[#FFC400] via-[#FF7A00] to-[#FF2D00] bg-clip-text text-transparent">
-              Shortlist
-            </span>
-            <span>, compare and decide</span>
-          </>
+          <HighlightedText i18nKey="home.fShortlistTitleRich" />
         }
         body={d('home.fShortlistBody', 'Keep a named list for every campaign, add private notes, and compare up to four people side by side.')}
         points={[
@@ -359,17 +357,7 @@ export function FeatureShowcase({ people }: { people: PersonSummary[] }) {
 
       <Showcase
         title={
-          <>
-            <span>Post a </span>
-            <span className="bg-gradient-to-tr from-[#FFC400] via-[#FF7A00] to-[#FF2D00] bg-clip-text text-transparent">
-              campaign
-            </span>
-            <span> and let </span>
-            <span className="bg-gradient-to-tr from-[#FFC400] via-[#FF7A00] to-[#FF2D00] bg-clip-text text-transparent">
-              talent
-            </span>
-            <span> come to you</span>
-          </>
+          <HighlightedText i18nKey="home.fCampaignTitleRich" />
         }
         body={d('home.fCampaignBody', 'Describe the job once. Verified creators apply with a pitch, and you pick the ones you want.')}
         points={[
@@ -404,12 +392,7 @@ export function FeatureShowcase({ people }: { people: PersonSummary[] }) {
       <Showcase
         flip
         title={
-          <>
-            <span>Sign it properly, pay by </span>
-            <span className="bg-gradient-to-tr from-[#FFC400] via-[#FF7A00] to-[#FF2D00] bg-clip-text text-transparent">
-              milestone
-            </span>
-          </>
+          <HighlightedText i18nKey="home.fAgreementTitleRich" />
         }
         body={d('home.fAgreementBody', 'Turn an accepted request into a written agreement. Both sides sign with a one-time code and the terms lock.')}
         points={[

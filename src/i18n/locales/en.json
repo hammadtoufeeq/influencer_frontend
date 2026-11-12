@@ -769,7 +769,12 @@
     "a4": "Yes. A verified manager can request to represent a creator, and the creator chooses what the manager may do.",
     "q5": "My profile is already listed. What now?",
     "a5": "Find it, press Claim and follow the steps. Once approved it shows the verified badge and you control the details.",
-    "example": "Example"
+    "example": "Example",
+    "titleRich": "<hl>Discover</hl> the people who <hl>influence</hl> your world",
+    "fDiscoverTitleRich": "<hl>Discover</hl> the right people in seconds",
+    "fShortlistTitleRich": "<hl>Shortlist</hl>, compare and decide",
+    "fCampaignTitleRich": "Post a <hl>campaign</hl> and let <hl>talent</hl> come to you",
+    "fAgreementTitleRich": "Sign it properly, pay by <hl>milestone</hl>"
   },
   "login": {
     "title": "Log in",

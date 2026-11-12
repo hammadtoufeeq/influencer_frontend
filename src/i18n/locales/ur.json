@@ -12,7 +12,7 @@
     "agreements": "معاہدے",
     "managers": "مینیجرز",
     "newsletter": "نیوز لیٹر",
-    "inquiries": "Sawal"
+    "inquiries": "سوالات"
   },
   "common": {
     "loading": "لوڈ ہو رہا ہے...",
@@ -331,7 +331,7 @@
         "reject": "{{actor}} نے مینیجر {{target}} کو مسترد کیا۔"
       },
       "inquiry": {
-        "update": "{{actor}} ne {{target}} ke baare mein sawal update kiya."
+        "update": "{{actor}} نے {{target}} کے بارے میں سوال اپ ڈیٹ کیا۔"
       }
     },
     "field": "فیلڈ",
@@ -345,7 +345,7 @@
     "business": "کاروبار",
     "agreement": "معاہدہ",
     "manager": "مینیجر",
-    "inquiry": "Sawal"
+    "inquiry": "سوال"
   },
   "auditAction": {
     "person": {
@@ -393,7 +393,7 @@
       "reject": "مینیجر مسترد کیا"
     },
     "inquiry": {
-      "update": "Sawal update kiya"
+      "update": "سوال اپ ڈیٹ کیا"
     }
   },
   "reportForm": {
@@ -768,8 +768,13 @@
     "q4": "کیا مینیجر کسی تخلیق کار کے لیے کام کر سکتا ہے؟",
     "a4": "جی ہاں۔ تصدیق شدہ مینیجر نمائندگی کی درخواست کر سکتا ہے، اور تخلیق کار طے کرتا ہے کہ مینیجر کیا کر سکتا ہے۔",
     "q5": "میری پروفائل پہلے سے موجود ہے۔ اب کیا کروں؟",
-    "a5": "اسے تلاش کریں، Claim دبائیں اور مراحل پر عمل کریں۔ منظوری کے بعد تصدیقی بیج لگ جاتا ہے اور تفصیلات آپ کے کنٹرول میں ہوتی ہیں۔",
-    "example": "مثال"
+    "a5": "اسے تلاش کریں، «دعویٰ کریں» دبائیں اور مراحل پر عمل کریں۔ منظوری کے بعد تصدیقی بیج لگ جاتا ہے اور تفصیلات آپ کے کنٹرول میں ہوتی ہیں۔",
+    "example": "مثال",
+    "titleRich": "اُن لوگوں کو <hl>دریافت</hl> کریں جو آپ کی دنیا پر <hl>اثر</hl> ڈالتے ہیں",
+    "fDiscoverTitleRich": "سیکنڈوں میں صحیح لوگ <hl>تلاش</hl> کریں",
+    "fShortlistTitleRich": "<hl>شارٹ لسٹ</hl> کریں، موازنہ کریں اور فیصلہ کریں",
+    "fCampaignTitleRich": "<hl>مہم</hl> پوسٹ کریں اور <hl>ٹیلنٹ</hl> خود آپ تک آئے",
+    "fAgreementTitleRich": "باقاعدہ دستخط کریں، <hl>مرحلہ وار</hl> ادائیگی کریں"
   },
   "login": {
     "title": "لاگ ان",
@@ -811,7 +816,7 @@
     "professionsDesc": "لوگ کیا کرتے ہیں: صحافی، کریئیٹرز، مقررین اور مزید۔",
     "countriesDesc": "لوگوں کو ان کے مقام سے تلاش کریں۔",
     "topicsDesc": "وہ موضوعات جن پر لوگ بات کرتے اور لکھتے ہیں۔",
-    "pickHint": "جتنی چاہیں چیزیں چنیں، پھر Show results دبائیں۔",
+    "pickHint": "جتنی چاہیں چیزیں چنیں، پھر «نتائج دکھائیں» دبائیں۔",
     "selectedCount": "{{count}} منتخب",
     "selectedTotal": "{{count}} چیزیں منتخب",
     "selectionBar": "آپ کا انتخاب",
@@ -948,8 +953,8 @@
     "platforms": "پلیٹ فارمز",
     "reviewsCount": "{{count}} ریویوز",
     "statusLabel": "پروفائل کی حالت",
-    "followersApprox": "Andaza, public profiles se · {{date}}",
-    "followersUpdated": "Update: {{date}}"
+    "followersApprox": "اندازاً، پبلک پروفائلز سے · {{date}}",
+    "followersUpdated": "اپ ڈیٹ: {{date}}"
   },
   "register": {
     "title": "اپنا اکاؤنٹ بنائیں",
@@ -1252,16 +1257,16 @@
     "socialUrlRequired": "پروفائل کا لنک لکھیں (https://...)",
     "socialRequiredHint": "کم از کم ایک سوشل اکاؤنٹ لازمی ہے تاکہ بزنسز آپ کا کام اور ریچ دیکھ سکیں۔",
     "photo": "پروفائل تصویر",
-    "followersAutoHint": "Followers har public profile se khud aate hain (taqreeban hafte mein ek dafa). Bas link daalein, username khud bhar jayega.",
-    "refreshFollowers": "Followers dobara lao",
-    "followersRefreshed_one": "{{count}} account update hua",
-    "followersRefreshed_other": "{{count}} accounts update hue",
-    "followersNotTracked": "Is platform ke followers nahi aate.",
-    "followersNeedHandle": "Username likhein taake followers mil sakein.",
-    "followersFound": "~{{count}} followers · {{date}} ko mile",
-    "followersCurrent": "{{count}} followers (khud update honge)",
-    "followersNotFound": "Is account ke followers abhi nahi mile.",
-    "followersPending": "Followers khud aa jayenge (ek din ke andar)."
+    "followersAutoHint": "فالوورز ہر پبلک پروفائل سے خود آتے ہیں (تقریباً ہفتے میں ایک بار)۔ بس لنک ڈالیں، یوزر نیم خود بھر جائے گا۔",
+    "refreshFollowers": "فالوورز دوبارہ لائیں",
+    "followersRefreshed_one": "{{count}} اکاؤنٹ اپ ڈیٹ ہوا",
+    "followersRefreshed_other": "{{count}} اکاؤنٹس اپ ڈیٹ ہوئے",
+    "followersNotTracked": "اس پلیٹ فارم کے فالوورز نہیں آتے۔",
+    "followersNeedHandle": "یوزر نیم لکھیں تاکہ فالوورز مل سکیں۔",
+    "followersFound": "~{{count}} فالوورز · {{date}} کو ملے",
+    "followersCurrent": "{{count}} فالوورز (خود اپ ڈیٹ ہوں گے)",
+    "followersNotFound": "اس اکاؤنٹ کے فالوورز ابھی نہیں ملے۔",
+    "followersPending": "فالوورز خود آ جائیں گے (ایک دن کے اندر)۔"
   },
   "oldClaims": {
     "title": "کلیم کی درخواستیں",
@@ -1393,7 +1398,7 @@
     "draftBadge": "نئی پروفائل · زیرِ جائزہ",
     "draftPending": "کلیم زیرِ التوا",
     "draftHint": "کلیم منظور ہونے پر شائع ہو گی",
-    "photoFailed": "Profile chali gayi, lekin photo upload nahi hui."
+    "photoFailed": "پروفائل بھیج دی گئی، لیکن تصویر اپ لوڈ نہیں ہوئی۔"
   },
   "notifications": {
     "title": "اطلاعات",
@@ -1453,7 +1458,7 @@
       "campaign_accepted": "{{business}} نے آپ کو \"{{campaign}}\" کے لیے منتخب کیا۔ آپ کی ہائر ریکویسٹ تیار ہے۔",
       "campaign_rejected": "اس بار آپ \"{{campaign}}\" کے لیے منتخب نہیں ہوئے۔",
       "manager_reviewed": "{{name}} نے آپ کو {{rating}} اسٹار دیے۔",
-      "inquiry_new": "{{person}} ke baare mein {{name}} ka naya sawal."
+      "inquiry_new": "{{person}} کے بارے میں {{name}} کا نیا سوال۔"
     },
     "categoriesLabel": "نوٹیفکیشن کی اقسام",
     "unreadOnly": "صرف ان پڑھی دکھائیں",
@@ -2658,8 +2663,8 @@
       "type": "JPG، PNG یا WebP تصویر منتخب کریں",
       "size": "تصویر 2 MB یا اس سے چھوٹی ہو"
     },
-    "uploadOnSend": "JPG, PNG ya WebP, 2 MB tak. Profile bhejte hi upload ho jayegi.",
-    "chosen": "Photo lag gayi. Profile ke saath upload hogi."
+    "uploadOnSend": "JPG، PNG یا WebP، زیادہ سے زیادہ 2 MB۔ پروفائل بھیجتے ہی اپ لوڈ ہو جائے گی۔",
+    "chosen": "تصویر لگ گئی۔ پروفائل کے ساتھ اپ لوڈ ہو گی۔"
   },
   "adminNewsletter": {
     "title": "نیوز لیٹر",
@@ -2914,48 +2919,48 @@
     "registerSubtitle": "تصدیق شدہ تخلیق کار، صحافی اور ماہرین، انہیں ہائر کرنے والے برانڈز اور ان کی نمائندگی کرنے والے مینیجرز۔"
   },
   "inquiry": {
-    "button": "Sawal bhejein",
-    "title": "{{name}} ke baare mein poochein",
-    "intro": "Aap ka sawal hamari team ke paas jayega, seedha talent ke paas nahi. Hum email pe jawab denge.",
-    "name": "Aap ka naam",
-    "email": "Aap ki email",
-    "phone": "Phone (zaroori nahi)",
-    "message": "Aap ka sawal",
-    "messagePlaceholder": "Maslan: kya {{name}} agle mahine brand campaign ke liye available hain? Rates kya hain?",
-    "send": "Sawal bhejein",
-    "sending": "Bhej rahe hain...",
-    "sent": "Aap ka sawal bhej diya gaya. Hum jald email pe jawab denge.",
+    "button": "سوال بھیجیں",
+    "title": "{{name}} کے بارے میں پوچھیں",
+    "intro": "آپ کا سوال ہماری ٹیم کے پاس جائے گا، براہِ راست ٹیلنٹ کے پاس نہیں۔ ہم ای میل پر جواب دیں گے۔",
+    "name": "آپ کا نام",
+    "email": "آپ کی ای میل",
+    "phone": "فون (ضروری نہیں)",
+    "message": "آپ کا سوال",
+    "messagePlaceholder": "مثلاً: کیا {{name}} اگلے مہینے برانڈ مہم کے لیے دستیاب ہیں؟ ریٹس کیا ہیں؟",
+    "send": "سوال بھیجیں",
+    "sending": "بھیج رہے ہیں...",
+    "sent": "آپ کا سوال بھیج دیا گیا۔ ہم جلد ای میل پر جواب دیں گے۔",
     "errors": {
-      "name": "Apna naam likhein",
-      "email": "Sahi email likhein",
-      "message": "Apna sawal likhein (kam az kam 10 harf)"
+      "name": "اپنا نام لکھیں",
+      "email": "درست ای میل لکھیں",
+      "message": "اپنا سوال لکھیں (کم از کم 10 حروف)"
     }
   },
   "inquiries": {
-    "title": "Talent ke baare mein sawal",
-    "subtitle": "Visitors ke bheje hue sawal. Email pe jawab dein, phir status badlein.",
-    "allStatuses": "Sab status",
-    "colPerson": "Talent",
-    "colFrom": "Kis ne bheja",
-    "colMessage": "Sawal",
-    "colStatus": "Status",
-    "colDate": "Kab aaya",
-    "emptyTitle": "Abhi koi sawal nahi",
-    "emptyText": "Talent profiles se bheje gaye sawal yahan aayenge.",
-    "detailTitle": "{{name}} ke baare mein sawal",
-    "replyByEmail": "Email pe jawab dein",
-    "replySubject": "{{name}} ke baare mein aap ka sawal",
-    "update": "Sawal update karein",
-    "newStatus": "Status",
-    "adminNote": "Andar ka note",
-    "adminNotePlaceholder": "Sirf admin dekhte hain",
-    "updated": "Sawal update ho gaya",
-    "handled": "Aakhri dafa {{name}} ne {{date}} ko dekha"
+    "title": "ٹیلنٹ کے بارے میں سوالات",
+    "subtitle": "وزیٹرز کے بھیجے ہوئے سوالات۔ ای میل پر جواب دیں، پھر اسٹیٹس بدلیں۔",
+    "allStatuses": "تمام اسٹیٹس",
+    "colPerson": "ٹیلنٹ",
+    "colFrom": "کس نے بھیجا",
+    "colMessage": "سوال",
+    "colStatus": "اسٹیٹس",
+    "colDate": "کب آیا",
+    "emptyTitle": "ابھی کوئی سوال نہیں",
+    "emptyText": "ٹیلنٹ پروفائلز سے بھیجے گئے سوالات یہاں آئیں گے۔",
+    "detailTitle": "{{name}} کے بارے میں سوال",
+    "replyByEmail": "ای میل پر جواب دیں",
+    "replySubject": "{{name}} کے بارے میں آپ کا سوال",
+    "update": "سوال اپ ڈیٹ کریں",
+    "newStatus": "اسٹیٹس",
+    "adminNote": "اندرونی نوٹ",
+    "adminNotePlaceholder": "صرف ایڈمن دیکھتے ہیں",
+    "updated": "سوال اپ ڈیٹ ہو گیا",
+    "handled": "آخری بار {{name}} نے {{date}} کو دیکھا"
   },
   "inquiryStatus": {
-    "new": "Naya",
-    "in_progress": "Jaari",
-    "answered": "Jawab de diya",
-    "closed": "Band"
+    "new": "نیا",
+    "in_progress": "جاری",
+    "answered": "جواب دے دیا",
+    "closed": "بند"
   }
 }

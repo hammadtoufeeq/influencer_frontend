@@ -26,6 +26,7 @@ import {
   CountUp,
   Faq,
   FeatureShowcase,
+  HighlightedText,
   HowItWorks,
   OpenCampaigns,
   Photo,
@@ -314,14 +315,9 @@ function Home() {
           <div className="text-center lg:text-start">
             {/* ✅ "Discover" aur "influence" ORANGE (AXcel X gradient), baqi WHITE */}
             <h1 className="font-display text-3xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl md:text-6xl">
-              <span className="bg-gradient-to-tr from-[#FFC400] via-[#FF7A00] to-[#FF2D00] bg-clip-text text-transparent">
-                Discover
-              </span>{' '}
-              <span className="text-white">the people who</span>{' '}
-              <span className="bg-gradient-to-tr from-[#FFC400] via-[#FF7A00] to-[#FF2D00] bg-clip-text text-transparent">
-                influence
-              </span>{' '}
-              <span className="text-white">your world</span>
+              <span className="text-white">
+                <HighlightedText i18nKey="home.titleRich" />
+              </span>
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/80 md:text-lg lg:mx-0">
               {t('home.subtitle')}
