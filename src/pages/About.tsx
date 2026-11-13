@@ -63,46 +63,6 @@ function Heading({ title, sub }: { title: string; sub?: string }) {
   );
 }
 
-// Slowly scrolling row of portrait tiles
-// function FaceRow({
-//   people,
-//   reverse,
-// }: {
-//   people: PersonSummary[];
-//   reverse?: boolean;
-// }) {
-//   const base =
-//     people.length >= 8 ? people : [...people, ...people, ...people].slice(0, 8);
-//   return (
-//     <div className="group overflow-hidden">
-//       <div
-//         className={`flex w-max animate-marquee gap-4 ${
-//           reverse ? "[animation-direction:reverse]" : ""
-//         }`}
-//       >
-//         {[...base, ...base].map((p, i) => (
-//           <Link
-//             key={`${p._id}-${i}`}
-//             to={`/people/${p.slug}`}
-//             aria-hidden={i >= base.length}
-//             tabIndex={i >= base.length ? -1 : 0}
-//             className="keep-dark group/tile relative block aspect-[3/4] w-40 shrink-0 overflow-hidden rounded-2xl bg-brand-plum text-white shadow-md md:w-48"
-//           >
-//             <Photo
-//               person={p}
-//               className="h-full w-full transition duration-700 group-hover/tile:scale-110"
-//             />
-//             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-//             <p className="absolute inset-x-0 bottom-0 truncate p-3 text-sm font-semibold">
-//               {p.name}
-//             </p>
-//           </Link>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// }
-
 // About: platform kya hai, kaise chalta hai, kis ke liye hai aur is mein kya kya hai
 function About() {
   const { t } = useTranslation();
@@ -194,10 +154,18 @@ function About() {
   }));
 
   return (
-    <div className="space-y-20 overflow-x-clip md:space-y-28">
+    // ✅ Root — w-screen + calc trick: Layout ke max-w-6xl aur px-4 se bahar
+    <div
+      className="w-screen space-y-20 overflow-x-clip md:space-y-28"
+      style={{
+        marginLeft: "calc(50% - 50vw)",
+        marginRight: "calc(50% - 50vw)",
+      }}
+    >
       <ScrollProgressButton />
-      {/* Hero: same picture as before, now with motion */}
-      <section className="keep-dark relative isolate overflow-hidden rounded-3xl bg-gray-900 px-5 py-14 text-white sm:px-10 md:py-24">
+
+      {/* Hero — max-w-6xl */}
+      <section className="keep-dark relative isolate mx-auto max-w-6xl overflow-hidden rounded-3xl bg-gray-900 px-5 py-14 text-white sm:px-10 md:py-24">
         <img
           src={ABOUT_IMAGE}
           alt=""
@@ -247,8 +215,8 @@ function About() {
         </div>
       </section>
 
-      {/* Numbers card overlapping the hero */}
-      <div className="relative z-10 -mt-32 px-2 md:-mt-36 md:px-8">
+      {/* Numbers card overlapping the hero — max-w-6xl */}
+      <div className="relative z-10 mx-auto -mt-32 max-w-6xl px-4 md:-mt-36 md:px-8">
         <Reveal>
           <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl bg-gray-200 shadow-xl ring-1 ring-gray-200 md:grid-cols-4">
             {stats.map((stat) => (
@@ -272,8 +240,8 @@ function About() {
         </Reveal>
       </div>
 
-      {/* Mission + faces */}
-      <section className="grid items-center gap-12 lg:grid-cols-2">
+      {/* Mission + faces — max-w-6xl */}
+      <section className="mx-auto grid max-w-6xl items-center gap-12 px-4 lg:grid-cols-2">
         <Reveal>
           <h2 className="font-display text-2xl font-bold md:text-4xl">
             {t("about.missionTitle")}
@@ -312,12 +280,10 @@ function About() {
         )}
       </section>
 
-      {/* How it works */}
-      {/* How it works */}
-      <section>
+      {/* How it works — max-w-6xl */}
+      <section className="mx-auto max-w-6xl px-4">
         <Heading title={t('about.howTitle')} sub={t('about.howSubtitle')} />
         <ol className="relative mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {/* ✅ Line — cards ke vertical center par, peeche */}
           <span
             aria-hidden="true"
             className="pointer-events-none absolute inset-x-[12%] top-1/2 -z-10 hidden h-0.5 -translate-y-1/2 bg-gradient-to-r from-brand-violet via-brand-magenta to-brand-coral lg:block"
@@ -341,9 +307,9 @@ function About() {
         </ol>
       </section>
 
-      {/* Statement band with a picture */}
+      {/* ✅ Statement band — FULL WIDTH (no max-w, no px-4) */}
       <Reveal>
-        <section className="keep-dark relative isolate overflow-hidden rounded-3xl bg-brand-plum px-6 py-16 text-center text-white md:py-24">
+        <section className="keep-dark relative isolate w-full overflow-hidden bg-brand-plum px-6 py-16 text-center text-white md:py-24">
           {bandIndex < BAND_IMAGES.length && (
             <img
               key={bandIndex}
@@ -372,8 +338,8 @@ function About() {
         </section>
       </Reveal>
 
-      {/* Everything on the platform */}
-      <section>
+      {/* Everything on the platform — max-w-6xl */}
+      <section className="mx-auto max-w-6xl px-4">
         <Heading
           title={t("about.featuresTitle")}
           sub={t("about.featuresSubtitle")}
@@ -397,19 +363,8 @@ function About() {
         </div>
       </section>
 
-      {/* People already here
-      {faces.length > 0 && (
-        <section className="space-y-4">
-          <Heading title={d("about.peopleTitle", "Already on the platform")} />
-          <div className="pt-6">
-            <FaceRow people={faces} />
-          </div>
-          <FaceRow people={[...faces].reverse()} reverse />
-        </section>
-      )} */}
-
-      {/* Kis ke liye: teen account types */}
-      <section>
+      {/* Kis ke liye: teen account types — max-w-6xl */}
+      <section className="mx-auto max-w-6xl px-4">
         <Heading title={t("about.forTitle")} />
         <div className="mt-10 grid gap-5 lg:grid-cols-3">
           {audiences.map((audience, i) => {
@@ -471,8 +426,8 @@ function About() {
         </div>
       </section>
 
-      {/* Usool */}
-      <section>
+      {/* Usool — max-w-6xl */}
+      <section className="mx-auto max-w-6xl px-4">
         <Heading
           title={t("about.valuesTitle")}
           sub={t("about.valuesSubtitle")}
@@ -498,10 +453,13 @@ function About() {
         </ul>
       </section>
 
-      <PlatformStrip />
+      {/* PlatformStrip — max-w-6xl */}
+      <div className="mx-auto max-w-6xl px-4">
+        <PlatformStrip />
+      </div>
 
-      {/* Aksar pooche jane wale sawal */}
-      <section className="mx-auto max-w-3xl">
+      {/* Aksar pooche jane wale sawal — max-w-3xl */}
+      <section className="mx-auto max-w-3xl px-4">
         <Heading title={t("about.faqTitle")} />
         <div className="mt-8 space-y-3">
           {faqs.map((faq, i) => (
@@ -533,9 +491,9 @@ function About() {
         </div>
       </section>
 
-      {/* Aakhri dawat */}
+      {/* Aakhri dawat — max-w-6xl */}
       <Reveal>
-        <section className="keep-dark relative isolate flex flex-col items-center gap-7 overflow-hidden rounded-3xl bg-brand-plum p-6 text-center text-white md:p-12">
+        <section className="keep-dark relative isolate mx-auto flex max-w-6xl flex-col items-center gap-7 overflow-hidden rounded-3xl bg-brand-plum p-6 text-center text-white md:p-12">
           <div className={`${glow} -start-16 -top-20 h-72 w-72 bg-brand-violet/35`} />
           <div
             className={`${glow} -bottom-24 end-0 h-72 w-72 bg-brand-magenta/25`}
