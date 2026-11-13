@@ -307,16 +307,15 @@ html.theme-switching *::after {
    Page ke peeche logo jaisi roshni (violet, magenta, orange), aur brand wali har cheez
    (primary buttons, active tabs, avatars, progress) logo ka violet -> magenta gradient */
 :root {
-  --brand-gradient: linear-gradient(135deg, #6d28d9 0%, #9333ea 50%, #c026d3 100%);
-  --brand-gradient-hover: linear-gradient(135deg, #5b21b6 0%, #7e22ce 50%, #a21caf 100%);
-  --starlight-glow:
-    radial-gradient(1100px 620px at -5% -10%, rgb(139 61 245 / 0.22), transparent 62%),
-    radial-gradient(900px 540px at 105% 5%, rgb(217 75 245 / 0.16), transparent 60%),
-    radial-gradient(1000px 640px at 85% 105%, rgb(247 149 58 / 0.14), transparent 62%);
+  /* SOLID colours only — no gradients */
+  --brand-gradient: #6d28d9;
+  --brand-gradient-hover: #5b21b6;
+  /* Light theme background is solid white — glow removed */
+  --starlight-glow: none;
 }
 .dark {
-  --brand-gradient: linear-gradient(135deg, #7c3aed 0%, #9333ea 50%, #c026d3 100%);
-  --brand-gradient-hover: linear-gradient(135deg, #8b3df5 0%, #a855f7 50%, #c026d3 100%);
+  --brand-gradient: #8b3df5;
+  --brand-gradient-hover: #9d5bf7;
   --starlight-glow:
     radial-gradient(1100px 640px at -5% -10%, rgb(139 61 245 / 0.32), transparent 62%),
     radial-gradient(900px 560px at 105% 10%, rgb(217 75 245 / 0.18), transparent 60%),
@@ -324,15 +323,21 @@ html.theme-switching *::after {
 }
 .starlight-bg {
   background-image: var(--starlight-glow);
+  background-color: #ffffff;
   background-attachment: fixed;
+}
+.dark .starlight-bg {
+  background-color: transparent;
 }
 .bg-brand,
 .hover\:bg-brand:hover,
 .group:hover .group-hover\:bg-brand {
-  background-image: var(--brand-gradient);
+  background-image: none;
+  background-color: var(--color-brand);
 }
 .hover\:bg-brand-hover:hover {
-  background-image: var(--brand-gradient-hover);
+  background-image: none;
+  background-color: var(--color-brand-hover);
 }
 ::selection {
   background: rgb(139 61 245 / 0.3);

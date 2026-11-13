@@ -26,7 +26,7 @@ import {
   CountUp,
   Faq,
   FeatureShowcase,
-  HighlightedText,
+  HighlightedText1,
   HowItWorks,
   OpenCampaigns,
   Photo,
@@ -299,15 +299,7 @@ function Home() {
             />
           )}
 
-          <div className="absolute -start-24 -top-24 h-96 w-96 animate-drift rounded-full bg-brand-violet/35 blur-3xl" />
-          <div
-            className="absolute -bottom-32 end-0 h-[30rem] w-[30rem] animate-drift rounded-full bg-brand-magenta/25 blur-3xl"
-            style={{ animationDelay: '-6s' }}
-          />
-          <div
-            className="absolute start-1/3 top-1/2 h-64 w-64 animate-drift rounded-full bg-brand-coral/15 blur-3xl"
-            style={{ animationDelay: '-11s' }}
-          />
+          {/* ✅ Purple blur effect removed — sirf gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-brand-plum/95 via-brand-plum/50 to-transparent" />
         </div>
 
@@ -316,7 +308,7 @@ function Home() {
             {/* ✅ "Discover" aur "influence" ORANGE (AXcel X gradient), baqi WHITE */}
             <h1 className="font-display text-3xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl md:text-6xl">
               <span className="text-white">
-                <HighlightedText i18nKey="home.titleRich" />
+                <HighlightedText1 i18nKey="home.titleRich" />
               </span>
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/80 md:text-lg lg:mx-0">
@@ -522,15 +514,15 @@ function Home() {
       </div>
 
       {/* Tabs per role — FULL WIDTH background, centered content */}
-      <section className="mt-24 w-full bg-white py-10 shadow-sm ring-1 ring-gray-100 md:py-16">
+      <section className="mt-24 w-full bg-gray-800 py-10 shadow-sm ring-1 ring-gray-100 md:py-16">
         <div className="mx-auto max-w-6xl px-4">
           <Reveal>
-            <h2 className="text-center font-display text-2xl font-bold md:text-3xl">
+            <h2 className="text-center font-display text-2xl font-bold text-white md:text-3xl">
               {d('home.rolesTitle', 'One platform, three ways to work')}
             </h2>
             <div
               role="tablist"
-              className="mx-auto mt-6 flex w-fit max-w-full flex-wrap justify-center gap-2 rounded-full bg-gray-100 p-1.5"
+              className="mx-auto mt-6 flex w-fit max-w-full flex-wrap justify-center gap-2 rounded-full bg-gray-700 p-1.5"
             >
               {(Object.keys(tabs) as (keyof typeof tabs)[]).map((id) => (
                 <button
@@ -542,7 +534,7 @@ function Home() {
                   className={`inline-flex min-w-0 items-center justify-center gap-2 rounded-full px-3 py-2 text-xs font-semibold transition sm:px-5 sm:text-sm ${
                     tab === id
                       ? 'bg-brand text-on-brand shadow'
-                      : 'text-gray-600 hover:text-gray-900'
+                      : 'text-gray-300 hover:text-white'
                   }`}
                 >
                   <FontAwesomeIcon icon={tabs[id].icon} className="text-xs" />
@@ -562,7 +554,7 @@ function Home() {
                     <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand text-on-brand">
                       <FontAwesomeIcon icon={faCheck} className="text-xs" />
                     </span>
-                    <span className="text-gray-700">{point}</span>
+                    <span className="text-gray-100">{point}</span>
                   </li>
                 ))}
               </ul>

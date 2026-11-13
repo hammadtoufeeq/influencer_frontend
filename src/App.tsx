@@ -65,6 +65,7 @@ import NewsletterUnsubscribe from "./pages/NewsletterUnsubscribe";
 import AdminManagerDetailPage from "./pages/admin-panel/AdminManagerDetailPage";
 import AdminAgreementDetailPage from "./pages/admin-panel/AdminAgreementDetailPage";
 
+
 function App() {
   // Enter moves to the next field in every form; the last field submits
   useEnterToNextField();

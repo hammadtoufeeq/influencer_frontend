@@ -499,6 +499,7 @@
     "popular": "Popular:",
     "statProfiles": "Public profiles",
     "howTitle": "How it works",
+    "howTitleRich": "How it <hl>works</hl>",
     "howSubtitle": "From search to a signed deal in three simple steps.",
     "step1Title": "Discover",
     "step1Body": "Search by name, profession, industry, topic or city to find the right people.",
@@ -685,6 +686,7 @@
     "statReach": "Combined reach of top creators",
     "platformsTitle": "See reach across every platform they use",
     "toolkitTitle": "Everything you need to work with creators",
+    
     "toolkitSub": "Search, shortlist, hire and get it in writing, all in one place.",
     "fDiscoverTitle": "Discover the right people in seconds",
     "fDiscoverBody": "Filter by profession, industry, country, language and reach. Every verified profile shows its sources openly.",
@@ -727,6 +729,7 @@
     "mockSigned": "Signed by both sides",
     "mockLocked": "Terms locked",
     "openCampaigns": "Open campaigns right now",
+    "openCampaignsRich": "Open <hl>campaigns</hl> right now",
     "budgetOpen": "Budget open",
     "whyTitle": "Why teams choose us",
     "b1": "Verified identities",

@@ -290,12 +290,16 @@ function Progress({ percent }: { percent: number }) {
 
 // Heading ke khaas lafz orange gradient mein. Jumla translation se aata hai, aur har zaban
 // apne lafz <hl>...</hl> mein band karti hai, is liye Urdu / Arabic mein bhi sahi lafz chamakta hai
-const HIGHLIGHT = 'bg-gradient-to-tr from-[#FFC400] via-[#FF7A00] to-[#FF2D00] bg-clip-text text-transparent'
+const HIGHLIGHT = 'bg-gradient-to-tr from-[#6d28d9] via-[#8b3df5] to-[#c026d3] bg-clip-text text-transparent'
+const HIGHLIGHT1 = 'bg-gradient-to-tr from-[#FFC400] via-[#FF7A00] to-[#FF2D00] bg-clip-text text-transparent'
 
 export function HighlightedText({ i18nKey }: { i18nKey: string }) {
   return <Trans i18nKey={i18nKey} components={{ hl: <span className={HIGHLIGHT} /> }} />
 }
 
+export function HighlightedText1({ i18nKey }: { i18nKey: string }) {
+  return <Trans i18nKey={i18nKey} components={{ hl: <span className={HIGHLIGHT1} /> }} />
+}
 export function FeatureShowcase({ people }: { people: PersonSummary[] }) {
   const d = useD()
   const [a, b, c] = people
@@ -431,7 +435,9 @@ export function HowItWorks() {
   ]
   return (
     <section>
-      <Title sub={t('home.howSubtitle')}>{t('home.howTitle')}</Title>
+      <Title sub={t('home.howSubtitle')}>
+        <HighlightedText i18nKey="home.howTitleRich" />
+      </Title>
       <ol ref={ref} className="relative mt-10 grid gap-8 sm:mt-12 sm:gap-10 md:grid-cols-3">
         <span
           aria-hidden="true"
@@ -469,12 +475,11 @@ export function OpenCampaigns() {
   return (
     <section>
       {/* ✅ Centered title */}
-      <div className="text-center">
-        <h2 className="font-display text-xl font-bold sm:text-2xl md:text-3xl">
-          {d('home.openCampaigns', 'Open campaigns right now')}
-        </h2>
-
-      </div>
+     <div className="text-center">
+  <h2 className="font-display text-xl font-bold sm:text-2xl md:text-3xl">
+    <HighlightedText i18nKey="home.openCampaignsRich" />
+  </h2>
+</div>
       <Link
         to="/campaigns"
         className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-gray-500 hover:text-gray-900 sm:text-sm"
