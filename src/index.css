@@ -15,6 +15,7 @@
   }
 }
 
+
 /* ---------- Starlight colours (logo se) ----------
    Day (light mode) yahan; Night (dark mode) neeche .dark mein.
    Greys mein halki violet jhalak, aur "brand" = logo ka violet: primary buttons,
@@ -302,33 +303,45 @@ html.theme-switching *::after {
   }
 }
 
-
 /* ---------- Starlight vibe ----------
-   Page ke peeche logo jaisi roshni (violet, magenta, orange), aur brand wali har cheez
-   (primary buttons, active tabs, avatars, progress) logo ka violet -> magenta gradient */
+   LIGHT theme: solid white background, NO purple glow.
+   DARK theme: purple/magenta/orange glow as before. */
 :root {
-  /* SOLID colours only — no gradients */
   --brand-gradient: #6d28d9;
   --brand-gradient-hover: #5b21b6;
-  /* Light theme background is solid white — glow removed */
+  /* ✅ Light theme: no glow */
   --starlight-glow: none;
 }
+
 .dark {
   --brand-gradient: #8b3df5;
   --brand-gradient-hover: #9d5bf7;
+  /* ✅ Dark theme only: purple/magenta/orange glow */
   --starlight-glow:
     radial-gradient(1100px 640px at -5% -10%, rgb(139 61 245 / 0.32), transparent 62%),
     radial-gradient(900px 560px at 105% 10%, rgb(217 75 245 / 0.18), transparent 60%),
     radial-gradient(1000px 640px at 80% 108%, rgb(247 149 58 / 0.10), transparent 62%);
 }
+
+/* ✅ LIGHT theme: plain solid white, no glow */
 .starlight-bg {
-  background-image: var(--starlight-glow);
+  background-image: none;
   background-color: #ffffff;
   background-attachment: fixed;
 }
+
+/* ✅ DARK theme: transparent background so glow shows through */
 .dark .starlight-bg {
+  background-image: var(--starlight-glow);
   background-color: transparent;
 }
+
+/* ✅ EXTRA SAFETY — light mode force: no gradient, plain white */
+html:not(.dark) .starlight-bg {
+  background-image: none !important;
+  background-color: #ffffff !important;
+}
+
 .bg-brand,
 .hover\:bg-brand:hover,
 .group:hover .group-hover\:bg-brand {

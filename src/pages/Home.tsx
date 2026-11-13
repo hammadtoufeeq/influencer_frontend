@@ -149,19 +149,21 @@ function CtaCard({
   variant?: 'solid' | 'outline'
 }) {
   return (
-    <div className="w-[85%] shrink-0 rounded-xl bg-white/10 p-5 ring-1 ring-white/20 backdrop-blur sm:rounded-2xl sm:p-6 md:w-auto">
-      <h2 className="font-display text-xl font-bold leading-snug sm:text-2xl">{title}</h2>
+    <div className="w-full rounded-xl bg-white/10 p-4 text-center ring-1 ring-white/20 backdrop-blur sm:rounded-2xl sm:p-5 md:p-6 md:text-start">
+      <h2 className="font-display text-base font-bold leading-snug sm:text-lg md:text-2xl">
+        {title}
+      </h2>
       <p className="mt-2 text-xs leading-relaxed text-white/80 sm:text-sm">{body}</p>
       <Link
         to={to}
         className={
           variant === 'solid'
-            ? 'mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-2.5 text-sm font-semibold text-on-brand transition hover:scale-105 sm:w-auto sm:justify-start'
-            : 'mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/40 px-5 py-2.5 text-sm font-semibold text-white transition hover:scale-105 hover:bg-white/10 sm:w-auto sm:justify-start'
+            ? 'mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-4 py-2 text-xs font-semibold text-on-brand transition hover:scale-105 sm:mt-5 sm:px-5 sm:py-2.5 sm:text-sm md:w-auto md:justify-start'
+            : 'mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/40 px-4 py-2 text-xs font-semibold text-white transition hover:scale-105 hover:bg-white/10 sm:mt-5 sm:px-5 sm:py-2.5 sm:text-sm md:w-auto md:justify-start'
         }
       >
         {cta}
-        <FontAwesomeIcon icon={faArrowRight} className="text-xs rtl:rotate-180" />
+        <FontAwesomeIcon icon={faArrowRight} className="text-[10px] sm:text-xs rtl:rotate-180" />
       </Link>
     </div>
   )
@@ -585,16 +587,21 @@ function Home() {
         </div>
       </section>
 
-      <div className="mx-auto mt-24 max-w-6xl space-y-24 px-4">
+      {/* ✅ OpenCampaigns — full width, max-w-6xl ke bahar */}
+      <div className="mt-24">
         <OpenCampaigns />
+      </div>
 
+      <div className="mx-auto max-w-6xl space-y-24 px-4">
         <Benefits />
 
         <Faq />
 
         {/* ✅ Final CTA — mobile pe continuous auto-scroll (no user scroll), desktop pe grid */}
+               {/* ✅ Final CTA — mobile pe continuous auto-scroll, desktop pe grid */}
+                {/* ✅ Final CTA — mobile pe vertical stack, desktop pe 2-column grid */}
         <Reveal>
-          <section className="keep-dark relative isolate overflow-hidden rounded-2xl p-5 text-white sm:rounded-[2rem] sm:p-6 md:p-12">
+          <section className="keep-dark relative isolate overflow-hidden rounded-2xl p-4 text-white sm:rounded-[2rem] sm:p-6 md:p-12">
             <img
               src={CTA_BACKGROUND}
               alt=""
@@ -608,24 +615,10 @@ function Home() {
               style={{ animationDelay: '-8s' }}
             />
 
-            {/* ✅ overflow-hidden — koi user scroll nahi. Animation khud chalti hai. */}
-            <div className="relative overflow-hidden">
-              <div
-                className="flex gap-4 md:grid md:grid-cols-2 md:gap-4"
-                style={{
-                  animation: reduced ? undefined : 'cta-marquee 24s linear infinite',
-                }}
-              >
-                {/* Original cards */}
-                <CtaCard {...ctaTalent} />
-                <CtaCard {...ctaBusiness} />
-
-                {/* ✅ Duplicate cards — sirf mobile, seamless loop ke liye (aria-hidden) */}
-                <div aria-hidden="true" className="contents md:hidden">
-                  <CtaCard {...ctaTalent} />
-                  <CtaCard {...ctaBusiness} />
-                </div>
-              </div>
+            {/* ✅ Mobile: vertical stack (1 column) | Desktop: 2-column grid */}
+            <div className="relative flex flex-col gap-3 sm:gap-4 md:grid md:grid-cols-2 md:gap-4">
+              <CtaCard {...ctaTalent} />
+              <CtaCard {...ctaBusiness} />
             </div>
           </section>
         </Reveal>

@@ -473,28 +473,32 @@ export function OpenCampaigns() {
   if (items.length === 0) return null
 
   return (
-    <section>
+    <section className="w-full">
       {/* ✅ Centered title */}
-     <div className="text-center">
-  <h2 className="font-display text-xl font-bold sm:text-2xl md:text-3xl">
-    <HighlightedText i18nKey="home.openCampaignsRich" />
-  </h2>
-</div>
-      <Link
-        to="/campaigns"
-        className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-gray-500 hover:text-gray-900 sm:text-sm"
-      >
-        {t('home.seeAll')}
-        <FontAwesomeIcon icon={faArrowRight} className="text-[10px] rtl:rotate-180" />
-      </Link>
+      <div className="mx-auto max-w-6xl px-4 text-center">
+        <h2 className="font-display text-xl font-bold sm:text-2xl md:text-3xl">
+          <HighlightedText i18nKey="home.openCampaignsRich" />
+        </h2>
+      </div>
 
-      {/* ✅ overflow-hidden — koi user scroll nahi. Cards khud right se left chalte hain. */}
-      <div className="relative mt-6 overflow-hidden">
+      {/* See all link */}
+      <div className="mx-auto max-w-6xl px-4">
+        <Link
+          to="/campaigns"
+          className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-gray-500 hover:text-gray-900 sm:text-sm"
+        >
+          {t('home.seeAll')}
+          <FontAwesomeIcon icon={faArrowRight} className="text-[10px] rtl:rotate-180" />
+        </Link>
+      </div>
+
+      {/* ✅ FULL WIDTH — edge to edge, seamless infinite marquee */}
+      <div className="relative mt-6 w-full overflow-hidden">
         <div
-          className="flex gap-3 sm:gap-4"
+          className="flex w-max gap-3 sm:gap-4"
           style={{
             animation: reduced ? undefined : 'campaigns-marquee 40s linear infinite',
-            width: 'max-content',
+            willChange: 'transform',
           }}
         >
           {/* Original cards */}
