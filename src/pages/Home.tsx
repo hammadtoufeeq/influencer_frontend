@@ -73,11 +73,20 @@ const ROLE_IMAGES = {
 const CTA_BACKGROUND =
   'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=75'
 
-const STAGE_POSITIONS = [
-  'left-0 top-16 w-40 -rotate-3 animate-float xl:w-44',
-  'left-1/2 top-0 z-10 w-40 -translate-x-1/2 animate-float-slow xl:w-44',
-  'right-0 top-24 w-40 rotate-3 animate-float xl:w-44',
+// Hero slides — all images are normalized to the same square canvas (1200x1200)
+// Save in public/images/ as hero-1.png ... hero-5.png
+const HERO_SLIDES = [
+  { src: '/images/hero-3.png', alt: 'Creators on the platform' },
+  { src: '/images/hero-4.png', alt: 'Brand tracking campaign reach' },
+  { src: '/images/hero-1.png', alt: 'Lifestyle creator with phone' },
+  { src: '/images/hero-5.png', alt: 'Content creator with laptop' },
+  { src: '/images/hero-2.png', alt: 'Creator working on laptop' },
 ]
+
+// Hero bottom is cut with a wavy mask, so the real page background (light or dark) shows through
+const CURVE_MASK =
+  'linear-gradient(#000 0 0) top / 100% calc(100% - var(--curve-h)) no-repeat, ' +
+  'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 1440 200\' preserveAspectRatio=\'none\'%3E%3Cpath d=\'M0,0 L1440,0 L1440,100 C1200,40 960,180 720,100 C480,20 240,180 0,100 Z\'/%3E%3C/svg%3E") bottom / 100% var(--curve-h) no-repeat'
 
 function RotatingWord({ words }: { words: string[] }) {
   const [i, setI] = useState(0)
@@ -93,6 +102,149 @@ function RotatingWord({ words }: { words: string[] }) {
     >
       {words[i]}
     </span>
+  )
+}
+
+// Hero image slider: fixed square box so every picture has the same size, responsive on all screens
+function HeroShowcase({ verifiedLabel, topLabel }: { verifiedLabel: string; topLabel: string }) {
+  const [active, setActive] = useState(0)
+  const [paused, setPaused] = useState(false)
+
+  useEffect(() => {
+    if (paused || prefersReducedMotion()) return
+    const id = window.setInterval(() => setActive((p) => (p + 1) % HERO_SLIDES.length), 3500)
+    return () => window.clearInterval(id)
+  }, [paused])
+
+  return (
+    <div
+      className="relative mx-auto mb-6 aspect-square w-full max-w-[17rem] sm:max-w-sm md:max-w-md lg:mb-0 lg:ms-auto lg:max-w-lg"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      {HERO_SLIDES.map((s, i) => (
+        <img
+          key={s.src}
+          src={s.src}
+          alt={s.alt}
+          loading={i === 0 ? 'eager' : 'lazy'}
+          onError={(e) => (e.currentTarget.style.display = 'none')}
+          className={`absolute inset-0 h-full w-full object-contain transition-all duration-1000 ease-out ${
+            i === active ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
+          }`}
+        />
+      ))}
+
+      {/* Floating chips */}
+      <div className="absolute start-0 top-[12%] z-20 flex animate-float items-center gap-1.5 rounded-xl bg-white px-2.5 py-1.5 text-[10px] font-semibold text-gray-900 shadow-xl ring-1 ring-gray-200 sm:gap-2 sm:rounded-2xl sm:px-3.5 sm:py-2 sm:text-xs">
+        <FontAwesomeIcon icon={faCircleCheck} className="text-brand-violet" />
+        {verifiedLabel}
+      </div>
+      <div
+        className="absolute bottom-[14%] end-0 z-20 flex animate-float-slow items-center gap-1.5 rounded-xl bg-white px-2.5 py-1.5 text-[10px] font-semibold text-gray-900 shadow-xl ring-1 ring-gray-200 sm:gap-2 sm:rounded-2xl sm:px-3.5 sm:py-2 sm:text-xs"
+        style={{ animationDelay: '-2s' }}
+      >
+        <FontAwesomeIcon icon={faStar} className="text-[#FF7A00]" />
+        {topLabel}
+      </div>
+
+      {/* Dots */}
+      <div className="absolute inset-x-0 -bottom-5 z-20 flex justify-center gap-2">
+        {HERO_SLIDES.map((s, i) => (
+          <button
+            key={s.src}
+            type="button"
+            aria-label={`Slide ${i + 1}`}
+            onClick={() => setActive(i)}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              i === active ? 'w-7 bg-brand-violet' : 'w-2 bg-white/40 hover:bg-white/70'
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+// Decorative vector shapes for the roles section background
+function RoleShapes() {
+  return (
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+      {/* Concentric rings, top-left */}
+      <svg
+        viewBox="0 0 200 200"
+        fill="none"
+        className="absolute -start-20 -top-20 h-56 w-56 text-brand-violet/40 sm:-start-24 sm:-top-24 sm:h-80 sm:w-80"
+      >
+        <circle cx="100" cy="100" r="92" stroke="currentColor" strokeWidth="2" />
+        <circle cx="100" cy="100" r="64" stroke="currentColor" strokeWidth="2" />
+        <circle cx="100" cy="100" r="34" fill="currentColor" />
+      </svg>
+
+      {/* Dotted grid, top-right */}
+      <svg
+        viewBox="0 0 120 120"
+        className="absolute end-4 top-6 hidden h-24 w-24 text-white/25 sm:block md:h-32 md:w-32"
+      >
+        <defs>
+          <pattern id="role-dots" width="15" height="15" patternUnits="userSpaceOnUse">
+            <circle cx="3" cy="3" r="2" fill="currentColor" />
+          </pattern>
+        </defs>
+        <rect width="120" height="120" fill="url(#role-dots)" />
+      </svg>
+
+      {/* Triangle outline */}
+      <svg
+        viewBox="0 0 100 100"
+        fill="none"
+        className="absolute start-[6%] bottom-10 h-12 w-12 rotate-12 text-white/25 sm:h-16 sm:w-16"
+      >
+        <path d="M50 8 L94 88 L6 88 Z" stroke="currentColor" strokeWidth="3" strokeLinejoin="round" />
+      </svg>
+
+      {/* Plus signs */}
+      <svg
+        viewBox="0 0 40 40"
+        fill="none"
+        className="absolute end-[10%] top-[45%] h-6 w-6 text-brand-violet/60 sm:h-8 sm:w-8"
+      >
+        <path d="M20 4 V36 M4 20 H36" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+      </svg>
+      <svg
+        viewBox="0 0 40 40"
+        fill="none"
+        className="absolute start-[42%] top-4 hidden h-5 w-5 text-white/30 md:block"
+      >
+        <path d="M20 4 V36 M4 20 H36" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+      </svg>
+
+      {/* Soft blob, bottom-right */}
+      <svg
+        viewBox="0 0 200 200"
+        className="absolute -bottom-16 -end-16 h-56 w-56 text-brand-violet/25 sm:-bottom-24 sm:-end-24 sm:h-80 sm:w-80"
+      >
+        <path
+          fill="currentColor"
+          d="M44.7,-58.4C57.4,-48.6,66.3,-33.6,70.6,-17.3C74.9,-1,74.6,16.7,67.1,30.6C59.6,44.5,44.9,54.6,29.1,61.1C13.3,67.6,-3.6,70.5,-19.6,66.5C-35.6,62.5,-50.7,51.6,-60.5,37.2C-70.3,22.8,-74.8,4.9,-71.3,-10.9C-67.8,-26.7,-56.3,-40.4,-42.9,-50C-29.5,-59.6,-14.7,-65.1,0.8,-66.1C16.3,-67.1,32,-68.2,44.7,-58.4Z"
+          transform="translate(100 100)"
+        />
+      </svg>
+
+      {/* Wave line */}
+      <svg
+        viewBox="0 0 1200 80"
+        preserveAspectRatio="none"
+        fill="none"
+        className="absolute inset-x-0 bottom-6 h-10 w-full text-white/15 sm:h-14"
+      >
+        <path
+          d="M0 40 C100 0 200 80 300 40 C400 0 500 80 600 40 C700 0 800 80 900 40 C1000 0 1100 80 1200 40"
+          stroke="currentColor"
+          strokeWidth="2"
+        />
+      </svg>
+    </div>
   )
 }
 
@@ -134,7 +286,7 @@ function IndustryTile({
   )
 }
 
-// ✅ Reusable CTA card — 2 baar use hoga (original + duplicate loop)
+// Reusable CTA card
 function CtaCard({
   title,
   body,
@@ -188,7 +340,6 @@ function Home() {
   )
   const people = data?.people ?? []
   const featured = people.slice(0, FEATURED_COUNT)
-  const stage = people.slice(0, 3)
   const reach = featured.reduce((sum, p) => sum + p.totalFollowers, 0)
 
   useEffect(() => {
@@ -253,7 +404,6 @@ function Home() {
   const chip =
     'rounded-full border border-white/25 bg-white/10 px-3 py-1.5 backdrop-blur transition hover:bg-white/20 hover:text-white'
 
-  // CTA cards data — reusable
   const ctaTalent = {
     title: t('home.ctaTalentTitle'),
     body: t('home.ctaTalentBody'),
@@ -273,9 +423,11 @@ function Home() {
     <div className="home-page overflow-x-hidden pb-16">
       <ScrollProgressButton />
       {/* Hero */}
+      <div className="relative [--curve-h:6rem] sm:[--curve-h:9rem] md:[--curve-h:12rem] lg:[--curve-h:14rem]">
       <section
         aria-label={t('home.heroLabel')}
         className="keep-dark relative isolate overflow-hidden bg-brand-plum"
+        style={{ mask: CURVE_MASK, WebkitMask: CURVE_MASK }}
       >
         <div className="absolute inset-0 -z-10">
           <img
@@ -301,14 +453,17 @@ function Home() {
             />
           )}
 
-          {/* ✅ Purple blur effect removed — sirf gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-brand-plum/95 via-brand-plum/50 to-transparent" />
         </div>
 
-        {/* ✅ Responsive hero content — small screen ke liye valid classes */}
-        <div className="mx-auto grid max-w-6xl items-center gap-6 px-4 pb-32 pt-20 sm:gap-10 sm:pb-40 sm:pt-24 md:pt-28 lg:grid-cols-2">
+        {/* 2 tilted vertical lines (decorative) */}
+        <div className="pointer-events-none absolute inset-0 z-0 hidden overflow-hidden lg:block">
+          <div className="absolute right-[32%] top-0 h-full w-px bg-brand-violet/60 rotate-12 transform origin-top"></div>
+          <div className="absolute right-[28%] top-0 h-full w-px bg-white/40 rotate-12 transform origin-top"></div>
+        </div>
+
+        <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-8 px-4 pb-28 pt-20 sm:gap-10 sm:pb-40 sm:pt-24 md:pt-28 lg:grid-cols-2">
           <div className="text-center lg:text-start">
-            {/* ✅ "Discover" aur "influence" ORANGE (AXcel X gradient), baqi WHITE */}
             <h1 className="font-display text-2xl font-extrabold leading-[1.08] tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
               <span className="text-white">
                 <HighlightedText1 i18nKey="home.titleRich" />
@@ -318,7 +473,6 @@ function Home() {
               {t('home.subtitle')}
             </p>
             <p className="mt-4 font-display text-lg font-bold text-white sm:mt-5 sm:text-xl md:text-2xl lg:text-3xl">
-              {/* Poora jumla translation se: Urdu / Arabic mein lafz apni sahi jagah aata hai */}
               <Sentence
                 template={t('home.findTopTemplate', { word: `${MARK}word${MARK}` })}
                 parts={{ word: <RotatingWord words={words} /> }}
@@ -358,7 +512,7 @@ function Home() {
                 <button
                   type="button"
                   onClick={() => setPlaying(true)}
-                  className="inline-flex items-center gap-3 text-sm font-medium text-white/90 hover:text-white"
+                  className="inline-flex items-center justify-center gap-3 text-sm font-medium text-white/90 hover:text-white"
                 >
                   <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-white text-gray-900 sm:h-11 sm:w-11">
                     <span className="absolute inset-0 animate-ping rounded-full bg-white/40" />
@@ -370,44 +524,33 @@ function Home() {
             </div>
           </div>
 
-          <div className="relative mx-auto hidden h-[26rem] w-full max-w-xl lg:block">
-            {stage.map((p, i) => (
-              <Link
-                key={p._id}
-                to={`/people/${p.slug}`}
-                style={{ animationDelay: `${i * -2.5}s` }}
-                className={`absolute ${STAGE_POSITIONS[i]} overflow-hidden rounded-3xl bg-brand-plum shadow-2xl shadow-black/40 ring-1 ring-white/25`}
-              >
-                <Photo person={p} className="aspect-[3/4] w-full" />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent p-3 pt-12 text-white">
-                  <p className="flex items-center gap-1.5 truncate text-sm font-semibold">
-                    {p.name}
-                    {p.verified && (
-                      <FontAwesomeIcon icon={faCircleCheck} className="text-xs text-brand-sun" />
-                    )}
-                  </p>
-                  <p className="text-xs text-white/80">{sub(p)}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
+          {/* Image showcase: below text on mobile/tablet, right side on desktop */}
+          <HeroShowcase
+            verifiedLabel={d('home.heroVerified', 'Verified creators')}
+            topLabel={d('home.heroTop', 'Top rated talent')}
+          />
         </div>
 
-        {/* ✅ White curve — hero ke bottom pe, zyada height + smooth design */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10">
-          <svg
-            viewBox="0 0 1440 200"
-            preserveAspectRatio="none"
-            className="h-24 w-full sm:h-36 md:h-48 lg:h-56"
-            aria-hidden="true"
-          >
-            <path
-              d="M0,100 C240,180 480,20 720,100 C960,180 1200,40 1440,100 L1440,200 L0,200 Z"
-              fill="#ffffff"
-            />
-          </svg>
-        </div>
       </section>
+
+      {/* Purple curve line (drawn outside the masked hero so it is not clipped) */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10">
+        <svg
+          viewBox="0 0 1440 200"
+          preserveAspectRatio="none"
+          className="h-[var(--curve-h)] w-full"
+          aria-hidden="true"
+        >
+          <path
+            d="M0,100 C240,180 480,20 720,100 C960,180 1200,40 1440,100"
+            fill="none"
+            stroke="#8b3df5"
+            strokeWidth="6"
+            strokeLinecap="round"
+          />
+        </svg>
+      </div>
+      </div>
 
       {/* Stats card overlapping the hero */}
       <div className="relative z-20 mx-auto -mt-10 max-w-6xl px-4 sm:-mt-14">
@@ -531,9 +674,10 @@ function Home() {
         <HowItWorks />
       </div>
 
-      {/* Tabs per role — FULL WIDTH background, centered content */}
-      <section className="mt-16 w-full bg-gray-800 py-8 shadow-sm ring-1 ring-gray-100 sm:mt-24 sm:py-10 md:py-16">
-        <div className="mx-auto max-w-6xl px-4">
+      {/* Tabs per role — FULL WIDTH background with vector shapes, centered content */}
+      <section className="relative isolate mt-16 w-full overflow-hidden bg-gray-800 py-8 shadow-sm ring-1 ring-gray-100 sm:mt-24 sm:py-10 md:py-16">
+        <RoleShapes />
+        <div className="relative z-10 mx-auto max-w-6xl px-4">
           <Reveal>
             <h2 className="text-center font-display text-xl font-bold text-white sm:text-2xl md:text-3xl">
               {d('home.rolesTitle', 'One platform, three ways to work')}
@@ -603,7 +747,7 @@ function Home() {
         </div>
       </section>
 
-      {/* ✅ OpenCampaigns — full width, max-w-6xl ke bahar */}
+      {/* OpenCampaigns — full width */}
       <div className="mt-16 sm:mt-24">
         <OpenCampaigns />
       </div>
@@ -613,7 +757,7 @@ function Home() {
 
         <Faq />
 
-        {/* ✅ Final CTA — mobile pe vertical stack, desktop pe 2-column grid */}
+        {/* Final CTA */}
         <Reveal>
           <section className="keep-dark relative isolate overflow-hidden rounded-2xl p-4 text-white sm:rounded-[2rem] sm:p-6 md:p-12">
             <img
@@ -629,7 +773,6 @@ function Home() {
               style={{ animationDelay: '-8s' }}
             />
 
-            {/* ✅ Mobile: vertical stack (1 column) | Desktop: 2-column grid */}
             <div className="relative flex flex-col gap-3 sm:gap-4 md:grid md:grid-cols-2 md:gap-4">
               <CtaCard {...ctaTalent} />
               <CtaCard {...ctaBusiness} />
@@ -668,7 +811,7 @@ function Home() {
   )
 }
 
-// "See all" sirf jab koi page ho jahan le ja sake
+// "See all" only when there is a page to go to
 function SectionHeader({ title, to }: { title: string; to?: string }) {
   const { t } = useTranslation()
   return (

@@ -300,11 +300,121 @@ export function HighlightedText({ i18nKey }: { i18nKey: string }) {
 export function HighlightedText1({ i18nKey }: { i18nKey: string }) {
   return <Trans i18nKey={i18nKey} components={{ hl: <span className={HIGHLIGHT1} /> }} />
 }
+
+// Decorative vector shapes behind the "Everything you need to work with creators" section
+function FeatureShapes() {
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-y-[-2.5rem] left-1/2 -z-10 w-screen -translate-x-1/2 overflow-hidden"
+    >
+      {/* Concentric rings, top-left */}
+      <svg
+        viewBox="0 0 200 200"
+        fill="none"
+        className="absolute -start-20 top-0 h-48 w-48 text-brand-violet/20 sm:-start-16 sm:h-72 sm:w-72"
+      >
+        <circle cx="100" cy="100" r="92" stroke="currentColor" strokeWidth="2" />
+        <circle cx="100" cy="100" r="64" stroke="currentColor" strokeWidth="2" />
+        <circle cx="100" cy="100" r="34" fill="currentColor" />
+      </svg>
+
+      {/* Dotted grid, top-right */}
+      <svg
+        viewBox="0 0 120 120"
+        className="absolute end-2 top-24 hidden h-24 w-24 text-brand-violet/30 sm:block md:h-32 md:w-32"
+      >
+        <defs>
+          <pattern id="feat-dots-a" width="15" height="15" patternUnits="userSpaceOnUse">
+            <circle cx="3" cy="3" r="2" fill="currentColor" />
+          </pattern>
+        </defs>
+        <rect width="120" height="120" fill="url(#feat-dots-a)" />
+      </svg>
+
+      {/* Soft blob, left middle */}
+      <svg
+        viewBox="0 0 200 200"
+        className="absolute -start-24 top-[28%] h-56 w-56 text-brand-violet/10 sm:h-80 sm:w-80"
+      >
+        <path
+          fill="currentColor"
+          d="M44.7,-58.4C57.4,-48.6,66.3,-33.6,70.6,-17.3C74.9,-1,74.6,16.7,67.1,30.6C59.6,44.5,44.9,54.6,29.1,61.1C13.3,67.6,-3.6,70.5,-19.6,66.5C-35.6,62.5,-50.7,51.6,-60.5,37.2C-70.3,22.8,-74.8,4.9,-71.3,-10.9C-67.8,-26.7,-56.3,-40.4,-42.9,-50C-29.5,-59.6,-14.7,-65.1,0.8,-66.1C16.3,-67.1,32,-68.2,44.7,-58.4Z"
+          transform="translate(100 100)"
+        />
+      </svg>
+
+      {/* Triangle outline, right middle */}
+      <svg
+        viewBox="0 0 100 100"
+        fill="none"
+        className="absolute end-[4%] top-[40%] h-12 w-12 -rotate-12 text-[#FF7A00]/40 sm:h-16 sm:w-16"
+      >
+        <path d="M50 8 L94 88 L6 88 Z" stroke="currentColor" strokeWidth="3" strokeLinejoin="round" />
+      </svg>
+
+      {/* Plus signs */}
+      <svg
+        viewBox="0 0 40 40"
+        fill="none"
+        className="absolute start-[8%] top-[22%] h-5 w-5 text-brand-violet/50 sm:h-7 sm:w-7"
+      >
+        <path d="M20 4 V36 M4 20 H36" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+      </svg>
+      <svg
+        viewBox="0 0 40 40"
+        fill="none"
+        className="absolute end-[12%] top-[62%] h-5 w-5 text-[#FF7A00]/50 sm:h-7 sm:w-7"
+      >
+        <path d="M20 4 V36 M4 20 H36" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+      </svg>
+
+      {/* Wave line, lower middle */}
+      <svg
+        viewBox="0 0 1200 80"
+        preserveAspectRatio="none"
+        fill="none"
+        className="absolute inset-x-0 top-[56%] h-10 w-full text-brand-violet/15 sm:h-14"
+      >
+        <path
+          d="M0 40 C100 0 200 80 300 40 C400 0 500 80 600 40 C700 0 800 80 900 40 C1000 0 1100 80 1200 40"
+          stroke="currentColor"
+          strokeWidth="2"
+        />
+      </svg>
+
+      {/* Dotted grid, bottom-left */}
+      <svg
+        viewBox="0 0 120 120"
+        className="absolute bottom-24 start-2 hidden h-24 w-24 text-[#FF7A00]/30 sm:block md:h-32 md:w-32"
+      >
+        <defs>
+          <pattern id="feat-dots-b" width="15" height="15" patternUnits="userSpaceOnUse">
+            <circle cx="3" cy="3" r="2" fill="currentColor" />
+          </pattern>
+        </defs>
+        <rect width="120" height="120" fill="url(#feat-dots-b)" />
+      </svg>
+
+      {/* Rings, bottom-right */}
+      <svg
+        viewBox="0 0 200 200"
+        fill="none"
+        className="absolute -bottom-10 -end-20 h-48 w-48 text-brand-violet/20 sm:-end-16 sm:h-72 sm:w-72"
+      >
+        <circle cx="100" cy="100" r="92" stroke="currentColor" strokeWidth="2" />
+        <circle cx="100" cy="100" r="60" stroke="currentColor" strokeWidth="2" />
+        <circle cx="100" cy="100" r="28" fill="currentColor" />
+      </svg>
+    </div>
+  )
+}
+
 export function FeatureShowcase({ people }: { people: PersonSummary[] }) {
   const d = useD()
   const [a, b, c] = people
   return (
-    <section className="space-y-14 sm:space-y-20 md:space-y-28">
+    <section className="relative isolate space-y-14 sm:space-y-20 md:space-y-28">
       <Title sub={d('home.toolkitSub', 'Search, shortlist, hire and get it in writing, all in one place.')}>
         {d('home.toolkitTitle', 'Everything you need to work with creators')}
       </Title>
@@ -419,6 +529,9 @@ export function FeatureShowcase({ people }: { people: PersonSummary[] }) {
         />
         <MockRow title={d('home.mockSigned', 'Signed by both sides')} note={d('home.mockLocked', 'Terms locked')} delay={240} tag={<FontAwesomeIcon icon={faFileSignature} className="text-gray-900" />} />
       </Showcase>
+
+      {/* Placed last so spacing utilities on the section are not affected */}
+      <FeatureShapes />
     </section>
   )
 }
